@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="container-fluid">
-      
+      <?php echo $sf_content ?>
       <hr>
       <footer>
         <p>&copy; Company 2012</p>
