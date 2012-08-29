@@ -29,19 +29,28 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="">Bblioteca Virtual UDC 2012</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">menu 1</a></li>
-              <li><a href="#">menu 2</a></li>
-              <li><a href="#">menu 3</a></li>
+              
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  menu 4 <b class="caret"></b>
+                  Administracion <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">add your own...</a></li>
-                  <li><a href="#">...is quite easy!</a></li>
+              <li><a href="#">ABM Material</a></li>
+              <li><a href="#">ABM Usuarios</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Tipo de Material <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Hemeroteca (archivos) </a></li>
+                  <li><a href="#">Libros (pdfs) </a></li>
+                  <li><a href="#">Presentaciones (ppts) </a></li>
                 </ul>
               </li>
             </ul>
@@ -50,7 +59,7 @@
       </div>
     </div>
     <div class="container-fluid">
-      <?php echo $sf_content ?>
+      
       <hr>
       <footer>
         <p>&copy; Company 2012</p>
