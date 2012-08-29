@@ -1,0 +1,14 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  libro:
+    _attributes: { phpName: Libro, idMethod: native }
+    idlibro: { phpName: Idlibro, type: INTEGER, primaryKey: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
+    archivo: { phpName: Archivo, type: BLOB, required: false }
+  usuario:
+    _attributes: { phpName: Usuario, idMethod: native }
+    idusuario: { phpName: Idusuario, type: INTEGER, primaryKey: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
+    password: { phpName: Password, type: VARCHAR, size: '45', required: false }
