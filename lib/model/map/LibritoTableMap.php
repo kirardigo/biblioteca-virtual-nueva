@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'usuario' table.
+ * This class defines the structure of the 'librito' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class UsuarioTableMap extends TableMap
+class LibritoTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.UsuarioTableMap';
+    const CLASS_NAME = 'lib.model.map.LibritoTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,15 @@ class UsuarioTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('usuario');
-        $this->setPhpName('Usuario');
-        $this->setClassname('Usuario');
+        $this->setName('librito');
+        $this->setPhpName('Librito');
+        $this->setClassname('Librito');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addPrimaryKey('ID_LIBRITO', 'IdLibrito', 'INTEGER', true, null, null);
+        $this->addColumn('NAME', 'Name', 'VARCHAR', false, 45, null);
+        $this->addColumn('PRICE', 'Price', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 
@@ -49,6 +49,7 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('LibritoPdf', 'LibritoPdf', RelationMap::ONE_TO_MANY, array('id_librito' => 'librito_id_librito', ), null, null, 'LibritoPdfs');
     } // buildRelations()
 
     /**
@@ -65,4 +66,4 @@ class UsuarioTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // UsuarioTableMap
+} // LibritoTableMap

@@ -2,52 +2,67 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'usuario' table.
+ * Base static class for performing query and update operations on the 'material' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseUsuarioPeer {
+abstract class BaseMaterialPeer {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'propel';
 
     /** the table name for this class */
-    const TABLE_NAME = 'usuario';
+    const TABLE_NAME = 'material';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'Usuario';
+    const OM_CLASS = 'Material';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'UsuarioTableMap';
+    const TM_CLASS = 'MaterialTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 3;
+    const NUM_COLUMNS = 8;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 3;
+    const NUM_HYDRATE_COLUMNS = 8;
 
-    /** the column name for the IDUSUARIO field */
-    const IDUSUARIO = 'usuario.IDUSUARIO';
+    /** the column name for the ID_MATERIAL field */
+    const ID_MATERIAL = 'material.ID_MATERIAL';
+
+    /** the column name for the ARCHIVO field */
+    const ARCHIVO = 'material.ARCHIVO';
 
     /** the column name for the NOMBRE field */
-    const NOMBRE = 'usuario.NOMBRE';
+    const NOMBRE = 'material.NOMBRE';
 
-    /** the column name for the PASSWORD field */
-    const PASSWORD = 'usuario.PASSWORD';
+    /** the column name for the TITULO field */
+    const TITULO = 'material.TITULO';
+
+    /** the column name for the EDITORIAL field */
+    const EDITORIAL = 'material.EDITORIAL';
+
+    /** the column name for the AUTOR field */
+    const AUTOR = 'material.AUTOR';
+
+    /** the column name for the DESCRIPCION field */
+    const DESCRIPCION = 'material.DESCRIPCION';
+
+    /** the column name for the SUBCONTENIDO_ID_SUBCONTENIDO field */
+    const SUBCONTENIDO_ID_SUBCONTENIDO = 'material.SUBCONTENIDO_ID_SUBCONTENIDO';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identiy map to hold any loaded instances of Usuario objects.
+     * An identiy map to hold any loaded instances of Material objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array Usuario[]
+     * @var        array Material[]
      */
     public static $instances = array();
 
@@ -59,12 +74,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idusuario', 'Nombre', 'Password', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idusuario', 'nombre', 'password', ),
-        BasePeer::TYPE_COLNAME => array (self::IDUSUARIO, self::NOMBRE, self::PASSWORD, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDUSUARIO', 'NOMBRE', 'PASSWORD', ),
-        BasePeer::TYPE_FIELDNAME => array ('idusuario', 'nombre', 'password', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Nombre', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'SubcontenidoIdSubcontenido', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'nombre', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenidoIdSubcontenido', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::NOMBRE, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::SUBCONTENIDO_ID_SUBCONTENIDO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'NOMBRE', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'SUBCONTENIDO_ID_SUBCONTENIDO', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'nombre', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenido_id_subcontenido', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -74,12 +89,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idusuario' => 0, 'Nombre' => 1, 'Password' => 2, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idusuario' => 0, 'nombre' => 1, 'password' => 2, ),
-        BasePeer::TYPE_COLNAME => array (self::IDUSUARIO => 0, self::NOMBRE => 1, self::PASSWORD => 2, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDUSUARIO' => 0, 'NOMBRE' => 1, 'PASSWORD' => 2, ),
-        BasePeer::TYPE_FIELDNAME => array ('idusuario' => 0, 'nombre' => 1, 'password' => 2, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Nombre' => 2, 'Titulo' => 3, 'Editorial' => 4, 'Autor' => 5, 'Descripcion' => 6, 'SubcontenidoIdSubcontenido' => 7, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'nombre' => 2, 'titulo' => 3, 'editorial' => 4, 'autor' => 5, 'descripcion' => 6, 'subcontenidoIdSubcontenido' => 7, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::NOMBRE => 2, self::TITULO => 3, self::EDITORIAL => 4, self::AUTOR => 5, self::DESCRIPCION => 6, self::SUBCONTENIDO_ID_SUBCONTENIDO => 7, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'NOMBRE' => 2, 'TITULO' => 3, 'EDITORIAL' => 4, 'AUTOR' => 5, 'DESCRIPCION' => 6, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 7, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'nombre' => 2, 'titulo' => 3, 'editorial' => 4, 'autor' => 5, 'descripcion' => 6, 'subcontenido_id_subcontenido' => 7, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -130,12 +145,12 @@ abstract class BaseUsuarioPeer {
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. UsuarioPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. MaterialPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(UsuarioPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(MaterialPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -153,13 +168,23 @@ abstract class BaseUsuarioPeer {
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(UsuarioPeer::IDUSUARIO);
-            $criteria->addSelectColumn(UsuarioPeer::NOMBRE);
-            $criteria->addSelectColumn(UsuarioPeer::PASSWORD);
+            $criteria->addSelectColumn(MaterialPeer::ID_MATERIAL);
+            $criteria->addSelectColumn(MaterialPeer::ARCHIVO);
+            $criteria->addSelectColumn(MaterialPeer::NOMBRE);
+            $criteria->addSelectColumn(MaterialPeer::TITULO);
+            $criteria->addSelectColumn(MaterialPeer::EDITORIAL);
+            $criteria->addSelectColumn(MaterialPeer::AUTOR);
+            $criteria->addSelectColumn(MaterialPeer::DESCRIPCION);
+            $criteria->addSelectColumn(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO);
         } else {
-            $criteria->addSelectColumn($alias . '.IDUSUARIO');
+            $criteria->addSelectColumn($alias . '.ID_MATERIAL');
+            $criteria->addSelectColumn($alias . '.ARCHIVO');
             $criteria->addSelectColumn($alias . '.NOMBRE');
-            $criteria->addSelectColumn($alias . '.PASSWORD');
+            $criteria->addSelectColumn($alias . '.TITULO');
+            $criteria->addSelectColumn($alias . '.EDITORIAL');
+            $criteria->addSelectColumn($alias . '.AUTOR');
+            $criteria->addSelectColumn($alias . '.DESCRIPCION');
+            $criteria->addSelectColumn($alias . '.SUBCONTENIDO_ID_SUBCONTENIDO');
         }
     }
 
@@ -179,26 +204,26 @@ abstract class BaseUsuarioPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(UsuarioPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            UsuarioPeer::addSelectColumns($criteria);
+            MaterialPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
         $criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseUsuarioPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
 		}
 
         // BasePeer returns a PDOStatement
@@ -218,7 +243,7 @@ abstract class BaseUsuarioPeer {
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return                 Usuario
+     * @return                 Material
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -226,7 +251,7 @@ abstract class BaseUsuarioPeer {
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = UsuarioPeer::doSelect($critcopy, $con);
+        $objects = MaterialPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -244,7 +269,7 @@ abstract class BaseUsuarioPeer {
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return UsuarioPeer::populateObjects(UsuarioPeer::doSelectStmt($criteria, $con));
+        return MaterialPeer::populateObjects(MaterialPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -262,12 +287,12 @@ abstract class BaseUsuarioPeer {
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            UsuarioPeer::addSelectColumns($criteria);
+            MaterialPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
@@ -275,7 +300,7 @@ abstract class BaseUsuarioPeer {
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseUsuarioPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
 		}
 
 
@@ -291,14 +316,14 @@ abstract class BaseUsuarioPeer {
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param      Usuario $obj A Usuario object.
+     * @param      Material $obj A Material object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdusuario();
+                $key = (string) $obj->getIdMaterial();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -312,7 +337,7 @@ abstract class BaseUsuarioPeer {
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A Usuario object or a primary key value.
+     * @param      mixed $value A Material object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -320,13 +345,13 @@ abstract class BaseUsuarioPeer {
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof Usuario) {
-                $key = (string) $value->getIdusuario();
+            if (is_object($value) && $value instanceof Material) {
+                $key = (string) $value->getIdMaterial();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Usuario object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Material object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
@@ -341,7 +366,7 @@ abstract class BaseUsuarioPeer {
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return   Usuario Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return   Material Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
@@ -366,7 +391,7 @@ abstract class BaseUsuarioPeer {
     }
     
     /**
-     * Method to invalidate the instance pool of all tables related to usuario
+     * Method to invalidate the instance pool of all tables related to material
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
@@ -420,11 +445,11 @@ abstract class BaseUsuarioPeer {
         $results = array();
     
         // set the class once to avoid overhead in the loop
-        $cls = UsuarioPeer::getOMClass();
+        $cls = MaterialPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = UsuarioPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = UsuarioPeer::getInstanceFromPool($key))) {
+            $key = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = MaterialPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -433,7 +458,7 @@ abstract class BaseUsuarioPeer {
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                UsuarioPeer::addInstanceToPool($obj, $key);
+                MaterialPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -447,24 +472,286 @@ abstract class BaseUsuarioPeer {
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (Usuario object, last column rank)
+     * @return array (Material object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = UsuarioPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = UsuarioPeer::getInstanceFromPool($key))) {
+        $key = MaterialPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = MaterialPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + UsuarioPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + MaterialPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = UsuarioPeer::OM_CLASS;
+            $cls = MaterialPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            UsuarioPeer::addInstanceToPool($obj, $key);
+            MaterialPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Subcontenido table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinSubcontenido(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            MaterialPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Material objects pre-filled with their Subcontenido objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Material objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinSubcontenido(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        MaterialPeer::addSelectColumns($criteria);
+        $startcol = MaterialPeer::NUM_HYDRATE_COLUMNS;
+        SubcontenidoPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = MaterialPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                MaterialPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = SubcontenidoPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = SubcontenidoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    SubcontenidoPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Material) to $obj2 (Subcontenido)
+                $obj2->addMaterial($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            MaterialPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of Material objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Material objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        MaterialPeer::addSelectColumns($criteria);
+        $startcol2 = MaterialPeer::NUM_HYDRATE_COLUMNS;
+
+        SubcontenidoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = MaterialPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                MaterialPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined Subcontenido rows
+
+            $key2 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = SubcontenidoPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = SubcontenidoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SubcontenidoPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (Material) to the collection in $obj2 (Subcontenido)
+                $obj2->addMaterial($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
     /**
@@ -484,9 +771,9 @@ abstract class BaseUsuarioPeer {
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseUsuarioPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseUsuarioPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new UsuarioTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseMaterialPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseMaterialPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new MaterialTableMap());
       }
     }
 
@@ -498,13 +785,13 @@ abstract class BaseUsuarioPeer {
      */
     public static function getOMClass()
     {
-        return UsuarioPeer::OM_CLASS;
+        return MaterialPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a Usuario or Criteria object.
+     * Performs an INSERT on the database, given a Material or Criteria object.
      *
-     * @param      mixed $values Criteria or Usuario object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or Material object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -513,17 +800,17 @@ abstract class BaseUsuarioPeer {
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from Usuario object
+            $criteria = $values->buildCriteria(); // build Criteria from Material object
         }
 
-        if ($criteria->containsKey(UsuarioPeer::IDUSUARIO) && $criteria->keyContainsValue(UsuarioPeer::IDUSUARIO) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.UsuarioPeer::IDUSUARIO.')');
+        if ($criteria->containsKey(MaterialPeer::ID_MATERIAL) && $criteria->keyContainsValue(MaterialPeer::ID_MATERIAL) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.MaterialPeer::ID_MATERIAL.')');
         }
 
 
@@ -545,9 +832,9 @@ abstract class BaseUsuarioPeer {
     }
 
     /**
-     * Performs an UPDATE on the database, given a Usuario or Criteria object.
+     * Performs an UPDATE on the database, given a Material or Criteria object.
      *
-     * @param      mixed $values Criteria or Usuario object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or Material object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -556,7 +843,7 @@ abstract class BaseUsuarioPeer {
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -564,15 +851,15 @@ abstract class BaseUsuarioPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(UsuarioPeer::IDUSUARIO);
-            $value = $criteria->remove(UsuarioPeer::IDUSUARIO);
+            $comparison = $criteria->getComparison(MaterialPeer::ID_MATERIAL);
+            $value = $criteria->remove(MaterialPeer::ID_MATERIAL);
             if ($value) {
-                $selectCriteria->add(UsuarioPeer::IDUSUARIO, $value, $comparison);
+                $selectCriteria->add(MaterialPeer::ID_MATERIAL, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(UsuarioPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
             }
 
-        } else { // $values is Usuario object
+        } else { // $values is Material object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
@@ -584,7 +871,7 @@ abstract class BaseUsuarioPeer {
     }
 
     /**
-     * Deletes all rows from the usuario table.
+     * Deletes all rows from the material table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -593,19 +880,19 @@ abstract class BaseUsuarioPeer {
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += BasePeer::doDeleteAll(UsuarioPeer::TABLE_NAME, $con, UsuarioPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(MaterialPeer::TABLE_NAME, $con, MaterialPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            UsuarioPeer::clearInstancePool();
-            UsuarioPeer::clearRelatedInstancePool();
+            MaterialPeer::clearInstancePool();
+            MaterialPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -616,9 +903,9 @@ abstract class BaseUsuarioPeer {
     }
 
     /**
-     * Performs a DELETE on the database, given a Usuario or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a Material or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or Usuario object or primary key or array of primary keys
+     * @param      mixed $values Criteria or Material object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -629,27 +916,27 @@ abstract class BaseUsuarioPeer {
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // invalidate the cache for all objects of this type, since we have no
             // way of knowing (without running a query) what objects should be invalidated
             // from the cache based on this Criteria.
-            UsuarioPeer::clearInstancePool();
+            MaterialPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof Usuario) { // it's a model object
+        } elseif ($values instanceof Material) { // it's a model object
             // invalidate the cache for this single object
-            UsuarioPeer::removeInstanceFromPool($values);
+            MaterialPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(UsuarioPeer::IDUSUARIO, (array) $values, Criteria::IN);
+            $criteria->add(MaterialPeer::ID_MATERIAL, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
-                UsuarioPeer::removeInstanceFromPool($singleval);
+                MaterialPeer::removeInstanceFromPool($singleval);
             }
         }
 
@@ -664,7 +951,7 @@ abstract class BaseUsuarioPeer {
             $con->beginTransaction();
             
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            UsuarioPeer::clearRelatedInstancePool();
+            MaterialPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -675,13 +962,13 @@ abstract class BaseUsuarioPeer {
     }
 
     /**
-     * Validates all modified columns of given Usuario object.
+     * Validates all modified columns of given Material object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param      Usuario $obj The object to validate.
+     * @param      Material $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -691,8 +978,8 @@ abstract class BaseUsuarioPeer {
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(UsuarioPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(UsuarioPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(MaterialPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(MaterialPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -708,7 +995,7 @@ abstract class BaseUsuarioPeer {
 
         }
 
-        return BasePeer::doValidate(UsuarioPeer::DATABASE_NAME, UsuarioPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(MaterialPeer::DATABASE_NAME, MaterialPeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -716,23 +1003,23 @@ abstract class BaseUsuarioPeer {
      *
      * @param      int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return Usuario
+     * @return Material
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = UsuarioPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = MaterialPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
-        $criteria->add(UsuarioPeer::IDUSUARIO, $pk);
+        $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
+        $criteria->add(MaterialPeer::ID_MATERIAL, $pk);
 
-        $v = UsuarioPeer::doSelect($criteria, $con);
+        $v = MaterialPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -742,23 +1029,23 @@ abstract class BaseUsuarioPeer {
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return Usuario[]
+     * @return Material[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
-            $criteria->add(UsuarioPeer::IDUSUARIO, $pks, Criteria::IN);
-            $objs = UsuarioPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
+            $criteria->add(MaterialPeer::ID_MATERIAL, $pks, Criteria::IN);
+            $objs = MaterialPeer::doSelect($criteria, $con);
         }
 
         return $objs;
@@ -791,15 +1078,15 @@ abstract class BaseUsuarioPeer {
 	{
 	  if (preg_match('/^do(Select|Count)(Join(All(Except)?)?|Stmt)?/', $method, $match))
 	  {
-	    return sprintf('BaseUsuarioPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
+	    return sprintf('BaseMaterialPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
 	  }
 	
 	  throw new LogicException(sprintf('Unrecognized function "%s"', $method));
 	}
 
-} // BaseUsuarioPeer
+} // BaseMaterialPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseUsuarioPeer::buildTableMap();
+BaseMaterialPeer::buildTableMap();
 

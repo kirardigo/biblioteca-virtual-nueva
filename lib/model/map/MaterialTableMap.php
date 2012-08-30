@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'usuario' table.
+ * This class defines the structure of the 'material' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class UsuarioTableMap extends TableMap
+class MaterialTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.UsuarioTableMap';
+    const CLASS_NAME = 'lib.model.map.MaterialTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,20 @@ class UsuarioTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('usuario');
-        $this->setPhpName('Usuario');
-        $this->setClassname('Usuario');
+        $this->setName('material');
+        $this->setPhpName('Material');
+        $this->setClassname('Material');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
+        $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
+        $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', false, 45, null);
+        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
+        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', false, 45, null);
+        $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);
+        $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +54,8 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::MANY_TO_ONE, array('subcontenido_id_subcontenido' => 'id_subcontenido', ), null, null);
+        $this->addRelation('Carrera', 'Carrera', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'Carreras');
     } // buildRelations()
 
     /**
@@ -65,4 +72,4 @@ class UsuarioTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // UsuarioTableMap
+} // MaterialTableMap

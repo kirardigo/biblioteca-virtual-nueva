@@ -65,8 +65,10 @@ class usuarioActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
+        //guardar nombre original de archivo
+        
       $Usuario = $form->save();
-
+      
       $this->redirect('usuario/edit?idusuario='.$Usuario->getIdusuario());
     }
   }

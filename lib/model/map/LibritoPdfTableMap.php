@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'usuario' table.
+ * This class defines the structure of the 'librito_pdf' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class UsuarioTableMap extends TableMap
+class LibritoPdfTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.UsuarioTableMap';
+    const CLASS_NAME = 'lib.model.map.LibritoPdfTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,16 @@ class UsuarioTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('usuario');
-        $this->setPhpName('Usuario');
-        $this->setClassname('Usuario');
+        $this->setName('librito_pdf');
+        $this->setPhpName('LibritoPdf');
+        $this->setClassname('LibritoPdf');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addPrimaryKey('ID_LIBRITO_PDF', 'IdLibritoPdf', 'INTEGER', true, null, null);
+        $this->addColumn('FILENAME', 'Filename', 'VARCHAR', false, 45, null);
+        $this->addColumn('CAPTION', 'Caption', 'VARCHAR', false, 45, null);
+        $this->addForeignKey('LIBRITO_ID_LIBRITO', 'LibritoIdLibrito', 'INTEGER', 'librito', 'ID_LIBRITO', true, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +50,7 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Librito', 'Librito', RelationMap::MANY_TO_ONE, array('librito_id_librito' => 'id_librito', ), null, null);
     } // buildRelations()
 
     /**
@@ -65,4 +67,4 @@ class UsuarioTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // UsuarioTableMap
+} // LibritoPdfTableMap

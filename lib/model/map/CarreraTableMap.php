@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'usuario' table.
+ * This class defines the structure of the 'carrera' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class UsuarioTableMap extends TableMap
+class CarreraTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.UsuarioTableMap';
+    const CLASS_NAME = 'lib.model.map.CarreraTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,15 @@ class UsuarioTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('usuario');
-        $this->setPhpName('Usuario');
-        $this->setClassname('Usuario');
+        $this->setName('carrera');
+        $this->setPhpName('Carrera');
+        $this->setClassname('Carrera');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
+        $this->addPrimaryKey('ID_CARRERA', 'IdCarrera', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addForeignKey('MATERIAL_ID_MATERIAL', 'MaterialIdMaterial', 'INTEGER', 'material', 'ID_MATERIAL', true, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +49,7 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), null, null);
     } // buildRelations()
 
     /**
@@ -65,4 +66,4 @@ class UsuarioTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // UsuarioTableMap
+} // CarreraTableMap

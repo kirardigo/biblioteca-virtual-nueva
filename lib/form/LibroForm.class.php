@@ -11,5 +11,8 @@ class LibroForm extends BaseLibroForm
 {
   public function configure()
   {
+	 /* $this->widgetSchema['archivoloco']=new sfWidgetFormInputFile();
+	  $this->validatorSchema['archivoloco']=new sfValidatorFile();*/
+	        
   }
 }

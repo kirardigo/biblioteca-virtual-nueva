@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'usuario' table.
+ * This class defines the structure of the 'subcontenido' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class UsuarioTableMap extends TableMap
+class SubcontenidoTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.UsuarioTableMap';
+    const CLASS_NAME = 'lib.model.map.SubcontenidoTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,16 @@ class UsuarioTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('usuario');
-        $this->setPhpName('Usuario');
-        $this->setClassname('Usuario');
+        $this->setName('subcontenido');
+        $this->setPhpName('Subcontenido');
+        $this->setClassname('Subcontenido');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
+        $this->addPrimaryKey('ID_SUBCONTENIDO', 'IdSubcontenido', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addColumn('NUMERO_SUBCONTENIDO', 'NumeroSubcontenido', 'INTEGER', false, null, null);
+        $this->addForeignKey('CONTENIDO_ID_CONTENIDO', 'ContenidoIdContenido', 'INTEGER', 'contenido', 'ID_CONTENIDO', true, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +50,8 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Contenido', 'Contenido', RelationMap::MANY_TO_ONE, array('contenido_id_contenido' => 'id_contenido', ), null, null);
+        $this->addRelation('Material', 'Material', RelationMap::ONE_TO_MANY, array('id_subcontenido' => 'subcontenido_id_subcontenido', ), null, null, 'Materials');
     } // buildRelations()
 
     /**
@@ -65,4 +68,4 @@ class UsuarioTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // UsuarioTableMap
+} // SubcontenidoTableMap

@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'usuario' table.
+ * Base class that represents a row from the 'librito_pdf' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseUsuario extends BaseObject 
+abstract class BaseLibritoPdf extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'UsuarioPeer';
+    const PEER = 'LibritoPdfPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        UsuarioPeer
+     * @var        LibritoPdfPeer
      */
     protected static $peer;
 
@@ -31,22 +31,33 @@ abstract class BaseUsuario extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the idusuario field.
+     * The value for the id_librito_pdf field.
      * @var        int
      */
-    protected $idusuario;
+    protected $id_librito_pdf;
 
     /**
-     * The value for the nombre field.
+     * The value for the filename field.
      * @var        string
      */
-    protected $nombre;
+    protected $filename;
 
     /**
-     * The value for the password field.
+     * The value for the caption field.
      * @var        string
      */
-    protected $password;
+    protected $caption;
+
+    /**
+     * The value for the librito_id_librito field.
+     * @var        int
+     */
+    protected $librito_id_librito;
+
+    /**
+     * @var        Librito
+     */
+    protected $aLibrito;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -63,100 +74,136 @@ abstract class BaseUsuario extends BaseObject
     protected $alreadyInValidation = false;
 
     /**
-     * Get the [idusuario] column value.
+     * Get the [id_librito_pdf] column value.
      * 
      * @return   int
      */
-    public function getIdusuario()
+    public function getIdLibritoPdf()
     {
 
-        return $this->idusuario;
+        return $this->id_librito_pdf;
     }
 
     /**
-     * Get the [nombre] column value.
+     * Get the [filename] column value.
      * 
      * @return   string
      */
-    public function getNombre()
+    public function getFilename()
     {
 
-        return $this->nombre;
+        return $this->filename;
     }
 
     /**
-     * Get the [password] column value.
+     * Get the [caption] column value.
      * 
      * @return   string
      */
-    public function getPassword()
+    public function getCaption()
     {
 
-        return $this->password;
+        return $this->caption;
     }
 
     /**
-     * Set the value of [idusuario] column.
+     * Get the [librito_id_librito] column value.
+     * 
+     * @return   int
+     */
+    public function getLibritoIdLibrito()
+    {
+
+        return $this->librito_id_librito;
+    }
+
+    /**
+     * Set the value of [id_librito_pdf] column.
      * 
      * @param      int $v new value
-     * @return   Usuario The current object (for fluent API support)
+     * @return   LibritoPdf The current object (for fluent API support)
      */
-    public function setIdusuario($v)
+    public function setIdLibritoPdf($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->idusuario !== $v) {
-            $this->idusuario = $v;
-            $this->modifiedColumns[] = UsuarioPeer::IDUSUARIO;
+        if ($this->id_librito_pdf !== $v) {
+            $this->id_librito_pdf = $v;
+            $this->modifiedColumns[] = LibritoPdfPeer::ID_LIBRITO_PDF;
         }
 
 
         return $this;
-    } // setIdusuario()
+    } // setIdLibritoPdf()
 
     /**
-     * Set the value of [nombre] column.
+     * Set the value of [filename] column.
      * 
      * @param      string $v new value
-     * @return   Usuario The current object (for fluent API support)
+     * @return   LibritoPdf The current object (for fluent API support)
      */
-    public function setNombre($v)
+    public function setFilename($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->nombre !== $v) {
-            $this->nombre = $v;
-            $this->modifiedColumns[] = UsuarioPeer::NOMBRE;
+        if ($this->filename !== $v) {
+            $this->filename = $v;
+            $this->modifiedColumns[] = LibritoPdfPeer::FILENAME;
         }
 
 
         return $this;
-    } // setNombre()
+    } // setFilename()
 
     /**
-     * Set the value of [password] column.
+     * Set the value of [caption] column.
      * 
      * @param      string $v new value
-     * @return   Usuario The current object (for fluent API support)
+     * @return   LibritoPdf The current object (for fluent API support)
      */
-    public function setPassword($v)
+    public function setCaption($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->password !== $v) {
-            $this->password = $v;
-            $this->modifiedColumns[] = UsuarioPeer::PASSWORD;
+        if ($this->caption !== $v) {
+            $this->caption = $v;
+            $this->modifiedColumns[] = LibritoPdfPeer::CAPTION;
         }
 
 
         return $this;
-    } // setPassword()
+    } // setCaption()
+
+    /**
+     * Set the value of [librito_id_librito] column.
+     * 
+     * @param      int $v new value
+     * @return   LibritoPdf The current object (for fluent API support)
+     */
+    public function setLibritoIdLibrito($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->librito_id_librito !== $v) {
+            $this->librito_id_librito = $v;
+            $this->modifiedColumns[] = LibritoPdfPeer::LIBRITO_ID_LIBRITO;
+        }
+
+        if ($this->aLibrito !== null && $this->aLibrito->getIdLibrito() !== $v) {
+            $this->aLibrito = null;
+        }
+
+
+        return $this;
+    } // setLibritoIdLibrito()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -190,9 +237,10 @@ abstract class BaseUsuario extends BaseObject
     {
         try {
 
-            $this->idusuario = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->password = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->id_librito_pdf = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->filename = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->caption = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->librito_id_librito = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -201,10 +249,10 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = LibritoPdfPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Usuario object", $e);
+            throw new PropelException("Error populating LibritoPdf object", $e);
         }
     }
 
@@ -224,6 +272,9 @@ abstract class BaseUsuario extends BaseObject
     public function ensureConsistency()
     {
 
+        if ($this->aLibrito !== null && $this->librito_id_librito !== $this->aLibrito->getIdLibrito()) {
+            $this->aLibrito = null;
+        }
     } // ensureConsistency
 
     /**
@@ -247,13 +298,13 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(LibritoPdfPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = UsuarioPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = LibritoPdfPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -263,6 +314,7 @@ abstract class BaseUsuario extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aLibrito = null;
         } // if (deep)
     }
 
@@ -283,16 +335,16 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(LibritoPdfPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = UsuarioQuery::create()
+            $deleteQuery = LibritoPdfQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseUsuario:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseLibritoPdf:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -305,7 +357,7 @@ abstract class BaseUsuario extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseUsuario:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseLibritoPdf:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -342,7 +394,7 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(LibritoPdfPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -350,7 +402,7 @@ abstract class BaseUsuario extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseUsuario:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseLibritoPdf:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -373,12 +425,12 @@ abstract class BaseUsuario extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseUsuario:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseLibritoPdf:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                UsuarioPeer::addInstanceToPool($this);
+                LibritoPdfPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -407,6 +459,18 @@ abstract class BaseUsuario extends BaseObject
         $affectedRows = 0; // initialize var to track total num of affected rows
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
+
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their coresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aLibrito !== null) {
+                if ($this->aLibrito->isModified() || $this->aLibrito->isNew()) {
+                    $affectedRows += $this->aLibrito->save($con);
+                }
+                $this->setLibrito($this->aLibrito);
+            }
 
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
@@ -439,24 +503,27 @@ abstract class BaseUsuario extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = UsuarioPeer::IDUSUARIO;
-        if (null !== $this->idusuario) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UsuarioPeer::IDUSUARIO . ')');
+        $this->modifiedColumns[] = LibritoPdfPeer::ID_LIBRITO_PDF;
+        if (null !== $this->id_librito_pdf) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . LibritoPdfPeer::ID_LIBRITO_PDF . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(UsuarioPeer::IDUSUARIO)) {
-            $modifiedColumns[':p' . $index++]  = '`IDUSUARIO`';
+        if ($this->isColumnModified(LibritoPdfPeer::ID_LIBRITO_PDF)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_LIBRITO_PDF`';
         }
-        if ($this->isColumnModified(UsuarioPeer::NOMBRE)) {
-            $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
+        if ($this->isColumnModified(LibritoPdfPeer::FILENAME)) {
+            $modifiedColumns[':p' . $index++]  = '`FILENAME`';
         }
-        if ($this->isColumnModified(UsuarioPeer::PASSWORD)) {
-            $modifiedColumns[':p' . $index++]  = '`PASSWORD`';
+        if ($this->isColumnModified(LibritoPdfPeer::CAPTION)) {
+            $modifiedColumns[':p' . $index++]  = '`CAPTION`';
+        }
+        if ($this->isColumnModified(LibritoPdfPeer::LIBRITO_ID_LIBRITO)) {
+            $modifiedColumns[':p' . $index++]  = '`LIBRITO_ID_LIBRITO`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `usuario` (%s) VALUES (%s)',
+            'INSERT INTO `librito_pdf` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -465,14 +532,17 @@ abstract class BaseUsuario extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`IDUSUARIO`':						
-						$stmt->bindValue($identifier, $this->idusuario, PDO::PARAM_INT);
+                    case '`ID_LIBRITO_PDF`':						
+						$stmt->bindValue($identifier, $this->id_librito_pdf, PDO::PARAM_INT);
                         break;
-                    case '`NOMBRE`':						
-						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
+                    case '`FILENAME`':						
+						$stmt->bindValue($identifier, $this->filename, PDO::PARAM_STR);
                         break;
-                    case '`PASSWORD`':						
-						$stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
+                    case '`CAPTION`':						
+						$stmt->bindValue($identifier, $this->caption, PDO::PARAM_STR);
+                        break;
+                    case '`LIBRITO_ID_LIBRITO`':						
+						$stmt->bindValue($identifier, $this->librito_id_librito, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -487,7 +557,7 @@ abstract class BaseUsuario extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdusuario($pk);
+        $this->setIdLibritoPdf($pk);
 
         $this->setNew(false);
     }
@@ -568,7 +638,19 @@ abstract class BaseUsuario extends BaseObject
             $failureMap = array();
 
 
-            if (($retval = UsuarioPeer::doValidate($this, $columns)) !== true) {
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their coresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aLibrito !== null) {
+                if (!$this->aLibrito->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aLibrito->getValidationFailures());
+                }
+            }
+
+
+            if (($retval = LibritoPdfPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
@@ -592,7 +674,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UsuarioPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = LibritoPdfPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -609,13 +691,16 @@ abstract class BaseUsuario extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdusuario();
+                return $this->getIdLibritoPdf();
                 break;
             case 1:
-                return $this->getNombre();
+                return $this->getFilename();
                 break;
             case 2:
-                return $this->getPassword();
+                return $this->getCaption();
+                break;
+            case 3:
+                return $this->getLibritoIdLibrito();
                 break;
             default:
                 return null;
@@ -634,21 +719,28 @@ abstract class BaseUsuario extends BaseObject
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Usuario'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['LibritoPdf'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Usuario'][$this->getPrimaryKey()] = true;
-        $keys = UsuarioPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['LibritoPdf'][$this->getPrimaryKey()] = true;
+        $keys = LibritoPdfPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdusuario(),
-            $keys[1] => $this->getNombre(),
-            $keys[2] => $this->getPassword(),
+            $keys[0] => $this->getIdLibritoPdf(),
+            $keys[1] => $this->getFilename(),
+            $keys[2] => $this->getCaption(),
+            $keys[3] => $this->getLibritoIdLibrito(),
         );
+        if ($includeForeignObjects) {
+            if (null !== $this->aLibrito) {
+                $result['Librito'] = $this->aLibrito->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+        }
 
         return $result;
     }
@@ -666,7 +758,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UsuarioPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = LibritoPdfPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -683,13 +775,16 @@ abstract class BaseUsuario extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdusuario($value);
+                $this->setIdLibritoPdf($value);
                 break;
             case 1:
-                $this->setNombre($value);
+                $this->setFilename($value);
                 break;
             case 2:
-                $this->setPassword($value);
+                $this->setCaption($value);
+                break;
+            case 3:
+                $this->setLibritoIdLibrito($value);
                 break;
         } // switch()
     }
@@ -713,11 +808,12 @@ abstract class BaseUsuario extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = UsuarioPeer::getFieldNames($keyType);
+        $keys = LibritoPdfPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdusuario($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setPassword($arr[$keys[2]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdLibritoPdf($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setFilename($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCaption($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setLibritoIdLibrito($arr[$keys[3]]);
     }
 
     /**
@@ -727,11 +823,12 @@ abstract class BaseUsuario extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
+        $criteria = new Criteria(LibritoPdfPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(UsuarioPeer::IDUSUARIO)) $criteria->add(UsuarioPeer::IDUSUARIO, $this->idusuario);
-        if ($this->isColumnModified(UsuarioPeer::NOMBRE)) $criteria->add(UsuarioPeer::NOMBRE, $this->nombre);
-        if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
+        if ($this->isColumnModified(LibritoPdfPeer::ID_LIBRITO_PDF)) $criteria->add(LibritoPdfPeer::ID_LIBRITO_PDF, $this->id_librito_pdf);
+        if ($this->isColumnModified(LibritoPdfPeer::FILENAME)) $criteria->add(LibritoPdfPeer::FILENAME, $this->filename);
+        if ($this->isColumnModified(LibritoPdfPeer::CAPTION)) $criteria->add(LibritoPdfPeer::CAPTION, $this->caption);
+        if ($this->isColumnModified(LibritoPdfPeer::LIBRITO_ID_LIBRITO)) $criteria->add(LibritoPdfPeer::LIBRITO_ID_LIBRITO, $this->librito_id_librito);
 
         return $criteria;
     }
@@ -746,8 +843,8 @@ abstract class BaseUsuario extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
-        $criteria->add(UsuarioPeer::IDUSUARIO, $this->idusuario);
+        $criteria = new Criteria(LibritoPdfPeer::DATABASE_NAME);
+        $criteria->add(LibritoPdfPeer::ID_LIBRITO_PDF, $this->id_librito_pdf);
 
         return $criteria;
     }
@@ -758,18 +855,18 @@ abstract class BaseUsuario extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdusuario();
+        return $this->getIdLibritoPdf();
     }
 
     /**
-     * Generic method to set the primary key (idusuario column).
+     * Generic method to set the primary key (id_librito_pdf column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdusuario($key);
+        $this->setIdLibritoPdf($key);
     }
 
     /**
@@ -779,7 +876,7 @@ abstract class BaseUsuario extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdusuario();
+        return null === $this->getIdLibritoPdf();
     }
 
     /**
@@ -788,18 +885,31 @@ abstract class BaseUsuario extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Usuario (or compatible) type.
+     * @param      object $copyObj An object of LibritoPdf (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setNombre($this->getNombre());
-        $copyObj->setPassword($this->getPassword());
+        $copyObj->setFilename($this->getFilename());
+        $copyObj->setCaption($this->getCaption());
+        $copyObj->setLibritoIdLibrito($this->getLibritoIdLibrito());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdusuario(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdLibritoPdf(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -812,7 +922,7 @@ abstract class BaseUsuario extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Usuario Clone of current object.
+     * @return                 LibritoPdf Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -832,15 +942,66 @@ abstract class BaseUsuario extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   UsuarioPeer
+     * @return   LibritoPdfPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new UsuarioPeer();
+            self::$peer = new LibritoPdfPeer();
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a Librito object.
+     *
+     * @param                  Librito $v
+     * @return                 LibritoPdf The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setLibrito(Librito $v = null)
+    {
+        if ($v === null) {
+            $this->setLibritoIdLibrito(NULL);
+        } else {
+            $this->setLibritoIdLibrito($v->getIdLibrito());
+        }
+
+        $this->aLibrito = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Librito object, it will not be re-added.
+        if ($v !== null) {
+            $v->addLibritoPdf($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated Librito object
+     *
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Librito The associated Librito object.
+     * @throws PropelException
+     */
+    public function getLibrito(PropelPDO $con = null)
+    {
+        if ($this->aLibrito === null && ($this->librito_id_librito !== null)) {
+            $this->aLibrito = LibritoQuery::create()->findPk($this->librito_id_librito, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aLibrito->addLibritoPdfs($this);
+             */
+        }
+
+        return $this->aLibrito;
     }
 
     /**
@@ -848,9 +1009,10 @@ abstract class BaseUsuario extends BaseObject
      */
     public function clear()
     {
-        $this->idusuario = null;
-        $this->nombre = null;
-        $this->password = null;
+        $this->id_librito_pdf = null;
+        $this->filename = null;
+        $this->caption = null;
+        $this->librito_id_librito = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -873,6 +1035,7 @@ abstract class BaseUsuario extends BaseObject
         if ($deep) {
         } // if ($deep)
 
+        $this->aLibrito = null;
     }
 
     /**
@@ -882,7 +1045,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UsuarioPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(LibritoPdfPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -892,7 +1055,7 @@ abstract class BaseUsuario extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseUsuario:' . $name))
+		if ($callable = sfMixer::getCallable('BaseLibritoPdf:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -902,4 +1065,4 @@ abstract class BaseUsuario extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseUsuario
+} // BaseLibritoPdf

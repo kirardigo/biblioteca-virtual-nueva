@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'usuario' table.
+ * Base class that represents a row from the 'contenido' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseUsuario extends BaseObject 
+abstract class BaseContenido extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'UsuarioPeer';
+    const PEER = 'ContenidoPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        UsuarioPeer
+     * @var        ContenidoPeer
      */
     protected static $peer;
 
@@ -31,10 +31,16 @@ abstract class BaseUsuario extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the idusuario field.
+     * The value for the id_contenido field.
      * @var        int
      */
-    protected $idusuario;
+    protected $id_contenido;
+
+    /**
+     * The value for the numero_contenido field.
+     * @var        int
+     */
+    protected $numero_contenido;
 
     /**
      * The value for the nombre field.
@@ -43,10 +49,9 @@ abstract class BaseUsuario extends BaseObject
     protected $nombre;
 
     /**
-     * The value for the password field.
-     * @var        string
+     * @var        PropelObjectCollection|Subcontenido[] Collection to store aggregation of Subcontenido objects.
      */
-    protected $password;
+    protected $collSubcontenidos;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -63,14 +68,31 @@ abstract class BaseUsuario extends BaseObject
     protected $alreadyInValidation = false;
 
     /**
-     * Get the [idusuario] column value.
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $subcontenidosScheduledForDeletion = null;
+
+    /**
+     * Get the [id_contenido] column value.
      * 
      * @return   int
      */
-    public function getIdusuario()
+    public function getIdContenido()
     {
 
-        return $this->idusuario;
+        return $this->id_contenido;
+    }
+
+    /**
+     * Get the [numero_contenido] column value.
+     * 
+     * @return   int
+     */
+    public function getNumeroContenido()
+    {
+
+        return $this->numero_contenido;
     }
 
     /**
@@ -85,42 +107,52 @@ abstract class BaseUsuario extends BaseObject
     }
 
     /**
-     * Get the [password] column value.
-     * 
-     * @return   string
-     */
-    public function getPassword()
-    {
-
-        return $this->password;
-    }
-
-    /**
-     * Set the value of [idusuario] column.
+     * Set the value of [id_contenido] column.
      * 
      * @param      int $v new value
-     * @return   Usuario The current object (for fluent API support)
+     * @return   Contenido The current object (for fluent API support)
      */
-    public function setIdusuario($v)
+    public function setIdContenido($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->idusuario !== $v) {
-            $this->idusuario = $v;
-            $this->modifiedColumns[] = UsuarioPeer::IDUSUARIO;
+        if ($this->id_contenido !== $v) {
+            $this->id_contenido = $v;
+            $this->modifiedColumns[] = ContenidoPeer::ID_CONTENIDO;
         }
 
 
         return $this;
-    } // setIdusuario()
+    } // setIdContenido()
+
+    /**
+     * Set the value of [numero_contenido] column.
+     * 
+     * @param      int $v new value
+     * @return   Contenido The current object (for fluent API support)
+     */
+    public function setNumeroContenido($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->numero_contenido !== $v) {
+            $this->numero_contenido = $v;
+            $this->modifiedColumns[] = ContenidoPeer::NUMERO_CONTENIDO;
+        }
+
+
+        return $this;
+    } // setNumeroContenido()
 
     /**
      * Set the value of [nombre] column.
      * 
      * @param      string $v new value
-     * @return   Usuario The current object (for fluent API support)
+     * @return   Contenido The current object (for fluent API support)
      */
     public function setNombre($v)
     {
@@ -130,33 +162,12 @@ abstract class BaseUsuario extends BaseObject
 
         if ($this->nombre !== $v) {
             $this->nombre = $v;
-            $this->modifiedColumns[] = UsuarioPeer::NOMBRE;
+            $this->modifiedColumns[] = ContenidoPeer::NOMBRE;
         }
 
 
         return $this;
     } // setNombre()
-
-    /**
-     * Set the value of [password] column.
-     * 
-     * @param      string $v new value
-     * @return   Usuario The current object (for fluent API support)
-     */
-    public function setPassword($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->password !== $v) {
-            $this->password = $v;
-            $this->modifiedColumns[] = UsuarioPeer::PASSWORD;
-        }
-
-
-        return $this;
-    } // setPassword()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -190,9 +201,9 @@ abstract class BaseUsuario extends BaseObject
     {
         try {
 
-            $this->idusuario = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->password = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->id_contenido = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->numero_contenido = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->nombre = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -201,10 +212,10 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 3; // 3 = ContenidoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Usuario object", $e);
+            throw new PropelException("Error populating Contenido object", $e);
         }
     }
 
@@ -247,13 +258,13 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(ContenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = UsuarioPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = ContenidoPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -262,6 +273,8 @@ abstract class BaseUsuario extends BaseObject
         $this->hydrate($row, 0, true); // rehydrate
 
         if ($deep) {  // also de-associate any related objects?
+
+            $this->collSubcontenidos = null;
 
         } // if (deep)
     }
@@ -283,16 +296,16 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(ContenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = UsuarioQuery::create()
+            $deleteQuery = ContenidoQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseUsuario:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseContenido:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -305,7 +318,7 @@ abstract class BaseUsuario extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseUsuario:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseContenido:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -342,7 +355,7 @@ abstract class BaseUsuario extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(ContenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -350,7 +363,7 @@ abstract class BaseUsuario extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseUsuario:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseContenido:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -373,12 +386,12 @@ abstract class BaseUsuario extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseUsuario:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseContenido:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                UsuarioPeer::addInstanceToPool($this);
+                ContenidoPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -419,6 +432,23 @@ abstract class BaseUsuario extends BaseObject
                 $this->resetModified();
             }
 
+            if ($this->subcontenidosScheduledForDeletion !== null) {
+                if (!$this->subcontenidosScheduledForDeletion->isEmpty()) {
+                    SubcontenidoQuery::create()
+                        ->filterByPrimaryKeys($this->subcontenidosScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->subcontenidosScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collSubcontenidos !== null) {
+                foreach ($this->collSubcontenidos as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -439,24 +469,24 @@ abstract class BaseUsuario extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = UsuarioPeer::IDUSUARIO;
-        if (null !== $this->idusuario) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UsuarioPeer::IDUSUARIO . ')');
+        $this->modifiedColumns[] = ContenidoPeer::ID_CONTENIDO;
+        if (null !== $this->id_contenido) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . ContenidoPeer::ID_CONTENIDO . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(UsuarioPeer::IDUSUARIO)) {
-            $modifiedColumns[':p' . $index++]  = '`IDUSUARIO`';
+        if ($this->isColumnModified(ContenidoPeer::ID_CONTENIDO)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_CONTENIDO`';
         }
-        if ($this->isColumnModified(UsuarioPeer::NOMBRE)) {
+        if ($this->isColumnModified(ContenidoPeer::NUMERO_CONTENIDO)) {
+            $modifiedColumns[':p' . $index++]  = '`NUMERO_CONTENIDO`';
+        }
+        if ($this->isColumnModified(ContenidoPeer::NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
-        }
-        if ($this->isColumnModified(UsuarioPeer::PASSWORD)) {
-            $modifiedColumns[':p' . $index++]  = '`PASSWORD`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `usuario` (%s) VALUES (%s)',
+            'INSERT INTO `contenido` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -465,14 +495,14 @@ abstract class BaseUsuario extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`IDUSUARIO`':						
-						$stmt->bindValue($identifier, $this->idusuario, PDO::PARAM_INT);
+                    case '`ID_CONTENIDO`':						
+						$stmt->bindValue($identifier, $this->id_contenido, PDO::PARAM_INT);
+                        break;
+                    case '`NUMERO_CONTENIDO`':						
+						$stmt->bindValue($identifier, $this->numero_contenido, PDO::PARAM_INT);
                         break;
                     case '`NOMBRE`':						
 						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
-                        break;
-                    case '`PASSWORD`':						
-						$stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -487,7 +517,7 @@ abstract class BaseUsuario extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdusuario($pk);
+        $this->setIdContenido($pk);
 
         $this->setNew(false);
     }
@@ -568,10 +598,18 @@ abstract class BaseUsuario extends BaseObject
             $failureMap = array();
 
 
-            if (($retval = UsuarioPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = ContenidoPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
+
+                if ($this->collSubcontenidos !== null) {
+                    foreach ($this->collSubcontenidos as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
 
 
             $this->alreadyInValidation = false;
@@ -592,7 +630,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UsuarioPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = ContenidoPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -609,13 +647,13 @@ abstract class BaseUsuario extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdusuario();
+                return $this->getIdContenido();
                 break;
             case 1:
-                return $this->getNombre();
+                return $this->getNumeroContenido();
                 break;
             case 2:
-                return $this->getPassword();
+                return $this->getNombre();
                 break;
             default:
                 return null;
@@ -634,21 +672,27 @@ abstract class BaseUsuario extends BaseObject
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Usuario'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['Contenido'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Usuario'][$this->getPrimaryKey()] = true;
-        $keys = UsuarioPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['Contenido'][$this->getPrimaryKey()] = true;
+        $keys = ContenidoPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdusuario(),
-            $keys[1] => $this->getNombre(),
-            $keys[2] => $this->getPassword(),
+            $keys[0] => $this->getIdContenido(),
+            $keys[1] => $this->getNumeroContenido(),
+            $keys[2] => $this->getNombre(),
         );
+        if ($includeForeignObjects) {
+            if (null !== $this->collSubcontenidos) {
+                $result['Subcontenidos'] = $this->collSubcontenidos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+        }
 
         return $result;
     }
@@ -666,7 +710,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UsuarioPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = ContenidoPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -683,13 +727,13 @@ abstract class BaseUsuario extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdusuario($value);
+                $this->setIdContenido($value);
                 break;
             case 1:
-                $this->setNombre($value);
+                $this->setNumeroContenido($value);
                 break;
             case 2:
-                $this->setPassword($value);
+                $this->setNombre($value);
                 break;
         } // switch()
     }
@@ -713,11 +757,11 @@ abstract class BaseUsuario extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = UsuarioPeer::getFieldNames($keyType);
+        $keys = ContenidoPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdusuario($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setPassword($arr[$keys[2]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdContenido($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setNumeroContenido($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setNombre($arr[$keys[2]]);
     }
 
     /**
@@ -727,11 +771,11 @@ abstract class BaseUsuario extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
+        $criteria = new Criteria(ContenidoPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(UsuarioPeer::IDUSUARIO)) $criteria->add(UsuarioPeer::IDUSUARIO, $this->idusuario);
-        if ($this->isColumnModified(UsuarioPeer::NOMBRE)) $criteria->add(UsuarioPeer::NOMBRE, $this->nombre);
-        if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
+        if ($this->isColumnModified(ContenidoPeer::ID_CONTENIDO)) $criteria->add(ContenidoPeer::ID_CONTENIDO, $this->id_contenido);
+        if ($this->isColumnModified(ContenidoPeer::NUMERO_CONTENIDO)) $criteria->add(ContenidoPeer::NUMERO_CONTENIDO, $this->numero_contenido);
+        if ($this->isColumnModified(ContenidoPeer::NOMBRE)) $criteria->add(ContenidoPeer::NOMBRE, $this->nombre);
 
         return $criteria;
     }
@@ -746,8 +790,8 @@ abstract class BaseUsuario extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
-        $criteria->add(UsuarioPeer::IDUSUARIO, $this->idusuario);
+        $criteria = new Criteria(ContenidoPeer::DATABASE_NAME);
+        $criteria->add(ContenidoPeer::ID_CONTENIDO, $this->id_contenido);
 
         return $criteria;
     }
@@ -758,18 +802,18 @@ abstract class BaseUsuario extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdusuario();
+        return $this->getIdContenido();
     }
 
     /**
-     * Generic method to set the primary key (idusuario column).
+     * Generic method to set the primary key (id_contenido column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdusuario($key);
+        $this->setIdContenido($key);
     }
 
     /**
@@ -779,7 +823,7 @@ abstract class BaseUsuario extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdusuario();
+        return null === $this->getIdContenido();
     }
 
     /**
@@ -788,18 +832,36 @@ abstract class BaseUsuario extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Usuario (or compatible) type.
+     * @param      object $copyObj An object of Contenido (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
+        $copyObj->setNumeroContenido($this->getNumeroContenido());
         $copyObj->setNombre($this->getNombre());
-        $copyObj->setPassword($this->getPassword());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            foreach ($this->getSubcontenidos() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addSubcontenido($relObj->copy($deepCopy));
+                }
+            }
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdusuario(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdContenido(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -812,7 +874,7 @@ abstract class BaseUsuario extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Usuario Clone of current object.
+     * @return                 Contenido Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -832,15 +894,198 @@ abstract class BaseUsuario extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   UsuarioPeer
+     * @return   ContenidoPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new UsuarioPeer();
+            self::$peer = new ContenidoPeer();
         }
 
         return self::$peer;
+    }
+
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param      string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('Subcontenido' == $relationName) {
+            $this->initSubcontenidos();
+        }
+    }
+
+    /**
+     * Clears out the collSubcontenidos collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addSubcontenidos()
+     */
+    public function clearSubcontenidos()
+    {
+        $this->collSubcontenidos = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collSubcontenidos collection.
+     *
+     * By default this just sets the collSubcontenidos collection to an empty array (like clearcollSubcontenidos());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initSubcontenidos($overrideExisting = true)
+    {
+        if (null !== $this->collSubcontenidos && !$overrideExisting) {
+            return;
+        }
+        $this->collSubcontenidos = new PropelObjectCollection();
+        $this->collSubcontenidos->setModel('Subcontenido');
+    }
+
+    /**
+     * Gets an array of Subcontenido objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Contenido is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Subcontenido[] List of Subcontenido objects
+     * @throws PropelException
+     */
+    public function getSubcontenidos($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collSubcontenidos || null !== $criteria) {
+            if ($this->isNew() && null === $this->collSubcontenidos) {
+                // return empty collection
+                $this->initSubcontenidos();
+            } else {
+                $collSubcontenidos = SubcontenidoQuery::create(null, $criteria)
+                    ->filterByContenido($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collSubcontenidos;
+                }
+                $this->collSubcontenidos = $collSubcontenidos;
+            }
+        }
+
+        return $this->collSubcontenidos;
+    }
+
+    /**
+     * Sets a collection of Subcontenido objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $subcontenidos A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setSubcontenidos(PropelCollection $subcontenidos, PropelPDO $con = null)
+    {
+        $this->subcontenidosScheduledForDeletion = $this->getSubcontenidos(new Criteria(), $con)->diff($subcontenidos);
+
+        foreach ($this->subcontenidosScheduledForDeletion as $subcontenidoRemoved) {
+            $subcontenidoRemoved->setContenido(null);
+        }
+
+        $this->collSubcontenidos = null;
+        foreach ($subcontenidos as $subcontenido) {
+            $this->addSubcontenido($subcontenido);
+        }
+
+        $this->collSubcontenidos = $subcontenidos;
+    }
+
+    /**
+     * Returns the number of related Subcontenido objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Subcontenido objects.
+     * @throws PropelException
+     */
+    public function countSubcontenidos(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collSubcontenidos || null !== $criteria) {
+            if ($this->isNew() && null === $this->collSubcontenidos) {
+                return 0;
+            } else {
+                $query = SubcontenidoQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByContenido($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collSubcontenidos);
+        }
+    }
+
+    /**
+     * Method called to associate a Subcontenido object to this object
+     * through the Subcontenido foreign key attribute.
+     *
+     * @param    Subcontenido $l Subcontenido
+     * @return   Contenido The current object (for fluent API support)
+     */
+    public function addSubcontenido(Subcontenido $l)
+    {
+        if ($this->collSubcontenidos === null) {
+            $this->initSubcontenidos();
+        }
+        if (!$this->collSubcontenidos->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddSubcontenido($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Subcontenido $subcontenido The subcontenido object to add.
+     */
+    protected function doAddSubcontenido($subcontenido)
+    {
+        $this->collSubcontenidos[]= $subcontenido;
+        $subcontenido->setContenido($this);
+    }
+
+    /**
+     * @param	Subcontenido $subcontenido The subcontenido object to remove.
+     */
+    public function removeSubcontenido($subcontenido)
+    {
+        if ($this->getSubcontenidos()->contains($subcontenido)) {
+            $this->collSubcontenidos->remove($this->collSubcontenidos->search($subcontenido));
+            if (null === $this->subcontenidosScheduledForDeletion) {
+                $this->subcontenidosScheduledForDeletion = clone $this->collSubcontenidos;
+                $this->subcontenidosScheduledForDeletion->clear();
+            }
+            $this->subcontenidosScheduledForDeletion[]= $subcontenido;
+            $subcontenido->setContenido(null);
+        }
     }
 
     /**
@@ -848,9 +1093,9 @@ abstract class BaseUsuario extends BaseObject
      */
     public function clear()
     {
-        $this->idusuario = null;
+        $this->id_contenido = null;
+        $this->numero_contenido = null;
         $this->nombre = null;
-        $this->password = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -871,8 +1116,17 @@ abstract class BaseUsuario extends BaseObject
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
+            if ($this->collSubcontenidos) {
+                foreach ($this->collSubcontenidos as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
+        if ($this->collSubcontenidos instanceof PropelCollection) {
+            $this->collSubcontenidos->clearIterator();
+        }
+        $this->collSubcontenidos = null;
     }
 
     /**
@@ -882,7 +1136,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UsuarioPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(ContenidoPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -892,7 +1146,7 @@ abstract class BaseUsuario extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseUsuario:' . $name))
+		if ($callable = sfMixer::getCallable('BaseContenido:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -902,4 +1156,4 @@ abstract class BaseUsuario extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseUsuario
+} // BaseContenido

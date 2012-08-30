@@ -1,36 +1,38 @@
 <?php
 
 /**
- * Usuario form.
+ * Material form.
  *
  * @package    biblioteca_virtual_2
  * @subpackage form
  * @author     Your name here
  */
-class UsuarioForm extends BaseUsuarioForm
+class MaterialForm extends BaseMaterialForm
 {
   public function configure()
   {
-    parent::configure();
+      
+          parent::configure();
     
     //error de csrf token si no se metia el codigo siguiente
     $this->disableLocalCSRFProtection(); 
 
-    $this->widgetSchema['password'] = new sfWidgetFormInputFileEditable(array(
-      'label'     => 'Company logo',
-      'file_src'  => '/uploads/products/'.$this->getObject()->getPassword(),
+    $this->widgetSchema['archivo'] = new sfWidgetFormInputFileEditable(array(
+      'label'     => 'Cargar archivo',
+      'file_src'  => '/uploads/files/'.$this->getObject()->getArchivo(),
       'is_image'  => false,
       'edit_mode' => !$this->isNew(),
       'template'  => '<div>%file%<br />%input%<br />%delete% %delete_label%</div>',
     ));
 
-    $this->validatorSchema['password_delete'] = new sfValidatorPass();
+    $this->validatorSchema['archivo_delete'] = new sfValidatorPass();
     
  
-  $this->setValidator('password', new sfValidatorFile(array(
+  $this->setValidator('archivo', new sfValidatorFile(array(
     //'mime_types' => array('application/pdf'),
-    'path' => sfConfig::get('sf_upload_dir').'/products',
+    'path' => sfConfig::get('sf_upload_dir').'/files',
     'required' => false,
   )));
+      
   }
 }
