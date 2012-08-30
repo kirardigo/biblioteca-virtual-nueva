@@ -17,7 +17,8 @@
     <?php foreach ($Materials as $Material): ?>
     <tr>
       <td><a href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><?php echo $Material->getIdMaterial() ?></a></td>
-      <td><?php echo $Material->getArchivo() ?></td>
+      <td><?php echo $Material->getArchivo()  ?></td>
+      <td><?php echo link_to('descargar archivo', 'material/descargarArchivo?archivito='.$Material->getArchivo()); ?></td>
       <td><?php echo $Material->getNombre() ?></td>
       <td><?php echo $Material->getTitulo() ?></td>
       <td><?php echo $Material->getEditorial() ?></td>

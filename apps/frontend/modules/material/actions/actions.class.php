@@ -69,5 +69,30 @@ class materialActions extends sfActions
 
       $this->redirect('material/edit?id_material='.$Material->getIdMaterial());
     }
+    
+
+    
   }
+      public function executeDescargarArchivo(sfWebRequest $request) { 
+
+                    $archivo=$request->getParameter('archivito');
+                  // Buscamos el archivo en la carpeta de upload (nuestro caso) 
+                  $file = sfConfig::get('sf_upload_dir').'/files/'.$archivo; 
+                    $file_name="test.jpg";
+                // Cabeceras necesarias para ejecutar la descarga 
+                  $response = $this->getResponse(); 
+                      $response->setContentType('application/octet-stream', true); 
+                      $response->setHttpHeader('Content-Disposition','attachment; filename='.$archivo, true); 
+
+                      $response->sendHttpHeaders(); 
+                // Send file to user client 
+                $response->setContent(readfile(utf8_decode($file))); 
+                $response->sendContent(); 
+
+                // No retorne ninguna vista 
+                sfView::NONE; 
+        } 
+        public function caca(int $mishi){
+            
+        }
 }
