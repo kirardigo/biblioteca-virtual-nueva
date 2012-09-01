@@ -1,0 +1,1 @@
+<img src="<?php echo image_path('presentacion.png')?>" alt="Fondo" width="600px" ></img>

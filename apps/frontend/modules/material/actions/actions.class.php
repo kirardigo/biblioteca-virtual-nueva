@@ -73,7 +73,7 @@ class materialActions extends sfActions
 
     
   }
-      public function executeDescargarArchivo(sfWebRequest $request) { 
+      public function executeDownload(sfWebRequest $request) { 
 
                     $archivo=$request->getParameter('archivito');
                   // Buscamos el archivo en la carpeta de upload (nuestro caso) 
@@ -92,7 +92,5 @@ class materialActions extends sfActions
                 // No retorne ninguna vista 
                 sfView::NONE; 
         } 
-        public function caca(int $mishi){
-            
-        }
+
 }

@@ -1,3 +1,3 @@
-<h1>New Material</h1>
+<h1>Material nuevo</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>
