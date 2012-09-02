@@ -74,8 +74,17 @@ class materialActions extends sfActions
     
   }
       public function executeDownload(sfWebRequest $request) { 
+          
+           $archivo=$request->getParameter('archivito');
+           
+          $this->cosa= new AccesoMaterial();
+          $this->cosa->setFisicaIdFisica(1);//sacar el id del usuario por su session
+          $this->cosa->setMaterialIdMaterial($request->getParameter('id'));
+          //$this->cosa->setFechaAcceso();
+          $this->cosa->save();
+          
 
-                    $archivo=$request->getParameter('archivito');
+                   
                   // Buscamos el archivo en la carpeta de upload (nuestro caso) 
                   $file = sfConfig::get('sf_upload_dir').'/files/'.$archivo; 
                     $file_name="test.jpg";

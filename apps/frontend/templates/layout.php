@@ -44,16 +44,18 @@
               <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
              
               <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
+              <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Tipo de Material <b class="caret"></b>
+                 Material <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Hemeroteca (archivos) </a></li>
                   <li><a href="#">Libros (pdfs) </a></li>
                   <li><a href="#">Presentaciones (ppts) </a></li>
+                  <li><a href="<?php echo url_for('lectura/index');?>">Lectura Online </a></li>
                 </ul>
               </li>
             </ul>

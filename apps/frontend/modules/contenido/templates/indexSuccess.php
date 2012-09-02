@@ -1,4 +1,4 @@
-<h1>Contenidos List</h1>
+<h1>Contenidos</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
@@ -12,7 +12,7 @@
   <tbody>
     <?php foreach ($Contenidos as $Contenido): ?>
     <tr>
-      <td><a href="<?php echo url_for('contenido/edit?id_contenido='.$Contenido->getIdContenido()) ?>"><?php echo $Contenido->getIdContenido() ?></a></td>
+      <td><?php echo $Contenido->getIdContenido() ?></td>
       <td><?php echo $Contenido->getNumeroContenido() ?></td>
       <td><?php echo $Contenido->getNombre() ?></td>
             <td>          

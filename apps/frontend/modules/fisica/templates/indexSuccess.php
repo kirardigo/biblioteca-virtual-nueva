@@ -1,4 +1,4 @@
-<h1>Fisicas List</h1>
+<h1>Usuarios</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
@@ -14,7 +14,7 @@
   <tbody>
     <?php foreach ($Fisicas as $Fisica): ?>
     <tr>
-      <td><a href="<?php echo url_for('fisica/edit?id_fisica='.$Fisica->getIdFisica()) ?>"><?php echo $Fisica->getIdFisica() ?></a></td>
+      <td><?php echo $Fisica->getIdFisica() ?></td>
       <td><?php echo $Fisica->getNombre() ?></td>
       <td><?php echo $Fisica->getApellido() ?></td>
       <td><?php echo $Fisica->getUsuario() ?></td>

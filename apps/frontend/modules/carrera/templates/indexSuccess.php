@@ -1,4 +1,4 @@
-<h1>Carreras List</h1>
+<h1>Carreras</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
