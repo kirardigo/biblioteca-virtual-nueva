@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'carrera' table.
+ * Base class that represents a row from the 'carrera_fisica' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseCarrera extends BaseObject 
+abstract class BaseCarreraFisica extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'CarreraPeer';
+    const PEER = 'CarreraFisicaPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        CarreraPeer
+     * @var        CarreraFisicaPeer
      */
     protected static $peer;
 
@@ -31,21 +31,32 @@ abstract class BaseCarrera extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the id_carrera field.
+     * The value for the id_carrera_fisica field.
      * @var        int
      */
-    protected $id_carrera;
+    protected $id_carrera_fisica;
 
     /**
-     * The value for the nombre field.
-     * @var        string
+     * The value for the carrera_id_carrera field.
+     * @var        int
      */
-    protected $nombre;
+    protected $carrera_id_carrera;
 
     /**
-     * @var        PropelObjectCollection|CarreraFisica[] Collection to store aggregation of CarreraFisica objects.
+     * The value for the fisica_id_fisica field.
+     * @var        int
      */
-    protected $collCarreraFisicas;
+    protected $fisica_id_fisica;
+
+    /**
+     * @var        Carrera
+     */
+    protected $aCarrera;
+
+    /**
+     * @var        Fisica
+     */
+    protected $aFisica;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -62,74 +73,108 @@ abstract class BaseCarrera extends BaseObject
     protected $alreadyInValidation = false;
 
     /**
-     * An array of objects scheduled for deletion.
-     * @var		PropelObjectCollection
-     */
-    protected $carreraFisicasScheduledForDeletion = null;
-
-    /**
-     * Get the [id_carrera] column value.
+     * Get the [id_carrera_fisica] column value.
      * 
      * @return   int
      */
-    public function getIdCarrera()
+    public function getIdCarreraFisica()
     {
 
-        return $this->id_carrera;
+        return $this->id_carrera_fisica;
     }
 
     /**
-     * Get the [nombre] column value.
+     * Get the [carrera_id_carrera] column value.
      * 
-     * @return   string
+     * @return   int
      */
-    public function getNombre()
+    public function getCarreraIdCarrera()
     {
 
-        return $this->nombre;
+        return $this->carrera_id_carrera;
     }
 
     /**
-     * Set the value of [id_carrera] column.
+     * Get the [fisica_id_fisica] column value.
+     * 
+     * @return   int
+     */
+    public function getFisicaIdFisica()
+    {
+
+        return $this->fisica_id_fisica;
+    }
+
+    /**
+     * Set the value of [id_carrera_fisica] column.
      * 
      * @param      int $v new value
-     * @return   Carrera The current object (for fluent API support)
+     * @return   CarreraFisica The current object (for fluent API support)
      */
-    public function setIdCarrera($v)
+    public function setIdCarreraFisica($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->id_carrera !== $v) {
-            $this->id_carrera = $v;
-            $this->modifiedColumns[] = CarreraPeer::ID_CARRERA;
+        if ($this->id_carrera_fisica !== $v) {
+            $this->id_carrera_fisica = $v;
+            $this->modifiedColumns[] = CarreraFisicaPeer::ID_CARRERA_FISICA;
         }
 
 
         return $this;
-    } // setIdCarrera()
+    } // setIdCarreraFisica()
 
     /**
-     * Set the value of [nombre] column.
+     * Set the value of [carrera_id_carrera] column.
      * 
-     * @param      string $v new value
-     * @return   Carrera The current object (for fluent API support)
+     * @param      int $v new value
+     * @return   CarreraFisica The current object (for fluent API support)
      */
-    public function setNombre($v)
+    public function setCarreraIdCarrera($v)
     {
         if ($v !== null) {
-            $v = (string) $v;
+            $v = (int) $v;
         }
 
-        if ($this->nombre !== $v) {
-            $this->nombre = $v;
-            $this->modifiedColumns[] = CarreraPeer::NOMBRE;
+        if ($this->carrera_id_carrera !== $v) {
+            $this->carrera_id_carrera = $v;
+            $this->modifiedColumns[] = CarreraFisicaPeer::CARRERA_ID_CARRERA;
+        }
+
+        if ($this->aCarrera !== null && $this->aCarrera->getIdCarrera() !== $v) {
+            $this->aCarrera = null;
         }
 
 
         return $this;
-    } // setNombre()
+    } // setCarreraIdCarrera()
+
+    /**
+     * Set the value of [fisica_id_fisica] column.
+     * 
+     * @param      int $v new value
+     * @return   CarreraFisica The current object (for fluent API support)
+     */
+    public function setFisicaIdFisica($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->fisica_id_fisica !== $v) {
+            $this->fisica_id_fisica = $v;
+            $this->modifiedColumns[] = CarreraFisicaPeer::FISICA_ID_FISICA;
+        }
+
+        if ($this->aFisica !== null && $this->aFisica->getIdFisica() !== $v) {
+            $this->aFisica = null;
+        }
+
+
+        return $this;
+    } // setFisicaIdFisica()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -163,8 +208,9 @@ abstract class BaseCarrera extends BaseObject
     {
         try {
 
-            $this->id_carrera = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->id_carrera_fisica = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->carrera_id_carrera = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->fisica_id_fisica = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -173,10 +219,10 @@ abstract class BaseCarrera extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 2; // 2 = CarreraPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 3; // 3 = CarreraFisicaPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Carrera object", $e);
+            throw new PropelException("Error populating CarreraFisica object", $e);
         }
     }
 
@@ -196,6 +242,12 @@ abstract class BaseCarrera extends BaseObject
     public function ensureConsistency()
     {
 
+        if ($this->aCarrera !== null && $this->carrera_id_carrera !== $this->aCarrera->getIdCarrera()) {
+            $this->aCarrera = null;
+        }
+        if ($this->aFisica !== null && $this->fisica_id_fisica !== $this->aFisica->getIdFisica()) {
+            $this->aFisica = null;
+        }
     } // ensureConsistency
 
     /**
@@ -219,13 +271,13 @@ abstract class BaseCarrera extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CarreraFisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = CarreraPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = CarreraFisicaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -235,8 +287,8 @@ abstract class BaseCarrera extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->collCarreraFisicas = null;
-
+            $this->aCarrera = null;
+            $this->aFisica = null;
         } // if (deep)
     }
 
@@ -257,16 +309,16 @@ abstract class BaseCarrera extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CarreraFisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = CarreraQuery::create()
+            $deleteQuery = CarreraFisicaQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseCarrera:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseCarreraFisica:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -279,7 +331,7 @@ abstract class BaseCarrera extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseCarrera:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseCarreraFisica:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -316,7 +368,7 @@ abstract class BaseCarrera extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CarreraFisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -324,7 +376,7 @@ abstract class BaseCarrera extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseCarrera:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseCarreraFisica:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -347,12 +399,12 @@ abstract class BaseCarrera extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseCarrera:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseCarreraFisica:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                CarreraPeer::addInstanceToPool($this);
+                CarreraFisicaPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -382,6 +434,25 @@ abstract class BaseCarrera extends BaseObject
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
 
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their coresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aCarrera !== null) {
+                if ($this->aCarrera->isModified() || $this->aCarrera->isNew()) {
+                    $affectedRows += $this->aCarrera->save($con);
+                }
+                $this->setCarrera($this->aCarrera);
+            }
+
+            if ($this->aFisica !== null) {
+                if ($this->aFisica->isModified() || $this->aFisica->isNew()) {
+                    $affectedRows += $this->aFisica->save($con);
+                }
+                $this->setFisica($this->aFisica);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -391,23 +462,6 @@ abstract class BaseCarrera extends BaseObject
                 }
                 $affectedRows += 1;
                 $this->resetModified();
-            }
-
-            if ($this->carreraFisicasScheduledForDeletion !== null) {
-                if (!$this->carreraFisicasScheduledForDeletion->isEmpty()) {
-                    CarreraFisicaQuery::create()
-                        ->filterByPrimaryKeys($this->carreraFisicasScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
-                    $this->carreraFisicasScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collCarreraFisicas !== null) {
-                foreach ($this->collCarreraFisicas as $referrerFK) {
-                    if (!$referrerFK->isDeleted()) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
-                }
             }
 
             $this->alreadyInSave = false;
@@ -430,21 +484,24 @@ abstract class BaseCarrera extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = CarreraPeer::ID_CARRERA;
-        if (null !== $this->id_carrera) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . CarreraPeer::ID_CARRERA . ')');
+        $this->modifiedColumns[] = CarreraFisicaPeer::ID_CARRERA_FISICA;
+        if (null !== $this->id_carrera_fisica) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . CarreraFisicaPeer::ID_CARRERA_FISICA . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(CarreraPeer::ID_CARRERA)) {
-            $modifiedColumns[':p' . $index++]  = '`ID_CARRERA`';
+        if ($this->isColumnModified(CarreraFisicaPeer::ID_CARRERA_FISICA)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_CARRERA_FISICA`';
         }
-        if ($this->isColumnModified(CarreraPeer::NOMBRE)) {
-            $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
+        if ($this->isColumnModified(CarreraFisicaPeer::CARRERA_ID_CARRERA)) {
+            $modifiedColumns[':p' . $index++]  = '`CARRERA_ID_CARRERA`';
+        }
+        if ($this->isColumnModified(CarreraFisicaPeer::FISICA_ID_FISICA)) {
+            $modifiedColumns[':p' . $index++]  = '`FISICA_ID_FISICA`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `carrera` (%s) VALUES (%s)',
+            'INSERT INTO `carrera_fisica` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -453,11 +510,14 @@ abstract class BaseCarrera extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID_CARRERA`':						
-						$stmt->bindValue($identifier, $this->id_carrera, PDO::PARAM_INT);
+                    case '`ID_CARRERA_FISICA`':						
+						$stmt->bindValue($identifier, $this->id_carrera_fisica, PDO::PARAM_INT);
                         break;
-                    case '`NOMBRE`':						
-						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
+                    case '`CARRERA_ID_CARRERA`':						
+						$stmt->bindValue($identifier, $this->carrera_id_carrera, PDO::PARAM_INT);
+                        break;
+                    case '`FISICA_ID_FISICA`':						
+						$stmt->bindValue($identifier, $this->fisica_id_fisica, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -472,7 +532,7 @@ abstract class BaseCarrera extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdCarrera($pk);
+        $this->setIdCarreraFisica($pk);
 
         $this->setNew(false);
     }
@@ -553,18 +613,28 @@ abstract class BaseCarrera extends BaseObject
             $failureMap = array();
 
 
-            if (($retval = CarreraPeer::doValidate($this, $columns)) !== true) {
-                $failureMap = array_merge($failureMap, $retval);
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their coresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aCarrera !== null) {
+                if (!$this->aCarrera->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aCarrera->getValidationFailures());
+                }
+            }
+
+            if ($this->aFisica !== null) {
+                if (!$this->aFisica->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aFisica->getValidationFailures());
+                }
             }
 
 
-                if ($this->collCarreraFisicas !== null) {
-                    foreach ($this->collCarreraFisicas as $referrerFK) {
-                        if (!$referrerFK->validate($columns)) {
-                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-                        }
-                    }
-                }
+            if (($retval = CarreraFisicaPeer::doValidate($this, $columns)) !== true) {
+                $failureMap = array_merge($failureMap, $retval);
+            }
+
 
 
             $this->alreadyInValidation = false;
@@ -585,7 +655,7 @@ abstract class BaseCarrera extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = CarreraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = CarreraFisicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -602,10 +672,13 @@ abstract class BaseCarrera extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdCarrera();
+                return $this->getIdCarreraFisica();
                 break;
             case 1:
-                return $this->getNombre();
+                return $this->getCarreraIdCarrera();
+                break;
+            case 2:
+                return $this->getFisicaIdFisica();
                 break;
             default:
                 return null;
@@ -630,18 +703,22 @@ abstract class BaseCarrera extends BaseObject
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Carrera'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['CarreraFisica'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Carrera'][$this->getPrimaryKey()] = true;
-        $keys = CarreraPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['CarreraFisica'][$this->getPrimaryKey()] = true;
+        $keys = CarreraFisicaPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdCarrera(),
-            $keys[1] => $this->getNombre(),
+            $keys[0] => $this->getIdCarreraFisica(),
+            $keys[1] => $this->getCarreraIdCarrera(),
+            $keys[2] => $this->getFisicaIdFisica(),
         );
         if ($includeForeignObjects) {
-            if (null !== $this->collCarreraFisicas) {
-                $result['CarreraFisicas'] = $this->collCarreraFisicas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->aCarrera) {
+                $result['Carrera'] = $this->aCarrera->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aFisica) {
+                $result['Fisica'] = $this->aFisica->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -661,7 +738,7 @@ abstract class BaseCarrera extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = CarreraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = CarreraFisicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -678,10 +755,13 @@ abstract class BaseCarrera extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdCarrera($value);
+                $this->setIdCarreraFisica($value);
                 break;
             case 1:
-                $this->setNombre($value);
+                $this->setCarreraIdCarrera($value);
+                break;
+            case 2:
+                $this->setFisicaIdFisica($value);
                 break;
         } // switch()
     }
@@ -705,10 +785,11 @@ abstract class BaseCarrera extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = CarreraPeer::getFieldNames($keyType);
+        $keys = CarreraFisicaPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdCarrera($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdCarreraFisica($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setCarreraIdCarrera($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setFisicaIdFisica($arr[$keys[2]]);
     }
 
     /**
@@ -718,10 +799,11 @@ abstract class BaseCarrera extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(CarreraPeer::DATABASE_NAME);
+        $criteria = new Criteria(CarreraFisicaPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(CarreraPeer::ID_CARRERA)) $criteria->add(CarreraPeer::ID_CARRERA, $this->id_carrera);
-        if ($this->isColumnModified(CarreraPeer::NOMBRE)) $criteria->add(CarreraPeer::NOMBRE, $this->nombre);
+        if ($this->isColumnModified(CarreraFisicaPeer::ID_CARRERA_FISICA)) $criteria->add(CarreraFisicaPeer::ID_CARRERA_FISICA, $this->id_carrera_fisica);
+        if ($this->isColumnModified(CarreraFisicaPeer::CARRERA_ID_CARRERA)) $criteria->add(CarreraFisicaPeer::CARRERA_ID_CARRERA, $this->carrera_id_carrera);
+        if ($this->isColumnModified(CarreraFisicaPeer::FISICA_ID_FISICA)) $criteria->add(CarreraFisicaPeer::FISICA_ID_FISICA, $this->fisica_id_fisica);
 
         return $criteria;
     }
@@ -736,8 +818,8 @@ abstract class BaseCarrera extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(CarreraPeer::DATABASE_NAME);
-        $criteria->add(CarreraPeer::ID_CARRERA, $this->id_carrera);
+        $criteria = new Criteria(CarreraFisicaPeer::DATABASE_NAME);
+        $criteria->add(CarreraFisicaPeer::ID_CARRERA_FISICA, $this->id_carrera_fisica);
 
         return $criteria;
     }
@@ -748,18 +830,18 @@ abstract class BaseCarrera extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdCarrera();
+        return $this->getIdCarreraFisica();
     }
 
     /**
-     * Generic method to set the primary key (id_carrera column).
+     * Generic method to set the primary key (id_carrera_fisica column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdCarrera($key);
+        $this->setIdCarreraFisica($key);
     }
 
     /**
@@ -769,7 +851,7 @@ abstract class BaseCarrera extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdCarrera();
+        return null === $this->getIdCarreraFisica();
     }
 
     /**
@@ -778,14 +860,15 @@ abstract class BaseCarrera extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Carrera (or compatible) type.
+     * @param      object $copyObj An object of CarreraFisica (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setNombre($this->getNombre());
+        $copyObj->setCarreraIdCarrera($this->getCarreraIdCarrera());
+        $copyObj->setFisicaIdFisica($this->getFisicaIdFisica());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -794,19 +877,13 @@ abstract class BaseCarrera extends BaseObject
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getCarreraFisicas() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addCarreraFisica($relObj->copy($deepCopy));
-                }
-            }
-
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdCarrera(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdCarreraFisica(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -819,7 +896,7 @@ abstract class BaseCarrera extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Carrera Clone of current object.
+     * @return                 CarreraFisica Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -839,223 +916,117 @@ abstract class BaseCarrera extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   CarreraPeer
+     * @return   CarreraFisicaPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new CarreraPeer();
+            self::$peer = new CarreraFisicaPeer();
         }
 
         return self::$peer;
     }
 
-
     /**
-     * Initializes a collection based on the name of a relation.
-     * Avoids crafting an 'init[$relationName]s' method name
-     * that wouldn't work when StandardEnglishPluralizer is used.
+     * Declares an association between this object and a Carrera object.
      *
-     * @param      string $relationName The name of the relation to initialize
-     * @return void
-     */
-    public function initRelation($relationName)
-    {
-        if ('CarreraFisica' == $relationName) {
-            $this->initCarreraFisicas();
-        }
-    }
-
-    /**
-     * Clears out the collCarreraFisicas collection
-     *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return void
-     * @see        addCarreraFisicas()
-     */
-    public function clearCarreraFisicas()
-    {
-        $this->collCarreraFisicas = null; // important to set this to NULL since that means it is uninitialized
-    }
-
-    /**
-     * Initializes the collCarreraFisicas collection.
-     *
-     * By default this just sets the collCarreraFisicas collection to an empty array (like clearcollCarreraFisicas());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param      boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initCarreraFisicas($overrideExisting = true)
-    {
-        if (null !== $this->collCarreraFisicas && !$overrideExisting) {
-            return;
-        }
-        $this->collCarreraFisicas = new PropelObjectCollection();
-        $this->collCarreraFisicas->setModel('CarreraFisica');
-    }
-
-    /**
-     * Gets an array of CarreraFisica objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Carrera is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     * @param                  Carrera $v
+     * @return                 CarreraFisica The current object (for fluent API support)
      * @throws PropelException
      */
-    public function getCarreraFisicas($criteria = null, PropelPDO $con = null)
+    public function setCarrera(Carrera $v = null)
     {
-        if (null === $this->collCarreraFisicas || null !== $criteria) {
-            if ($this->isNew() && null === $this->collCarreraFisicas) {
-                // return empty collection
-                $this->initCarreraFisicas();
-            } else {
-                $collCarreraFisicas = CarreraFisicaQuery::create(null, $criteria)
-                    ->filterByCarrera($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    return $collCarreraFisicas;
-                }
-                $this->collCarreraFisicas = $collCarreraFisicas;
-            }
-        }
-
-        return $this->collCarreraFisicas;
-    }
-
-    /**
-     * Sets a collection of CarreraFisica objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param      PropelCollection $carreraFisicas A Propel collection.
-     * @param      PropelPDO $con Optional connection object
-     */
-    public function setCarreraFisicas(PropelCollection $carreraFisicas, PropelPDO $con = null)
-    {
-        $this->carreraFisicasScheduledForDeletion = $this->getCarreraFisicas(new Criteria(), $con)->diff($carreraFisicas);
-
-        foreach ($this->carreraFisicasScheduledForDeletion as $carreraFisicaRemoved) {
-            $carreraFisicaRemoved->setCarrera(null);
-        }
-
-        $this->collCarreraFisicas = null;
-        foreach ($carreraFisicas as $carreraFisica) {
-            $this->addCarreraFisica($carreraFisica);
-        }
-
-        $this->collCarreraFisicas = $carreraFisicas;
-    }
-
-    /**
-     * Returns the number of related CarreraFisica objects.
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct
-     * @param      PropelPDO $con
-     * @return int             Count of related CarreraFisica objects.
-     * @throws PropelException
-     */
-    public function countCarreraFisicas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-    {
-        if (null === $this->collCarreraFisicas || null !== $criteria) {
-            if ($this->isNew() && null === $this->collCarreraFisicas) {
-                return 0;
-            } else {
-                $query = CarreraFisicaQuery::create(null, $criteria);
-                if ($distinct) {
-                    $query->distinct();
-                }
-
-                return $query
-                    ->filterByCarrera($this)
-                    ->count($con);
-            }
+        if ($v === null) {
+            $this->setCarreraIdCarrera(NULL);
         } else {
-            return count($this->collCarreraFisicas);
+            $this->setCarreraIdCarrera($v->getIdCarrera());
         }
-    }
 
-    /**
-     * Method called to associate a CarreraFisica object to this object
-     * through the CarreraFisica foreign key attribute.
-     *
-     * @param    CarreraFisica $l CarreraFisica
-     * @return   Carrera The current object (for fluent API support)
-     */
-    public function addCarreraFisica(CarreraFisica $l)
-    {
-        if ($this->collCarreraFisicas === null) {
-            $this->initCarreraFisicas();
+        $this->aCarrera = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Carrera object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCarreraFisica($this);
         }
-        if (!$this->collCarreraFisicas->contains($l)) { // only add it if the **same** object is not already associated
-            $this->doAddCarreraFisica($l);
-        }
+
 
         return $this;
     }
 
-    /**
-     * @param	CarreraFisica $carreraFisica The carreraFisica object to add.
-     */
-    protected function doAddCarreraFisica($carreraFisica)
-    {
-        $this->collCarreraFisicas[]= $carreraFisica;
-        $carreraFisica->setCarrera($this);
-    }
 
     /**
-     * @param	CarreraFisica $carreraFisica The carreraFisica object to remove.
+     * Get the associated Carrera object
+     *
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Carrera The associated Carrera object.
+     * @throws PropelException
      */
-    public function removeCarreraFisica($carreraFisica)
+    public function getCarrera(PropelPDO $con = null)
     {
-        if ($this->getCarreraFisicas()->contains($carreraFisica)) {
-            $this->collCarreraFisicas->remove($this->collCarreraFisicas->search($carreraFisica));
-            if (null === $this->carreraFisicasScheduledForDeletion) {
-                $this->carreraFisicasScheduledForDeletion = clone $this->collCarreraFisicas;
-                $this->carreraFisicasScheduledForDeletion->clear();
-            }
-            $this->carreraFisicasScheduledForDeletion[]= $carreraFisica;
-            $carreraFisica->setCarrera(null);
+        if ($this->aCarrera === null && ($this->carrera_id_carrera !== null)) {
+            $this->aCarrera = CarreraQuery::create()->findPk($this->carrera_id_carrera, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aCarrera->addCarreraFisicas($this);
+             */
         }
+
+        return $this->aCarrera;
+    }
+
+    /**
+     * Declares an association between this object and a Fisica object.
+     *
+     * @param                  Fisica $v
+     * @return                 CarreraFisica The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setFisica(Fisica $v = null)
+    {
+        if ($v === null) {
+            $this->setFisicaIdFisica(NULL);
+        } else {
+            $this->setFisicaIdFisica($v->getIdFisica());
+        }
+
+        $this->aFisica = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Fisica object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCarreraFisica($this);
+        }
+
+
+        return $this;
     }
 
 
     /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Carrera is new, it will return
-     * an empty collection; or if this Carrera has previously
-     * been saved, it will retrieve related CarreraFisicas from storage.
+     * Get the associated Fisica object
      *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Carrera.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Fisica The associated Fisica object.
+     * @throws PropelException
      */
-    public function getCarreraFisicasJoinFisica($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getFisica(PropelPDO $con = null)
     {
-        $query = CarreraFisicaQuery::create(null, $criteria);
-        $query->joinWith('Fisica', $join_behavior);
+        if ($this->aFisica === null && ($this->fisica_id_fisica !== null)) {
+            $this->aFisica = FisicaQuery::create()->findPk($this->fisica_id_fisica, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aFisica->addCarreraFisicas($this);
+             */
+        }
 
-        return $this->getCarreraFisicas($query, $con);
+        return $this->aFisica;
     }
 
     /**
@@ -1063,8 +1034,9 @@ abstract class BaseCarrera extends BaseObject
      */
     public function clear()
     {
-        $this->id_carrera = null;
-        $this->nombre = null;
+        $this->id_carrera_fisica = null;
+        $this->carrera_id_carrera = null;
+        $this->fisica_id_fisica = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1085,17 +1057,10 @@ abstract class BaseCarrera extends BaseObject
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collCarreraFisicas) {
-                foreach ($this->collCarreraFisicas as $o) {
-                    $o->clearAllReferences($deep);
-                }
-            }
         } // if ($deep)
 
-        if ($this->collCarreraFisicas instanceof PropelCollection) {
-            $this->collCarreraFisicas->clearIterator();
-        }
-        $this->collCarreraFisicas = null;
+        $this->aCarrera = null;
+        $this->aFisica = null;
     }
 
     /**
@@ -1105,7 +1070,7 @@ abstract class BaseCarrera extends BaseObject
      */
     public function __toString()
     {
-        return (string) $this->exportTo(CarreraPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(CarreraFisicaPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -1115,7 +1080,7 @@ abstract class BaseCarrera extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseCarrera:' . $name))
+		if ($callable = sfMixer::getCallable('BaseCarreraFisica:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -1125,4 +1090,4 @@ abstract class BaseCarrera extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseCarrera
+} // BaseCarreraFisica

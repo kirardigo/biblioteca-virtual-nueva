@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'material' table.
+ * This class defines the structure of the 'fisica' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class MaterialTableMap extends TableMap
+class FisicaTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.MaterialTableMap';
+    const CLASS_NAME = 'lib.model.map.FisicaTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,20 +32,17 @@ class MaterialTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('material');
-        $this->setPhpName('Material');
-        $this->setClassname('Material');
+        $this->setName('fisica');
+        $this->setPhpName('Fisica');
+        $this->setClassname('Fisica');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
-        $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
+        $this->addPrimaryKey('ID_FISICA', 'IdFisica', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', false, 45, null);
-        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
-        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', false, 45, null);
-        $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);
-        $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
+        $this->addColumn('APELLIDO', 'Apellido', 'VARCHAR', false, 45, null);
+        $this->addColumn('USUARIO', 'Usuario', 'VARCHAR', false, 45, null);
+        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 
@@ -54,8 +51,8 @@ class MaterialTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::MANY_TO_ONE, array('subcontenido_id_subcontenido' => 'id_subcontenido', ), null, null);
-        $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'AccesoMaterials');
+        $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_fisica' => 'fisica_id_fisica', ), null, null, 'AccesoMaterials');
+        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_fisica' => 'fisica_id_fisica', ), null, null, 'CarreraFisicas');
     } // buildRelations()
 
     /**
@@ -72,4 +69,4 @@ class MaterialTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // MaterialTableMap
+} // FisicaTableMap

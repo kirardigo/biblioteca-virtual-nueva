@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'material' table.
+ * Base class that represents a row from the 'fisica' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseMaterial extends BaseObject 
+abstract class BaseFisica extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'MaterialPeer';
+    const PEER = 'FisicaPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        MaterialPeer
+     * @var        FisicaPeer
      */
     protected static $peer;
 
@@ -31,16 +31,10 @@ abstract class BaseMaterial extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the id_material field.
+     * The value for the id_fisica field.
      * @var        int
      */
-    protected $id_material;
-
-    /**
-     * The value for the archivo field.
-     * @var        string
-     */
-    protected $archivo;
+    protected $id_fisica;
 
     /**
      * The value for the nombre field.
@@ -49,44 +43,32 @@ abstract class BaseMaterial extends BaseObject
     protected $nombre;
 
     /**
-     * The value for the titulo field.
+     * The value for the apellido field.
      * @var        string
      */
-    protected $titulo;
+    protected $apellido;
 
     /**
-     * The value for the editorial field.
+     * The value for the usuario field.
      * @var        string
      */
-    protected $editorial;
+    protected $usuario;
 
     /**
-     * The value for the autor field.
+     * The value for the password field.
      * @var        string
      */
-    protected $autor;
-
-    /**
-     * The value for the descripcion field.
-     * @var        string
-     */
-    protected $descripcion;
-
-    /**
-     * The value for the subcontenido_id_subcontenido field.
-     * @var        int
-     */
-    protected $subcontenido_id_subcontenido;
-
-    /**
-     * @var        Subcontenido
-     */
-    protected $aSubcontenido;
+    protected $password;
 
     /**
      * @var        PropelObjectCollection|AccesoMaterial[] Collection to store aggregation of AccesoMaterial objects.
      */
     protected $collAccesoMaterials;
+
+    /**
+     * @var        PropelObjectCollection|CarreraFisica[] Collection to store aggregation of CarreraFisica objects.
+     */
+    protected $collCarreraFisicas;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -109,25 +91,20 @@ abstract class BaseMaterial extends BaseObject
     protected $accesoMaterialsScheduledForDeletion = null;
 
     /**
-     * Get the [id_material] column value.
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $carreraFisicasScheduledForDeletion = null;
+
+    /**
+     * Get the [id_fisica] column value.
      * 
      * @return   int
      */
-    public function getIdMaterial()
+    public function getIdFisica()
     {
 
-        return $this->id_material;
-    }
-
-    /**
-     * Get the [archivo] column value.
-     * 
-     * @return   string
-     */
-    public function getArchivo()
-    {
-
-        return $this->archivo;
+        return $this->id_fisica;
     }
 
     /**
@@ -142,107 +119,64 @@ abstract class BaseMaterial extends BaseObject
     }
 
     /**
-     * Get the [titulo] column value.
+     * Get the [apellido] column value.
      * 
      * @return   string
      */
-    public function getTitulo()
+    public function getApellido()
     {
 
-        return $this->titulo;
+        return $this->apellido;
     }
 
     /**
-     * Get the [editorial] column value.
+     * Get the [usuario] column value.
      * 
      * @return   string
      */
-    public function getEditorial()
+    public function getUsuario()
     {
 
-        return $this->editorial;
+        return $this->usuario;
     }
 
     /**
-     * Get the [autor] column value.
+     * Get the [password] column value.
      * 
      * @return   string
      */
-    public function getAutor()
+    public function getPassword()
     {
 
-        return $this->autor;
+        return $this->password;
     }
 
     /**
-     * Get the [descripcion] column value.
-     * 
-     * @return   string
-     */
-    public function getDescripcion()
-    {
-
-        return $this->descripcion;
-    }
-
-    /**
-     * Get the [subcontenido_id_subcontenido] column value.
-     * 
-     * @return   int
-     */
-    public function getSubcontenidoIdSubcontenido()
-    {
-
-        return $this->subcontenido_id_subcontenido;
-    }
-
-    /**
-     * Set the value of [id_material] column.
+     * Set the value of [id_fisica] column.
      * 
      * @param      int $v new value
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
-    public function setIdMaterial($v)
+    public function setIdFisica($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->id_material !== $v) {
-            $this->id_material = $v;
-            $this->modifiedColumns[] = MaterialPeer::ID_MATERIAL;
+        if ($this->id_fisica !== $v) {
+            $this->id_fisica = $v;
+            $this->modifiedColumns[] = FisicaPeer::ID_FISICA;
         }
 
 
         return $this;
-    } // setIdMaterial()
-
-    /**
-     * Set the value of [archivo] column.
-     * 
-     * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
-     */
-    public function setArchivo($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->archivo !== $v) {
-            $this->archivo = $v;
-            $this->modifiedColumns[] = MaterialPeer::ARCHIVO;
-        }
-
-
-        return $this;
-    } // setArchivo()
+    } // setIdFisica()
 
     /**
      * Set the value of [nombre] column.
      * 
      * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
     public function setNombre($v)
     {
@@ -252,7 +186,7 @@ abstract class BaseMaterial extends BaseObject
 
         if ($this->nombre !== $v) {
             $this->nombre = $v;
-            $this->modifiedColumns[] = MaterialPeer::NOMBRE;
+            $this->modifiedColumns[] = FisicaPeer::NOMBRE;
         }
 
 
@@ -260,113 +194,67 @@ abstract class BaseMaterial extends BaseObject
     } // setNombre()
 
     /**
-     * Set the value of [titulo] column.
+     * Set the value of [apellido] column.
      * 
      * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
-    public function setTitulo($v)
+    public function setApellido($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->titulo !== $v) {
-            $this->titulo = $v;
-            $this->modifiedColumns[] = MaterialPeer::TITULO;
+        if ($this->apellido !== $v) {
+            $this->apellido = $v;
+            $this->modifiedColumns[] = FisicaPeer::APELLIDO;
         }
 
 
         return $this;
-    } // setTitulo()
+    } // setApellido()
 
     /**
-     * Set the value of [editorial] column.
+     * Set the value of [usuario] column.
      * 
      * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
-    public function setEditorial($v)
+    public function setUsuario($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->editorial !== $v) {
-            $this->editorial = $v;
-            $this->modifiedColumns[] = MaterialPeer::EDITORIAL;
+        if ($this->usuario !== $v) {
+            $this->usuario = $v;
+            $this->modifiedColumns[] = FisicaPeer::USUARIO;
         }
 
 
         return $this;
-    } // setEditorial()
+    } // setUsuario()
 
     /**
-     * Set the value of [autor] column.
+     * Set the value of [password] column.
      * 
      * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
-    public function setAutor($v)
+    public function setPassword($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->autor !== $v) {
-            $this->autor = $v;
-            $this->modifiedColumns[] = MaterialPeer::AUTOR;
+        if ($this->password !== $v) {
+            $this->password = $v;
+            $this->modifiedColumns[] = FisicaPeer::PASSWORD;
         }
 
 
         return $this;
-    } // setAutor()
-
-    /**
-     * Set the value of [descripcion] column.
-     * 
-     * @param      string $v new value
-     * @return   Material The current object (for fluent API support)
-     */
-    public function setDescripcion($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->descripcion !== $v) {
-            $this->descripcion = $v;
-            $this->modifiedColumns[] = MaterialPeer::DESCRIPCION;
-        }
-
-
-        return $this;
-    } // setDescripcion()
-
-    /**
-     * Set the value of [subcontenido_id_subcontenido] column.
-     * 
-     * @param      int $v new value
-     * @return   Material The current object (for fluent API support)
-     */
-    public function setSubcontenidoIdSubcontenido($v)
-    {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->subcontenido_id_subcontenido !== $v) {
-            $this->subcontenido_id_subcontenido = $v;
-            $this->modifiedColumns[] = MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO;
-        }
-
-        if ($this->aSubcontenido !== null && $this->aSubcontenido->getIdSubcontenido() !== $v) {
-            $this->aSubcontenido = null;
-        }
-
-
-        return $this;
-    } // setSubcontenidoIdSubcontenido()
+    } // setPassword()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -400,14 +288,11 @@ abstract class BaseMaterial extends BaseObject
     {
         try {
 
-            $this->id_material = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->archivo = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->nombre = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->titulo = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->editorial = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->autor = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->descripcion = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->subcontenido_id_subcontenido = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->id_fisica = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->apellido = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->usuario = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->password = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -416,10 +301,10 @@ abstract class BaseMaterial extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 8; // 8 = MaterialPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 5; // 5 = FisicaPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Material object", $e);
+            throw new PropelException("Error populating Fisica object", $e);
         }
     }
 
@@ -439,9 +324,6 @@ abstract class BaseMaterial extends BaseObject
     public function ensureConsistency()
     {
 
-        if ($this->aSubcontenido !== null && $this->subcontenido_id_subcontenido !== $this->aSubcontenido->getIdSubcontenido()) {
-            $this->aSubcontenido = null;
-        }
     } // ensureConsistency
 
     /**
@@ -465,13 +347,13 @@ abstract class BaseMaterial extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = MaterialPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = FisicaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -481,8 +363,9 @@ abstract class BaseMaterial extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aSubcontenido = null;
             $this->collAccesoMaterials = null;
+
+            $this->collCarreraFisicas = null;
 
         } // if (deep)
     }
@@ -504,16 +387,16 @@ abstract class BaseMaterial extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = MaterialQuery::create()
+            $deleteQuery = FisicaQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseMaterial:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseFisica:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -526,7 +409,7 @@ abstract class BaseMaterial extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseMaterial:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseFisica:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -563,7 +446,7 @@ abstract class BaseMaterial extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -571,7 +454,7 @@ abstract class BaseMaterial extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseMaterial:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseFisica:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -594,12 +477,12 @@ abstract class BaseMaterial extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseMaterial:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseFisica:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                MaterialPeer::addInstanceToPool($this);
+                FisicaPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -629,18 +512,6 @@ abstract class BaseMaterial extends BaseObject
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
 
-            // We call the save method on the following object(s) if they
-            // were passed to this object by their coresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aSubcontenido !== null) {
-                if ($this->aSubcontenido->isModified() || $this->aSubcontenido->isNew()) {
-                    $affectedRows += $this->aSubcontenido->save($con);
-                }
-                $this->setSubcontenido($this->aSubcontenido);
-            }
-
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -669,6 +540,23 @@ abstract class BaseMaterial extends BaseObject
                 }
             }
 
+            if ($this->carreraFisicasScheduledForDeletion !== null) {
+                if (!$this->carreraFisicasScheduledForDeletion->isEmpty()) {
+                    CarreraFisicaQuery::create()
+                        ->filterByPrimaryKeys($this->carreraFisicasScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->carreraFisicasScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCarreraFisicas !== null) {
+                foreach ($this->collCarreraFisicas as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -689,39 +577,30 @@ abstract class BaseMaterial extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = MaterialPeer::ID_MATERIAL;
-        if (null !== $this->id_material) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . MaterialPeer::ID_MATERIAL . ')');
+        $this->modifiedColumns[] = FisicaPeer::ID_FISICA;
+        if (null !== $this->id_fisica) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . FisicaPeer::ID_FISICA . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(MaterialPeer::ID_MATERIAL)) {
-            $modifiedColumns[':p' . $index++]  = '`ID_MATERIAL`';
+        if ($this->isColumnModified(FisicaPeer::ID_FISICA)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_FISICA`';
         }
-        if ($this->isColumnModified(MaterialPeer::ARCHIVO)) {
-            $modifiedColumns[':p' . $index++]  = '`ARCHIVO`';
-        }
-        if ($this->isColumnModified(MaterialPeer::NOMBRE)) {
+        if ($this->isColumnModified(FisicaPeer::NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
         }
-        if ($this->isColumnModified(MaterialPeer::TITULO)) {
-            $modifiedColumns[':p' . $index++]  = '`TITULO`';
+        if ($this->isColumnModified(FisicaPeer::APELLIDO)) {
+            $modifiedColumns[':p' . $index++]  = '`APELLIDO`';
         }
-        if ($this->isColumnModified(MaterialPeer::EDITORIAL)) {
-            $modifiedColumns[':p' . $index++]  = '`EDITORIAL`';
+        if ($this->isColumnModified(FisicaPeer::USUARIO)) {
+            $modifiedColumns[':p' . $index++]  = '`USUARIO`';
         }
-        if ($this->isColumnModified(MaterialPeer::AUTOR)) {
-            $modifiedColumns[':p' . $index++]  = '`AUTOR`';
-        }
-        if ($this->isColumnModified(MaterialPeer::DESCRIPCION)) {
-            $modifiedColumns[':p' . $index++]  = '`DESCRIPCION`';
-        }
-        if ($this->isColumnModified(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) {
-            $modifiedColumns[':p' . $index++]  = '`SUBCONTENIDO_ID_SUBCONTENIDO`';
+        if ($this->isColumnModified(FisicaPeer::PASSWORD)) {
+            $modifiedColumns[':p' . $index++]  = '`PASSWORD`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `material` (%s) VALUES (%s)',
+            'INSERT INTO `fisica` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -730,29 +609,20 @@ abstract class BaseMaterial extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID_MATERIAL`':						
-						$stmt->bindValue($identifier, $this->id_material, PDO::PARAM_INT);
-                        break;
-                    case '`ARCHIVO`':						
-						$stmt->bindValue($identifier, $this->archivo, PDO::PARAM_STR);
+                    case '`ID_FISICA`':						
+						$stmt->bindValue($identifier, $this->id_fisica, PDO::PARAM_INT);
                         break;
                     case '`NOMBRE`':						
 						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
                         break;
-                    case '`TITULO`':						
-						$stmt->bindValue($identifier, $this->titulo, PDO::PARAM_STR);
+                    case '`APELLIDO`':						
+						$stmt->bindValue($identifier, $this->apellido, PDO::PARAM_STR);
                         break;
-                    case '`EDITORIAL`':						
-						$stmt->bindValue($identifier, $this->editorial, PDO::PARAM_STR);
+                    case '`USUARIO`':						
+						$stmt->bindValue($identifier, $this->usuario, PDO::PARAM_STR);
                         break;
-                    case '`AUTOR`':						
-						$stmt->bindValue($identifier, $this->autor, PDO::PARAM_STR);
-                        break;
-                    case '`DESCRIPCION`':						
-						$stmt->bindValue($identifier, $this->descripcion, PDO::PARAM_STR);
-                        break;
-                    case '`SUBCONTENIDO_ID_SUBCONTENIDO`':						
-						$stmt->bindValue($identifier, $this->subcontenido_id_subcontenido, PDO::PARAM_INT);
+                    case '`PASSWORD`':						
+						$stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -767,7 +637,7 @@ abstract class BaseMaterial extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdMaterial($pk);
+        $this->setIdFisica($pk);
 
         $this->setNew(false);
     }
@@ -848,25 +718,21 @@ abstract class BaseMaterial extends BaseObject
             $failureMap = array();
 
 
-            // We call the validate method on the following object(s) if they
-            // were passed to this object by their coresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aSubcontenido !== null) {
-                if (!$this->aSubcontenido->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSubcontenido->getValidationFailures());
-                }
-            }
-
-
-            if (($retval = MaterialPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = FisicaPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
 
                 if ($this->collAccesoMaterials !== null) {
                     foreach ($this->collAccesoMaterials as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collCarreraFisicas !== null) {
+                    foreach ($this->collCarreraFisicas as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -892,7 +758,7 @@ abstract class BaseMaterial extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = MaterialPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = FisicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -909,28 +775,19 @@ abstract class BaseMaterial extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdMaterial();
+                return $this->getIdFisica();
                 break;
             case 1:
-                return $this->getArchivo();
-                break;
-            case 2:
                 return $this->getNombre();
                 break;
+            case 2:
+                return $this->getApellido();
+                break;
             case 3:
-                return $this->getTitulo();
+                return $this->getUsuario();
                 break;
             case 4:
-                return $this->getEditorial();
-                break;
-            case 5:
-                return $this->getAutor();
-                break;
-            case 6:
-                return $this->getDescripcion();
-                break;
-            case 7:
-                return $this->getSubcontenidoIdSubcontenido();
+                return $this->getPassword();
                 break;
             default:
                 return null;
@@ -955,27 +812,24 @@ abstract class BaseMaterial extends BaseObject
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Material'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['Fisica'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Material'][$this->getPrimaryKey()] = true;
-        $keys = MaterialPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['Fisica'][$this->getPrimaryKey()] = true;
+        $keys = FisicaPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdMaterial(),
-            $keys[1] => $this->getArchivo(),
-            $keys[2] => $this->getNombre(),
-            $keys[3] => $this->getTitulo(),
-            $keys[4] => $this->getEditorial(),
-            $keys[5] => $this->getAutor(),
-            $keys[6] => $this->getDescripcion(),
-            $keys[7] => $this->getSubcontenidoIdSubcontenido(),
+            $keys[0] => $this->getIdFisica(),
+            $keys[1] => $this->getNombre(),
+            $keys[2] => $this->getApellido(),
+            $keys[3] => $this->getUsuario(),
+            $keys[4] => $this->getPassword(),
         );
         if ($includeForeignObjects) {
-            if (null !== $this->aSubcontenido) {
-                $result['Subcontenido'] = $this->aSubcontenido->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
             if (null !== $this->collAccesoMaterials) {
                 $result['AccesoMaterials'] = $this->collAccesoMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collCarreraFisicas) {
+                $result['CarreraFisicas'] = $this->collCarreraFisicas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -995,7 +849,7 @@ abstract class BaseMaterial extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = MaterialPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = FisicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -1012,28 +866,19 @@ abstract class BaseMaterial extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdMaterial($value);
+                $this->setIdFisica($value);
                 break;
             case 1:
-                $this->setArchivo($value);
-                break;
-            case 2:
                 $this->setNombre($value);
                 break;
+            case 2:
+                $this->setApellido($value);
+                break;
             case 3:
-                $this->setTitulo($value);
+                $this->setUsuario($value);
                 break;
             case 4:
-                $this->setEditorial($value);
-                break;
-            case 5:
-                $this->setAutor($value);
-                break;
-            case 6:
-                $this->setDescripcion($value);
-                break;
-            case 7:
-                $this->setSubcontenidoIdSubcontenido($value);
+                $this->setPassword($value);
                 break;
         } // switch()
     }
@@ -1057,16 +902,13 @@ abstract class BaseMaterial extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = MaterialPeer::getFieldNames($keyType);
+        $keys = FisicaPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdMaterial($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setArchivo($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setNombre($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setTitulo($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setEditorial($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setAutor($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setDescripcion($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[7]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdFisica($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setApellido($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setUsuario($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setPassword($arr[$keys[4]]);
     }
 
     /**
@@ -1076,16 +918,13 @@ abstract class BaseMaterial extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
+        $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(MaterialPeer::ID_MATERIAL)) $criteria->add(MaterialPeer::ID_MATERIAL, $this->id_material);
-        if ($this->isColumnModified(MaterialPeer::ARCHIVO)) $criteria->add(MaterialPeer::ARCHIVO, $this->archivo);
-        if ($this->isColumnModified(MaterialPeer::NOMBRE)) $criteria->add(MaterialPeer::NOMBRE, $this->nombre);
-        if ($this->isColumnModified(MaterialPeer::TITULO)) $criteria->add(MaterialPeer::TITULO, $this->titulo);
-        if ($this->isColumnModified(MaterialPeer::EDITORIAL)) $criteria->add(MaterialPeer::EDITORIAL, $this->editorial);
-        if ($this->isColumnModified(MaterialPeer::AUTOR)) $criteria->add(MaterialPeer::AUTOR, $this->autor);
-        if ($this->isColumnModified(MaterialPeer::DESCRIPCION)) $criteria->add(MaterialPeer::DESCRIPCION, $this->descripcion);
-        if ($this->isColumnModified(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) $criteria->add(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $this->subcontenido_id_subcontenido);
+        if ($this->isColumnModified(FisicaPeer::ID_FISICA)) $criteria->add(FisicaPeer::ID_FISICA, $this->id_fisica);
+        if ($this->isColumnModified(FisicaPeer::NOMBRE)) $criteria->add(FisicaPeer::NOMBRE, $this->nombre);
+        if ($this->isColumnModified(FisicaPeer::APELLIDO)) $criteria->add(FisicaPeer::APELLIDO, $this->apellido);
+        if ($this->isColumnModified(FisicaPeer::USUARIO)) $criteria->add(FisicaPeer::USUARIO, $this->usuario);
+        if ($this->isColumnModified(FisicaPeer::PASSWORD)) $criteria->add(FisicaPeer::PASSWORD, $this->password);
 
         return $criteria;
     }
@@ -1100,8 +939,8 @@ abstract class BaseMaterial extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
-        $criteria->add(MaterialPeer::ID_MATERIAL, $this->id_material);
+        $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
+        $criteria->add(FisicaPeer::ID_FISICA, $this->id_fisica);
 
         return $criteria;
     }
@@ -1112,18 +951,18 @@ abstract class BaseMaterial extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdMaterial();
+        return $this->getIdFisica();
     }
 
     /**
-     * Generic method to set the primary key (id_material column).
+     * Generic method to set the primary key (id_fisica column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdMaterial($key);
+        $this->setIdFisica($key);
     }
 
     /**
@@ -1133,7 +972,7 @@ abstract class BaseMaterial extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdMaterial();
+        return null === $this->getIdFisica();
     }
 
     /**
@@ -1142,20 +981,17 @@ abstract class BaseMaterial extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Material (or compatible) type.
+     * @param      object $copyObj An object of Fisica (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setArchivo($this->getArchivo());
         $copyObj->setNombre($this->getNombre());
-        $copyObj->setTitulo($this->getTitulo());
-        $copyObj->setEditorial($this->getEditorial());
-        $copyObj->setAutor($this->getAutor());
-        $copyObj->setDescripcion($this->getDescripcion());
-        $copyObj->setSubcontenidoIdSubcontenido($this->getSubcontenidoIdSubcontenido());
+        $copyObj->setApellido($this->getApellido());
+        $copyObj->setUsuario($this->getUsuario());
+        $copyObj->setPassword($this->getPassword());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1170,13 +1006,19 @@ abstract class BaseMaterial extends BaseObject
                 }
             }
 
+            foreach ($this->getCarreraFisicas() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCarreraFisica($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdMaterial(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdFisica(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -1189,7 +1031,7 @@ abstract class BaseMaterial extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Material Clone of current object.
+     * @return                 Fisica Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1209,66 +1051,15 @@ abstract class BaseMaterial extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   MaterialPeer
+     * @return   FisicaPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new MaterialPeer();
+            self::$peer = new FisicaPeer();
         }
 
         return self::$peer;
-    }
-
-    /**
-     * Declares an association between this object and a Subcontenido object.
-     *
-     * @param                  Subcontenido $v
-     * @return                 Material The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setSubcontenido(Subcontenido $v = null)
-    {
-        if ($v === null) {
-            $this->setSubcontenidoIdSubcontenido(NULL);
-        } else {
-            $this->setSubcontenidoIdSubcontenido($v->getIdSubcontenido());
-        }
-
-        $this->aSubcontenido = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Subcontenido object, it will not be re-added.
-        if ($v !== null) {
-            $v->addMaterial($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated Subcontenido object
-     *
-     * @param      PropelPDO $con Optional Connection object.
-     * @return                 Subcontenido The associated Subcontenido object.
-     * @throws PropelException
-     */
-    public function getSubcontenido(PropelPDO $con = null)
-    {
-        if ($this->aSubcontenido === null && ($this->subcontenido_id_subcontenido !== null)) {
-            $this->aSubcontenido = SubcontenidoQuery::create()->findPk($this->subcontenido_id_subcontenido, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aSubcontenido->addMaterials($this);
-             */
-        }
-
-        return $this->aSubcontenido;
     }
 
 
@@ -1284,6 +1075,9 @@ abstract class BaseMaterial extends BaseObject
     {
         if ('AccesoMaterial' == $relationName) {
             $this->initAccesoMaterials();
+        }
+        if ('CarreraFisica' == $relationName) {
+            $this->initCarreraFisicas();
         }
     }
 
@@ -1328,7 +1122,7 @@ abstract class BaseMaterial extends BaseObject
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Material is new, it will return
+     * If this Fisica is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -1344,7 +1138,7 @@ abstract class BaseMaterial extends BaseObject
                 $this->initAccesoMaterials();
             } else {
                 $collAccesoMaterials = AccesoMaterialQuery::create(null, $criteria)
-                    ->filterByMaterial($this)
+                    ->filterByFisica($this)
                     ->find($con);
                 if (null !== $criteria) {
                     return $collAccesoMaterials;
@@ -1370,7 +1164,7 @@ abstract class BaseMaterial extends BaseObject
         $this->accesoMaterialsScheduledForDeletion = $this->getAccesoMaterials(new Criteria(), $con)->diff($accesoMaterials);
 
         foreach ($this->accesoMaterialsScheduledForDeletion as $accesoMaterialRemoved) {
-            $accesoMaterialRemoved->setMaterial(null);
+            $accesoMaterialRemoved->setFisica(null);
         }
 
         $this->collAccesoMaterials = null;
@@ -1402,7 +1196,7 @@ abstract class BaseMaterial extends BaseObject
                 }
 
                 return $query
-                    ->filterByMaterial($this)
+                    ->filterByFisica($this)
                     ->count($con);
             }
         } else {
@@ -1415,7 +1209,7 @@ abstract class BaseMaterial extends BaseObject
      * through the AccesoMaterial foreign key attribute.
      *
      * @param    AccesoMaterial $l AccesoMaterial
-     * @return   Material The current object (for fluent API support)
+     * @return   Fisica The current object (for fluent API support)
      */
     public function addAccesoMaterial(AccesoMaterial $l)
     {
@@ -1435,7 +1229,7 @@ abstract class BaseMaterial extends BaseObject
     protected function doAddAccesoMaterial($accesoMaterial)
     {
         $this->collAccesoMaterials[]= $accesoMaterial;
-        $accesoMaterial->setMaterial($this);
+        $accesoMaterial->setFisica($this);
     }
 
     /**
@@ -1450,7 +1244,7 @@ abstract class BaseMaterial extends BaseObject
                 $this->accesoMaterialsScheduledForDeletion->clear();
             }
             $this->accesoMaterialsScheduledForDeletion[]= $accesoMaterial;
-            $accesoMaterial->setMaterial(null);
+            $accesoMaterial->setFisica(null);
         }
     }
 
@@ -1458,25 +1252,217 @@ abstract class BaseMaterial extends BaseObject
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this Material is new, it will return
-     * an empty collection; or if this Material has previously
+     * Otherwise if this Fisica is new, it will return
+     * an empty collection; or if this Fisica has previously
      * been saved, it will retrieve related AccesoMaterials from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in Material.
+     * actually need in Fisica.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|AccesoMaterial[] List of AccesoMaterial objects
      */
-    public function getAccesoMaterialsJoinFisica($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getAccesoMaterialsJoinMaterial($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = AccesoMaterialQuery::create(null, $criteria);
-        $query->joinWith('Fisica', $join_behavior);
+        $query->joinWith('Material', $join_behavior);
 
         return $this->getAccesoMaterials($query, $con);
+    }
+
+    /**
+     * Clears out the collCarreraFisicas collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addCarreraFisicas()
+     */
+    public function clearCarreraFisicas()
+    {
+        $this->collCarreraFisicas = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collCarreraFisicas collection.
+     *
+     * By default this just sets the collCarreraFisicas collection to an empty array (like clearcollCarreraFisicas());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCarreraFisicas($overrideExisting = true)
+    {
+        if (null !== $this->collCarreraFisicas && !$overrideExisting) {
+            return;
+        }
+        $this->collCarreraFisicas = new PropelObjectCollection();
+        $this->collCarreraFisicas->setModel('CarreraFisica');
+    }
+
+    /**
+     * Gets an array of CarreraFisica objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Fisica is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     * @throws PropelException
+     */
+    public function getCarreraFisicas($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collCarreraFisicas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collCarreraFisicas) {
+                // return empty collection
+                $this->initCarreraFisicas();
+            } else {
+                $collCarreraFisicas = CarreraFisicaQuery::create(null, $criteria)
+                    ->filterByFisica($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collCarreraFisicas;
+                }
+                $this->collCarreraFisicas = $collCarreraFisicas;
+            }
+        }
+
+        return $this->collCarreraFisicas;
+    }
+
+    /**
+     * Sets a collection of CarreraFisica objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $carreraFisicas A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setCarreraFisicas(PropelCollection $carreraFisicas, PropelPDO $con = null)
+    {
+        $this->carreraFisicasScheduledForDeletion = $this->getCarreraFisicas(new Criteria(), $con)->diff($carreraFisicas);
+
+        foreach ($this->carreraFisicasScheduledForDeletion as $carreraFisicaRemoved) {
+            $carreraFisicaRemoved->setFisica(null);
+        }
+
+        $this->collCarreraFisicas = null;
+        foreach ($carreraFisicas as $carreraFisica) {
+            $this->addCarreraFisica($carreraFisica);
+        }
+
+        $this->collCarreraFisicas = $carreraFisicas;
+    }
+
+    /**
+     * Returns the number of related CarreraFisica objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related CarreraFisica objects.
+     * @throws PropelException
+     */
+    public function countCarreraFisicas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collCarreraFisicas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collCarreraFisicas) {
+                return 0;
+            } else {
+                $query = CarreraFisicaQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByFisica($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collCarreraFisicas);
+        }
+    }
+
+    /**
+     * Method called to associate a CarreraFisica object to this object
+     * through the CarreraFisica foreign key attribute.
+     *
+     * @param    CarreraFisica $l CarreraFisica
+     * @return   Fisica The current object (for fluent API support)
+     */
+    public function addCarreraFisica(CarreraFisica $l)
+    {
+        if ($this->collCarreraFisicas === null) {
+            $this->initCarreraFisicas();
+        }
+        if (!$this->collCarreraFisicas->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddCarreraFisica($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	CarreraFisica $carreraFisica The carreraFisica object to add.
+     */
+    protected function doAddCarreraFisica($carreraFisica)
+    {
+        $this->collCarreraFisicas[]= $carreraFisica;
+        $carreraFisica->setFisica($this);
+    }
+
+    /**
+     * @param	CarreraFisica $carreraFisica The carreraFisica object to remove.
+     */
+    public function removeCarreraFisica($carreraFisica)
+    {
+        if ($this->getCarreraFisicas()->contains($carreraFisica)) {
+            $this->collCarreraFisicas->remove($this->collCarreraFisicas->search($carreraFisica));
+            if (null === $this->carreraFisicasScheduledForDeletion) {
+                $this->carreraFisicasScheduledForDeletion = clone $this->collCarreraFisicas;
+                $this->carreraFisicasScheduledForDeletion->clear();
+            }
+            $this->carreraFisicasScheduledForDeletion[]= $carreraFisica;
+            $carreraFisica->setFisica(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Fisica is new, it will return
+     * an empty collection; or if this Fisica has previously
+     * been saved, it will retrieve related CarreraFisicas from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Fisica.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     */
+    public function getCarreraFisicasJoinCarrera($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CarreraFisicaQuery::create(null, $criteria);
+        $query->joinWith('Carrera', $join_behavior);
+
+        return $this->getCarreraFisicas($query, $con);
     }
 
     /**
@@ -1484,14 +1470,11 @@ abstract class BaseMaterial extends BaseObject
      */
     public function clear()
     {
-        $this->id_material = null;
-        $this->archivo = null;
+        $this->id_fisica = null;
         $this->nombre = null;
-        $this->titulo = null;
-        $this->editorial = null;
-        $this->autor = null;
-        $this->descripcion = null;
-        $this->subcontenido_id_subcontenido = null;
+        $this->apellido = null;
+        $this->usuario = null;
+        $this->password = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1517,13 +1500,21 @@ abstract class BaseMaterial extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collCarreraFisicas) {
+                foreach ($this->collCarreraFisicas as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collAccesoMaterials instanceof PropelCollection) {
             $this->collAccesoMaterials->clearIterator();
         }
         $this->collAccesoMaterials = null;
-        $this->aSubcontenido = null;
+        if ($this->collCarreraFisicas instanceof PropelCollection) {
+            $this->collCarreraFisicas->clearIterator();
+        }
+        $this->collCarreraFisicas = null;
     }
 
     /**
@@ -1533,7 +1524,7 @@ abstract class BaseMaterial extends BaseObject
      */
     public function __toString()
     {
-        return (string) $this->exportTo(MaterialPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(FisicaPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -1543,7 +1534,7 @@ abstract class BaseMaterial extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseMaterial:' . $name))
+		if ($callable = sfMixer::getCallable('BaseFisica:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -1553,4 +1544,4 @@ abstract class BaseMaterial extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseMaterial
+} // BaseFisica

@@ -2,34 +2,35 @@ propel:
   _attributes:
     package: lib.model
     defaultIdMethod: native
+  acceso_material:
+    _attributes: { phpName: AccesoMaterial, idMethod: native }
+    id_acceso_material: { phpName: IdAccesoMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    fisica_id_fisica: { phpName: FisicaIdFisica, type: INTEGER, required: true, foreignTable: fisica, foreignReference: id_fisica }
+    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
+    fecha_acceso: { phpName: FechaAcceso, type: TIMESTAMP, required: false }
+    _indexes: { fk_acceso_material_fisica1: [fisica_id_fisica], fk_acceso_material_material1: [material_id_material] }
   carrera:
     _attributes: { phpName: Carrera, idMethod: native }
     id_carrera: { phpName: IdCarrera, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
-    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
-    _indexes: { fk_carrera_material1: [material_id_material] }
+  carrera_fisica:
+    _attributes: { phpName: CarreraFisica, idMethod: native }
+    id_carrera_fisica: { phpName: IdCarreraFisica, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }
+    fisica_id_fisica: { phpName: FisicaIdFisica, type: INTEGER, required: true, foreignTable: fisica, foreignReference: id_fisica }
+    _indexes: { fk_carrera_fisica_carrera1: [carrera_id_carrera], fk_carrera_fisica_fisica1: [fisica_id_fisica] }
   contenido:
     _attributes: { phpName: Contenido, idMethod: native }
     id_contenido: { phpName: IdContenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     numero_contenido: { phpName: NumeroContenido, type: INTEGER, required: false, index: unique }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
-  librito:
-    _attributes: { phpName: Librito, idMethod: native }
-    id_librito: { phpName: IdLibrito, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    name: { phpName: Name, type: VARCHAR, size: '45', required: false }
-    price: { phpName: Price, type: VARCHAR, size: '45', required: false }
-  librito_pdf:
-    _attributes: { phpName: LibritoPdf, idMethod: native }
-    id_librito_pdf: { phpName: IdLibritoPdf, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    filename: { phpName: Filename, type: VARCHAR, size: '45', required: false }
-    caption: { phpName: Caption, type: VARCHAR, size: '45', required: false }
-    librito_id_librito: { phpName: LibritoIdLibrito, type: INTEGER, required: true, foreignTable: librito, foreignReference: id_librito }
-    _indexes: { fk_librito_pdf_librito: [librito_id_librito] }
-  libro:
-    _attributes: { phpName: Libro, idMethod: native }
-    idlibro: { phpName: Idlibro, type: INTEGER, primaryKey: true, required: true }
+  fisica:
+    _attributes: { phpName: Fisica, idMethod: native }
+    id_fisica: { phpName: IdFisica, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
-    archivo: { phpName: Archivo, type: BLOB, required: false }
+    apellido: { phpName: Apellido, type: VARCHAR, size: '45', required: false }
+    usuario: { phpName: Usuario, type: VARCHAR, size: '45', required: false }
+    password: { phpName: Password, type: VARCHAR, size: '45', required: false }
   material:
     _attributes: { phpName: Material, idMethod: native }
     id_material: { phpName: IdMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -48,8 +49,3 @@ propel:
     numero_subcontenido: { phpName: NumeroSubcontenido, type: INTEGER, required: false, index: unique }
     contenido_id_contenido: { phpName: ContenidoIdContenido, type: INTEGER, required: true, foreignTable: contenido, foreignReference: id_contenido }
     _indexes: { fk_subcontenido_contenido1: [contenido_id_contenido] }
-  usuario:
-    _attributes: { phpName: Usuario, idMethod: native }
-    idusuario: { phpName: Idusuario, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
-    password: { phpName: Password, type: VARCHAR, size: '45', required: false }

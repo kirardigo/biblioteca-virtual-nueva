@@ -2,49 +2,58 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'carrera' table.
+ * Base static class for performing query and update operations on the 'fisica' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseCarreraPeer {
+abstract class BaseFisicaPeer {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'propel';
 
     /** the table name for this class */
-    const TABLE_NAME = 'carrera';
+    const TABLE_NAME = 'fisica';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'Carrera';
+    const OM_CLASS = 'Fisica';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'CarreraTableMap';
+    const TM_CLASS = 'FisicaTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 2;
+    const NUM_COLUMNS = 5;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 2;
+    const NUM_HYDRATE_COLUMNS = 5;
 
-    /** the column name for the ID_CARRERA field */
-    const ID_CARRERA = 'carrera.ID_CARRERA';
+    /** the column name for the ID_FISICA field */
+    const ID_FISICA = 'fisica.ID_FISICA';
 
     /** the column name for the NOMBRE field */
-    const NOMBRE = 'carrera.NOMBRE';
+    const NOMBRE = 'fisica.NOMBRE';
+
+    /** the column name for the APELLIDO field */
+    const APELLIDO = 'fisica.APELLIDO';
+
+    /** the column name for the USUARIO field */
+    const USUARIO = 'fisica.USUARIO';
+
+    /** the column name for the PASSWORD field */
+    const PASSWORD = 'fisica.PASSWORD';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identiy map to hold any loaded instances of Carrera objects.
+     * An identiy map to hold any loaded instances of Fisica objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array Carrera[]
+     * @var        array Fisica[]
      */
     public static $instances = array();
 
@@ -56,12 +65,12 @@ abstract class BaseCarreraPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdCarrera', 'Nombre', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarrera', 'nombre', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA, self::NOMBRE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA', 'NOMBRE', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_carrera', 'nombre', ),
-        BasePeer::TYPE_NUM => array (0, 1, )
+        BasePeer::TYPE_PHPNAME => array ('IdFisica', 'Nombre', 'Apellido', 'Usuario', 'Password', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idFisica', 'nombre', 'apellido', 'usuario', 'password', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_FISICA, self::NOMBRE, self::APELLIDO, self::USUARIO, self::PASSWORD, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_FISICA', 'NOMBRE', 'APELLIDO', 'USUARIO', 'PASSWORD', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_fisica', 'nombre', 'apellido', 'usuario', 'password', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -71,12 +80,12 @@ abstract class BaseCarreraPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdCarrera' => 0, 'Nombre' => 1, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarrera' => 0, 'nombre' => 1, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA => 0, self::NOMBRE => 1, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA' => 0, 'NOMBRE' => 1, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_carrera' => 0, 'nombre' => 1, ),
-        BasePeer::TYPE_NUM => array (0, 1, )
+        BasePeer::TYPE_PHPNAME => array ('IdFisica' => 0, 'Nombre' => 1, 'Apellido' => 2, 'Usuario' => 3, 'Password' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idFisica' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'password' => 4, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_FISICA => 0, self::NOMBRE => 1, self::APELLIDO => 2, self::USUARIO => 3, self::PASSWORD => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_FISICA' => 0, 'NOMBRE' => 1, 'APELLIDO' => 2, 'USUARIO' => 3, 'PASSWORD' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_fisica' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'password' => 4, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -127,12 +136,12 @@ abstract class BaseCarreraPeer {
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. CarreraPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. FisicaPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(CarreraPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(FisicaPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -150,11 +159,17 @@ abstract class BaseCarreraPeer {
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(CarreraPeer::ID_CARRERA);
-            $criteria->addSelectColumn(CarreraPeer::NOMBRE);
+            $criteria->addSelectColumn(FisicaPeer::ID_FISICA);
+            $criteria->addSelectColumn(FisicaPeer::NOMBRE);
+            $criteria->addSelectColumn(FisicaPeer::APELLIDO);
+            $criteria->addSelectColumn(FisicaPeer::USUARIO);
+            $criteria->addSelectColumn(FisicaPeer::PASSWORD);
         } else {
-            $criteria->addSelectColumn($alias . '.ID_CARRERA');
+            $criteria->addSelectColumn($alias . '.ID_FISICA');
             $criteria->addSelectColumn($alias . '.NOMBRE');
+            $criteria->addSelectColumn($alias . '.APELLIDO');
+            $criteria->addSelectColumn($alias . '.USUARIO');
+            $criteria->addSelectColumn($alias . '.PASSWORD');
         }
     }
 
@@ -174,26 +189,26 @@ abstract class BaseCarreraPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(CarreraPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            CarreraPeer::addSelectColumns($criteria);
+            FisicaPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
         $criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseCarreraPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
 		}
 
         // BasePeer returns a PDOStatement
@@ -213,7 +228,7 @@ abstract class BaseCarreraPeer {
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return                 Carrera
+     * @return                 Fisica
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -221,7 +236,7 @@ abstract class BaseCarreraPeer {
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = CarreraPeer::doSelect($critcopy, $con);
+        $objects = FisicaPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -239,7 +254,7 @@ abstract class BaseCarreraPeer {
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return CarreraPeer::populateObjects(CarreraPeer::doSelectStmt($criteria, $con));
+        return FisicaPeer::populateObjects(FisicaPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -257,12 +272,12 @@ abstract class BaseCarreraPeer {
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            CarreraPeer::addSelectColumns($criteria);
+            FisicaPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
@@ -270,7 +285,7 @@ abstract class BaseCarreraPeer {
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseCarreraPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
 		}
 
 
@@ -286,14 +301,14 @@ abstract class BaseCarreraPeer {
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param      Carrera $obj A Carrera object.
+     * @param      Fisica $obj A Fisica object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdCarrera();
+                $key = (string) $obj->getIdFisica();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -307,7 +322,7 @@ abstract class BaseCarreraPeer {
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A Carrera object or a primary key value.
+     * @param      mixed $value A Fisica object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -315,13 +330,13 @@ abstract class BaseCarreraPeer {
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof Carrera) {
-                $key = (string) $value->getIdCarrera();
+            if (is_object($value) && $value instanceof Fisica) {
+                $key = (string) $value->getIdFisica();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Carrera object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Fisica object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
@@ -336,7 +351,7 @@ abstract class BaseCarreraPeer {
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return   Carrera Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return   Fisica Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
@@ -361,7 +376,7 @@ abstract class BaseCarreraPeer {
     }
     
     /**
-     * Method to invalidate the instance pool of all tables related to carrera
+     * Method to invalidate the instance pool of all tables related to fisica
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
@@ -415,11 +430,11 @@ abstract class BaseCarreraPeer {
         $results = array();
     
         // set the class once to avoid overhead in the loop
-        $cls = CarreraPeer::getOMClass();
+        $cls = FisicaPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = CarreraPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = CarreraPeer::getInstanceFromPool($key))) {
+            $key = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = FisicaPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -428,7 +443,7 @@ abstract class BaseCarreraPeer {
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                CarreraPeer::addInstanceToPool($obj, $key);
+                FisicaPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -442,21 +457,21 @@ abstract class BaseCarreraPeer {
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (Carrera object, last column rank)
+     * @return array (Fisica object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = CarreraPeer::getInstanceFromPool($key))) {
+        $key = FisicaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = FisicaPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + CarreraPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + FisicaPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = CarreraPeer::OM_CLASS;
+            $cls = FisicaPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            CarreraPeer::addInstanceToPool($obj, $key);
+            FisicaPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -479,9 +494,9 @@ abstract class BaseCarreraPeer {
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseCarreraPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseCarreraPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new CarreraTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseFisicaPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseFisicaPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new FisicaTableMap());
       }
     }
 
@@ -493,13 +508,13 @@ abstract class BaseCarreraPeer {
      */
     public static function getOMClass()
     {
-        return CarreraPeer::OM_CLASS;
+        return FisicaPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a Carrera or Criteria object.
+     * Performs an INSERT on the database, given a Fisica or Criteria object.
      *
-     * @param      mixed $values Criteria or Carrera object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or Fisica object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -508,17 +523,17 @@ abstract class BaseCarreraPeer {
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from Carrera object
+            $criteria = $values->buildCriteria(); // build Criteria from Fisica object
         }
 
-        if ($criteria->containsKey(CarreraPeer::ID_CARRERA) && $criteria->keyContainsValue(CarreraPeer::ID_CARRERA) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.CarreraPeer::ID_CARRERA.')');
+        if ($criteria->containsKey(FisicaPeer::ID_FISICA) && $criteria->keyContainsValue(FisicaPeer::ID_FISICA) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.FisicaPeer::ID_FISICA.')');
         }
 
 
@@ -540,9 +555,9 @@ abstract class BaseCarreraPeer {
     }
 
     /**
-     * Performs an UPDATE on the database, given a Carrera or Criteria object.
+     * Performs an UPDATE on the database, given a Fisica or Criteria object.
      *
-     * @param      mixed $values Criteria or Carrera object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or Fisica object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -551,7 +566,7 @@ abstract class BaseCarreraPeer {
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -559,15 +574,15 @@ abstract class BaseCarreraPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(CarreraPeer::ID_CARRERA);
-            $value = $criteria->remove(CarreraPeer::ID_CARRERA);
+            $comparison = $criteria->getComparison(FisicaPeer::ID_FISICA);
+            $value = $criteria->remove(FisicaPeer::ID_FISICA);
             if ($value) {
-                $selectCriteria->add(CarreraPeer::ID_CARRERA, $value, $comparison);
+                $selectCriteria->add(FisicaPeer::ID_FISICA, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(CarreraPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
             }
 
-        } else { // $values is Carrera object
+        } else { // $values is Fisica object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
@@ -579,7 +594,7 @@ abstract class BaseCarreraPeer {
     }
 
     /**
-     * Deletes all rows from the carrera table.
+     * Deletes all rows from the fisica table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -588,19 +603,19 @@ abstract class BaseCarreraPeer {
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += BasePeer::doDeleteAll(CarreraPeer::TABLE_NAME, $con, CarreraPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(FisicaPeer::TABLE_NAME, $con, FisicaPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            CarreraPeer::clearInstancePool();
-            CarreraPeer::clearRelatedInstancePool();
+            FisicaPeer::clearInstancePool();
+            FisicaPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -611,9 +626,9 @@ abstract class BaseCarreraPeer {
     }
 
     /**
-     * Performs a DELETE on the database, given a Carrera or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a Fisica or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or Carrera object or primary key or array of primary keys
+     * @param      mixed $values Criteria or Fisica object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -624,27 +639,27 @@ abstract class BaseCarreraPeer {
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // invalidate the cache for all objects of this type, since we have no
             // way of knowing (without running a query) what objects should be invalidated
             // from the cache based on this Criteria.
-            CarreraPeer::clearInstancePool();
+            FisicaPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof Carrera) { // it's a model object
+        } elseif ($values instanceof Fisica) { // it's a model object
             // invalidate the cache for this single object
-            CarreraPeer::removeInstanceFromPool($values);
+            FisicaPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(CarreraPeer::ID_CARRERA, (array) $values, Criteria::IN);
+            $criteria->add(FisicaPeer::ID_FISICA, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
-                CarreraPeer::removeInstanceFromPool($singleval);
+                FisicaPeer::removeInstanceFromPool($singleval);
             }
         }
 
@@ -659,7 +674,7 @@ abstract class BaseCarreraPeer {
             $con->beginTransaction();
             
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            CarreraPeer::clearRelatedInstancePool();
+            FisicaPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -670,13 +685,13 @@ abstract class BaseCarreraPeer {
     }
 
     /**
-     * Validates all modified columns of given Carrera object.
+     * Validates all modified columns of given Fisica object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param      Carrera $obj The object to validate.
+     * @param      Fisica $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -686,8 +701,8 @@ abstract class BaseCarreraPeer {
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(CarreraPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(CarreraPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(FisicaPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(FisicaPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -703,7 +718,7 @@ abstract class BaseCarreraPeer {
 
         }
 
-        return BasePeer::doValidate(CarreraPeer::DATABASE_NAME, CarreraPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(FisicaPeer::DATABASE_NAME, FisicaPeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -711,23 +726,23 @@ abstract class BaseCarreraPeer {
      *
      * @param      int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return Carrera
+     * @return Fisica
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = CarreraPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = FisicaPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(CarreraPeer::DATABASE_NAME);
-        $criteria->add(CarreraPeer::ID_CARRERA, $pk);
+        $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
+        $criteria->add(FisicaPeer::ID_FISICA, $pk);
 
-        $v = CarreraPeer::doSelect($criteria, $con);
+        $v = FisicaPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -737,23 +752,23 @@ abstract class BaseCarreraPeer {
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return Carrera[]
+     * @return Fisica[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(CarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(CarreraPeer::DATABASE_NAME);
-            $criteria->add(CarreraPeer::ID_CARRERA, $pks, Criteria::IN);
-            $objs = CarreraPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
+            $criteria->add(FisicaPeer::ID_FISICA, $pks, Criteria::IN);
+            $objs = FisicaPeer::doSelect($criteria, $con);
         }
 
         return $objs;
@@ -786,15 +801,15 @@ abstract class BaseCarreraPeer {
 	{
 	  if (preg_match('/^do(Select|Count)(Join(All(Except)?)?|Stmt)?/', $method, $match))
 	  {
-	    return sprintf('BaseCarreraPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
+	    return sprintf('BaseFisicaPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
 	  }
 	
 	  throw new LogicException(sprintf('Unrecognized function "%s"', $method));
 	}
 
-} // BaseCarreraPeer
+} // BaseFisicaPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseCarreraPeer::buildTableMap();
+BaseFisicaPeer::buildTableMap();
 
