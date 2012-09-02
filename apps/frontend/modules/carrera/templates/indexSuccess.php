@@ -1,10 +1,11 @@
 <h1>Carreras List</h1>
 
-<table>
-  <thead>
+<table class="table table-bordered">
+  <thead style="background: #7FDDCA">
     <tr>
       <th>Id carrera</th>
       <th>Nombre</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -12,9 +13,13 @@
     <tr>
       <td><a href="<?php echo url_for('carrera/edit?id_carrera='.$Carrera->getIdCarrera()) ?>"><?php echo $Carrera->getIdCarrera() ?></a></td>
       <td><?php echo $Carrera->getNombre() ?></td>
+      <td>          
+          <a class="btn btn-warning btn-mini" href="<?php echo url_for('carrera/edit?id_carrera='.$Carrera->getIdCarrera()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
+          <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'carrera/delete?id_carrera='.$Carrera->getIdCarrera(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el carrera?', 'class'=>"btn btn-danger btn-mini")) ?>
+      </td>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('carrera/new') ?>">New</a>
+<a class="btn btn-success" href="<?php echo url_for('carrera/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

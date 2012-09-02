@@ -39,8 +39,8 @@
                   Administracion <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-              <li><a href="#">ABM Material</a></li>
-              <li><a href="#">ABM Usuarios</a></li>
+              <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
+              <li><a href="<?php echo url_for('fisica/index');?>">ABM Usuarios</a></li>
                 </ul>
               </li>
               <li class="dropdown">
