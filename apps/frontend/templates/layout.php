@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="">Bblioteca Virtual UDC 2012</a>
+          <a class="brand" href="<?php echo url_for('principal/index');?>">Biblioteca Virtual UDC 2012</a>
           <div class="nav-collapse">
             <ul class="nav">
               
@@ -39,8 +39,11 @@
                   Administracion <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-              <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
+
               <li><a href="<?php echo url_for('fisica/index');?>">ABM Usuarios</a></li>
+              <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
+             
+              <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
                 </ul>
               </li>
               <li class="dropdown">
