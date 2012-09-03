@@ -41,3 +41,6 @@ $this->forward('default', 'module');
 
 //if('es' === sfContext::getInstance()->getUser()->getCulture())
 comentar esta linea en el archivo mpformpropel.class.php en la carpeta plugins
+
+post_maxsize 8M
+upload_max_filesize 2M
