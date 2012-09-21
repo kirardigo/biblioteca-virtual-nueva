@@ -43,10 +43,10 @@ abstract class BaseCarreraFisica extends BaseObject
     protected $carrera_id_carrera;
 
     /**
-     * The value for the fisica_id_fisica field.
+     * The value for the usuario_id_usuario field.
      * @var        int
      */
-    protected $fisica_id_fisica;
+    protected $usuario_id_usuario;
 
     /**
      * @var        Carrera
@@ -54,9 +54,9 @@ abstract class BaseCarreraFisica extends BaseObject
     protected $aCarrera;
 
     /**
-     * @var        Fisica
+     * @var        Usuario
      */
-    protected $aFisica;
+    protected $aUsuario;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -95,14 +95,14 @@ abstract class BaseCarreraFisica extends BaseObject
     }
 
     /**
-     * Get the [fisica_id_fisica] column value.
+     * Get the [usuario_id_usuario] column value.
      * 
      * @return   int
      */
-    public function getFisicaIdFisica()
+    public function getUsuarioIdUsuario()
     {
 
-        return $this->fisica_id_fisica;
+        return $this->usuario_id_usuario;
     }
 
     /**
@@ -152,29 +152,29 @@ abstract class BaseCarreraFisica extends BaseObject
     } // setCarreraIdCarrera()
 
     /**
-     * Set the value of [fisica_id_fisica] column.
+     * Set the value of [usuario_id_usuario] column.
      * 
      * @param      int $v new value
      * @return   CarreraFisica The current object (for fluent API support)
      */
-    public function setFisicaIdFisica($v)
+    public function setUsuarioIdUsuario($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->fisica_id_fisica !== $v) {
-            $this->fisica_id_fisica = $v;
-            $this->modifiedColumns[] = CarreraFisicaPeer::FISICA_ID_FISICA;
+        if ($this->usuario_id_usuario !== $v) {
+            $this->usuario_id_usuario = $v;
+            $this->modifiedColumns[] = CarreraFisicaPeer::USUARIO_ID_USUARIO;
         }
 
-        if ($this->aFisica !== null && $this->aFisica->getIdFisica() !== $v) {
-            $this->aFisica = null;
+        if ($this->aUsuario !== null && $this->aUsuario->getIdUsuario() !== $v) {
+            $this->aUsuario = null;
         }
 
 
         return $this;
-    } // setFisicaIdFisica()
+    } // setUsuarioIdUsuario()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -210,7 +210,7 @@ abstract class BaseCarreraFisica extends BaseObject
 
             $this->id_carrera_fisica = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->carrera_id_carrera = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-            $this->fisica_id_fisica = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->usuario_id_usuario = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -245,8 +245,8 @@ abstract class BaseCarreraFisica extends BaseObject
         if ($this->aCarrera !== null && $this->carrera_id_carrera !== $this->aCarrera->getIdCarrera()) {
             $this->aCarrera = null;
         }
-        if ($this->aFisica !== null && $this->fisica_id_fisica !== $this->aFisica->getIdFisica()) {
-            $this->aFisica = null;
+        if ($this->aUsuario !== null && $this->usuario_id_usuario !== $this->aUsuario->getIdUsuario()) {
+            $this->aUsuario = null;
         }
     } // ensureConsistency
 
@@ -288,7 +288,7 @@ abstract class BaseCarreraFisica extends BaseObject
         if ($deep) {  // also de-associate any related objects?
 
             $this->aCarrera = null;
-            $this->aFisica = null;
+            $this->aUsuario = null;
         } // if (deep)
     }
 
@@ -446,11 +446,11 @@ abstract class BaseCarreraFisica extends BaseObject
                 $this->setCarrera($this->aCarrera);
             }
 
-            if ($this->aFisica !== null) {
-                if ($this->aFisica->isModified() || $this->aFisica->isNew()) {
-                    $affectedRows += $this->aFisica->save($con);
+            if ($this->aUsuario !== null) {
+                if ($this->aUsuario->isModified() || $this->aUsuario->isNew()) {
+                    $affectedRows += $this->aUsuario->save($con);
                 }
-                $this->setFisica($this->aFisica);
+                $this->setUsuario($this->aUsuario);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -496,8 +496,8 @@ abstract class BaseCarreraFisica extends BaseObject
         if ($this->isColumnModified(CarreraFisicaPeer::CARRERA_ID_CARRERA)) {
             $modifiedColumns[':p' . $index++]  = '`CARRERA_ID_CARRERA`';
         }
-        if ($this->isColumnModified(CarreraFisicaPeer::FISICA_ID_FISICA)) {
-            $modifiedColumns[':p' . $index++]  = '`FISICA_ID_FISICA`';
+        if ($this->isColumnModified(CarreraFisicaPeer::USUARIO_ID_USUARIO)) {
+            $modifiedColumns[':p' . $index++]  = '`USUARIO_ID_USUARIO`';
         }
 
         $sql = sprintf(
@@ -516,8 +516,8 @@ abstract class BaseCarreraFisica extends BaseObject
                     case '`CARRERA_ID_CARRERA`':						
 						$stmt->bindValue($identifier, $this->carrera_id_carrera, PDO::PARAM_INT);
                         break;
-                    case '`FISICA_ID_FISICA`':						
-						$stmt->bindValue($identifier, $this->fisica_id_fisica, PDO::PARAM_INT);
+                    case '`USUARIO_ID_USUARIO`':						
+						$stmt->bindValue($identifier, $this->usuario_id_usuario, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -624,9 +624,9 @@ abstract class BaseCarreraFisica extends BaseObject
                 }
             }
 
-            if ($this->aFisica !== null) {
-                if (!$this->aFisica->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aFisica->getValidationFailures());
+            if ($this->aUsuario !== null) {
+                if (!$this->aUsuario->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUsuario->getValidationFailures());
                 }
             }
 
@@ -678,7 +678,7 @@ abstract class BaseCarreraFisica extends BaseObject
                 return $this->getCarreraIdCarrera();
                 break;
             case 2:
-                return $this->getFisicaIdFisica();
+                return $this->getUsuarioIdUsuario();
                 break;
             default:
                 return null;
@@ -711,14 +711,14 @@ abstract class BaseCarreraFisica extends BaseObject
         $result = array(
             $keys[0] => $this->getIdCarreraFisica(),
             $keys[1] => $this->getCarreraIdCarrera(),
-            $keys[2] => $this->getFisicaIdFisica(),
+            $keys[2] => $this->getUsuarioIdUsuario(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aCarrera) {
                 $result['Carrera'] = $this->aCarrera->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aFisica) {
-                $result['Fisica'] = $this->aFisica->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            if (null !== $this->aUsuario) {
+                $result['Usuario'] = $this->aUsuario->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -761,7 +761,7 @@ abstract class BaseCarreraFisica extends BaseObject
                 $this->setCarreraIdCarrera($value);
                 break;
             case 2:
-                $this->setFisicaIdFisica($value);
+                $this->setUsuarioIdUsuario($value);
                 break;
         } // switch()
     }
@@ -789,7 +789,7 @@ abstract class BaseCarreraFisica extends BaseObject
 
         if (array_key_exists($keys[0], $arr)) $this->setIdCarreraFisica($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setCarreraIdCarrera($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setFisicaIdFisica($arr[$keys[2]]);
+        if (array_key_exists($keys[2], $arr)) $this->setUsuarioIdUsuario($arr[$keys[2]]);
     }
 
     /**
@@ -803,7 +803,7 @@ abstract class BaseCarreraFisica extends BaseObject
 
         if ($this->isColumnModified(CarreraFisicaPeer::ID_CARRERA_FISICA)) $criteria->add(CarreraFisicaPeer::ID_CARRERA_FISICA, $this->id_carrera_fisica);
         if ($this->isColumnModified(CarreraFisicaPeer::CARRERA_ID_CARRERA)) $criteria->add(CarreraFisicaPeer::CARRERA_ID_CARRERA, $this->carrera_id_carrera);
-        if ($this->isColumnModified(CarreraFisicaPeer::FISICA_ID_FISICA)) $criteria->add(CarreraFisicaPeer::FISICA_ID_FISICA, $this->fisica_id_fisica);
+        if ($this->isColumnModified(CarreraFisicaPeer::USUARIO_ID_USUARIO)) $criteria->add(CarreraFisicaPeer::USUARIO_ID_USUARIO, $this->usuario_id_usuario);
 
         return $criteria;
     }
@@ -868,7 +868,7 @@ abstract class BaseCarreraFisica extends BaseObject
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setCarreraIdCarrera($this->getCarreraIdCarrera());
-        $copyObj->setFisicaIdFisica($this->getFisicaIdFisica());
+        $copyObj->setUsuarioIdUsuario($this->getUsuarioIdUsuario());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -979,24 +979,24 @@ abstract class BaseCarreraFisica extends BaseObject
     }
 
     /**
-     * Declares an association between this object and a Fisica object.
+     * Declares an association between this object and a Usuario object.
      *
-     * @param                  Fisica $v
+     * @param                  Usuario $v
      * @return                 CarreraFisica The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setFisica(Fisica $v = null)
+    public function setUsuario(Usuario $v = null)
     {
         if ($v === null) {
-            $this->setFisicaIdFisica(NULL);
+            $this->setUsuarioIdUsuario(NULL);
         } else {
-            $this->setFisicaIdFisica($v->getIdFisica());
+            $this->setUsuarioIdUsuario($v->getIdUsuario());
         }
 
-        $this->aFisica = $v;
+        $this->aUsuario = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Fisica object, it will not be re-added.
+        // If this object has already been added to the Usuario object, it will not be re-added.
         if ($v !== null) {
             $v->addCarreraFisica($this);
         }
@@ -1007,26 +1007,26 @@ abstract class BaseCarreraFisica extends BaseObject
 
 
     /**
-     * Get the associated Fisica object
+     * Get the associated Usuario object
      *
      * @param      PropelPDO $con Optional Connection object.
-     * @return                 Fisica The associated Fisica object.
+     * @return                 Usuario The associated Usuario object.
      * @throws PropelException
      */
-    public function getFisica(PropelPDO $con = null)
+    public function getUsuario(PropelPDO $con = null)
     {
-        if ($this->aFisica === null && ($this->fisica_id_fisica !== null)) {
-            $this->aFisica = FisicaQuery::create()->findPk($this->fisica_id_fisica, $con);
+        if ($this->aUsuario === null && ($this->usuario_id_usuario !== null)) {
+            $this->aUsuario = UsuarioQuery::create()->findPk($this->usuario_id_usuario, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aFisica->addCarreraFisicas($this);
+                $this->aUsuario->addCarreraFisicas($this);
              */
         }
 
-        return $this->aFisica;
+        return $this->aUsuario;
     }
 
     /**
@@ -1036,7 +1036,7 @@ abstract class BaseCarreraFisica extends BaseObject
     {
         $this->id_carrera_fisica = null;
         $this->carrera_id_carrera = null;
-        $this->fisica_id_fisica = null;
+        $this->usuario_id_usuario = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1060,7 +1060,7 @@ abstract class BaseCarreraFisica extends BaseObject
         } // if ($deep)
 
         $this->aCarrera = null;
-        $this->aFisica = null;
+        $this->aUsuario = null;
     }
 
     /**

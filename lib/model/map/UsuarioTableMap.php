@@ -38,9 +38,12 @@ class UsuarioTableMap extends TableMap
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('IDUSUARIO', 'Idusuario', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', false, 45, null);
+        $this->addPrimaryKey('ID_USUARIO', 'IdUsuario', 'INTEGER', true, null, null);
+        $this->addColumn('USUARIO', 'Usuario', 'VARCHAR', true, 45, null);
+        $this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 45, null);
+        $this->addColumn('ADMIN', 'Admin', 'BOOLEAN', false, 1, null);
+        $this->addColumn('EMAIL', 'Email', 'VARCHAR', false, 45, null);
+        $this->addForeignKey('FISICA_ID_PFISICA', 'FisicaIdPfisica', 'INTEGER', 'pfisica', 'ID_PFISICA', true, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +52,9 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('fisica_id_pfisica' => 'id_pfisica', ), null, null);
+        $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'AccesoMaterials');
+        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'CarreraFisicas');
     } // buildRelations()
 
     /**

@@ -40,7 +40,7 @@ class CarreraFisicaTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_CARRERA_FISICA', 'IdCarreraFisica', 'INTEGER', true, null, null);
         $this->addForeignKey('CARRERA_ID_CARRERA', 'CarreraIdCarrera', 'INTEGER', 'carrera', 'ID_CARRERA', true, null, null);
-        $this->addForeignKey('FISICA_ID_FISICA', 'FisicaIdFisica', 'INTEGER', 'fisica', 'ID_FISICA', true, null, null);
+        $this->addForeignKey('USUARIO_ID_USUARIO', 'UsuarioIdUsuario', 'INTEGER', 'usuario', 'ID_USUARIO', true, null, null);
         // validators
     } // initialize()
 
@@ -50,7 +50,7 @@ class CarreraFisicaTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Carrera', 'Carrera', RelationMap::MANY_TO_ONE, array('carrera_id_carrera' => 'id_carrera', ), null, null);
-        $this->addRelation('Fisica', 'Fisica', RelationMap::MANY_TO_ONE, array('fisica_id_fisica' => 'id_fisica', ), null, null);
+        $this->addRelation('Usuario', 'Usuario', RelationMap::MANY_TO_ONE, array('usuario_id_usuario' => 'id_usuario', ), null, null);
     } // buildRelations()
 
     /**

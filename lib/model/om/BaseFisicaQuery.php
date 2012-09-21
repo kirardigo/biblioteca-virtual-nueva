@@ -6,44 +6,60 @@
  *
  * 
  *
- * @method     FisicaQuery orderByIdFisica($order = Criteria::ASC) Order by the id_fisica column
+ * @method     FisicaQuery orderByIdPfisica($order = Criteria::ASC) Order by the id_pfisica column
  * @method     FisicaQuery orderByNombre($order = Criteria::ASC) Order by the nombre column
  * @method     FisicaQuery orderByApellido($order = Criteria::ASC) Order by the apellido column
- * @method     FisicaQuery orderByUsuario($order = Criteria::ASC) Order by the usuario column
- * @method     FisicaQuery orderByPassword($order = Criteria::ASC) Order by the password column
+ * @method     FisicaQuery orderByVaron($order = Criteria::ASC) Order by the varon column
+ * @method     FisicaQuery orderByFechaNac($order = Criteria::ASC) Order by the fecha_nac column
+ * @method     FisicaQuery orderByTipoDocIdTipoDoc($order = Criteria::ASC) Order by the tipo_doc_id_tipo_doc column
+ * @method     FisicaQuery orderByDocumento($order = Criteria::ASC) Order by the documento column
+ * @method     FisicaQuery orderByPersonaIdPersona($order = Criteria::ASC) Order by the persona_id_persona column
  *
- * @method     FisicaQuery groupByIdFisica() Group by the id_fisica column
+ * @method     FisicaQuery groupByIdPfisica() Group by the id_pfisica column
  * @method     FisicaQuery groupByNombre() Group by the nombre column
  * @method     FisicaQuery groupByApellido() Group by the apellido column
- * @method     FisicaQuery groupByUsuario() Group by the usuario column
- * @method     FisicaQuery groupByPassword() Group by the password column
+ * @method     FisicaQuery groupByVaron() Group by the varon column
+ * @method     FisicaQuery groupByFechaNac() Group by the fecha_nac column
+ * @method     FisicaQuery groupByTipoDocIdTipoDoc() Group by the tipo_doc_id_tipo_doc column
+ * @method     FisicaQuery groupByDocumento() Group by the documento column
+ * @method     FisicaQuery groupByPersonaIdPersona() Group by the persona_id_persona column
  *
  * @method     FisicaQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     FisicaQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     FisicaQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     FisicaQuery leftJoinAccesoMaterial($relationAlias = null) Adds a LEFT JOIN clause to the query using the AccesoMaterial relation
- * @method     FisicaQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
- * @method     FisicaQuery innerJoinAccesoMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the AccesoMaterial relation
+ * @method     FisicaQuery leftJoinTipoDoc($relationAlias = null) Adds a LEFT JOIN clause to the query using the TipoDoc relation
+ * @method     FisicaQuery rightJoinTipoDoc($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TipoDoc relation
+ * @method     FisicaQuery innerJoinTipoDoc($relationAlias = null) Adds a INNER JOIN clause to the query using the TipoDoc relation
  *
- * @method     FisicaQuery leftJoinCarreraFisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarreraFisica relation
- * @method     FisicaQuery rightJoinCarreraFisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarreraFisica relation
- * @method     FisicaQuery innerJoinCarreraFisica($relationAlias = null) Adds a INNER JOIN clause to the query using the CarreraFisica relation
+ * @method     FisicaQuery leftJoinPersona($relationAlias = null) Adds a LEFT JOIN clause to the query using the Persona relation
+ * @method     FisicaQuery rightJoinPersona($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Persona relation
+ * @method     FisicaQuery innerJoinPersona($relationAlias = null) Adds a INNER JOIN clause to the query using the Persona relation
+ *
+ * @method     FisicaQuery leftJoinUsuario($relationAlias = null) Adds a LEFT JOIN clause to the query using the Usuario relation
+ * @method     FisicaQuery rightJoinUsuario($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Usuario relation
+ * @method     FisicaQuery innerJoinUsuario($relationAlias = null) Adds a INNER JOIN clause to the query using the Usuario relation
  *
  * @method     Fisica findOne(PropelPDO $con = null) Return the first Fisica matching the query
  * @method     Fisica findOneOrCreate(PropelPDO $con = null) Return the first Fisica matching the query, or a new Fisica object populated from the query conditions when no match is found
  *
- * @method     Fisica findOneByIdFisica(int $id_fisica) Return the first Fisica filtered by the id_fisica column
+ * @method     Fisica findOneByIdPfisica(int $id_pfisica) Return the first Fisica filtered by the id_pfisica column
  * @method     Fisica findOneByNombre(string $nombre) Return the first Fisica filtered by the nombre column
  * @method     Fisica findOneByApellido(string $apellido) Return the first Fisica filtered by the apellido column
- * @method     Fisica findOneByUsuario(string $usuario) Return the first Fisica filtered by the usuario column
- * @method     Fisica findOneByPassword(string $password) Return the first Fisica filtered by the password column
+ * @method     Fisica findOneByVaron(boolean $varon) Return the first Fisica filtered by the varon column
+ * @method     Fisica findOneByFechaNac(string $fecha_nac) Return the first Fisica filtered by the fecha_nac column
+ * @method     Fisica findOneByTipoDocIdTipoDoc(int $tipo_doc_id_tipo_doc) Return the first Fisica filtered by the tipo_doc_id_tipo_doc column
+ * @method     Fisica findOneByDocumento(string $documento) Return the first Fisica filtered by the documento column
+ * @method     Fisica findOneByPersonaIdPersona(int $persona_id_persona) Return the first Fisica filtered by the persona_id_persona column
  *
- * @method     array findByIdFisica(int $id_fisica) Return Fisica objects filtered by the id_fisica column
+ * @method     array findByIdPfisica(int $id_pfisica) Return Fisica objects filtered by the id_pfisica column
  * @method     array findByNombre(string $nombre) Return Fisica objects filtered by the nombre column
  * @method     array findByApellido(string $apellido) Return Fisica objects filtered by the apellido column
- * @method     array findByUsuario(string $usuario) Return Fisica objects filtered by the usuario column
- * @method     array findByPassword(string $password) Return Fisica objects filtered by the password column
+ * @method     array findByVaron(boolean $varon) Return Fisica objects filtered by the varon column
+ * @method     array findByFechaNac(string $fecha_nac) Return Fisica objects filtered by the fecha_nac column
+ * @method     array findByTipoDocIdTipoDoc(int $tipo_doc_id_tipo_doc) Return Fisica objects filtered by the tipo_doc_id_tipo_doc column
+ * @method     array findByDocumento(string $documento) Return Fisica objects filtered by the documento column
+ * @method     array findByPersonaIdPersona(int $persona_id_persona) Return Fisica objects filtered by the persona_id_persona column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -134,7 +150,7 @@ abstract class BaseFisicaQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_FISICA`, `NOMBRE`, `APELLIDO`, `USUARIO`, `PASSWORD` FROM `fisica` WHERE `ID_FISICA` = :p0';
+        $sql = 'SELECT `ID_PFISICA`, `NOMBRE`, `APELLIDO`, `VARON`, `FECHA_NAC`, `TIPO_DOC_ID_TIPO_DOC`, `DOCUMENTO`, `PERSONA_ID_PERSONA` FROM `fisica` WHERE `ID_PFISICA` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -207,7 +223,7 @@ abstract class BaseFisicaQuery extends ModelCriteria
     public function filterByPrimaryKey($key)
     {
 
-        return $this->addUsingAlias(FisicaPeer::ID_FISICA, $key, Criteria::EQUAL);
+        return $this->addUsingAlias(FisicaPeer::ID_PFISICA, $key, Criteria::EQUAL);
     }
 
     /**
@@ -220,20 +236,20 @@ abstract class BaseFisicaQuery extends ModelCriteria
     public function filterByPrimaryKeys($keys)
     {
 
-        return $this->addUsingAlias(FisicaPeer::ID_FISICA, $keys, Criteria::IN);
+        return $this->addUsingAlias(FisicaPeer::ID_PFISICA, $keys, Criteria::IN);
     }
 
     /**
-     * Filter the query on the id_fisica column
+     * Filter the query on the id_pfisica column
      *
      * Example usage:
      * <code>
-     * $query->filterByIdFisica(1234); // WHERE id_fisica = 1234
-     * $query->filterByIdFisica(array(12, 34)); // WHERE id_fisica IN (12, 34)
-     * $query->filterByIdFisica(array('min' => 12)); // WHERE id_fisica > 12
+     * $query->filterByIdPfisica(1234); // WHERE id_pfisica = 1234
+     * $query->filterByIdPfisica(array(12, 34)); // WHERE id_pfisica IN (12, 34)
+     * $query->filterByIdPfisica(array('min' => 12)); // WHERE id_pfisica > 12
      * </code>
      *
-     * @param     mixed $idFisica The value to use as filter.
+     * @param     mixed $idPfisica The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -241,13 +257,13 @@ abstract class BaseFisicaQuery extends ModelCriteria
      *
      * @return FisicaQuery The current query, for fluid interface
      */
-    public function filterByIdFisica($idFisica = null, $comparison = null)
+    public function filterByIdPfisica($idPfisica = null, $comparison = null)
     {
-        if (is_array($idFisica) && null === $comparison) {
+        if (is_array($idPfisica) && null === $comparison) {
             $comparison = Criteria::IN;
         }
 
-        return $this->addUsingAlias(FisicaPeer::ID_FISICA, $idFisica, $comparison);
+        return $this->addUsingAlias(FisicaPeer::ID_PFISICA, $idPfisica, $comparison);
     }
 
     /**
@@ -309,99 +325,214 @@ abstract class BaseFisicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the usuario column
+     * Filter the query on the varon column
      *
      * Example usage:
      * <code>
-     * $query->filterByUsuario('fooValue');   // WHERE usuario = 'fooValue'
-     * $query->filterByUsuario('%fooValue%'); // WHERE usuario LIKE '%fooValue%'
+     * $query->filterByVaron(true); // WHERE varon = true
+     * $query->filterByVaron('yes'); // WHERE varon = true
      * </code>
      *
-     * @param     string $usuario The value to use as filter.
+     * @param     boolean|string $varon The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return FisicaQuery The current query, for fluid interface
+     */
+    public function filterByVaron($varon = null, $comparison = null)
+    {
+        if (is_string($varon)) {
+            $varon = in_array(strtolower($varon), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(FisicaPeer::VARON, $varon, $comparison);
+    }
+
+    /**
+     * Filter the query on the fecha_nac column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFechaNac('fooValue');   // WHERE fecha_nac = 'fooValue'
+     * $query->filterByFechaNac('%fooValue%'); // WHERE fecha_nac LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $fechaNac The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return FisicaQuery The current query, for fluid interface
      */
-    public function filterByUsuario($usuario = null, $comparison = null)
+    public function filterByFechaNac($fechaNac = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($usuario)) {
+            if (is_array($fechaNac)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $usuario)) {
-                $usuario = str_replace('*', '%', $usuario);
+            } elseif (preg_match('/[\%\*]/', $fechaNac)) {
+                $fechaNac = str_replace('*', '%', $fechaNac);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(FisicaPeer::USUARIO, $usuario, $comparison);
+        return $this->addUsingAlias(FisicaPeer::FECHA_NAC, $fechaNac, $comparison);
     }
 
     /**
-     * Filter the query on the password column
+     * Filter the query on the tipo_doc_id_tipo_doc column
      *
      * Example usage:
      * <code>
-     * $query->filterByPassword('fooValue');   // WHERE password = 'fooValue'
-     * $query->filterByPassword('%fooValue%'); // WHERE password LIKE '%fooValue%'
+     * $query->filterByTipoDocIdTipoDoc(1234); // WHERE tipo_doc_id_tipo_doc = 1234
+     * $query->filterByTipoDocIdTipoDoc(array(12, 34)); // WHERE tipo_doc_id_tipo_doc IN (12, 34)
+     * $query->filterByTipoDocIdTipoDoc(array('min' => 12)); // WHERE tipo_doc_id_tipo_doc > 12
      * </code>
      *
-     * @param     string $password The value to use as filter.
+     * @see       filterByTipoDoc()
+     *
+     * @param     mixed $tipoDocIdTipoDoc The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return FisicaQuery The current query, for fluid interface
+     */
+    public function filterByTipoDocIdTipoDoc($tipoDocIdTipoDoc = null, $comparison = null)
+    {
+        if (is_array($tipoDocIdTipoDoc)) {
+            $useMinMax = false;
+            if (isset($tipoDocIdTipoDoc['min'])) {
+                $this->addUsingAlias(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, $tipoDocIdTipoDoc['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($tipoDocIdTipoDoc['max'])) {
+                $this->addUsingAlias(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, $tipoDocIdTipoDoc['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, $tipoDocIdTipoDoc, $comparison);
+    }
+
+    /**
+     * Filter the query on the documento column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDocumento('fooValue');   // WHERE documento = 'fooValue'
+     * $query->filterByDocumento('%fooValue%'); // WHERE documento LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $documento The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return FisicaQuery The current query, for fluid interface
      */
-    public function filterByPassword($password = null, $comparison = null)
+    public function filterByDocumento($documento = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($password)) {
+            if (is_array($documento)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $password)) {
-                $password = str_replace('*', '%', $password);
+            } elseif (preg_match('/[\%\*]/', $documento)) {
+                $documento = str_replace('*', '%', $documento);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(FisicaPeer::PASSWORD, $password, $comparison);
+        return $this->addUsingAlias(FisicaPeer::DOCUMENTO, $documento, $comparison);
     }
 
     /**
-     * Filter the query by a related AccesoMaterial object
+     * Filter the query on the persona_id_persona column
      *
-     * @param   AccesoMaterial|PropelObjectCollection $accesoMaterial  the related object to use as filter
+     * Example usage:
+     * <code>
+     * $query->filterByPersonaIdPersona(1234); // WHERE persona_id_persona = 1234
+     * $query->filterByPersonaIdPersona(array(12, 34)); // WHERE persona_id_persona IN (12, 34)
+     * $query->filterByPersonaIdPersona(array('min' => 12)); // WHERE persona_id_persona > 12
+     * </code>
+     *
+     * @see       filterByPersona()
+     *
+     * @param     mixed $personaIdPersona The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return FisicaQuery The current query, for fluid interface
+     */
+    public function filterByPersonaIdPersona($personaIdPersona = null, $comparison = null)
+    {
+        if (is_array($personaIdPersona)) {
+            $useMinMax = false;
+            if (isset($personaIdPersona['min'])) {
+                $this->addUsingAlias(FisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($personaIdPersona['max'])) {
+                $this->addUsingAlias(FisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(FisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona, $comparison);
+    }
+
+    /**
+     * Filter the query by a related TipoDoc object
+     *
+     * @param   TipoDoc|PropelObjectCollection $tipoDoc The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   FisicaQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterByAccesoMaterial($accesoMaterial, $comparison = null)
+    public function filterByTipoDoc($tipoDoc, $comparison = null)
     {
-        if ($accesoMaterial instanceof AccesoMaterial) {
+        if ($tipoDoc instanceof TipoDoc) {
             return $this
-                ->addUsingAlias(FisicaPeer::ID_FISICA, $accesoMaterial->getFisicaIdFisica(), $comparison);
-        } elseif ($accesoMaterial instanceof PropelObjectCollection) {
+                ->addUsingAlias(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, $tipoDoc->getIdTipoDoc(), $comparison);
+        } elseif ($tipoDoc instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
             return $this
-                ->useAccesoMaterialQuery()
-                ->filterByPrimaryKeys($accesoMaterial->getPrimaryKeys())
-                ->endUse();
+                ->addUsingAlias(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, $tipoDoc->toKeyValue('PrimaryKey', 'IdTipoDoc'), $comparison);
         } else {
-            throw new PropelException('filterByAccesoMaterial() only accepts arguments of type AccesoMaterial or PropelCollection');
+            throw new PropelException('filterByTipoDoc() only accepts arguments of type TipoDoc or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the AccesoMaterial relation
+     * Adds a JOIN clause to the query using the TipoDoc relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return FisicaQuery The current query, for fluid interface
      */
-    public function joinAccesoMaterial($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinTipoDoc($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('AccesoMaterial');
+        $relationMap = $tableMap->getRelation('TipoDoc');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -416,14 +547,14 @@ abstract class BaseFisicaQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'AccesoMaterial');
+            $this->addJoinObject($join, 'TipoDoc');
         }
 
         return $this;
     }
 
     /**
-     * Use the AccesoMaterial relation AccesoMaterial object
+     * Use the TipoDoc relation TipoDoc object
      *
      * @see       useQuery()
      *
@@ -431,51 +562,53 @@ abstract class BaseFisicaQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   AccesoMaterialQuery A secondary query class using the current class as primary query
+     * @return   TipoDocQuery A secondary query class using the current class as primary query
      */
-    public function useAccesoMaterialQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useTipoDocQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinAccesoMaterial($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'AccesoMaterial', 'AccesoMaterialQuery');
+            ->joinTipoDoc($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TipoDoc', 'TipoDocQuery');
     }
 
     /**
-     * Filter the query by a related CarreraFisica object
+     * Filter the query by a related Persona object
      *
-     * @param   CarreraFisica|PropelObjectCollection $carreraFisica  the related object to use as filter
+     * @param   Persona|PropelObjectCollection $persona The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   FisicaQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterByCarreraFisica($carreraFisica, $comparison = null)
+    public function filterByPersona($persona, $comparison = null)
     {
-        if ($carreraFisica instanceof CarreraFisica) {
+        if ($persona instanceof Persona) {
             return $this
-                ->addUsingAlias(FisicaPeer::ID_FISICA, $carreraFisica->getFisicaIdFisica(), $comparison);
-        } elseif ($carreraFisica instanceof PropelObjectCollection) {
+                ->addUsingAlias(FisicaPeer::PERSONA_ID_PERSONA, $persona->getIdPersona(), $comparison);
+        } elseif ($persona instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
             return $this
-                ->useCarreraFisicaQuery()
-                ->filterByPrimaryKeys($carreraFisica->getPrimaryKeys())
-                ->endUse();
+                ->addUsingAlias(FisicaPeer::PERSONA_ID_PERSONA, $persona->toKeyValue('PrimaryKey', 'IdPersona'), $comparison);
         } else {
-            throw new PropelException('filterByCarreraFisica() only accepts arguments of type CarreraFisica or PropelCollection');
+            throw new PropelException('filterByPersona() only accepts arguments of type Persona or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the CarreraFisica relation
+     * Adds a JOIN clause to the query using the Persona relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return FisicaQuery The current query, for fluid interface
      */
-    public function joinCarreraFisica($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPersona($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('CarreraFisica');
+        $relationMap = $tableMap->getRelation('Persona');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -490,14 +623,14 @@ abstract class BaseFisicaQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'CarreraFisica');
+            $this->addJoinObject($join, 'Persona');
         }
 
         return $this;
     }
 
     /**
-     * Use the CarreraFisica relation CarreraFisica object
+     * Use the Persona relation Persona object
      *
      * @see       useQuery()
      *
@@ -505,13 +638,87 @@ abstract class BaseFisicaQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   CarreraFisicaQuery A secondary query class using the current class as primary query
+     * @return   PersonaQuery A secondary query class using the current class as primary query
      */
-    public function useCarreraFisicaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePersonaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinCarreraFisica($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'CarreraFisica', 'CarreraFisicaQuery');
+            ->joinPersona($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Persona', 'PersonaQuery');
+    }
+
+    /**
+     * Filter the query by a related Usuario object
+     *
+     * @param   Usuario|PropelObjectCollection $usuario  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   FisicaQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByUsuario($usuario, $comparison = null)
+    {
+        if ($usuario instanceof Usuario) {
+            return $this
+                ->addUsingAlias(FisicaPeer::ID_PFISICA, $usuario->getFisicaIdPfisica(), $comparison);
+        } elseif ($usuario instanceof PropelObjectCollection) {
+            return $this
+                ->useUsuarioQuery()
+                ->filterByPrimaryKeys($usuario->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByUsuario() only accepts arguments of type Usuario or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Usuario relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return FisicaQuery The current query, for fluid interface
+     */
+    public function joinUsuario($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Usuario');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Usuario');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Usuario relation Usuario object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   UsuarioQuery A secondary query class using the current class as primary query
+     */
+    public function useUsuarioQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinUsuario($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Usuario', 'UsuarioQuery');
     }
 
     /**
@@ -524,7 +731,7 @@ abstract class BaseFisicaQuery extends ModelCriteria
     public function prune($fisica = null)
     {
         if ($fisica) {
-            $this->addUsingAlias(FisicaPeer::ID_FISICA, $fisica->getIdFisica(), Criteria::NOT_EQUAL);
+            $this->addUsingAlias(FisicaPeer::ID_PFISICA, $fisica->getIdPfisica(), Criteria::NOT_EQUAL);
         }
 
         return $this;

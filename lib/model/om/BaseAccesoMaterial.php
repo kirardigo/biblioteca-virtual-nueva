@@ -37,10 +37,11 @@ abstract class BaseAccesoMaterial extends BaseObject
     protected $id_acceso_material;
 
     /**
-     * The value for the fisica_id_fisica field.
-     * @var        int
+     * The value for the fecha_acceso field.
+     * Note: this column has a database default value of: (expression) CURRENT_TIMESTAMP
+     * @var        string
      */
-    protected $fisica_id_fisica;
+    protected $fecha_acceso;
 
     /**
      * The value for the material_id_material field.
@@ -49,20 +50,20 @@ abstract class BaseAccesoMaterial extends BaseObject
     protected $material_id_material;
 
     /**
-     * The value for the fecha_acceso field.
-     * @var        string
+     * The value for the usuario_id_usuario field.
+     * @var        int
      */
-    protected $fecha_acceso;
-
-    /**
-     * @var        Fisica
-     */
-    protected $aFisica;
+    protected $usuario_id_usuario;
 
     /**
      * @var        Material
      */
     protected $aMaterial;
+
+    /**
+     * @var        Usuario
+     */
+    protected $aUsuario;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -79,6 +80,26 @@ abstract class BaseAccesoMaterial extends BaseObject
     protected $alreadyInValidation = false;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see        __construct()
+     */
+    public function applyDefaultValues()
+    {
+    }
+
+    /**
+     * Initializes internal state of BaseAccesoMaterial object.
+     * @see        applyDefaults()
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->applyDefaultValues();
+    }
+
+    /**
      * Get the [id_acceso_material] column value.
      * 
      * @return   int
@@ -87,28 +108,6 @@ abstract class BaseAccesoMaterial extends BaseObject
     {
 
         return $this->id_acceso_material;
-    }
-
-    /**
-     * Get the [fisica_id_fisica] column value.
-     * 
-     * @return   int
-     */
-    public function getFisicaIdFisica()
-    {
-
-        return $this->fisica_id_fisica;
-    }
-
-    /**
-     * Get the [material_id_material] column value.
-     * 
-     * @return   int
-     */
-    public function getMaterialIdMaterial()
-    {
-
-        return $this->material_id_material;
     }
 
     /**
@@ -150,6 +149,28 @@ abstract class BaseAccesoMaterial extends BaseObject
     }
 
     /**
+     * Get the [material_id_material] column value.
+     * 
+     * @return   int
+     */
+    public function getMaterialIdMaterial()
+    {
+
+        return $this->material_id_material;
+    }
+
+    /**
+     * Get the [usuario_id_usuario] column value.
+     * 
+     * @return   int
+     */
+    public function getUsuarioIdUsuario()
+    {
+
+        return $this->usuario_id_usuario;
+    }
+
+    /**
      * Set the value of [id_acceso_material] column.
      * 
      * @param      int $v new value
@@ -171,29 +192,27 @@ abstract class BaseAccesoMaterial extends BaseObject
     } // setIdAccesoMaterial()
 
     /**
-     * Set the value of [fisica_id_fisica] column.
+     * Sets the value of [fecha_acceso] column to a normalized version of the date/time value specified.
      * 
-     * @param      int $v new value
+     * @param      mixed $v string, integer (timestamp), or DateTime value.
+     *               Empty strings are treated as NULL.
      * @return   AccesoMaterial The current object (for fluent API support)
      */
-    public function setFisicaIdFisica($v)
+    public function setFechaAcceso($v)
     {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->fisica_id_fisica !== $v) {
-            $this->fisica_id_fisica = $v;
-            $this->modifiedColumns[] = AccesoMaterialPeer::FISICA_ID_FISICA;
-        }
-
-        if ($this->aFisica !== null && $this->aFisica->getIdFisica() !== $v) {
-            $this->aFisica = null;
-        }
+        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
+        if ($this->fecha_acceso !== null || $dt !== null) {
+            $currentDateAsString = ($this->fecha_acceso !== null && $tmpDt = new DateTime($this->fecha_acceso)) ? $tmpDt->format('Y-m-d H:i:s') : null;
+            $newDateAsString = $dt ? $dt->format('Y-m-d H:i:s') : null;
+            if ($currentDateAsString !== $newDateAsString) {
+                $this->fecha_acceso = $newDateAsString;
+                $this->modifiedColumns[] = AccesoMaterialPeer::FECHA_ACCESO;
+            }
+        } // if either are not null
 
 
         return $this;
-    } // setFisicaIdFisica()
+    } // setFechaAcceso()
 
     /**
      * Set the value of [material_id_material] column.
@@ -221,27 +240,29 @@ abstract class BaseAccesoMaterial extends BaseObject
     } // setMaterialIdMaterial()
 
     /**
-     * Sets the value of [fecha_acceso] column to a normalized version of the date/time value specified.
+     * Set the value of [usuario_id_usuario] column.
      * 
-     * @param      mixed $v string, integer (timestamp), or DateTime value.
-     *               Empty strings are treated as NULL.
+     * @param      int $v new value
      * @return   AccesoMaterial The current object (for fluent API support)
      */
-    public function setFechaAcceso($v)
+    public function setUsuarioIdUsuario($v)
     {
-        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
-        if ($this->fecha_acceso !== null || $dt !== null) {
-            $currentDateAsString = ($this->fecha_acceso !== null && $tmpDt = new DateTime($this->fecha_acceso)) ? $tmpDt->format('Y-m-d H:i:s') : null;
-            $newDateAsString = $dt ? $dt->format('Y-m-d H:i:s') : null;
-            if ($currentDateAsString !== $newDateAsString) {
-                $this->fecha_acceso = $newDateAsString;
-                $this->modifiedColumns[] = AccesoMaterialPeer::FECHA_ACCESO;
-            }
-        } // if either are not null
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->usuario_id_usuario !== $v) {
+            $this->usuario_id_usuario = $v;
+            $this->modifiedColumns[] = AccesoMaterialPeer::USUARIO_ID_USUARIO;
+        }
+
+        if ($this->aUsuario !== null && $this->aUsuario->getIdUsuario() !== $v) {
+            $this->aUsuario = null;
+        }
 
 
         return $this;
-    } // setFechaAcceso()
+    } // setUsuarioIdUsuario()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -276,9 +297,9 @@ abstract class BaseAccesoMaterial extends BaseObject
         try {
 
             $this->id_acceso_material = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->fisica_id_fisica = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->fecha_acceso = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->material_id_material = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
-            $this->fecha_acceso = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->usuario_id_usuario = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -310,11 +331,11 @@ abstract class BaseAccesoMaterial extends BaseObject
     public function ensureConsistency()
     {
 
-        if ($this->aFisica !== null && $this->fisica_id_fisica !== $this->aFisica->getIdFisica()) {
-            $this->aFisica = null;
-        }
         if ($this->aMaterial !== null && $this->material_id_material !== $this->aMaterial->getIdMaterial()) {
             $this->aMaterial = null;
+        }
+        if ($this->aUsuario !== null && $this->usuario_id_usuario !== $this->aUsuario->getIdUsuario()) {
+            $this->aUsuario = null;
         }
     } // ensureConsistency
 
@@ -355,8 +376,8 @@ abstract class BaseAccesoMaterial extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aFisica = null;
             $this->aMaterial = null;
+            $this->aUsuario = null;
         } // if (deep)
     }
 
@@ -507,18 +528,18 @@ abstract class BaseAccesoMaterial extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aFisica !== null) {
-                if ($this->aFisica->isModified() || $this->aFisica->isNew()) {
-                    $affectedRows += $this->aFisica->save($con);
-                }
-                $this->setFisica($this->aFisica);
-            }
-
             if ($this->aMaterial !== null) {
                 if ($this->aMaterial->isModified() || $this->aMaterial->isNew()) {
                     $affectedRows += $this->aMaterial->save($con);
                 }
                 $this->setMaterial($this->aMaterial);
+            }
+
+            if ($this->aUsuario !== null) {
+                if ($this->aUsuario->isModified() || $this->aUsuario->isNew()) {
+                    $affectedRows += $this->aUsuario->save($con);
+                }
+                $this->setUsuario($this->aUsuario);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -561,14 +582,14 @@ abstract class BaseAccesoMaterial extends BaseObject
         if ($this->isColumnModified(AccesoMaterialPeer::ID_ACCESO_MATERIAL)) {
             $modifiedColumns[':p' . $index++]  = '`ID_ACCESO_MATERIAL`';
         }
-        if ($this->isColumnModified(AccesoMaterialPeer::FISICA_ID_FISICA)) {
-            $modifiedColumns[':p' . $index++]  = '`FISICA_ID_FISICA`';
+        if ($this->isColumnModified(AccesoMaterialPeer::FECHA_ACCESO)) {
+            $modifiedColumns[':p' . $index++]  = '`FECHA_ACCESO`';
         }
         if ($this->isColumnModified(AccesoMaterialPeer::MATERIAL_ID_MATERIAL)) {
             $modifiedColumns[':p' . $index++]  = '`MATERIAL_ID_MATERIAL`';
         }
-        if ($this->isColumnModified(AccesoMaterialPeer::FECHA_ACCESO)) {
-            $modifiedColumns[':p' . $index++]  = '`FECHA_ACCESO`';
+        if ($this->isColumnModified(AccesoMaterialPeer::USUARIO_ID_USUARIO)) {
+            $modifiedColumns[':p' . $index++]  = '`USUARIO_ID_USUARIO`';
         }
 
         $sql = sprintf(
@@ -584,14 +605,14 @@ abstract class BaseAccesoMaterial extends BaseObject
                     case '`ID_ACCESO_MATERIAL`':						
 						$stmt->bindValue($identifier, $this->id_acceso_material, PDO::PARAM_INT);
                         break;
-                    case '`FISICA_ID_FISICA`':						
-						$stmt->bindValue($identifier, $this->fisica_id_fisica, PDO::PARAM_INT);
+                    case '`FECHA_ACCESO`':						
+						$stmt->bindValue($identifier, $this->fecha_acceso, PDO::PARAM_STR);
                         break;
                     case '`MATERIAL_ID_MATERIAL`':						
 						$stmt->bindValue($identifier, $this->material_id_material, PDO::PARAM_INT);
                         break;
-                    case '`FECHA_ACCESO`':						
-						$stmt->bindValue($identifier, $this->fecha_acceso, PDO::PARAM_STR);
+                    case '`USUARIO_ID_USUARIO`':						
+						$stmt->bindValue($identifier, $this->usuario_id_usuario, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -692,15 +713,15 @@ abstract class BaseAccesoMaterial extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aFisica !== null) {
-                if (!$this->aFisica->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aFisica->getValidationFailures());
-                }
-            }
-
             if ($this->aMaterial !== null) {
                 if (!$this->aMaterial->validate($columns)) {
                     $failureMap = array_merge($failureMap, $this->aMaterial->getValidationFailures());
+                }
+            }
+
+            if ($this->aUsuario !== null) {
+                if (!$this->aUsuario->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUsuario->getValidationFailures());
                 }
             }
 
@@ -749,13 +770,13 @@ abstract class BaseAccesoMaterial extends BaseObject
                 return $this->getIdAccesoMaterial();
                 break;
             case 1:
-                return $this->getFisicaIdFisica();
+                return $this->getFechaAcceso();
                 break;
             case 2:
                 return $this->getMaterialIdMaterial();
                 break;
             case 3:
-                return $this->getFechaAcceso();
+                return $this->getUsuarioIdUsuario();
                 break;
             default:
                 return null;
@@ -787,16 +808,16 @@ abstract class BaseAccesoMaterial extends BaseObject
         $keys = AccesoMaterialPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdAccesoMaterial(),
-            $keys[1] => $this->getFisicaIdFisica(),
+            $keys[1] => $this->getFechaAcceso(),
             $keys[2] => $this->getMaterialIdMaterial(),
-            $keys[3] => $this->getFechaAcceso(),
+            $keys[3] => $this->getUsuarioIdUsuario(),
         );
         if ($includeForeignObjects) {
-            if (null !== $this->aFisica) {
-                $result['Fisica'] = $this->aFisica->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
             if (null !== $this->aMaterial) {
                 $result['Material'] = $this->aMaterial->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aUsuario) {
+                $result['Usuario'] = $this->aUsuario->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -836,13 +857,13 @@ abstract class BaseAccesoMaterial extends BaseObject
                 $this->setIdAccesoMaterial($value);
                 break;
             case 1:
-                $this->setFisicaIdFisica($value);
+                $this->setFechaAcceso($value);
                 break;
             case 2:
                 $this->setMaterialIdMaterial($value);
                 break;
             case 3:
-                $this->setFechaAcceso($value);
+                $this->setUsuarioIdUsuario($value);
                 break;
         } // switch()
     }
@@ -869,9 +890,9 @@ abstract class BaseAccesoMaterial extends BaseObject
         $keys = AccesoMaterialPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdAccesoMaterial($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setFisicaIdFisica($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setFechaAcceso($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setMaterialIdMaterial($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setFechaAcceso($arr[$keys[3]]);
+        if (array_key_exists($keys[3], $arr)) $this->setUsuarioIdUsuario($arr[$keys[3]]);
     }
 
     /**
@@ -884,9 +905,9 @@ abstract class BaseAccesoMaterial extends BaseObject
         $criteria = new Criteria(AccesoMaterialPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(AccesoMaterialPeer::ID_ACCESO_MATERIAL)) $criteria->add(AccesoMaterialPeer::ID_ACCESO_MATERIAL, $this->id_acceso_material);
-        if ($this->isColumnModified(AccesoMaterialPeer::FISICA_ID_FISICA)) $criteria->add(AccesoMaterialPeer::FISICA_ID_FISICA, $this->fisica_id_fisica);
-        if ($this->isColumnModified(AccesoMaterialPeer::MATERIAL_ID_MATERIAL)) $criteria->add(AccesoMaterialPeer::MATERIAL_ID_MATERIAL, $this->material_id_material);
         if ($this->isColumnModified(AccesoMaterialPeer::FECHA_ACCESO)) $criteria->add(AccesoMaterialPeer::FECHA_ACCESO, $this->fecha_acceso);
+        if ($this->isColumnModified(AccesoMaterialPeer::MATERIAL_ID_MATERIAL)) $criteria->add(AccesoMaterialPeer::MATERIAL_ID_MATERIAL, $this->material_id_material);
+        if ($this->isColumnModified(AccesoMaterialPeer::USUARIO_ID_USUARIO)) $criteria->add(AccesoMaterialPeer::USUARIO_ID_USUARIO, $this->usuario_id_usuario);
 
         return $criteria;
     }
@@ -950,9 +971,9 @@ abstract class BaseAccesoMaterial extends BaseObject
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setFisicaIdFisica($this->getFisicaIdFisica());
-        $copyObj->setMaterialIdMaterial($this->getMaterialIdMaterial());
         $copyObj->setFechaAcceso($this->getFechaAcceso());
+        $copyObj->setMaterialIdMaterial($this->getMaterialIdMaterial());
+        $copyObj->setUsuarioIdUsuario($this->getUsuarioIdUsuario());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1012,57 +1033,6 @@ abstract class BaseAccesoMaterial extends BaseObject
     }
 
     /**
-     * Declares an association between this object and a Fisica object.
-     *
-     * @param                  Fisica $v
-     * @return                 AccesoMaterial The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setFisica(Fisica $v = null)
-    {
-        if ($v === null) {
-            $this->setFisicaIdFisica(NULL);
-        } else {
-            $this->setFisicaIdFisica($v->getIdFisica());
-        }
-
-        $this->aFisica = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Fisica object, it will not be re-added.
-        if ($v !== null) {
-            $v->addAccesoMaterial($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated Fisica object
-     *
-     * @param      PropelPDO $con Optional Connection object.
-     * @return                 Fisica The associated Fisica object.
-     * @throws PropelException
-     */
-    public function getFisica(PropelPDO $con = null)
-    {
-        if ($this->aFisica === null && ($this->fisica_id_fisica !== null)) {
-            $this->aFisica = FisicaQuery::create()->findPk($this->fisica_id_fisica, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aFisica->addAccesoMaterials($this);
-             */
-        }
-
-        return $this->aFisica;
-    }
-
-    /**
      * Declares an association between this object and a Material object.
      *
      * @param                  Material $v
@@ -1114,17 +1084,69 @@ abstract class BaseAccesoMaterial extends BaseObject
     }
 
     /**
+     * Declares an association between this object and a Usuario object.
+     *
+     * @param                  Usuario $v
+     * @return                 AccesoMaterial The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUsuario(Usuario $v = null)
+    {
+        if ($v === null) {
+            $this->setUsuarioIdUsuario(NULL);
+        } else {
+            $this->setUsuarioIdUsuario($v->getIdUsuario());
+        }
+
+        $this->aUsuario = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Usuario object, it will not be re-added.
+        if ($v !== null) {
+            $v->addAccesoMaterial($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated Usuario object
+     *
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Usuario The associated Usuario object.
+     * @throws PropelException
+     */
+    public function getUsuario(PropelPDO $con = null)
+    {
+        if ($this->aUsuario === null && ($this->usuario_id_usuario !== null)) {
+            $this->aUsuario = UsuarioQuery::create()->findPk($this->usuario_id_usuario, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUsuario->addAccesoMaterials($this);
+             */
+        }
+
+        return $this->aUsuario;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
     {
         $this->id_acceso_material = null;
-        $this->fisica_id_fisica = null;
-        $this->material_id_material = null;
         $this->fecha_acceso = null;
+        $this->material_id_material = null;
+        $this->usuario_id_usuario = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
@@ -1144,8 +1166,8 @@ abstract class BaseAccesoMaterial extends BaseObject
         if ($deep) {
         } // if ($deep)
 
-        $this->aFisica = null;
         $this->aMaterial = null;
+        $this->aUsuario = null;
     }
 
     /**

@@ -15,16 +15,16 @@ abstract class BaseAccesoMaterialForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id_acceso_material'   => new sfWidgetFormInputHidden(),
-      'fisica_id_fisica'     => new sfWidgetFormPropelChoice(array('model' => 'Fisica', 'add_empty' => false)),
-      'material_id_material' => new sfWidgetFormPropelChoice(array('model' => 'Material', 'add_empty' => false)),
       'fecha_acceso'         => new sfWidgetFormDateTime(),
+      'material_id_material' => new sfWidgetFormPropelChoice(array('model' => 'Material', 'add_empty' => false)),
+      'usuario_id_usuario'   => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
       'id_acceso_material'   => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdAccesoMaterial()), 'empty_value' => $this->getObject()->getIdAccesoMaterial(), 'required' => false)),
-      'fisica_id_fisica'     => new sfValidatorPropelChoice(array('model' => 'Fisica', 'column' => 'id_fisica')),
+      'fecha_acceso'         => new sfValidatorDateTime(),
       'material_id_material' => new sfValidatorPropelChoice(array('model' => 'Material', 'column' => 'id_material')),
-      'fecha_acceso'         => new sfValidatorDateTime(array('required' => false)),
+      'usuario_id_usuario'   => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id_usuario')),
     ));
 
     $this->widgetSchema->setNameFormat('acceso_material[%s]');

@@ -11,7 +11,7 @@ class UsuarioForm extends BaseUsuarioForm
 {
   public function configure()
   {
-    parent::configure();
+   /* parent::configure();
     
     //error de csrf token si no se metia el codigo siguiente
     $this->disableLocalCSRFProtection(); 
@@ -31,6 +31,6 @@ class UsuarioForm extends BaseUsuarioForm
     //'mime_types' => array('application/pdf'),
     'path' => sfConfig::get('sf_upload_dir').'/products',
     'required' => false,
-  )));
+  )));*/
   }
 }

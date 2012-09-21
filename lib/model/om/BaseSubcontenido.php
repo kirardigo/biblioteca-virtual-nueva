@@ -44,7 +44,7 @@ abstract class BaseSubcontenido extends BaseObject
 
     /**
      * The value for the numero_subcontenido field.
-     * @var        int
+     * @var        string
      */
     protected $numero_subcontenido;
 
@@ -109,7 +109,7 @@ abstract class BaseSubcontenido extends BaseObject
     /**
      * Get the [numero_subcontenido] column value.
      * 
-     * @return   int
+     * @return   string
      */
     public function getNumeroSubcontenido()
     {
@@ -173,13 +173,13 @@ abstract class BaseSubcontenido extends BaseObject
     /**
      * Set the value of [numero_subcontenido] column.
      * 
-     * @param      int $v new value
+     * @param      string $v new value
      * @return   Subcontenido The current object (for fluent API support)
      */
     public function setNumeroSubcontenido($v)
     {
         if ($v !== null) {
-            $v = (int) $v;
+            $v = (string) $v;
         }
 
         if ($this->numero_subcontenido !== $v) {
@@ -250,7 +250,7 @@ abstract class BaseSubcontenido extends BaseObject
 
             $this->id_subcontenido = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->numero_subcontenido = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->numero_subcontenido = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->contenido_id_contenido = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
@@ -569,7 +569,7 @@ abstract class BaseSubcontenido extends BaseObject
 						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
                         break;
                     case '`NUMERO_SUBCONTENIDO`':						
-						$stmt->bindValue($identifier, $this->numero_subcontenido, PDO::PARAM_INT);
+						$stmt->bindValue($identifier, $this->numero_subcontenido, PDO::PARAM_STR);
                         break;
                     case '`CONTENIDO_ID_CONTENIDO`':						
 						$stmt->bindValue($identifier, $this->contenido_id_contenido, PDO::PARAM_INT);

@@ -39,9 +39,9 @@ class AccesoMaterialTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_ACCESO_MATERIAL', 'IdAccesoMaterial', 'INTEGER', true, null, null);
-        $this->addForeignKey('FISICA_ID_FISICA', 'FisicaIdFisica', 'INTEGER', 'fisica', 'ID_FISICA', true, null, null);
+        $this->addColumn('FECHA_ACCESO', 'FechaAcceso', 'TIMESTAMP', true, null, 'CURRENT_TIMESTAMP');
         $this->addForeignKey('MATERIAL_ID_MATERIAL', 'MaterialIdMaterial', 'INTEGER', 'material', 'ID_MATERIAL', true, null, null);
-        $this->addColumn('FECHA_ACCESO', 'FechaAcceso', 'TIMESTAMP', false, null, null);
+        $this->addForeignKey('USUARIO_ID_USUARIO', 'UsuarioIdUsuario', 'INTEGER', 'usuario', 'ID_USUARIO', true, null, null);
         // validators
     } // initialize()
 
@@ -50,8 +50,8 @@ class AccesoMaterialTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Fisica', 'Fisica', RelationMap::MANY_TO_ONE, array('fisica_id_fisica' => 'id_fisica', ), null, null);
         $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), null, null);
+        $this->addRelation('Usuario', 'Usuario', RelationMap::MANY_TO_ONE, array('usuario_id_usuario' => 'id_usuario', ), null, null);
     } // buildRelations()
 
     /**

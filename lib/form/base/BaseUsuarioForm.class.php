@@ -14,15 +14,21 @@ abstract class BaseUsuarioForm extends BaseFormPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'idusuario' => new sfWidgetFormInputHidden(),
-      'nombre'    => new sfWidgetFormInputText(),
-      'password'  => new sfWidgetFormInputText(),
+      'id_usuario'        => new sfWidgetFormInputHidden(),
+      'usuario'           => new sfWidgetFormInputText(),
+      'password'          => new sfWidgetFormInputText(),
+      'admin'             => new sfWidgetFormInputCheckbox(),
+      'email'             => new sfWidgetFormInputText(),
+      'fisica_id_pfisica' => new sfWidgetFormPropelChoice(array('model' => 'Pfisica', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'idusuario' => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdusuario()), 'empty_value' => $this->getObject()->getIdusuario(), 'required' => false)),
-      'nombre'    => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'password'  => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'id_usuario'        => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdUsuario()), 'empty_value' => $this->getObject()->getIdUsuario(), 'required' => false)),
+      'usuario'           => new sfValidatorString(array('max_length' => 45)),
+      'password'          => new sfValidatorString(array('max_length' => 45)),
+      'admin'             => new sfValidatorBoolean(array('required' => false)),
+      'email'             => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'fisica_id_pfisica' => new sfValidatorPropelChoice(array('model' => 'Pfisica', 'column' => 'id_pfisica')),
     ));
 
     $this->widgetSchema->setNameFormat('usuario[%s]');

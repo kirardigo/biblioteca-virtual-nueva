@@ -67,7 +67,7 @@ class materialActions extends sfActions
     {
       $Material = $form->save();
 
-      $this->redirect('material/edit?id_material='.$Material->getIdMaterial());
+      $this->redirect('material/index');
     }
     
 
@@ -78,7 +78,7 @@ class materialActions extends sfActions
            $archivo=$request->getParameter('archivito');
            
           $this->cosa= new AccesoMaterial();
-          $this->cosa->setFisicaIdFisica(1);//sacar el id del usuario por su session
+          $this->cosa->setUsuarioIdusuario(1);//sacar el id del usuario por su session
           $this->cosa->setMaterialIdMaterial($request->getParameter('id'));
           //$this->cosa->setFechaAcceso();
           $this->cosa->save();

@@ -33,12 +33,12 @@
  *
  * @method     Subcontenido findOneByIdSubcontenido(int $id_subcontenido) Return the first Subcontenido filtered by the id_subcontenido column
  * @method     Subcontenido findOneByNombre(string $nombre) Return the first Subcontenido filtered by the nombre column
- * @method     Subcontenido findOneByNumeroSubcontenido(int $numero_subcontenido) Return the first Subcontenido filtered by the numero_subcontenido column
+ * @method     Subcontenido findOneByNumeroSubcontenido(string $numero_subcontenido) Return the first Subcontenido filtered by the numero_subcontenido column
  * @method     Subcontenido findOneByContenidoIdContenido(int $contenido_id_contenido) Return the first Subcontenido filtered by the contenido_id_contenido column
  *
  * @method     array findByIdSubcontenido(int $id_subcontenido) Return Subcontenido objects filtered by the id_subcontenido column
  * @method     array findByNombre(string $nombre) Return Subcontenido objects filtered by the nombre column
- * @method     array findByNumeroSubcontenido(int $numero_subcontenido) Return Subcontenido objects filtered by the numero_subcontenido column
+ * @method     array findByNumeroSubcontenido(string $numero_subcontenido) Return Subcontenido objects filtered by the numero_subcontenido column
  * @method     array findByContenidoIdContenido(int $contenido_id_contenido) Return Subcontenido objects filtered by the contenido_id_contenido column
  *
  * @package    propel.generator.lib.model.om
@@ -280,36 +280,24 @@ abstract class BaseSubcontenidoQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByNumeroSubcontenido(1234); // WHERE numero_subcontenido = 1234
-     * $query->filterByNumeroSubcontenido(array(12, 34)); // WHERE numero_subcontenido IN (12, 34)
-     * $query->filterByNumeroSubcontenido(array('min' => 12)); // WHERE numero_subcontenido > 12
+     * $query->filterByNumeroSubcontenido('fooValue');   // WHERE numero_subcontenido = 'fooValue'
+     * $query->filterByNumeroSubcontenido('%fooValue%'); // WHERE numero_subcontenido LIKE '%fooValue%'
      * </code>
      *
-     * @param     mixed $numeroSubcontenido The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $numeroSubcontenido The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return SubcontenidoQuery The current query, for fluid interface
      */
     public function filterByNumeroSubcontenido($numeroSubcontenido = null, $comparison = null)
     {
-        if (is_array($numeroSubcontenido)) {
-            $useMinMax = false;
-            if (isset($numeroSubcontenido['min'])) {
-                $this->addUsingAlias(SubcontenidoPeer::NUMERO_SUBCONTENIDO, $numeroSubcontenido['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($numeroSubcontenido['max'])) {
-                $this->addUsingAlias(SubcontenidoPeer::NUMERO_SUBCONTENIDO, $numeroSubcontenido['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
+        if (null === $comparison) {
+            if (is_array($numeroSubcontenido)) {
                 $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $numeroSubcontenido)) {
+                $numeroSubcontenido = str_replace('*', '%', $numeroSubcontenido);
+                $comparison = Criteria::LIKE;
             }
         }
 

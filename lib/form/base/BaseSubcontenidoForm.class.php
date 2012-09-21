@@ -23,7 +23,7 @@ abstract class BaseSubcontenidoForm extends BaseFormPropel
     $this->setValidators(array(
       'id_subcontenido'        => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdSubcontenido()), 'empty_value' => $this->getObject()->getIdSubcontenido(), 'required' => false)),
       'nombre'                 => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'numero_subcontenido'    => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'numero_subcontenido'    => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'contenido_id_contenido' => new sfValidatorPropelChoice(array('model' => 'Contenido', 'column' => 'id_contenido')),
     ));
 

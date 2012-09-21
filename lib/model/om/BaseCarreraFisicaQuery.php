@@ -8,11 +8,11 @@
  *
  * @method     CarreraFisicaQuery orderByIdCarreraFisica($order = Criteria::ASC) Order by the id_carrera_fisica column
  * @method     CarreraFisicaQuery orderByCarreraIdCarrera($order = Criteria::ASC) Order by the carrera_id_carrera column
- * @method     CarreraFisicaQuery orderByFisicaIdFisica($order = Criteria::ASC) Order by the fisica_id_fisica column
+ * @method     CarreraFisicaQuery orderByUsuarioIdUsuario($order = Criteria::ASC) Order by the usuario_id_usuario column
  *
  * @method     CarreraFisicaQuery groupByIdCarreraFisica() Group by the id_carrera_fisica column
  * @method     CarreraFisicaQuery groupByCarreraIdCarrera() Group by the carrera_id_carrera column
- * @method     CarreraFisicaQuery groupByFisicaIdFisica() Group by the fisica_id_fisica column
+ * @method     CarreraFisicaQuery groupByUsuarioIdUsuario() Group by the usuario_id_usuario column
  *
  * @method     CarreraFisicaQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     CarreraFisicaQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -22,20 +22,20 @@
  * @method     CarreraFisicaQuery rightJoinCarrera($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Carrera relation
  * @method     CarreraFisicaQuery innerJoinCarrera($relationAlias = null) Adds a INNER JOIN clause to the query using the Carrera relation
  *
- * @method     CarreraFisicaQuery leftJoinFisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the Fisica relation
- * @method     CarreraFisicaQuery rightJoinFisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Fisica relation
- * @method     CarreraFisicaQuery innerJoinFisica($relationAlias = null) Adds a INNER JOIN clause to the query using the Fisica relation
+ * @method     CarreraFisicaQuery leftJoinUsuario($relationAlias = null) Adds a LEFT JOIN clause to the query using the Usuario relation
+ * @method     CarreraFisicaQuery rightJoinUsuario($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Usuario relation
+ * @method     CarreraFisicaQuery innerJoinUsuario($relationAlias = null) Adds a INNER JOIN clause to the query using the Usuario relation
  *
  * @method     CarreraFisica findOne(PropelPDO $con = null) Return the first CarreraFisica matching the query
  * @method     CarreraFisica findOneOrCreate(PropelPDO $con = null) Return the first CarreraFisica matching the query, or a new CarreraFisica object populated from the query conditions when no match is found
  *
  * @method     CarreraFisica findOneByIdCarreraFisica(int $id_carrera_fisica) Return the first CarreraFisica filtered by the id_carrera_fisica column
  * @method     CarreraFisica findOneByCarreraIdCarrera(int $carrera_id_carrera) Return the first CarreraFisica filtered by the carrera_id_carrera column
- * @method     CarreraFisica findOneByFisicaIdFisica(int $fisica_id_fisica) Return the first CarreraFisica filtered by the fisica_id_fisica column
+ * @method     CarreraFisica findOneByUsuarioIdUsuario(int $usuario_id_usuario) Return the first CarreraFisica filtered by the usuario_id_usuario column
  *
  * @method     array findByIdCarreraFisica(int $id_carrera_fisica) Return CarreraFisica objects filtered by the id_carrera_fisica column
  * @method     array findByCarreraIdCarrera(int $carrera_id_carrera) Return CarreraFisica objects filtered by the carrera_id_carrera column
- * @method     array findByFisicaIdFisica(int $fisica_id_fisica) Return CarreraFisica objects filtered by the fisica_id_fisica column
+ * @method     array findByUsuarioIdUsuario(int $usuario_id_usuario) Return CarreraFisica objects filtered by the usuario_id_usuario column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -126,7 +126,7 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_CARRERA_FISICA`, `CARRERA_ID_CARRERA`, `FISICA_ID_FISICA` FROM `carrera_fisica` WHERE `ID_CARRERA_FISICA` = :p0';
+        $sql = 'SELECT `ID_CARRERA_FISICA`, `CARRERA_ID_CARRERA`, `USUARIO_ID_USUARIO` FROM `carrera_fisica` WHERE `ID_CARRERA_FISICA` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -286,18 +286,18 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the fisica_id_fisica column
+     * Filter the query on the usuario_id_usuario column
      *
      * Example usage:
      * <code>
-     * $query->filterByFisicaIdFisica(1234); // WHERE fisica_id_fisica = 1234
-     * $query->filterByFisicaIdFisica(array(12, 34)); // WHERE fisica_id_fisica IN (12, 34)
-     * $query->filterByFisicaIdFisica(array('min' => 12)); // WHERE fisica_id_fisica > 12
+     * $query->filterByUsuarioIdUsuario(1234); // WHERE usuario_id_usuario = 1234
+     * $query->filterByUsuarioIdUsuario(array(12, 34)); // WHERE usuario_id_usuario IN (12, 34)
+     * $query->filterByUsuarioIdUsuario(array('min' => 12)); // WHERE usuario_id_usuario > 12
      * </code>
      *
-     * @see       filterByFisica()
+     * @see       filterByUsuario()
      *
-     * @param     mixed $fisicaIdFisica The value to use as filter.
+     * @param     mixed $usuarioIdUsuario The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -305,16 +305,16 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
      *
      * @return CarreraFisicaQuery The current query, for fluid interface
      */
-    public function filterByFisicaIdFisica($fisicaIdFisica = null, $comparison = null)
+    public function filterByUsuarioIdUsuario($usuarioIdUsuario = null, $comparison = null)
     {
-        if (is_array($fisicaIdFisica)) {
+        if (is_array($usuarioIdUsuario)) {
             $useMinMax = false;
-            if (isset($fisicaIdFisica['min'])) {
-                $this->addUsingAlias(CarreraFisicaPeer::FISICA_ID_FISICA, $fisicaIdFisica['min'], Criteria::GREATER_EQUAL);
+            if (isset($usuarioIdUsuario['min'])) {
+                $this->addUsingAlias(CarreraFisicaPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($fisicaIdFisica['max'])) {
-                $this->addUsingAlias(CarreraFisicaPeer::FISICA_ID_FISICA, $fisicaIdFisica['max'], Criteria::LESS_EQUAL);
+            if (isset($usuarioIdUsuario['max'])) {
+                $this->addUsingAlias(CarreraFisicaPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -325,7 +325,7 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(CarreraFisicaPeer::FISICA_ID_FISICA, $fisicaIdFisica, $comparison);
+        return $this->addUsingAlias(CarreraFisicaPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario, $comparison);
     }
 
     /**
@@ -405,43 +405,43 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Fisica object
+     * Filter the query by a related Usuario object
      *
-     * @param   Fisica|PropelObjectCollection $fisica The related object(s) to use as filter
+     * @param   Usuario|PropelObjectCollection $usuario The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   CarreraFisicaQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterByFisica($fisica, $comparison = null)
+    public function filterByUsuario($usuario, $comparison = null)
     {
-        if ($fisica instanceof Fisica) {
+        if ($usuario instanceof Usuario) {
             return $this
-                ->addUsingAlias(CarreraFisicaPeer::FISICA_ID_FISICA, $fisica->getIdFisica(), $comparison);
-        } elseif ($fisica instanceof PropelObjectCollection) {
+                ->addUsingAlias(CarreraFisicaPeer::USUARIO_ID_USUARIO, $usuario->getIdUsuario(), $comparison);
+        } elseif ($usuario instanceof PropelObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(CarreraFisicaPeer::FISICA_ID_FISICA, $fisica->toKeyValue('PrimaryKey', 'IdFisica'), $comparison);
+                ->addUsingAlias(CarreraFisicaPeer::USUARIO_ID_USUARIO, $usuario->toKeyValue('PrimaryKey', 'IdUsuario'), $comparison);
         } else {
-            throw new PropelException('filterByFisica() only accepts arguments of type Fisica or PropelCollection');
+            throw new PropelException('filterByUsuario() only accepts arguments of type Usuario or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Fisica relation
+     * Adds a JOIN clause to the query using the Usuario relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return CarreraFisicaQuery The current query, for fluid interface
      */
-    public function joinFisica($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinUsuario($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Fisica');
+        $relationMap = $tableMap->getRelation('Usuario');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -456,14 +456,14 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Fisica');
+            $this->addJoinObject($join, 'Usuario');
         }
 
         return $this;
     }
 
     /**
-     * Use the Fisica relation Fisica object
+     * Use the Usuario relation Usuario object
      *
      * @see       useQuery()
      *
@@ -471,13 +471,13 @@ abstract class BaseCarreraFisicaQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   FisicaQuery A secondary query class using the current class as primary query
+     * @return   UsuarioQuery A secondary query class using the current class as primary query
      */
-    public function useFisicaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useUsuarioQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinFisica($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Fisica', 'FisicaQuery');
+            ->joinUsuario($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Usuario', 'UsuarioQuery');
     }
 
     /**

@@ -7,39 +7,39 @@
  * 
  *
  * @method     AccesoMaterialQuery orderByIdAccesoMaterial($order = Criteria::ASC) Order by the id_acceso_material column
- * @method     AccesoMaterialQuery orderByFisicaIdFisica($order = Criteria::ASC) Order by the fisica_id_fisica column
- * @method     AccesoMaterialQuery orderByMaterialIdMaterial($order = Criteria::ASC) Order by the material_id_material column
  * @method     AccesoMaterialQuery orderByFechaAcceso($order = Criteria::ASC) Order by the fecha_acceso column
+ * @method     AccesoMaterialQuery orderByMaterialIdMaterial($order = Criteria::ASC) Order by the material_id_material column
+ * @method     AccesoMaterialQuery orderByUsuarioIdUsuario($order = Criteria::ASC) Order by the usuario_id_usuario column
  *
  * @method     AccesoMaterialQuery groupByIdAccesoMaterial() Group by the id_acceso_material column
- * @method     AccesoMaterialQuery groupByFisicaIdFisica() Group by the fisica_id_fisica column
- * @method     AccesoMaterialQuery groupByMaterialIdMaterial() Group by the material_id_material column
  * @method     AccesoMaterialQuery groupByFechaAcceso() Group by the fecha_acceso column
+ * @method     AccesoMaterialQuery groupByMaterialIdMaterial() Group by the material_id_material column
+ * @method     AccesoMaterialQuery groupByUsuarioIdUsuario() Group by the usuario_id_usuario column
  *
  * @method     AccesoMaterialQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     AccesoMaterialQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     AccesoMaterialQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     AccesoMaterialQuery leftJoinFisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the Fisica relation
- * @method     AccesoMaterialQuery rightJoinFisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Fisica relation
- * @method     AccesoMaterialQuery innerJoinFisica($relationAlias = null) Adds a INNER JOIN clause to the query using the Fisica relation
- *
  * @method     AccesoMaterialQuery leftJoinMaterial($relationAlias = null) Adds a LEFT JOIN clause to the query using the Material relation
  * @method     AccesoMaterialQuery rightJoinMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Material relation
  * @method     AccesoMaterialQuery innerJoinMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the Material relation
+ *
+ * @method     AccesoMaterialQuery leftJoinUsuario($relationAlias = null) Adds a LEFT JOIN clause to the query using the Usuario relation
+ * @method     AccesoMaterialQuery rightJoinUsuario($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Usuario relation
+ * @method     AccesoMaterialQuery innerJoinUsuario($relationAlias = null) Adds a INNER JOIN clause to the query using the Usuario relation
  *
  * @method     AccesoMaterial findOne(PropelPDO $con = null) Return the first AccesoMaterial matching the query
  * @method     AccesoMaterial findOneOrCreate(PropelPDO $con = null) Return the first AccesoMaterial matching the query, or a new AccesoMaterial object populated from the query conditions when no match is found
  *
  * @method     AccesoMaterial findOneByIdAccesoMaterial(int $id_acceso_material) Return the first AccesoMaterial filtered by the id_acceso_material column
- * @method     AccesoMaterial findOneByFisicaIdFisica(int $fisica_id_fisica) Return the first AccesoMaterial filtered by the fisica_id_fisica column
- * @method     AccesoMaterial findOneByMaterialIdMaterial(int $material_id_material) Return the first AccesoMaterial filtered by the material_id_material column
  * @method     AccesoMaterial findOneByFechaAcceso(string $fecha_acceso) Return the first AccesoMaterial filtered by the fecha_acceso column
+ * @method     AccesoMaterial findOneByMaterialIdMaterial(int $material_id_material) Return the first AccesoMaterial filtered by the material_id_material column
+ * @method     AccesoMaterial findOneByUsuarioIdUsuario(int $usuario_id_usuario) Return the first AccesoMaterial filtered by the usuario_id_usuario column
  *
  * @method     array findByIdAccesoMaterial(int $id_acceso_material) Return AccesoMaterial objects filtered by the id_acceso_material column
- * @method     array findByFisicaIdFisica(int $fisica_id_fisica) Return AccesoMaterial objects filtered by the fisica_id_fisica column
- * @method     array findByMaterialIdMaterial(int $material_id_material) Return AccesoMaterial objects filtered by the material_id_material column
  * @method     array findByFechaAcceso(string $fecha_acceso) Return AccesoMaterial objects filtered by the fecha_acceso column
+ * @method     array findByMaterialIdMaterial(int $material_id_material) Return AccesoMaterial objects filtered by the material_id_material column
+ * @method     array findByUsuarioIdUsuario(int $usuario_id_usuario) Return AccesoMaterial objects filtered by the usuario_id_usuario column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -130,7 +130,7 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_ACCESO_MATERIAL`, `FISICA_ID_FISICA`, `MATERIAL_ID_MATERIAL`, `FECHA_ACCESO` FROM `acceso_material` WHERE `ID_ACCESO_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_ACCESO_MATERIAL`, `FECHA_ACCESO`, `MATERIAL_ID_MATERIAL`, `USUARIO_ID_USUARIO` FROM `acceso_material` WHERE `ID_ACCESO_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -247,18 +247,18 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the fisica_id_fisica column
+     * Filter the query on the fecha_acceso column
      *
      * Example usage:
      * <code>
-     * $query->filterByFisicaIdFisica(1234); // WHERE fisica_id_fisica = 1234
-     * $query->filterByFisicaIdFisica(array(12, 34)); // WHERE fisica_id_fisica IN (12, 34)
-     * $query->filterByFisicaIdFisica(array('min' => 12)); // WHERE fisica_id_fisica > 12
+     * $query->filterByFechaAcceso('2011-03-14'); // WHERE fecha_acceso = '2011-03-14'
+     * $query->filterByFechaAcceso('now'); // WHERE fecha_acceso = '2011-03-14'
+     * $query->filterByFechaAcceso(array('max' => 'yesterday')); // WHERE fecha_acceso > '2011-03-13'
      * </code>
      *
-     * @see       filterByFisica()
-     *
-     * @param     mixed $fisicaIdFisica The value to use as filter.
+     * @param     mixed $fechaAcceso The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -266,16 +266,16 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
      *
      * @return AccesoMaterialQuery The current query, for fluid interface
      */
-    public function filterByFisicaIdFisica($fisicaIdFisica = null, $comparison = null)
+    public function filterByFechaAcceso($fechaAcceso = null, $comparison = null)
     {
-        if (is_array($fisicaIdFisica)) {
+        if (is_array($fechaAcceso)) {
             $useMinMax = false;
-            if (isset($fisicaIdFisica['min'])) {
-                $this->addUsingAlias(AccesoMaterialPeer::FISICA_ID_FISICA, $fisicaIdFisica['min'], Criteria::GREATER_EQUAL);
+            if (isset($fechaAcceso['min'])) {
+                $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($fisicaIdFisica['max'])) {
-                $this->addUsingAlias(AccesoMaterialPeer::FISICA_ID_FISICA, $fisicaIdFisica['max'], Criteria::LESS_EQUAL);
+            if (isset($fechaAcceso['max'])) {
+                $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -286,7 +286,7 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(AccesoMaterialPeer::FISICA_ID_FISICA, $fisicaIdFisica, $comparison);
+        return $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso, $comparison);
     }
 
     /**
@@ -333,18 +333,18 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the fecha_acceso column
+     * Filter the query on the usuario_id_usuario column
      *
      * Example usage:
      * <code>
-     * $query->filterByFechaAcceso('2011-03-14'); // WHERE fecha_acceso = '2011-03-14'
-     * $query->filterByFechaAcceso('now'); // WHERE fecha_acceso = '2011-03-14'
-     * $query->filterByFechaAcceso(array('max' => 'yesterday')); // WHERE fecha_acceso > '2011-03-13'
+     * $query->filterByUsuarioIdUsuario(1234); // WHERE usuario_id_usuario = 1234
+     * $query->filterByUsuarioIdUsuario(array(12, 34)); // WHERE usuario_id_usuario IN (12, 34)
+     * $query->filterByUsuarioIdUsuario(array('min' => 12)); // WHERE usuario_id_usuario > 12
      * </code>
      *
-     * @param     mixed $fechaAcceso The value to use as filter.
-     *              Values can be integers (unix timestamps), DateTime objects, or strings.
-     *              Empty strings are treated as NULL.
+     * @see       filterByUsuario()
+     *
+     * @param     mixed $usuarioIdUsuario The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -352,16 +352,16 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
      *
      * @return AccesoMaterialQuery The current query, for fluid interface
      */
-    public function filterByFechaAcceso($fechaAcceso = null, $comparison = null)
+    public function filterByUsuarioIdUsuario($usuarioIdUsuario = null, $comparison = null)
     {
-        if (is_array($fechaAcceso)) {
+        if (is_array($usuarioIdUsuario)) {
             $useMinMax = false;
-            if (isset($fechaAcceso['min'])) {
-                $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso['min'], Criteria::GREATER_EQUAL);
+            if (isset($usuarioIdUsuario['min'])) {
+                $this->addUsingAlias(AccesoMaterialPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($fechaAcceso['max'])) {
-                $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso['max'], Criteria::LESS_EQUAL);
+            if (isset($usuarioIdUsuario['max'])) {
+                $this->addUsingAlias(AccesoMaterialPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -372,83 +372,7 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(AccesoMaterialPeer::FECHA_ACCESO, $fechaAcceso, $comparison);
-    }
-
-    /**
-     * Filter the query by a related Fisica object
-     *
-     * @param   Fisica|PropelObjectCollection $fisica The related object(s) to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return   AccesoMaterialQuery The current query, for fluid interface
-     * @throws   PropelException - if the provided filter is invalid.
-     */
-    public function filterByFisica($fisica, $comparison = null)
-    {
-        if ($fisica instanceof Fisica) {
-            return $this
-                ->addUsingAlias(AccesoMaterialPeer::FISICA_ID_FISICA, $fisica->getIdFisica(), $comparison);
-        } elseif ($fisica instanceof PropelObjectCollection) {
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-
-            return $this
-                ->addUsingAlias(AccesoMaterialPeer::FISICA_ID_FISICA, $fisica->toKeyValue('PrimaryKey', 'IdFisica'), $comparison);
-        } else {
-            throw new PropelException('filterByFisica() only accepts arguments of type Fisica or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the Fisica relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return AccesoMaterialQuery The current query, for fluid interface
-     */
-    public function joinFisica($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Fisica');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'Fisica');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the Fisica relation Fisica object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   FisicaQuery A secondary query class using the current class as primary query
-     */
-    public function useFisicaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinFisica($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Fisica', 'FisicaQuery');
+        return $this->addUsingAlias(AccesoMaterialPeer::USUARIO_ID_USUARIO, $usuarioIdUsuario, $comparison);
     }
 
     /**
@@ -525,6 +449,82 @@ abstract class BaseAccesoMaterialQuery extends ModelCriteria
         return $this
             ->joinMaterial($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Material', 'MaterialQuery');
+    }
+
+    /**
+     * Filter the query by a related Usuario object
+     *
+     * @param   Usuario|PropelObjectCollection $usuario The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   AccesoMaterialQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByUsuario($usuario, $comparison = null)
+    {
+        if ($usuario instanceof Usuario) {
+            return $this
+                ->addUsingAlias(AccesoMaterialPeer::USUARIO_ID_USUARIO, $usuario->getIdUsuario(), $comparison);
+        } elseif ($usuario instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(AccesoMaterialPeer::USUARIO_ID_USUARIO, $usuario->toKeyValue('PrimaryKey', 'IdUsuario'), $comparison);
+        } else {
+            throw new PropelException('filterByUsuario() only accepts arguments of type Usuario or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Usuario relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return AccesoMaterialQuery The current query, for fluid interface
+     */
+    public function joinUsuario($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Usuario');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Usuario');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Usuario relation Usuario object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   UsuarioQuery A secondary query class using the current class as primary query
+     */
+    public function useUsuarioQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinUsuario($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Usuario', 'UsuarioQuery');
     }
 
     /**

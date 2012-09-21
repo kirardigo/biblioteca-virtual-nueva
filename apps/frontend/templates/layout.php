@@ -40,7 +40,7 @@
                 </a>
                 <ul class="dropdown-menu">
 
-              <li><a href="<?php echo url_for('fisica/index');?>">ABM Usuarios</a></li>
+              <li><a href="<?php echo url_for('usuario/index');?>">ABM Usuarios</a></li>
               <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
              
               <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>

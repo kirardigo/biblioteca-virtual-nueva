@@ -23,16 +23,16 @@ abstract class BaseFisicaPeer {
     const TM_CLASS = 'FisicaTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 8;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 8;
 
-    /** the column name for the ID_FISICA field */
-    const ID_FISICA = 'fisica.ID_FISICA';
+    /** the column name for the ID_PFISICA field */
+    const ID_PFISICA = 'fisica.ID_PFISICA';
 
     /** the column name for the NOMBRE field */
     const NOMBRE = 'fisica.NOMBRE';
@@ -40,11 +40,20 @@ abstract class BaseFisicaPeer {
     /** the column name for the APELLIDO field */
     const APELLIDO = 'fisica.APELLIDO';
 
-    /** the column name for the USUARIO field */
-    const USUARIO = 'fisica.USUARIO';
+    /** the column name for the VARON field */
+    const VARON = 'fisica.VARON';
 
-    /** the column name for the PASSWORD field */
-    const PASSWORD = 'fisica.PASSWORD';
+    /** the column name for the FECHA_NAC field */
+    const FECHA_NAC = 'fisica.FECHA_NAC';
+
+    /** the column name for the TIPO_DOC_ID_TIPO_DOC field */
+    const TIPO_DOC_ID_TIPO_DOC = 'fisica.TIPO_DOC_ID_TIPO_DOC';
+
+    /** the column name for the DOCUMENTO field */
+    const DOCUMENTO = 'fisica.DOCUMENTO';
+
+    /** the column name for the PERSONA_ID_PERSONA field */
+    const PERSONA_ID_PERSONA = 'fisica.PERSONA_ID_PERSONA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -65,12 +74,12 @@ abstract class BaseFisicaPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdFisica', 'Nombre', 'Apellido', 'Usuario', 'Password', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idFisica', 'nombre', 'apellido', 'usuario', 'password', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_FISICA, self::NOMBRE, self::APELLIDO, self::USUARIO, self::PASSWORD, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_FISICA', 'NOMBRE', 'APELLIDO', 'USUARIO', 'PASSWORD', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_fisica', 'nombre', 'apellido', 'usuario', 'password', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('IdPfisica', 'Nombre', 'Apellido', 'Varon', 'FechaNac', 'TipoDocIdTipoDoc', 'Documento', 'PersonaIdPersona', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPfisica', 'nombre', 'apellido', 'varon', 'fechaNac', 'tipoDocIdTipoDoc', 'documento', 'personaIdPersona', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_PFISICA, self::NOMBRE, self::APELLIDO, self::VARON, self::FECHA_NAC, self::TIPO_DOC_ID_TIPO_DOC, self::DOCUMENTO, self::PERSONA_ID_PERSONA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PFISICA', 'NOMBRE', 'APELLIDO', 'VARON', 'FECHA_NAC', 'TIPO_DOC_ID_TIPO_DOC', 'DOCUMENTO', 'PERSONA_ID_PERSONA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_pfisica', 'nombre', 'apellido', 'varon', 'fecha_nac', 'tipo_doc_id_tipo_doc', 'documento', 'persona_id_persona', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -80,12 +89,12 @@ abstract class BaseFisicaPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdFisica' => 0, 'Nombre' => 1, 'Apellido' => 2, 'Usuario' => 3, 'Password' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idFisica' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'password' => 4, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_FISICA => 0, self::NOMBRE => 1, self::APELLIDO => 2, self::USUARIO => 3, self::PASSWORD => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_FISICA' => 0, 'NOMBRE' => 1, 'APELLIDO' => 2, 'USUARIO' => 3, 'PASSWORD' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_fisica' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'password' => 4, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('IdPfisica' => 0, 'Nombre' => 1, 'Apellido' => 2, 'Varon' => 3, 'FechaNac' => 4, 'TipoDocIdTipoDoc' => 5, 'Documento' => 6, 'PersonaIdPersona' => 7, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPfisica' => 0, 'nombre' => 1, 'apellido' => 2, 'varon' => 3, 'fechaNac' => 4, 'tipoDocIdTipoDoc' => 5, 'documento' => 6, 'personaIdPersona' => 7, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_PFISICA => 0, self::NOMBRE => 1, self::APELLIDO => 2, self::VARON => 3, self::FECHA_NAC => 4, self::TIPO_DOC_ID_TIPO_DOC => 5, self::DOCUMENTO => 6, self::PERSONA_ID_PERSONA => 7, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PFISICA' => 0, 'NOMBRE' => 1, 'APELLIDO' => 2, 'VARON' => 3, 'FECHA_NAC' => 4, 'TIPO_DOC_ID_TIPO_DOC' => 5, 'DOCUMENTO' => 6, 'PERSONA_ID_PERSONA' => 7, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_pfisica' => 0, 'nombre' => 1, 'apellido' => 2, 'varon' => 3, 'fecha_nac' => 4, 'tipo_doc_id_tipo_doc' => 5, 'documento' => 6, 'persona_id_persona' => 7, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -159,17 +168,23 @@ abstract class BaseFisicaPeer {
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(FisicaPeer::ID_FISICA);
+            $criteria->addSelectColumn(FisicaPeer::ID_PFISICA);
             $criteria->addSelectColumn(FisicaPeer::NOMBRE);
             $criteria->addSelectColumn(FisicaPeer::APELLIDO);
-            $criteria->addSelectColumn(FisicaPeer::USUARIO);
-            $criteria->addSelectColumn(FisicaPeer::PASSWORD);
+            $criteria->addSelectColumn(FisicaPeer::VARON);
+            $criteria->addSelectColumn(FisicaPeer::FECHA_NAC);
+            $criteria->addSelectColumn(FisicaPeer::TIPO_DOC_ID_TIPO_DOC);
+            $criteria->addSelectColumn(FisicaPeer::DOCUMENTO);
+            $criteria->addSelectColumn(FisicaPeer::PERSONA_ID_PERSONA);
         } else {
-            $criteria->addSelectColumn($alias . '.ID_FISICA');
+            $criteria->addSelectColumn($alias . '.ID_PFISICA');
             $criteria->addSelectColumn($alias . '.NOMBRE');
             $criteria->addSelectColumn($alias . '.APELLIDO');
-            $criteria->addSelectColumn($alias . '.USUARIO');
-            $criteria->addSelectColumn($alias . '.PASSWORD');
+            $criteria->addSelectColumn($alias . '.VARON');
+            $criteria->addSelectColumn($alias . '.FECHA_NAC');
+            $criteria->addSelectColumn($alias . '.TIPO_DOC_ID_TIPO_DOC');
+            $criteria->addSelectColumn($alias . '.DOCUMENTO');
+            $criteria->addSelectColumn($alias . '.PERSONA_ID_PERSONA');
         }
     }
 
@@ -308,7 +323,7 @@ abstract class BaseFisicaPeer {
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdFisica();
+                $key = (string) $obj->getIdPfisica();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -331,7 +346,7 @@ abstract class BaseFisicaPeer {
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
             if (is_object($value) && $value instanceof Fisica) {
-                $key = (string) $value->getIdFisica();
+                $key = (string) $value->getIdPfisica();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
@@ -477,6 +492,697 @@ abstract class BaseFisicaPeer {
         return array($obj, $col);
     }
 
+
+    /**
+     * Returns the number of rows matching criteria, joining the related TipoDoc table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinTipoDoc(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            FisicaPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Persona table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinPersona(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            FisicaPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Fisica objects pre-filled with their TipoDoc objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Fisica objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinTipoDoc(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        FisicaPeer::addSelectColumns($criteria);
+        $startcol = FisicaPeer::NUM_HYDRATE_COLUMNS;
+        TipoDocPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = FisicaPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = FisicaPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                FisicaPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = TipoDocPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = TipoDocPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = TipoDocPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    TipoDocPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Fisica) to $obj2 (TipoDoc)
+                $obj2->addFisica($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Fisica objects pre-filled with their Persona objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Fisica objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinPersona(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        FisicaPeer::addSelectColumns($criteria);
+        $startcol = FisicaPeer::NUM_HYDRATE_COLUMNS;
+        PersonaPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = FisicaPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = FisicaPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                FisicaPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = PersonaPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = PersonaPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    PersonaPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Fisica) to $obj2 (Persona)
+                $obj2->addFisica($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            FisicaPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of Fisica objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Fisica objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        FisicaPeer::addSelectColumns($criteria);
+        $startcol2 = FisicaPeer::NUM_HYDRATE_COLUMNS;
+
+        TipoDocPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + TipoDocPeer::NUM_HYDRATE_COLUMNS;
+
+        PersonaPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + PersonaPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = FisicaPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = FisicaPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                FisicaPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined TipoDoc rows
+
+            $key2 = TipoDocPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = TipoDocPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = TipoDocPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    TipoDocPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (Fisica) to the collection in $obj2 (TipoDoc)
+                $obj2->addFisica($obj1);
+            } // if joined row not null
+
+            // Add objects for joined Persona rows
+
+            $key3 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = PersonaPeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = PersonaPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    PersonaPeer::addInstanceToPool($obj3, $key3);
+                } // if obj3 loaded
+
+                // Add the $obj1 (Fisica) to the collection in $obj3 (Persona)
+                $obj3->addFisica($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related TipoDoc table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptTipoDoc(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            FisicaPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Persona table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptPersona(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            FisicaPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(FisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Fisica objects pre-filled with all related objects except TipoDoc.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Fisica objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptTipoDoc(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        FisicaPeer::addSelectColumns($criteria);
+        $startcol2 = FisicaPeer::NUM_HYDRATE_COLUMNS;
+
+        PersonaPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + PersonaPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(FisicaPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = FisicaPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = FisicaPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                FisicaPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Persona rows
+
+                $key2 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = PersonaPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = PersonaPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    PersonaPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Fisica) to the collection in $obj2 (Persona)
+                $obj2->addFisica($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Fisica objects pre-filled with all related objects except Persona.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Fisica objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptPersona(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        FisicaPeer::addSelectColumns($criteria);
+        $startcol2 = FisicaPeer::NUM_HYDRATE_COLUMNS;
+
+        TipoDocPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + TipoDocPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(FisicaPeer::TIPO_DOC_ID_TIPO_DOC, TipoDocPeer::ID_TIPO_DOC, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseFisicaPeer', $criteria, $con);
+		}
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = FisicaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = FisicaPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = FisicaPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                FisicaPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined TipoDoc rows
+
+                $key2 = TipoDocPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = TipoDocPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = TipoDocPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    TipoDocPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Fisica) to the collection in $obj2 (TipoDoc)
+                $obj2->addFisica($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
     /**
      * Returns the TableMap related to this peer.
      * This method is not needed for general use but a specific application could have a need.
@@ -532,8 +1238,8 @@ abstract class BaseFisicaPeer {
             $criteria = $values->buildCriteria(); // build Criteria from Fisica object
         }
 
-        if ($criteria->containsKey(FisicaPeer::ID_FISICA) && $criteria->keyContainsValue(FisicaPeer::ID_FISICA) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.FisicaPeer::ID_FISICA.')');
+        if ($criteria->containsKey(FisicaPeer::ID_PFISICA) && $criteria->keyContainsValue(FisicaPeer::ID_PFISICA) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.FisicaPeer::ID_PFISICA.')');
         }
 
 
@@ -574,10 +1280,10 @@ abstract class BaseFisicaPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(FisicaPeer::ID_FISICA);
-            $value = $criteria->remove(FisicaPeer::ID_FISICA);
+            $comparison = $criteria->getComparison(FisicaPeer::ID_PFISICA);
+            $value = $criteria->remove(FisicaPeer::ID_PFISICA);
             if ($value) {
-                $selectCriteria->add(FisicaPeer::ID_FISICA, $value, $comparison);
+                $selectCriteria->add(FisicaPeer::ID_PFISICA, $value, $comparison);
             } else {
                 $selectCriteria->setPrimaryTableName(FisicaPeer::TABLE_NAME);
             }
@@ -656,7 +1362,7 @@ abstract class BaseFisicaPeer {
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(FisicaPeer::ID_FISICA, (array) $values, Criteria::IN);
+            $criteria->add(FisicaPeer::ID_PFISICA, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
                 FisicaPeer::removeInstanceFromPool($singleval);
@@ -740,7 +1446,7 @@ abstract class BaseFisicaPeer {
         }
 
         $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
-        $criteria->add(FisicaPeer::ID_FISICA, $pk);
+        $criteria->add(FisicaPeer::ID_PFISICA, $pk);
 
         $v = FisicaPeer::doSelect($criteria, $con);
 
@@ -767,7 +1473,7 @@ abstract class BaseFisicaPeer {
             $objs = array();
         } else {
             $criteria = new Criteria(FisicaPeer::DATABASE_NAME);
-            $criteria->add(FisicaPeer::ID_FISICA, $pks, Criteria::IN);
+            $criteria->add(FisicaPeer::ID_PFISICA, $pks, Criteria::IN);
             $objs = FisicaPeer::doSelect($criteria, $con);
         }
 
