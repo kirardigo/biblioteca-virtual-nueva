@@ -6,7 +6,7 @@ propel:
     _attributes: { phpName: AccesoMaterial, idMethod: native }
     id_acceso_material: { phpName: IdAccesoMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     fecha_acceso: { phpName: FechaAcceso, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
-    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
+    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material, onDelete: CASCADE, onUpdate: CASCADE }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
     _indexes: { fk_acceso_material_material1: [material_id_material], fk_acceso_material_usuario1: [usuario_id_usuario] }
   carrera:
@@ -16,9 +16,9 @@ propel:
   carrera_fisica:
     _attributes: { phpName: CarreraFisica, idMethod: native }
     id_carrera_fisica: { phpName: IdCarreraFisica, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }
-    usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
-    _indexes: { fk_carrera_fisica_carrera1: [carrera_id_carrera], fk_carrera_fisica_usuario1: [usuario_id_usuario] }
+    carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera, onDelete: CASCADE, onUpdate: CASCADE }
+    pfisica_id_pfisica: { phpName: PfisicaIdPfisica, type: INTEGER, required: true, foreignTable: pfisica, foreignReference: id_pfisica }
+    _indexes: { fk_carrera_fisica_carrera1: [carrera_id_carrera], fk_carrera_fisica_pfisica1: [pfisica_id_pfisica] }
   contenido:
     _attributes: { phpName: Contenido, idMethod: native }
     id_contenido: { phpName: IdContenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -33,7 +33,7 @@ propel:
     editorial: { phpName: Editorial, type: VARCHAR, size: '45', required: false }
     autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
-    subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido }
+    subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { fk_material_subcontenido1: [subcontenido_id_subcontenido] }
   persona:
     _attributes: { phpName: Persona, idMethod: native }
@@ -47,7 +47,7 @@ propel:
     apellido: { phpName: Apellido, type: VARCHAR, size: '45', required: false }
     varon: { phpName: Varon, type: BOOLEAN, size: '1', required: false }
     fecha_nac: { phpName: FechaNac, type: VARCHAR, size: '45', required: false }
-    tipo_doc_id_tipo_doc: { phpName: TipoDocIdTipoDoc, type: INTEGER, required: true, foreignTable: tipo_doc, foreignReference: id_tipo_doc }
+    tipo_doc_id_tipo_doc: { phpName: TipoDocIdTipoDoc, type: INTEGER, required: true, foreignTable: tipo_doc, foreignReference: id_tipo_doc, onDelete: CASCADE, onUpdate: CASCADE }
     documento: { phpName: Documento, type: VARCHAR, size: '45', required: false }
     persona_id_persona: { phpName: PersonaIdPersona, type: INTEGER, required: true, foreignTable: persona, foreignReference: id_persona }
     _indexes: { fk_pfisica_tipo_doc1: [tipo_doc_id_tipo_doc], fk_pfisica_persona1: [persona_id_persona] }
@@ -56,7 +56,7 @@ propel:
     id_subcontenido: { phpName: IdSubcontenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
     numero_subcontenido: { phpName: NumeroSubcontenido, type: VARCHAR, size: '45', required: false, index: unique }
-    contenido_id_contenido: { phpName: ContenidoIdContenido, type: INTEGER, required: true, foreignTable: contenido, foreignReference: id_contenido }
+    contenido_id_contenido: { phpName: ContenidoIdContenido, type: INTEGER, required: true, foreignTable: contenido, foreignReference: id_contenido, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { fk_subcontenido_contenido1: [contenido_id_contenido] }
   tipo_doc:
     _attributes: { phpName: TipoDoc, idMethod: native }
@@ -69,5 +69,5 @@ propel:
     password: { phpName: Password, type: VARCHAR, size: '45', required: true }
     admin: { phpName: Admin, type: BOOLEAN, size: '1', required: false }
     email: { phpName: Email, type: VARCHAR, size: '45', required: false }
-    fisica_id_pfisica: { phpName: FisicaIdPfisica, type: INTEGER, required: true, foreignTable: pfisica, foreignReference: id_pfisica }
+    fisica_id_pfisica: { phpName: FisicaIdPfisica, type: INTEGER, required: true, foreignTable: pfisica, foreignReference: id_pfisica, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { fk_usuario_fisica1: [fisica_id_pfisica] }

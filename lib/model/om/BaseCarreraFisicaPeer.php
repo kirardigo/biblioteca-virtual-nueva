@@ -37,8 +37,8 @@ abstract class BaseCarreraFisicaPeer {
     /** the column name for the CARRERA_ID_CARRERA field */
     const CARRERA_ID_CARRERA = 'carrera_fisica.CARRERA_ID_CARRERA';
 
-    /** the column name for the USUARIO_ID_USUARIO field */
-    const USUARIO_ID_USUARIO = 'carrera_fisica.USUARIO_ID_USUARIO';
+    /** the column name for the PFISICA_ID_PFISICA field */
+    const PFISICA_ID_PFISICA = 'carrera_fisica.PFISICA_ID_PFISICA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -59,11 +59,11 @@ abstract class BaseCarreraFisicaPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdCarreraFisica', 'CarreraIdCarrera', 'UsuarioIdUsuario', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarreraFisica', 'carreraIdCarrera', 'usuarioIdUsuario', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA_FISICA, self::CARRERA_ID_CARRERA, self::USUARIO_ID_USUARIO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA_FISICA', 'CARRERA_ID_CARRERA', 'USUARIO_ID_USUARIO', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_carrera_fisica', 'carrera_id_carrera', 'usuario_id_usuario', ),
+        BasePeer::TYPE_PHPNAME => array ('IdCarreraFisica', 'CarreraIdCarrera', 'PfisicaIdPfisica', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarreraFisica', 'carreraIdCarrera', 'pfisicaIdPfisica', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA_FISICA, self::CARRERA_ID_CARRERA, self::PFISICA_ID_PFISICA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA_FISICA', 'CARRERA_ID_CARRERA', 'PFISICA_ID_PFISICA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_carrera_fisica', 'carrera_id_carrera', 'pfisica_id_pfisica', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
@@ -74,11 +74,11 @@ abstract class BaseCarreraFisicaPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdCarreraFisica' => 0, 'CarreraIdCarrera' => 1, 'UsuarioIdUsuario' => 2, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarreraFisica' => 0, 'carreraIdCarrera' => 1, 'usuarioIdUsuario' => 2, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA_FISICA => 0, self::CARRERA_ID_CARRERA => 1, self::USUARIO_ID_USUARIO => 2, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA_FISICA' => 0, 'CARRERA_ID_CARRERA' => 1, 'USUARIO_ID_USUARIO' => 2, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_carrera_fisica' => 0, 'carrera_id_carrera' => 1, 'usuario_id_usuario' => 2, ),
+        BasePeer::TYPE_PHPNAME => array ('IdCarreraFisica' => 0, 'CarreraIdCarrera' => 1, 'PfisicaIdPfisica' => 2, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idCarreraFisica' => 0, 'carreraIdCarrera' => 1, 'pfisicaIdPfisica' => 2, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_CARRERA_FISICA => 0, self::CARRERA_ID_CARRERA => 1, self::PFISICA_ID_PFISICA => 2, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_CARRERA_FISICA' => 0, 'CARRERA_ID_CARRERA' => 1, 'PFISICA_ID_PFISICA' => 2, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_carrera_fisica' => 0, 'carrera_id_carrera' => 1, 'pfisica_id_pfisica' => 2, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
@@ -155,11 +155,11 @@ abstract class BaseCarreraFisicaPeer {
         if (null === $alias) {
             $criteria->addSelectColumn(CarreraFisicaPeer::ID_CARRERA_FISICA);
             $criteria->addSelectColumn(CarreraFisicaPeer::CARRERA_ID_CARRERA);
-            $criteria->addSelectColumn(CarreraFisicaPeer::USUARIO_ID_USUARIO);
+            $criteria->addSelectColumn(CarreraFisicaPeer::PFISICA_ID_PFISICA);
         } else {
             $criteria->addSelectColumn($alias . '.ID_CARRERA_FISICA');
             $criteria->addSelectColumn($alias . '.CARRERA_ID_CARRERA');
-            $criteria->addSelectColumn($alias . '.USUARIO_ID_USUARIO');
+            $criteria->addSelectColumn($alias . '.PFISICA_ID_PFISICA');
         }
     }
 
@@ -526,7 +526,7 @@ abstract class BaseCarreraFisicaPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Usuario table
+     * Returns the number of rows matching criteria, joining the related Pfisica table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -534,7 +534,7 @@ abstract class BaseCarreraFisicaPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinUsuario(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinPfisica(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -561,7 +561,7 @@ abstract class BaseCarreraFisicaPeer {
             $con = Propel::getConnection(CarreraFisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -656,7 +656,7 @@ abstract class BaseCarreraFisicaPeer {
 
 
     /**
-     * Selects a collection of CarreraFisica objects pre-filled with their Usuario objects.
+     * Selects a collection of CarreraFisica objects pre-filled with their Pfisica objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
@@ -664,7 +664,7 @@ abstract class BaseCarreraFisicaPeer {
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinUsuario(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinPfisica(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -675,9 +675,9 @@ abstract class BaseCarreraFisicaPeer {
 
         CarreraFisicaPeer::addSelectColumns($criteria);
         $startcol = CarreraFisicaPeer::NUM_HYDRATE_COLUMNS;
-        UsuarioPeer::addSelectColumns($criteria);
+        PfisicaPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -703,19 +703,19 @@ abstract class BaseCarreraFisicaPeer {
                 CarreraFisicaPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = UsuarioPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = UsuarioPeer::getInstanceFromPool($key2);
+                $obj2 = PfisicaPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = UsuarioPeer::getOMClass();
+                    $cls = PfisicaPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    UsuarioPeer::addInstanceToPool($obj2, $key2);
+                    PfisicaPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (CarreraFisica) to $obj2 (Usuario)
+                // Add the $obj1 (CarreraFisica) to $obj2 (Pfisica)
                 $obj2->addCarreraFisica($obj1);
 
             } // if joined row was not null
@@ -766,7 +766,7 @@ abstract class BaseCarreraFisicaPeer {
 
         $criteria->addJoin(CarreraFisicaPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -811,12 +811,12 @@ abstract class BaseCarreraFisicaPeer {
         CarreraPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + CarreraPeer::NUM_HYDRATE_COLUMNS;
 
-        UsuarioPeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + UsuarioPeer::NUM_HYDRATE_COLUMNS;
+        PfisicaPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + PfisicaPeer::NUM_HYDRATE_COLUMNS;
 
         $criteria->addJoin(CarreraFisicaPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -859,21 +859,21 @@ abstract class BaseCarreraFisicaPeer {
                 $obj2->addCarreraFisica($obj1);
             } // if joined row not null
 
-            // Add objects for joined Usuario rows
+            // Add objects for joined Pfisica rows
 
-            $key3 = UsuarioPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            $key3 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
             if ($key3 !== null) {
-                $obj3 = UsuarioPeer::getInstanceFromPool($key3);
+                $obj3 = PfisicaPeer::getInstanceFromPool($key3);
                 if (!$obj3) {
 
-                    $cls = UsuarioPeer::getOMClass();
+                    $cls = PfisicaPeer::getOMClass();
 
                     $obj3 = new $cls();
                     $obj3->hydrate($row, $startcol3);
-                    UsuarioPeer::addInstanceToPool($obj3, $key3);
+                    PfisicaPeer::addInstanceToPool($obj3, $key3);
                 } // if obj3 loaded
 
-                // Add the $obj1 (CarreraFisica) to the collection in $obj3 (Usuario)
+                // Add the $obj1 (CarreraFisica) to the collection in $obj3 (Pfisica)
                 $obj3->addCarreraFisica($obj1);
             } // if joined row not null
 
@@ -921,7 +921,7 @@ abstract class BaseCarreraFisicaPeer {
             $con = Propel::getConnection(CarreraFisicaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
     
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -943,7 +943,7 @@ abstract class BaseCarreraFisicaPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Usuario table
+     * Returns the number of rows matching criteria, joining the related Pfisica table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -951,7 +951,7 @@ abstract class BaseCarreraFisicaPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExceptUsuario(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptPfisica(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -1023,10 +1023,10 @@ abstract class BaseCarreraFisicaPeer {
         CarreraFisicaPeer::addSelectColumns($criteria);
         $startcol2 = CarreraFisicaPeer::NUM_HYDRATE_COLUMNS;
 
-        UsuarioPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + UsuarioPeer::NUM_HYDRATE_COLUMNS;
+        PfisicaPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + PfisicaPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(CarreraFisicaPeer::USUARIO_ID_USUARIO, UsuarioPeer::ID_USUARIO, $join_behavior);
+        $criteria->addJoin(CarreraFisicaPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -1052,21 +1052,21 @@ abstract class BaseCarreraFisicaPeer {
                 CarreraFisicaPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-                // Add objects for joined Usuario rows
+                // Add objects for joined Pfisica rows
 
-                $key2 = UsuarioPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                $key2 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
                 if ($key2 !== null) {
-                    $obj2 = UsuarioPeer::getInstanceFromPool($key2);
+                    $obj2 = PfisicaPeer::getInstanceFromPool($key2);
                     if (!$obj2) {
     
-                        $cls = UsuarioPeer::getOMClass();
+                        $cls = PfisicaPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    UsuarioPeer::addInstanceToPool($obj2, $key2);
+                    PfisicaPeer::addInstanceToPool($obj2, $key2);
                 } // if $obj2 already loaded
 
-                // Add the $obj1 (CarreraFisica) to the collection in $obj2 (Usuario)
+                // Add the $obj1 (CarreraFisica) to the collection in $obj2 (Pfisica)
                 $obj2->addCarreraFisica($obj1);
 
             } // if joined row is not null
@@ -1080,7 +1080,7 @@ abstract class BaseCarreraFisicaPeer {
 
 
     /**
-     * Selects a collection of CarreraFisica objects pre-filled with all related objects except Usuario.
+     * Selects a collection of CarreraFisica objects pre-filled with all related objects except Pfisica.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -1089,7 +1089,7 @@ abstract class BaseCarreraFisicaPeer {
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptUsuario(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptPfisica(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 

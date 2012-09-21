@@ -50,8 +50,8 @@ class SubcontenidoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Contenido', 'Contenido', RelationMap::MANY_TO_ONE, array('contenido_id_contenido' => 'id_contenido', ), null, null);
-        $this->addRelation('Material', 'Material', RelationMap::ONE_TO_MANY, array('id_subcontenido' => 'subcontenido_id_subcontenido', ), null, null, 'Materials');
+        $this->addRelation('Contenido', 'Contenido', RelationMap::MANY_TO_ONE, array('contenido_id_contenido' => 'id_contenido', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Material', 'Material', RelationMap::ONE_TO_MANY, array('id_subcontenido' => 'subcontenido_id_subcontenido', ), 'CASCADE', 'CASCADE', 'Materials');
     } // buildRelations()
 
     /**

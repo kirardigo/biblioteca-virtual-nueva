@@ -32,10 +32,6 @@
  * @method     UsuarioQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
  * @method     UsuarioQuery innerJoinAccesoMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the AccesoMaterial relation
  *
- * @method     UsuarioQuery leftJoinCarreraFisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarreraFisica relation
- * @method     UsuarioQuery rightJoinCarreraFisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarreraFisica relation
- * @method     UsuarioQuery innerJoinCarreraFisica($relationAlias = null) Adds a INNER JOIN clause to the query using the CarreraFisica relation
- *
  * @method     Usuario findOne(PropelPDO $con = null) Return the first Usuario matching the query
  * @method     Usuario findOneOrCreate(PropelPDO $con = null) Return the first Usuario matching the query, or a new Usuario object populated from the query conditions when no match is found
  *
@@ -563,80 +559,6 @@ abstract class BaseUsuarioQuery extends ModelCriteria
         return $this
             ->joinAccesoMaterial($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'AccesoMaterial', 'AccesoMaterialQuery');
-    }
-
-    /**
-     * Filter the query by a related CarreraFisica object
-     *
-     * @param   CarreraFisica|PropelObjectCollection $carreraFisica  the related object to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return   UsuarioQuery The current query, for fluid interface
-     * @throws   PropelException - if the provided filter is invalid.
-     */
-    public function filterByCarreraFisica($carreraFisica, $comparison = null)
-    {
-        if ($carreraFisica instanceof CarreraFisica) {
-            return $this
-                ->addUsingAlias(UsuarioPeer::ID_USUARIO, $carreraFisica->getUsuarioIdUsuario(), $comparison);
-        } elseif ($carreraFisica instanceof PropelObjectCollection) {
-            return $this
-                ->useCarreraFisicaQuery()
-                ->filterByPrimaryKeys($carreraFisica->getPrimaryKeys())
-                ->endUse();
-        } else {
-            throw new PropelException('filterByCarreraFisica() only accepts arguments of type CarreraFisica or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the CarreraFisica relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return UsuarioQuery The current query, for fluid interface
-     */
-    public function joinCarreraFisica($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('CarreraFisica');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'CarreraFisica');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the CarreraFisica relation CarreraFisica object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   CarreraFisicaQuery A secondary query class using the current class as primary query
-     */
-    public function useCarreraFisicaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinCarreraFisica($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'CarreraFisica', 'CarreraFisicaQuery');
     }
 
     /**

@@ -50,7 +50,7 @@ class AccesoMaterialTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), null, null);
+        $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Usuario', 'Usuario', RelationMap::MANY_TO_ONE, array('usuario_id_usuario' => 'id_usuario', ), null, null);
     } // buildRelations()
 

@@ -1050,10 +1050,10 @@ abstract class BaseCarrera extends BaseObject
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
      */
-    public function getCarreraFisicasJoinUsuario($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getCarreraFisicasJoinPfisica($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = CarreraFisicaQuery::create(null, $criteria);
-        $query->joinWith('Usuario', $join_behavior);
+        $query->joinWith('Pfisica', $join_behavior);
 
         return $this->getCarreraFisicas($query, $con);
     }

@@ -13,7 +13,7 @@
   <tbody>
     <?php foreach ($Subcontenidos as $Subcontenido): ?>
     <tr>
-      <td><a href="<?php echo url_for('subcontenido/edit?id_subcontenido='.$Subcontenido->getIdSubcontenido()) ?>"><?php echo $Subcontenido->getIdSubcontenido() ?></a></td>
+      <td><?php echo $Subcontenido->getIdSubcontenido() ?></td>
       <td><?php echo $Subcontenido->getNombre() ?></td>
       <td><?php echo $Subcontenido->getNumeroSubcontenido() ?></td>
       <td><?php echo $Subcontenido->getContenidoIdContenido() ?></td>

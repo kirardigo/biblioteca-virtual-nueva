@@ -48,7 +48,7 @@ class TipoDocTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Pfisica', 'Pfisica', RelationMap::ONE_TO_MANY, array('id_tipo_doc' => 'tipo_doc_id_tipo_doc', ), null, null, 'Pfisicas');
+        $this->addRelation('Pfisica', 'Pfisica', RelationMap::ONE_TO_MANY, array('id_tipo_doc' => 'tipo_doc_id_tipo_doc', ), 'CASCADE', 'CASCADE', 'Pfisicas');
     } // buildRelations()
 
     /**

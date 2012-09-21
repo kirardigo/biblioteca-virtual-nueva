@@ -52,9 +52,8 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('fisica_id_pfisica' => 'id_pfisica', ), null, null);
+        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('fisica_id_pfisica' => 'id_pfisica', ), 'CASCADE', 'CASCADE');
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'AccesoMaterials');
-        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'CarreraFisicas');
     } // buildRelations()
 
     /**

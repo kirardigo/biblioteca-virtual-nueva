@@ -54,9 +54,10 @@ class PfisicaTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('TipoDoc', 'TipoDoc', RelationMap::MANY_TO_ONE, array('tipo_doc_id_tipo_doc' => 'id_tipo_doc', ), null, null);
+        $this->addRelation('TipoDoc', 'TipoDoc', RelationMap::MANY_TO_ONE, array('tipo_doc_id_tipo_doc' => 'id_tipo_doc', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Persona', 'Persona', RelationMap::MANY_TO_ONE, array('persona_id_persona' => 'id_persona', ), null, null);
-        $this->addRelation('Usuario', 'Usuario', RelationMap::ONE_TO_MANY, array('id_pfisica' => 'fisica_id_pfisica', ), null, null, 'Usuarios');
+        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_pfisica' => 'pfisica_id_pfisica', ), null, null, 'CarreraFisicas');
+        $this->addRelation('Usuario', 'Usuario', RelationMap::ONE_TO_MANY, array('id_pfisica' => 'fisica_id_pfisica', ), 'CASCADE', 'CASCADE', 'Usuarios');
     } // buildRelations()
 
     /**

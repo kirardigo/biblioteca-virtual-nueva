@@ -16,13 +16,13 @@ abstract class BaseCarreraFisicaForm extends BaseFormPropel
     $this->setWidgets(array(
       'id_carrera_fisica'  => new sfWidgetFormInputHidden(),
       'carrera_id_carrera' => new sfWidgetFormPropelChoice(array('model' => 'Carrera', 'add_empty' => false)),
-      'usuario_id_usuario' => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => false)),
+      'pfisica_id_pfisica' => new sfWidgetFormPropelChoice(array('model' => 'Pfisica', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
       'id_carrera_fisica'  => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdCarreraFisica()), 'empty_value' => $this->getObject()->getIdCarreraFisica(), 'required' => false)),
       'carrera_id_carrera' => new sfValidatorPropelChoice(array('model' => 'Carrera', 'column' => 'id_carrera')),
-      'usuario_id_usuario' => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id_usuario')),
+      'pfisica_id_pfisica' => new sfValidatorPropelChoice(array('model' => 'Pfisica', 'column' => 'id_pfisica')),
     ));
 
     $this->widgetSchema->setNameFormat('carrera_fisica[%s]');

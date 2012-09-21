@@ -12,5 +12,7 @@ class PfisicaForm extends BasePfisicaForm
   public function configure()
   {
       $this->embedRelation('Usuario');
+      $this->embedRelation('CarreraFisica');
+     // $this->validatorSchema->setOption('allow_extra_fields',true); 
   }
 }

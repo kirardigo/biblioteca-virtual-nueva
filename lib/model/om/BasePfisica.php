@@ -89,6 +89,11 @@ abstract class BasePfisica extends BaseObject
     protected $aPersona;
 
     /**
+     * @var        PropelObjectCollection|CarreraFisica[] Collection to store aggregation of CarreraFisica objects.
+     */
+    protected $collCarreraFisicas;
+
+    /**
      * @var        PropelObjectCollection|Usuario[] Collection to store aggregation of Usuario objects.
      */
     protected $collUsuarios;
@@ -106,6 +111,12 @@ abstract class BasePfisica extends BaseObject
      * @var        boolean
      */
     protected $alreadyInValidation = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $carreraFisicasScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -503,6 +514,8 @@ abstract class BasePfisica extends BaseObject
 
             $this->aTipoDoc = null;
             $this->aPersona = null;
+            $this->collCarreraFisicas = null;
+
             $this->collUsuarios = null;
 
         } // if (deep)
@@ -678,6 +691,23 @@ abstract class BasePfisica extends BaseObject
                 }
                 $affectedRows += 1;
                 $this->resetModified();
+            }
+
+            if ($this->carreraFisicasScheduledForDeletion !== null) {
+                if (!$this->carreraFisicasScheduledForDeletion->isEmpty()) {
+                    CarreraFisicaQuery::create()
+                        ->filterByPrimaryKeys($this->carreraFisicasScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->carreraFisicasScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCarreraFisicas !== null) {
+                foreach ($this->collCarreraFisicas as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             if ($this->usuariosScheduledForDeletion !== null) {
@@ -899,6 +929,14 @@ abstract class BasePfisica extends BaseObject
             }
 
 
+                if ($this->collCarreraFisicas !== null) {
+                    foreach ($this->collCarreraFisicas as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collUsuarios !== null) {
                     foreach ($this->collUsuarios as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
@@ -1010,6 +1048,9 @@ abstract class BasePfisica extends BaseObject
             }
             if (null !== $this->aPersona) {
                 $result['Persona'] = $this->aPersona->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->collCarreraFisicas) {
+                $result['CarreraFisicas'] = $this->collCarreraFisicas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collUsuarios) {
                 $result['Usuarios'] = $this->collUsuarios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1201,6 +1242,12 @@ abstract class BasePfisica extends BaseObject
             // store object hash to prevent cycle
             $this->startCopy = true;
 
+            foreach ($this->getCarreraFisicas() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCarreraFisica($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getUsuarios() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addUsuario($relObj->copy($deepCopy));
@@ -1370,9 +1417,204 @@ abstract class BasePfisica extends BaseObject
      */
     public function initRelation($relationName)
     {
+        if ('CarreraFisica' == $relationName) {
+            $this->initCarreraFisicas();
+        }
         if ('Usuario' == $relationName) {
             $this->initUsuarios();
         }
+    }
+
+    /**
+     * Clears out the collCarreraFisicas collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addCarreraFisicas()
+     */
+    public function clearCarreraFisicas()
+    {
+        $this->collCarreraFisicas = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collCarreraFisicas collection.
+     *
+     * By default this just sets the collCarreraFisicas collection to an empty array (like clearcollCarreraFisicas());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCarreraFisicas($overrideExisting = true)
+    {
+        if (null !== $this->collCarreraFisicas && !$overrideExisting) {
+            return;
+        }
+        $this->collCarreraFisicas = new PropelObjectCollection();
+        $this->collCarreraFisicas->setModel('CarreraFisica');
+    }
+
+    /**
+     * Gets an array of CarreraFisica objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Pfisica is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     * @throws PropelException
+     */
+    public function getCarreraFisicas($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collCarreraFisicas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collCarreraFisicas) {
+                // return empty collection
+                $this->initCarreraFisicas();
+            } else {
+                $collCarreraFisicas = CarreraFisicaQuery::create(null, $criteria)
+                    ->filterByPfisica($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collCarreraFisicas;
+                }
+                $this->collCarreraFisicas = $collCarreraFisicas;
+            }
+        }
+
+        return $this->collCarreraFisicas;
+    }
+
+    /**
+     * Sets a collection of CarreraFisica objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $carreraFisicas A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setCarreraFisicas(PropelCollection $carreraFisicas, PropelPDO $con = null)
+    {
+        $this->carreraFisicasScheduledForDeletion = $this->getCarreraFisicas(new Criteria(), $con)->diff($carreraFisicas);
+
+        foreach ($this->carreraFisicasScheduledForDeletion as $carreraFisicaRemoved) {
+            $carreraFisicaRemoved->setPfisica(null);
+        }
+
+        $this->collCarreraFisicas = null;
+        foreach ($carreraFisicas as $carreraFisica) {
+            $this->addCarreraFisica($carreraFisica);
+        }
+
+        $this->collCarreraFisicas = $carreraFisicas;
+    }
+
+    /**
+     * Returns the number of related CarreraFisica objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related CarreraFisica objects.
+     * @throws PropelException
+     */
+    public function countCarreraFisicas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collCarreraFisicas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collCarreraFisicas) {
+                return 0;
+            } else {
+                $query = CarreraFisicaQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByPfisica($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collCarreraFisicas);
+        }
+    }
+
+    /**
+     * Method called to associate a CarreraFisica object to this object
+     * through the CarreraFisica foreign key attribute.
+     *
+     * @param    CarreraFisica $l CarreraFisica
+     * @return   Pfisica The current object (for fluent API support)
+     */
+    public function addCarreraFisica(CarreraFisica $l)
+    {
+        if ($this->collCarreraFisicas === null) {
+            $this->initCarreraFisicas();
+        }
+        if (!$this->collCarreraFisicas->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddCarreraFisica($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	CarreraFisica $carreraFisica The carreraFisica object to add.
+     */
+    protected function doAddCarreraFisica($carreraFisica)
+    {
+        $this->collCarreraFisicas[]= $carreraFisica;
+        $carreraFisica->setPfisica($this);
+    }
+
+    /**
+     * @param	CarreraFisica $carreraFisica The carreraFisica object to remove.
+     */
+    public function removeCarreraFisica($carreraFisica)
+    {
+        if ($this->getCarreraFisicas()->contains($carreraFisica)) {
+            $this->collCarreraFisicas->remove($this->collCarreraFisicas->search($carreraFisica));
+            if (null === $this->carreraFisicasScheduledForDeletion) {
+                $this->carreraFisicasScheduledForDeletion = clone $this->collCarreraFisicas;
+                $this->carreraFisicasScheduledForDeletion->clear();
+            }
+            $this->carreraFisicasScheduledForDeletion[]= $carreraFisica;
+            $carreraFisica->setPfisica(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Pfisica is new, it will return
+     * an empty collection; or if this Pfisica has previously
+     * been saved, it will retrieve related CarreraFisicas from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Pfisica.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|CarreraFisica[] List of CarreraFisica objects
+     */
+    public function getCarreraFisicasJoinCarrera($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CarreraFisicaQuery::create(null, $criteria);
+        $query->joinWith('Carrera', $join_behavior);
+
+        return $this->getCarreraFisicas($query, $con);
     }
 
     /**
@@ -1575,6 +1817,11 @@ abstract class BasePfisica extends BaseObject
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
+            if ($this->collCarreraFisicas) {
+                foreach ($this->collCarreraFisicas as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collUsuarios) {
                 foreach ($this->collUsuarios as $o) {
                     $o->clearAllReferences($deep);
@@ -1582,6 +1829,10 @@ abstract class BasePfisica extends BaseObject
             }
         } // if ($deep)
 
+        if ($this->collCarreraFisicas instanceof PropelCollection) {
+            $this->collCarreraFisicas->clearIterator();
+        }
+        $this->collCarreraFisicas = null;
         if ($this->collUsuarios instanceof PropelCollection) {
             $this->collUsuarios->clearIterator();
         }

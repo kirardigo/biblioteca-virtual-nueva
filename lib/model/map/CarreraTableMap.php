@@ -48,7 +48,7 @@ class CarreraTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), null, null, 'CarreraFisicas');
+        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), 'CASCADE', 'CASCADE', 'CarreraFisicas');
     } // buildRelations()
 
     /**

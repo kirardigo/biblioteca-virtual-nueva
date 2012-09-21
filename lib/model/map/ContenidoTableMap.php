@@ -49,7 +49,7 @@ class ContenidoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::ONE_TO_MANY, array('id_contenido' => 'contenido_id_contenido', ), null, null, 'Subcontenidos');
+        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::ONE_TO_MANY, array('id_contenido' => 'contenido_id_contenido', ), 'CASCADE', 'CASCADE', 'Subcontenidos');
     } // buildRelations()
 
     /**
