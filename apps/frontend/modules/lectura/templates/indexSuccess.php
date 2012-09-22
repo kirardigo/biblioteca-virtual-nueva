@@ -1,5 +1,4 @@
+<?php echo link_to('<i class=" icon-arrow-left icon-white"></i>Materiales', 'material/index',array( 'class'=>"btn btn-inverse btn-mini") )  ?>
+<br/><br/>
 
-
-<embed src="<?php // $cosa= '364f0ba1d49eb2895e2dd0accc9c7cd57811e1d5.pdf';
-
-echo image_path('../uploads/files/'.$arch)?>" width="900" height="500"></embed>
+<embed src="<?php echo image_path('../uploads/files/'.$arch)?>" width="900" height="500"></embed>

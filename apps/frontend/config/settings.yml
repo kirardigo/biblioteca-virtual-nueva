@@ -44,8 +44,9 @@ all:
     i18n:                   true
     
     # Uncomment if you will use sfGuardPlugin
-    #login_module:           sfGuardAuth
-    #login_action:           signin
+    #login_module:           error
+    #login_action:           index
 
-    #secure_module:          sfGuardAuth
-    #secure_action:          secure
+    secure_module:          error
+    secure_action:          index
+    

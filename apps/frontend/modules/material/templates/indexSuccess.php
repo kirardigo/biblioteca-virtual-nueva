@@ -13,8 +13,9 @@
       <th>Editorial</th>
       <th>Autor</th>
       <th>Descripcion</th>
-      
+      <?php if($sf_user->hasCredential('admin')):?>
       <th>Acciones</th>
+      <?php endif;?>
     </tr>
   </thead>
   <tbody>
@@ -33,14 +34,17 @@
       <td><?php echo $Material->getEditorial() ?></td>
       <td><?php echo $Material->getAutor() ?></td>
       <td><?php echo $Material->getDescripcion() ?></td>
-      
+      <?php if($sf_user->hasCredential('admin')):?>
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
       </td>
+      <?php endif;?>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-<a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
 
+<?php if($sf_user->hasCredential('admin')):?>
+<a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<?php endif;?>

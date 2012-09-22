@@ -19,9 +19,22 @@
     <?php include_stylesheets() ?>
   </head>
   <body>
+      
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="offset3">
+            <?php //echo image_tag('banner2.jpg')?>
+            <img src="<?php echo image_path('banner.jpg')?>" alt="Fondo" width="500px">
+            </div>
+        </div>
+        <div class="span2">
+            <?php include_partial("global/estado");?>
+        </div>
+    </div>  
+      
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <!-- sample navbar -->
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -33,7 +46,7 @@
           <div class="nav-collapse">
             <ul class="nav">
               
-
+<?php if($sf_user->hasCredential('admin')):?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Administracion <b class="caret"></b>
@@ -47,17 +60,13 @@
               <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
                 </ul>
               </li>
+              <?php endif;?>
+              <?php if($sf_user->isAuthenticated()):?>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 Material <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Hemeroteca (archivos) </a></li>
-                  <li><a href="#">Libros (pdfs) </a></li>
-                  <li><a href="#">Presentaciones (ppts) </a></li>
-                  <li><a href="<?php echo url_for('lectura/index');?>">Lectura Online </a></li>
-                </ul>
+                <a href="<?php echo url_for('material/index');?>">Material</a>
+
               </li>
+              <?php endif?>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
