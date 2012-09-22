@@ -17,6 +17,7 @@ class lecturaActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    
+    $cosa=$request->getParameter('archivo');
+      $this->arch=$cosa;
   }
 }
