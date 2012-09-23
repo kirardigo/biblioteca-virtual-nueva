@@ -67,7 +67,7 @@ class tipodocActions extends sfActions
     {
       $Tipodoc = $form->save();
 
-      $this->redirect('tipodoc/edit?id_tipo_doc='.$Tipodoc->getIdTipoDoc());
+      $this->redirect('tipodoc/index');
     }
   }
 }

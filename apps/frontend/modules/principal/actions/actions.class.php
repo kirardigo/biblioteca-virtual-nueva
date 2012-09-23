@@ -19,4 +19,9 @@ class principalActions extends sfActions
   {
   
   }
+  
+    public function executeVacchina(sfWebRequest $request)
+  {
+  
+  }
 }

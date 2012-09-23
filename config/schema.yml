@@ -9,6 +9,12 @@ propel:
     material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material, onDelete: CASCADE, onUpdate: CASCADE }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
     _indexes: { fk_acceso_material_material1: [material_id_material], fk_acceso_material_usuario1: [usuario_id_usuario] }
+  biblioteca:
+    _attributes: { phpName: Biblioteca, idMethod: native }
+    id_biblioteca: { phpName: IdBiblioteca, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
+    pjuridica_id_pjuridica: { phpName: PjuridicaIdPjuridica, type: INTEGER, required: true, foreignTable: pjuridica, foreignReference: id_pjuridica }
+    _indexes: { fk_biblioteca_pjuridica1: [pjuridica_id_pjuridica] }
   carrera:
     _attributes: { phpName: Carrera, idMethod: native }
     id_carrera: { phpName: IdCarrera, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -24,6 +30,22 @@ propel:
     id_contenido: { phpName: IdContenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     numero_contenido: { phpName: NumeroContenido, type: INTEGER, required: false, index: unique }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
+  domicilio:
+    _attributes: { phpName: Domicilio, idMethod: native }
+    id_domicilio: { phpName: IdDomicilio, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    calle: { phpName: Calle, type: VARCHAR, size: '45', required: false }
+    altura: { phpName: Altura, type: VARCHAR, size: '45', required: false }
+    cod_postal: { phpName: CodPostal, type: VARCHAR, size: '45', required: false }
+    localidad_id_localidad: { phpName: LocalidadIdLocalidad, type: INTEGER, required: true, foreignTable: localidad, foreignReference: id_localidad }
+    persona_id_persona: { phpName: PersonaIdPersona, type: INTEGER, required: true, foreignTable: persona, foreignReference: id_persona }
+    _indexes: { fk_domicilio_localidad1: [localidad_id_localidad], fk_domicilio_persona1: [persona_id_persona] }
+  localidad:
+    _attributes: { phpName: Localidad, idMethod: native }
+    id_localidad: { phpName: IdLocalidad, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
+    cod_postal: { phpName: CodPostal, type: VARCHAR, size: '45', required: false }
+    provincia_id_provincia: { phpName: ProvinciaIdProvincia, type: INTEGER, required: true, foreignTable: provincia, foreignReference: id_provincia }
+    _indexes: { fk_localidad_provincia1: [provincia_id_provincia] }
   material:
     _attributes: { phpName: Material, idMethod: native }
     id_material: { phpName: IdMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -34,7 +56,8 @@ propel:
     autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
     subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido, onDelete: CASCADE, onUpdate: CASCADE }
-    _indexes: { fk_material_subcontenido1: [subcontenido_id_subcontenido] }
+    biblioteca_id_biblioteca: { phpName: BibliotecaIdBiblioteca, type: INTEGER, required: true, foreignTable: biblioteca, foreignReference: id_biblioteca }
+    _indexes: { fk_material_subcontenido1: [subcontenido_id_subcontenido], fk_material_biblioteca1: [biblioteca_id_biblioteca] }
   persona:
     _attributes: { phpName: Persona, idMethod: native }
     id_persona: { phpName: IdPersona, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -51,6 +74,16 @@ propel:
     documento: { phpName: Documento, type: VARCHAR, size: '45', required: false }
     persona_id_persona: { phpName: PersonaIdPersona, type: INTEGER, required: true, foreignTable: persona, foreignReference: id_persona }
     _indexes: { fk_pfisica_tipo_doc1: [tipo_doc_id_tipo_doc], fk_pfisica_persona1: [persona_id_persona] }
+  pjuridica:
+    _attributes: { phpName: Pjuridica, idMethod: native }
+    id_pjuridica: { phpName: IdPjuridica, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    razon_social: { phpName: RazonSocial, type: VARCHAR, size: '45', required: true }
+    persona_id_persona: { phpName: PersonaIdPersona, type: INTEGER, required: true, foreignTable: persona, foreignReference: id_persona }
+    _indexes: { fk_pjuridica_persona1: [persona_id_persona] }
+  provincia:
+    _attributes: { phpName: Provincia, idMethod: native }
+    id_provincia: { phpName: IdProvincia, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
   subcontenido:
     _attributes: { phpName: Subcontenido, idMethod: native }
     id_subcontenido: { phpName: IdSubcontenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }

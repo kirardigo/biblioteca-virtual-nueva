@@ -14,6 +14,7 @@
  * @method     MaterialQuery orderByAutor($order = Criteria::ASC) Order by the autor column
  * @method     MaterialQuery orderByDescripcion($order = Criteria::ASC) Order by the descripcion column
  * @method     MaterialQuery orderBySubcontenidoIdSubcontenido($order = Criteria::ASC) Order by the subcontenido_id_subcontenido column
+ * @method     MaterialQuery orderByBibliotecaIdBiblioteca($order = Criteria::ASC) Order by the biblioteca_id_biblioteca column
  *
  * @method     MaterialQuery groupByIdMaterial() Group by the id_material column
  * @method     MaterialQuery groupByArchivo() Group by the archivo column
@@ -23,6 +24,7 @@
  * @method     MaterialQuery groupByAutor() Group by the autor column
  * @method     MaterialQuery groupByDescripcion() Group by the descripcion column
  * @method     MaterialQuery groupBySubcontenidoIdSubcontenido() Group by the subcontenido_id_subcontenido column
+ * @method     MaterialQuery groupByBibliotecaIdBiblioteca() Group by the biblioteca_id_biblioteca column
  *
  * @method     MaterialQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     MaterialQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -31,6 +33,10 @@
  * @method     MaterialQuery leftJoinSubcontenido($relationAlias = null) Adds a LEFT JOIN clause to the query using the Subcontenido relation
  * @method     MaterialQuery rightJoinSubcontenido($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Subcontenido relation
  * @method     MaterialQuery innerJoinSubcontenido($relationAlias = null) Adds a INNER JOIN clause to the query using the Subcontenido relation
+ *
+ * @method     MaterialQuery leftJoinBiblioteca($relationAlias = null) Adds a LEFT JOIN clause to the query using the Biblioteca relation
+ * @method     MaterialQuery rightJoinBiblioteca($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Biblioteca relation
+ * @method     MaterialQuery innerJoinBiblioteca($relationAlias = null) Adds a INNER JOIN clause to the query using the Biblioteca relation
  *
  * @method     MaterialQuery leftJoinAccesoMaterial($relationAlias = null) Adds a LEFT JOIN clause to the query using the AccesoMaterial relation
  * @method     MaterialQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
@@ -47,6 +53,7 @@
  * @method     Material findOneByAutor(string $autor) Return the first Material filtered by the autor column
  * @method     Material findOneByDescripcion(string $descripcion) Return the first Material filtered by the descripcion column
  * @method     Material findOneBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return the first Material filtered by the subcontenido_id_subcontenido column
+ * @method     Material findOneByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return the first Material filtered by the biblioteca_id_biblioteca column
  *
  * @method     array findByIdMaterial(int $id_material) Return Material objects filtered by the id_material column
  * @method     array findByArchivo(string $archivo) Return Material objects filtered by the archivo column
@@ -56,6 +63,7 @@
  * @method     array findByAutor(string $autor) Return Material objects filtered by the autor column
  * @method     array findByDescripcion(string $descripcion) Return Material objects filtered by the descripcion column
  * @method     array findBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return Material objects filtered by the subcontenido_id_subcontenido column
+ * @method     array findByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return Material objects filtered by the biblioteca_id_biblioteca column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -146,7 +154,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `NOMBRE`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `SUBCONTENIDO_ID_SUBCONTENIDO` FROM `material` WHERE `ID_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `NOMBRE`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA` FROM `material` WHERE `ID_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -480,6 +488,49 @@ abstract class BaseMaterialQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the biblioteca_id_biblioteca column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByBibliotecaIdBiblioteca(1234); // WHERE biblioteca_id_biblioteca = 1234
+     * $query->filterByBibliotecaIdBiblioteca(array(12, 34)); // WHERE biblioteca_id_biblioteca IN (12, 34)
+     * $query->filterByBibliotecaIdBiblioteca(array('min' => 12)); // WHERE biblioteca_id_biblioteca > 12
+     * </code>
+     *
+     * @see       filterByBiblioteca()
+     *
+     * @param     mixed $bibliotecaIdBiblioteca The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return MaterialQuery The current query, for fluid interface
+     */
+    public function filterByBibliotecaIdBiblioteca($bibliotecaIdBiblioteca = null, $comparison = null)
+    {
+        if (is_array($bibliotecaIdBiblioteca)) {
+            $useMinMax = false;
+            if (isset($bibliotecaIdBiblioteca['min'])) {
+                $this->addUsingAlias(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $bibliotecaIdBiblioteca['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($bibliotecaIdBiblioteca['max'])) {
+                $this->addUsingAlias(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $bibliotecaIdBiblioteca['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $bibliotecaIdBiblioteca, $comparison);
+    }
+
+    /**
      * Filter the query by a related Subcontenido object
      *
      * @param   Subcontenido|PropelObjectCollection $subcontenido The related object(s) to use as filter
@@ -553,6 +604,82 @@ abstract class BaseMaterialQuery extends ModelCriteria
         return $this
             ->joinSubcontenido($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Subcontenido', 'SubcontenidoQuery');
+    }
+
+    /**
+     * Filter the query by a related Biblioteca object
+     *
+     * @param   Biblioteca|PropelObjectCollection $biblioteca The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   MaterialQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByBiblioteca($biblioteca, $comparison = null)
+    {
+        if ($biblioteca instanceof Biblioteca) {
+            return $this
+                ->addUsingAlias(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $biblioteca->getIdBiblioteca(), $comparison);
+        } elseif ($biblioteca instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $biblioteca->toKeyValue('PrimaryKey', 'IdBiblioteca'), $comparison);
+        } else {
+            throw new PropelException('filterByBiblioteca() only accepts arguments of type Biblioteca or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Biblioteca relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return MaterialQuery The current query, for fluid interface
+     */
+    public function joinBiblioteca($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Biblioteca');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Biblioteca');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Biblioteca relation Biblioteca object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   BibliotecaQuery A secondary query class using the current class as primary query
+     */
+    public function useBibliotecaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinBiblioteca($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Biblioteca', 'BibliotecaQuery');
     }
 
     /**

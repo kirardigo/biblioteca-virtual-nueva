@@ -22,6 +22,7 @@ abstract class BaseMaterialForm extends BaseFormPropel
       'autor'                        => new sfWidgetFormInputText(),
       'descripcion'                  => new sfWidgetFormTextarea(),
       'subcontenido_id_subcontenido' => new sfWidgetFormPropelChoice(array('model' => 'Subcontenido', 'add_empty' => false)),
+      'biblioteca_id_biblioteca'     => new sfWidgetFormPropelChoice(array('model' => 'Biblioteca', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -33,6 +34,7 @@ abstract class BaseMaterialForm extends BaseFormPropel
       'autor'                        => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'descripcion'                  => new sfValidatorString(array('required' => false)),
       'subcontenido_id_subcontenido' => new sfValidatorPropelChoice(array('model' => 'Subcontenido', 'column' => 'id_subcontenido')),
+      'biblioteca_id_biblioteca'     => new sfValidatorPropelChoice(array('model' => 'Biblioteca', 'column' => 'id_biblioteca')),
     ));
 
     $this->widgetSchema->setNameFormat('material[%s]');

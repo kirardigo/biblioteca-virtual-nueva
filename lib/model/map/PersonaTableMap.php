@@ -49,7 +49,9 @@ class PersonaTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Domicilio', 'Domicilio', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Domicilios');
         $this->addRelation('Pfisica', 'Pfisica', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Pfisicas');
+        $this->addRelation('Pjuridica', 'Pjuridica', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Pjuridicas');
     } // buildRelations()
 
     /**

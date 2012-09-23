@@ -3,11 +3,11 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id material</th>
+      <th>Id</th>
       <th>Archivo</th>
       
       <th>Bajar</th>
-      <th>Lectura Online</th>
+      <th>Leer</th>
       <th>Nombre</th>
       <th>Titulo</th>
       <th>Editorial</th>
@@ -35,7 +35,7 @@
       <td><?php echo $Material->getAutor() ?></td>
       <td><?php echo $Material->getDescripcion() ?></td>
       <?php if($sf_user->hasCredential('admin')):?>
-      <td>          
+      <td nowrap>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
       </td>

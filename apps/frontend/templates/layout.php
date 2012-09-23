@@ -61,12 +61,34 @@
                 </ul>
               </li>
               <?php endif;?>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Administracion Extra <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+
+              <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
+              <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
+             
+              <li><a href="<?php echo url_for('persona/index');?>">ABM Persona</a></li>
+              
+                </ul>
+                  
+                  
               <?php if($sf_user->isAuthenticated()):?>
               <li class="dropdown">
                 <a href="<?php echo url_for('material/index');?>">Material</a>
 
               </li>
               <?php endif?>
+              
+              <li class="dropdown">
+                <a href="<?php echo url_for('principal/vacchina');?>">Biblioteca Vacchina</a>
+
+              </li>
+              
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
