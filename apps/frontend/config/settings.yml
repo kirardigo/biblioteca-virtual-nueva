@@ -40,8 +40,8 @@ all:
     check_lock:             true
     
     # Spanish language supported, but it's not the default anymore
-    default_culture:        en
-    i18n:                   true
+    default_culture:        es_ES
+    i18n:                   on
     
     # Uncomment if you will use sfGuardPlugin
     login_module:           error

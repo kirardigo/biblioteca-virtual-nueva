@@ -7,7 +7,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-
+      
     <!-- more metas -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -20,17 +20,29 @@
   </head>
   <body>
       
-    <div class="row-fluid">
-        <div class="span10">
-            <div class="offset3">
-            <?php //echo image_tag('banner2.jpg')?>
-            <img src="<?php echo image_path('banner.jpg')?>" alt="Fondo" width="500px">
-            </div>
+<table>
+<tr>
+<td><div class="span4">
+        
+     <img src="<?php echo image_path('vacchina.png')?>" width="300px">
+        
         </div>
-        <div class="span2">
-            <?php include_partial("global/estado");?>
-        </div>
-    </div>  
+</td>
+<td><div class="span7">
+<div class="offset1">
+            <img src="<?php echo image_path('virtual.png')?>"  width="300px"  >
+<div/>
+    </div>
+</td>
+<td> <div class="span3">
+         <?php include_partial("global/estado");?>
+    </div>
+</td>
+</tr>
+
+</table>
+      
+    
       
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <!-- sample navbar -->
@@ -73,6 +85,10 @@
              
               <li><a href="<?php echo url_for('persona/index');?>">ABM Persona</a></li>
               
+              <li><a href="<?php echo url_for('provincia/index');?>">ABM Provincia/Localidad</a></li>
+              <li><a href="<?php echo url_for('domicilio/index');?>">ABM Domicilio</a></li>
+              <li><a href="<?php echo url_for('biblioteca/index');?>">ABM Biblioteca</a></li>
+                <li><a href="<?php echo url_for('pjuridica/index');?>">ABM Persona juridica</a></li>
                 </ul>
                   
                   
