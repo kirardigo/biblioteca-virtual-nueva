@@ -12,8 +12,22 @@ class UsuarioForm extends BaseUsuarioForm
   public function configure()
   {
      
-     // $this->embedRelation('CarreraFisica');
-      //$this->validatorSchema->setOption('allow_extra_fields',true); 
-   
+    //si el usuario no es admin saco cierttos campos
+   $user = sfContext::getInstance()->getUser();
+     if ($user->hasCredential('user') ){
+       
+       unset($this['admin']);
+       //quito la opcion de modificar el "usuario"
+       unset($this['usuario']);
+       
+       unset($this['fisica_id_pfisica']);
+     }  
+     
+     $var=$this->getValue('id_usuario');
+     if (($user->getAttribute('id'))!= ($var) ){
+        // return;
+
+     }  
+     
   }
 }

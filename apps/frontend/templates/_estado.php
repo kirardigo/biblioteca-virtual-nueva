@@ -11,7 +11,7 @@
       </fieldset>     
 <?php else:?>                   
       <div class="well" style="font-size: small"><?php echo "<i> Hola <b>".$sf_user->getAttribute('userNom')."</b>, Bienvenido!</i>"?>        
-        <br/><a href="<?php echo url_for('usuario/edit?id_usuario=1') ?>"><i class="icon-user"></i> Perfil</a>
+        <br/><a href="<?php echo url_for('usuario/edit?id_usuario='.$sf_user->getAttribute('id')) ?>"><i class="icon-user"></i> Perfil</a>
         <br/><a href="<?php echo url_for('login/logout') ?>"><i class="icon-off"></i> Salir</a>        
       </div>       
 <?php endif;?>

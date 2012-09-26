@@ -67,7 +67,7 @@ class pjuridicaActions extends sfActions
     {
       $Pjuridica = $form->save();
 
-      $this->redirect('pjuridica/edit?id_pjuridica='.$Pjuridica->getIdPjuridica());
+      $this->redirect('pjuridica/index');
     }
   }
 }

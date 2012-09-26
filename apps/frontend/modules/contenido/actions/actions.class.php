@@ -67,7 +67,7 @@ class contenidoActions extends sfActions
     {
       $Contenido = $form->save();
 
-      $this->redirect('contenido/edit?id_contenido='.$Contenido->getIdContenido());
+      $this->redirect('contenido/index');
     }
   }
 }

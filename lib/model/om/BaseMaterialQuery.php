@@ -8,7 +8,6 @@
  *
  * @method     MaterialQuery orderByIdMaterial($order = Criteria::ASC) Order by the id_material column
  * @method     MaterialQuery orderByArchivo($order = Criteria::ASC) Order by the archivo column
- * @method     MaterialQuery orderByNombre($order = Criteria::ASC) Order by the nombre column
  * @method     MaterialQuery orderByTitulo($order = Criteria::ASC) Order by the titulo column
  * @method     MaterialQuery orderByEditorial($order = Criteria::ASC) Order by the editorial column
  * @method     MaterialQuery orderByAutor($order = Criteria::ASC) Order by the autor column
@@ -18,7 +17,6 @@
  *
  * @method     MaterialQuery groupByIdMaterial() Group by the id_material column
  * @method     MaterialQuery groupByArchivo() Group by the archivo column
- * @method     MaterialQuery groupByNombre() Group by the nombre column
  * @method     MaterialQuery groupByTitulo() Group by the titulo column
  * @method     MaterialQuery groupByEditorial() Group by the editorial column
  * @method     MaterialQuery groupByAutor() Group by the autor column
@@ -47,7 +45,6 @@
  *
  * @method     Material findOneByIdMaterial(int $id_material) Return the first Material filtered by the id_material column
  * @method     Material findOneByArchivo(string $archivo) Return the first Material filtered by the archivo column
- * @method     Material findOneByNombre(string $nombre) Return the first Material filtered by the nombre column
  * @method     Material findOneByTitulo(string $titulo) Return the first Material filtered by the titulo column
  * @method     Material findOneByEditorial(string $editorial) Return the first Material filtered by the editorial column
  * @method     Material findOneByAutor(string $autor) Return the first Material filtered by the autor column
@@ -57,7 +54,6 @@
  *
  * @method     array findByIdMaterial(int $id_material) Return Material objects filtered by the id_material column
  * @method     array findByArchivo(string $archivo) Return Material objects filtered by the archivo column
- * @method     array findByNombre(string $nombre) Return Material objects filtered by the nombre column
  * @method     array findByTitulo(string $titulo) Return Material objects filtered by the titulo column
  * @method     array findByEditorial(string $editorial) Return Material objects filtered by the editorial column
  * @method     array findByAutor(string $autor) Return Material objects filtered by the autor column
@@ -154,7 +150,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `NOMBRE`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA` FROM `material` WHERE `ID_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA` FROM `material` WHERE `ID_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -297,35 +293,6 @@ abstract class BaseMaterialQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(MaterialPeer::ARCHIVO, $archivo, $comparison);
-    }
-
-    /**
-     * Filter the query on the nombre column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByNombre('fooValue');   // WHERE nombre = 'fooValue'
-     * $query->filterByNombre('%fooValue%'); // WHERE nombre LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $nombre The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return MaterialQuery The current query, for fluid interface
-     */
-    public function filterByNombre($nombre = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($nombre)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $nombre)) {
-                $nombre = str_replace('*', '%', $nombre);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(MaterialPeer::NOMBRE, $nombre, $comparison);
     }
 
     /**

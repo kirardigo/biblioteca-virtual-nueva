@@ -11,14 +11,12 @@
  * @method     UsuarioQuery orderByPassword($order = Criteria::ASC) Order by the password column
  * @method     UsuarioQuery orderByAdmin($order = Criteria::ASC) Order by the admin column
  * @method     UsuarioQuery orderByEmail($order = Criteria::ASC) Order by the email column
- * @method     UsuarioQuery orderByFisicaIdPfisica($order = Criteria::ASC) Order by the fisica_id_pfisica column
  *
  * @method     UsuarioQuery groupByIdUsuario() Group by the id_usuario column
  * @method     UsuarioQuery groupByUsuario() Group by the usuario column
  * @method     UsuarioQuery groupByPassword() Group by the password column
  * @method     UsuarioQuery groupByAdmin() Group by the admin column
  * @method     UsuarioQuery groupByEmail() Group by the email column
- * @method     UsuarioQuery groupByFisicaIdPfisica() Group by the fisica_id_pfisica column
  *
  * @method     UsuarioQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     UsuarioQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -40,14 +38,12 @@
  * @method     Usuario findOneByPassword(string $password) Return the first Usuario filtered by the password column
  * @method     Usuario findOneByAdmin(boolean $admin) Return the first Usuario filtered by the admin column
  * @method     Usuario findOneByEmail(string $email) Return the first Usuario filtered by the email column
- * @method     Usuario findOneByFisicaIdPfisica(int $fisica_id_pfisica) Return the first Usuario filtered by the fisica_id_pfisica column
  *
  * @method     array findByIdUsuario(int $id_usuario) Return Usuario objects filtered by the id_usuario column
  * @method     array findByUsuario(string $usuario) Return Usuario objects filtered by the usuario column
  * @method     array findByPassword(string $password) Return Usuario objects filtered by the password column
  * @method     array findByAdmin(boolean $admin) Return Usuario objects filtered by the admin column
  * @method     array findByEmail(string $email) Return Usuario objects filtered by the email column
- * @method     array findByFisicaIdPfisica(int $fisica_id_pfisica) Return Usuario objects filtered by the fisica_id_pfisica column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -138,7 +134,7 @@ abstract class BaseUsuarioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_USUARIO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL`, `FISICA_ID_PFISICA` FROM `usuario` WHERE `ID_USUARIO` = :p0';
+        $sql = 'SELECT `ID_USUARIO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL` FROM `usuario` WHERE `ID_USUARIO` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -236,6 +232,8 @@ abstract class BaseUsuarioQuery extends ModelCriteria
      * $query->filterByIdUsuario(array(12, 34)); // WHERE id_usuario IN (12, 34)
      * $query->filterByIdUsuario(array('min' => 12)); // WHERE id_usuario > 12
      * </code>
+     *
+     * @see       filterByPfisica()
      *
      * @param     mixed $idUsuario The value to use as filter.
      *              Use scalar values for equality.
@@ -369,49 +367,6 @@ abstract class BaseUsuarioQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the fisica_id_pfisica column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByFisicaIdPfisica(1234); // WHERE fisica_id_pfisica = 1234
-     * $query->filterByFisicaIdPfisica(array(12, 34)); // WHERE fisica_id_pfisica IN (12, 34)
-     * $query->filterByFisicaIdPfisica(array('min' => 12)); // WHERE fisica_id_pfisica > 12
-     * </code>
-     *
-     * @see       filterByPfisica()
-     *
-     * @param     mixed $fisicaIdPfisica The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return UsuarioQuery The current query, for fluid interface
-     */
-    public function filterByFisicaIdPfisica($fisicaIdPfisica = null, $comparison = null)
-    {
-        if (is_array($fisicaIdPfisica)) {
-            $useMinMax = false;
-            if (isset($fisicaIdPfisica['min'])) {
-                $this->addUsingAlias(UsuarioPeer::FISICA_ID_PFISICA, $fisicaIdPfisica['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($fisicaIdPfisica['max'])) {
-                $this->addUsingAlias(UsuarioPeer::FISICA_ID_PFISICA, $fisicaIdPfisica['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(UsuarioPeer::FISICA_ID_PFISICA, $fisicaIdPfisica, $comparison);
-    }
-
-    /**
      * Filter the query by a related Pfisica object
      *
      * @param   Pfisica|PropelObjectCollection $pfisica The related object(s) to use as filter
@@ -424,14 +379,14 @@ abstract class BaseUsuarioQuery extends ModelCriteria
     {
         if ($pfisica instanceof Pfisica) {
             return $this
-                ->addUsingAlias(UsuarioPeer::FISICA_ID_PFISICA, $pfisica->getIdPfisica(), $comparison);
+                ->addUsingAlias(UsuarioPeer::ID_USUARIO, $pfisica->getIdPfisica(), $comparison);
         } elseif ($pfisica instanceof PropelObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(UsuarioPeer::FISICA_ID_PFISICA, $pfisica->toKeyValue('PrimaryKey', 'IdPfisica'), $comparison);
+                ->addUsingAlias(UsuarioPeer::ID_USUARIO, $pfisica->toKeyValue('PrimaryKey', 'IdPfisica'), $comparison);
         } else {
             throw new PropelException('filterByPfisica() only accepts arguments of type Pfisica or PropelCollection');
         }

@@ -94,9 +94,9 @@ abstract class BasePfisica extends BaseObject
     protected $collCarreraFisicas;
 
     /**
-     * @var        PropelObjectCollection|Usuario[] Collection to store aggregation of Usuario objects.
+     * @var        Usuario one-to-one related Usuario object
      */
-    protected $collUsuarios;
+    protected $singleUsuario;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -516,7 +516,7 @@ abstract class BasePfisica extends BaseObject
             $this->aPersona = null;
             $this->collCarreraFisicas = null;
 
-            $this->collUsuarios = null;
+            $this->singleUsuario = null;
 
         } // if (deep)
     }
@@ -719,11 +719,9 @@ abstract class BasePfisica extends BaseObject
                 }
             }
 
-            if ($this->collUsuarios !== null) {
-                foreach ($this->collUsuarios as $referrerFK) {
-                    if (!$referrerFK->isDeleted()) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
+            if ($this->singleUsuario !== null) {
+                if (!$this->singleUsuario->isDeleted()) {
+                        $affectedRows += $this->singleUsuario->save($con);
                 }
             }
 
@@ -937,11 +935,9 @@ abstract class BasePfisica extends BaseObject
                     }
                 }
 
-                if ($this->collUsuarios !== null) {
-                    foreach ($this->collUsuarios as $referrerFK) {
-                        if (!$referrerFK->validate($columns)) {
-                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-                        }
+                if ($this->singleUsuario !== null) {
+                    if (!$this->singleUsuario->validate($columns)) {
+                        $failureMap = array_merge($failureMap, $this->singleUsuario->getValidationFailures());
                     }
                 }
 
@@ -1052,8 +1048,8 @@ abstract class BasePfisica extends BaseObject
             if (null !== $this->collCarreraFisicas) {
                 $result['CarreraFisicas'] = $this->collCarreraFisicas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collUsuarios) {
-                $result['Usuarios'] = $this->collUsuarios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->singleUsuario) {
+                $result['Usuario'] = $this->singleUsuario->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
             }
         }
 
@@ -1248,10 +1244,9 @@ abstract class BasePfisica extends BaseObject
                 }
             }
 
-            foreach ($this->getUsuarios() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addUsuario($relObj->copy($deepCopy));
-                }
+            $relObj = $this->getUsuario();
+            if ($relObj) {
+                $copyObj->setUsuario($relObj->copy($deepCopy));
             }
 
             //unflag object copy
@@ -1419,9 +1414,6 @@ abstract class BasePfisica extends BaseObject
     {
         if ('CarreraFisica' == $relationName) {
             $this->initCarreraFisicas();
-        }
-        if ('Usuario' == $relationName) {
-            $this->initUsuarios();
         }
     }
 
@@ -1618,170 +1610,39 @@ abstract class BasePfisica extends BaseObject
     }
 
     /**
-     * Clears out the collUsuarios collection
+     * Gets a single Usuario object, which is related to this object by a one-to-one relationship.
      *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return void
-     * @see        addUsuarios()
-     */
-    public function clearUsuarios()
-    {
-        $this->collUsuarios = null; // important to set this to NULL since that means it is uninitialized
-    }
-
-    /**
-     * Initializes the collUsuarios collection.
-     *
-     * By default this just sets the collUsuarios collection to an empty array (like clearcollUsuarios());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param      boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initUsuarios($overrideExisting = true)
-    {
-        if (null !== $this->collUsuarios && !$overrideExisting) {
-            return;
-        }
-        $this->collUsuarios = new PropelObjectCollection();
-        $this->collUsuarios->setModel('Usuario');
-    }
-
-    /**
-     * Gets an array of Usuario objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Pfisica is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Usuario[] List of Usuario objects
+     * @return                 Usuario
      * @throws PropelException
      */
-    public function getUsuarios($criteria = null, PropelPDO $con = null)
+    public function getUsuario(PropelPDO $con = null)
     {
-        if (null === $this->collUsuarios || null !== $criteria) {
-            if ($this->isNew() && null === $this->collUsuarios) {
-                // return empty collection
-                $this->initUsuarios();
-            } else {
-                $collUsuarios = UsuarioQuery::create(null, $criteria)
-                    ->filterByPfisica($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    return $collUsuarios;
-                }
-                $this->collUsuarios = $collUsuarios;
-            }
+
+        if ($this->singleUsuario === null && !$this->isNew()) {
+            $this->singleUsuario = UsuarioQuery::create()->findPk($this->getPrimaryKey(), $con);
         }
 
-        return $this->collUsuarios;
+        return $this->singleUsuario;
     }
 
     /**
-     * Sets a collection of Usuario objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
+     * Sets a single Usuario object as related to this object by a one-to-one relationship.
      *
-     * @param      PropelCollection $usuarios A Propel collection.
-     * @param      PropelPDO $con Optional connection object
-     */
-    public function setUsuarios(PropelCollection $usuarios, PropelPDO $con = null)
-    {
-        $this->usuariosScheduledForDeletion = $this->getUsuarios(new Criteria(), $con)->diff($usuarios);
-
-        foreach ($this->usuariosScheduledForDeletion as $usuarioRemoved) {
-            $usuarioRemoved->setPfisica(null);
-        }
-
-        $this->collUsuarios = null;
-        foreach ($usuarios as $usuario) {
-            $this->addUsuario($usuario);
-        }
-
-        $this->collUsuarios = $usuarios;
-    }
-
-    /**
-     * Returns the number of related Usuario objects.
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct
-     * @param      PropelPDO $con
-     * @return int             Count of related Usuario objects.
+     * @param                  Usuario $v Usuario
+     * @return                 Pfisica The current object (for fluent API support)
      * @throws PropelException
      */
-    public function countUsuarios(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    public function setUsuario(Usuario $v = null)
     {
-        if (null === $this->collUsuarios || null !== $criteria) {
-            if ($this->isNew() && null === $this->collUsuarios) {
-                return 0;
-            } else {
-                $query = UsuarioQuery::create(null, $criteria);
-                if ($distinct) {
-                    $query->distinct();
-                }
+        $this->singleUsuario = $v;
 
-                return $query
-                    ->filterByPfisica($this)
-                    ->count($con);
-            }
-        } else {
-            return count($this->collUsuarios);
-        }
-    }
-
-    /**
-     * Method called to associate a Usuario object to this object
-     * through the Usuario foreign key attribute.
-     *
-     * @param    Usuario $l Usuario
-     * @return   Pfisica The current object (for fluent API support)
-     */
-    public function addUsuario(Usuario $l)
-    {
-        if ($this->collUsuarios === null) {
-            $this->initUsuarios();
-        }
-        if (!$this->collUsuarios->contains($l)) { // only add it if the **same** object is not already associated
-            $this->doAddUsuario($l);
+        // Make sure that that the passed-in Usuario isn't already associated with this object
+        if ($v !== null && $v->getPfisica() === null) {
+            $v->setPfisica($this);
         }
 
         return $this;
-    }
-
-    /**
-     * @param	Usuario $usuario The usuario object to add.
-     */
-    protected function doAddUsuario($usuario)
-    {
-        $this->collUsuarios[]= $usuario;
-        $usuario->setPfisica($this);
-    }
-
-    /**
-     * @param	Usuario $usuario The usuario object to remove.
-     */
-    public function removeUsuario($usuario)
-    {
-        if ($this->getUsuarios()->contains($usuario)) {
-            $this->collUsuarios->remove($this->collUsuarios->search($usuario));
-            if (null === $this->usuariosScheduledForDeletion) {
-                $this->usuariosScheduledForDeletion = clone $this->collUsuarios;
-                $this->usuariosScheduledForDeletion->clear();
-            }
-            $this->usuariosScheduledForDeletion[]= $usuario;
-            $usuario->setPfisica(null);
-        }
     }
 
     /**
@@ -1822,10 +1683,8 @@ abstract class BasePfisica extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collUsuarios) {
-                foreach ($this->collUsuarios as $o) {
-                    $o->clearAllReferences($deep);
-                }
+            if ($this->singleUsuario) {
+                $this->singleUsuario->clearAllReferences($deep);
             }
         } // if ($deep)
 
@@ -1833,10 +1692,10 @@ abstract class BasePfisica extends BaseObject
             $this->collCarreraFisicas->clearIterator();
         }
         $this->collCarreraFisicas = null;
-        if ($this->collUsuarios instanceof PropelCollection) {
-            $this->collUsuarios->clearIterator();
+        if ($this->singleUsuario instanceof PropelCollection) {
+            $this->singleUsuario->clearIterator();
         }
-        $this->collUsuarios = null;
+        $this->singleUsuario = null;
         $this->aTipoDoc = null;
         $this->aPersona = null;
     }

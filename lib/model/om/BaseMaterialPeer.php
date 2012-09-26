@@ -23,22 +23,19 @@ abstract class BaseMaterialPeer {
     const TM_CLASS = 'MaterialTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 9;
+    const NUM_COLUMNS = 8;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 9;
+    const NUM_HYDRATE_COLUMNS = 8;
 
     /** the column name for the ID_MATERIAL field */
     const ID_MATERIAL = 'material.ID_MATERIAL';
 
     /** the column name for the ARCHIVO field */
     const ARCHIVO = 'material.ARCHIVO';
-
-    /** the column name for the NOMBRE field */
-    const NOMBRE = 'material.NOMBRE';
 
     /** the column name for the TITULO field */
     const TITULO = 'material.TITULO';
@@ -77,12 +74,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Nombre', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'SubcontenidoIdSubcontenido', 'BibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'nombre', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenidoIdSubcontenido', 'bibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::NOMBRE, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::SUBCONTENIDO_ID_SUBCONTENIDO, self::BIBLIOTECA_ID_BIBLIOTECA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'NOMBRE', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'SUBCONTENIDO_ID_SUBCONTENIDO', 'BIBLIOTECA_ID_BIBLIOTECA', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'nombre', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenido_id_subcontenido', 'biblioteca_id_biblioteca', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'SubcontenidoIdSubcontenido', 'BibliotecaIdBiblioteca', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenidoIdSubcontenido', 'bibliotecaIdBiblioteca', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::SUBCONTENIDO_ID_SUBCONTENIDO, self::BIBLIOTECA_ID_BIBLIOTECA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'SUBCONTENIDO_ID_SUBCONTENIDO', 'BIBLIOTECA_ID_BIBLIOTECA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenido_id_subcontenido', 'biblioteca_id_biblioteca', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -92,12 +89,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Nombre' => 2, 'Titulo' => 3, 'Editorial' => 4, 'Autor' => 5, 'Descripcion' => 6, 'SubcontenidoIdSubcontenido' => 7, 'BibliotecaIdBiblioteca' => 8, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'nombre' => 2, 'titulo' => 3, 'editorial' => 4, 'autor' => 5, 'descripcion' => 6, 'subcontenidoIdSubcontenido' => 7, 'bibliotecaIdBiblioteca' => 8, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::NOMBRE => 2, self::TITULO => 3, self::EDITORIAL => 4, self::AUTOR => 5, self::DESCRIPCION => 6, self::SUBCONTENIDO_ID_SUBCONTENIDO => 7, self::BIBLIOTECA_ID_BIBLIOTECA => 8, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'NOMBRE' => 2, 'TITULO' => 3, 'EDITORIAL' => 4, 'AUTOR' => 5, 'DESCRIPCION' => 6, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 7, 'BIBLIOTECA_ID_BIBLIOTECA' => 8, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'nombre' => 2, 'titulo' => 3, 'editorial' => 4, 'autor' => 5, 'descripcion' => 6, 'subcontenido_id_subcontenido' => 7, 'biblioteca_id_biblioteca' => 8, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Titulo' => 2, 'Editorial' => 3, 'Autor' => 4, 'Descripcion' => 5, 'SubcontenidoIdSubcontenido' => 6, 'BibliotecaIdBiblioteca' => 7, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenidoIdSubcontenido' => 6, 'bibliotecaIdBiblioteca' => 7, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::TITULO => 2, self::EDITORIAL => 3, self::AUTOR => 4, self::DESCRIPCION => 5, self::SUBCONTENIDO_ID_SUBCONTENIDO => 6, self::BIBLIOTECA_ID_BIBLIOTECA => 7, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'TITULO' => 2, 'EDITORIAL' => 3, 'AUTOR' => 4, 'DESCRIPCION' => 5, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 6, 'BIBLIOTECA_ID_BIBLIOTECA' => 7, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenido_id_subcontenido' => 6, 'biblioteca_id_biblioteca' => 7, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -173,7 +170,6 @@ abstract class BaseMaterialPeer {
         if (null === $alias) {
             $criteria->addSelectColumn(MaterialPeer::ID_MATERIAL);
             $criteria->addSelectColumn(MaterialPeer::ARCHIVO);
-            $criteria->addSelectColumn(MaterialPeer::NOMBRE);
             $criteria->addSelectColumn(MaterialPeer::TITULO);
             $criteria->addSelectColumn(MaterialPeer::EDITORIAL);
             $criteria->addSelectColumn(MaterialPeer::AUTOR);
@@ -183,7 +179,6 @@ abstract class BaseMaterialPeer {
         } else {
             $criteria->addSelectColumn($alias . '.ID_MATERIAL');
             $criteria->addSelectColumn($alias . '.ARCHIVO');
-            $criteria->addSelectColumn($alias . '.NOMBRE');
             $criteria->addSelectColumn($alias . '.TITULO');
             $criteria->addSelectColumn($alias . '.EDITORIAL');
             $criteria->addSelectColumn($alias . '.AUTOR');

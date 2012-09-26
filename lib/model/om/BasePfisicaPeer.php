@@ -1427,7 +1427,7 @@ abstract class BasePfisicaPeer {
             // delete related Usuario objects
             $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
             
-            $criteria->add(UsuarioPeer::FISICA_ID_PFISICA, $obj->getIdPfisica());
+            $criteria->add(UsuarioPeer::ID_USUARIO, $obj->getIdPfisica());
             $affectedRows += UsuarioPeer::doDelete($criteria, $con);
         }
 

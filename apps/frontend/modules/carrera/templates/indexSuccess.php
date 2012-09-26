@@ -5,13 +5,13 @@
     <tr>
       <th>Id carrera</th>
       <th>Nombre</th>
-      <th>Acciones</th>
+      
     </tr>
   </thead>
   <tbody>
     <?php foreach ($Carreras as $Carrera): ?>
     <tr>
-      <td><a href="<?php echo url_for('carrera/edit?id_carrera='.$Carrera->getIdCarrera()) ?>"><?php echo $Carrera->getIdCarrera() ?></a></td>
+      <td><?php echo $Carrera->getIdCarrera() ?></td>
       <td><?php echo $Carrera->getNombre() ?></td>
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('carrera/edit?id_carrera='.$Carrera->getIdCarrera()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>

@@ -67,7 +67,7 @@ class carreraActions extends sfActions
     {
       $Carrera = $form->save();
 
-      $this->redirect('carrera/edit?id_carrera='.$Carrera->getIdCarrera());
+      $this->redirect('carrera/index');
     }
   }
 }

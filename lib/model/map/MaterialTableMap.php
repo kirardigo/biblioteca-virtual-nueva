@@ -40,10 +40,9 @@ class MaterialTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
         $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', false, 45, null);
-        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
-        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', false, 45, null);
+        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', true, 45, null);
+        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', true, 45, null);
+        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', true, 45, null);
         $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);
         $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
         $this->addForeignKey('BIBLIOTECA_ID_BIBLIOTECA', 'BibliotecaIdBiblioteca', 'INTEGER', 'biblioteca', 'ID_BIBLIOTECA', true, null, null);

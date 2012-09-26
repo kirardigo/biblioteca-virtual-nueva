@@ -67,7 +67,7 @@ class bibliotecaActions extends sfActions
     {
       $Biblioteca = $form->save();
 
-      $this->redirect('biblioteca/edit?id_biblioteca='.$Biblioteca->getIdBiblioteca());
+      $this->redirect('biblioteca/index');
     }
   }
 }

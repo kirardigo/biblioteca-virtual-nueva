@@ -43,12 +43,13 @@ class MaterialForm extends BaseMaterialForm
     $archivin= $this->getValue('nombre');
     $autor= $this->getValue('autor');
     $titulo= $this->getValue('titulo');
+    $id= $this->getValue('id_material');
     
     $swimsuit = $this->getObject();
 
     if ($image)
     {
-      $image->save( $autor.'_'.$titulo .'.pdf');
+      $image->save( $autor.'_'.$titulo.'.pdf');
      // $image->save( $image.'jpg');
     }
 

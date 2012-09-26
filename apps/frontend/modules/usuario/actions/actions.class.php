@@ -31,7 +31,7 @@ class usuarioActions extends sfActions
   }
 
   public function executeEdit(sfWebRequest $request)
-  {
+  { 
     $Usuario = UsuarioQuery::create()->findPk($request->getParameter('id_usuario'));
     $this->forward404Unless($Usuario, sprintf('Object Usuario does not exist (%s).', $request->getParameter('id_usuario')));
     $this->form = new UsuarioForm($Usuario);
@@ -66,8 +66,8 @@ class usuarioActions extends sfActions
     if ($form->isValid())
     {
       $Usuario = $form->save();
-
-      $this->redirect('usuario/index');
+      //$this->redirect('usuario/edit?id_usuario='.$Usuario->getIdUsuario());
+      $this->redirect('login/index');
     }
   }
 }

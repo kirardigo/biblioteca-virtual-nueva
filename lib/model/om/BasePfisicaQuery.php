@@ -738,7 +738,7 @@ abstract class BasePfisicaQuery extends ModelCriteria
     {
         if ($usuario instanceof Usuario) {
             return $this
-                ->addUsingAlias(PfisicaPeer::ID_PFISICA, $usuario->getFisicaIdPfisica(), $comparison);
+                ->addUsingAlias(PfisicaPeer::ID_PFISICA, $usuario->getIdUsuario(), $comparison);
         } elseif ($usuario instanceof PropelObjectCollection) {
             return $this
                 ->useUsuarioQuery()

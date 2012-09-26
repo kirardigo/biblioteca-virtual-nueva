@@ -1,7 +1,7 @@
-<h1>Pjuridicas List</h1>
+<h1>Personas juridicas</h1>
 
-<table>
-  <thead>
+<table class="table table-bordered">
+  <thead style="background: #7FDDCA">
     <tr>
       <th>Id pjuridica</th>
       <th>Razon social</th>
@@ -11,12 +11,16 @@
   <tbody>
     <?php foreach ($Pjuridicas as $Pjuridica): ?>
     <tr>
-      <td><a href="<?php echo url_for('pjuridica/edit?id_pjuridica='.$Pjuridica->getIdPjuridica()) ?>"><?php echo $Pjuridica->getIdPjuridica() ?></a></td>
+      <td><?php echo $Pjuridica->getIdPjuridica() ?></td>
       <td><?php echo $Pjuridica->getRazonSocial() ?></td>
       <td><?php echo $Pjuridica->getPersonaIdPersona() ?></td>
+      <td>          
+          <a class="btn btn-warning btn-mini" href="<?php echo url_for('pjuridica/edit?id_pjuridica='.$Pjuridica->getIdPjuridica()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
+          <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'pjuridica/delete?id_pjuridica='.$Pjuridica->getIdPjuridica(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar la persona?', 'class'=>"btn btn-danger btn-mini")) ?>
+      </td>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('pjuridica/new') ?>">New</a>
+<a class="btn btn-success" href="<?php echo url_for('pjuridica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

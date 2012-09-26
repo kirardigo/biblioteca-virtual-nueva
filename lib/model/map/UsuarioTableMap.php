@@ -36,14 +36,13 @@ class UsuarioTableMap extends TableMap
         $this->setPhpName('Usuario');
         $this->setClassname('Usuario');
         $this->setPackage('lib.model');
-        $this->setUseIdGenerator(true);
+        $this->setUseIdGenerator(false);
         // columns
-        $this->addPrimaryKey('ID_USUARIO', 'IdUsuario', 'INTEGER', true, null, null);
+        $this->addForeignPrimaryKey('ID_USUARIO', 'IdUsuario', 'INTEGER' , 'pfisica', 'ID_PFISICA', true, null, null);
         $this->addColumn('USUARIO', 'Usuario', 'VARCHAR', true, 45, null);
         $this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 45, null);
         $this->addColumn('ADMIN', 'Admin', 'BOOLEAN', false, 1, null);
         $this->addColumn('EMAIL', 'Email', 'VARCHAR', false, 45, null);
-        $this->addForeignKey('FISICA_ID_PFISICA', 'FisicaIdPfisica', 'INTEGER', 'pfisica', 'ID_PFISICA', true, null, null);
         // validators
     } // initialize()
 
@@ -52,7 +51,7 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('fisica_id_pfisica' => 'id_pfisica', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('id_usuario' => 'id_pfisica', ), 'CASCADE', 'CASCADE');
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'AccesoMaterials');
     } // buildRelations()
 

@@ -50,10 +50,9 @@ propel:
     _attributes: { phpName: Material, idMethod: native }
     id_material: { phpName: IdMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: false }
-    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
-    titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: false }
-    editorial: { phpName: Editorial, type: VARCHAR, size: '45', required: false }
-    autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
+    titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: true }
+    editorial: { phpName: Editorial, type: VARCHAR, size: '45', required: true }
+    autor: { phpName: Autor, type: VARCHAR, size: '45', required: true }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
     subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido, onDelete: CASCADE, onUpdate: CASCADE }
     biblioteca_id_biblioteca: { phpName: BibliotecaIdBiblioteca, type: INTEGER, required: true, foreignTable: biblioteca, foreignReference: id_biblioteca }
@@ -97,10 +96,8 @@ propel:
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: false }
   usuario:
     _attributes: { phpName: Usuario, idMethod: native }
-    id_usuario: { phpName: IdUsuario, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, primaryKey: true, required: true, foreignTable: pfisica, foreignReference: id_pfisica, onDelete: CASCADE, onUpdate: CASCADE }
     usuario: { phpName: Usuario, type: VARCHAR, size: '45', required: true }
     password: { phpName: Password, type: VARCHAR, size: '45', required: true }
     admin: { phpName: Admin, type: BOOLEAN, size: '1', required: false }
     email: { phpName: Email, type: VARCHAR, size: '45', required: false }
-    fisica_id_pfisica: { phpName: FisicaIdPfisica, type: INTEGER, required: true, foreignTable: pfisica, foreignReference: id_pfisica, onDelete: CASCADE, onUpdate: CASCADE }
-    _indexes: { fk_usuario_fisica1: [fisica_id_pfisica] }

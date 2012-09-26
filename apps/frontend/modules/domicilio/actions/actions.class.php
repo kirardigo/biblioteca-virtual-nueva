@@ -67,7 +67,7 @@ class domicilioActions extends sfActions
     {
       $Domicilio = $form->save();
 
-      $this->redirect('domicilio/edit?id_domicilio='.$Domicilio->getIdDomicilio());
+      $this->redirect('domicilio/index');
     }
   }
 }

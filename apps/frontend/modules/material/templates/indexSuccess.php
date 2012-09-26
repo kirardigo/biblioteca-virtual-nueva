@@ -8,14 +8,12 @@
       
       <th>Bajar</th>
       <th>Leer</th>
-      <th>Nombre</th>
+      
       <th>Titulo</th>
       <th>Editorial</th>
       <th>Autor</th>
       <th>Descripcion</th>
-      <?php if($sf_user->hasCredential('admin')):?>
-      <th>Acciones</th>
-      <?php endif;?>
+
     </tr>
   </thead>
   <tbody>
@@ -29,7 +27,7 @@
       <?php if ($Material->getArchivo()!=null):?>
       <td><?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?></td>
       <?php endif?>
-      <td><?php echo $Material->getNombre() ?></td>
+      
       <td><?php echo $Material->getTitulo() ?></td>
       <td><?php echo $Material->getEditorial() ?></td>
       <td><?php echo $Material->getAutor() ?></td>

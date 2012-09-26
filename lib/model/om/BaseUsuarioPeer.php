@@ -23,13 +23,13 @@ abstract class BaseUsuarioPeer {
     const TM_CLASS = 'UsuarioTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 5;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 5;
 
     /** the column name for the ID_USUARIO field */
     const ID_USUARIO = 'usuario.ID_USUARIO';
@@ -45,9 +45,6 @@ abstract class BaseUsuarioPeer {
 
     /** the column name for the EMAIL field */
     const EMAIL = 'usuario.EMAIL';
-
-    /** the column name for the FISICA_ID_PFISICA field */
-    const FISICA_ID_PFISICA = 'usuario.FISICA_ID_PFISICA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -68,12 +65,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUsuario', 'Usuario', 'Password', 'Admin', 'Email', 'FisicaIdPfisica', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario', 'usuario', 'password', 'admin', 'email', 'fisicaIdPfisica', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO, self::USUARIO, self::PASSWORD, self::ADMIN, self::EMAIL, self::FISICA_ID_PFISICA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO', 'USUARIO', 'PASSWORD', 'ADMIN', 'EMAIL', 'FISICA_ID_PFISICA', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_usuario', 'usuario', 'password', 'admin', 'email', 'fisica_id_pfisica', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('IdUsuario', 'Usuario', 'Password', 'Admin', 'Email', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario', 'usuario', 'password', 'admin', 'email', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO, self::USUARIO, self::PASSWORD, self::ADMIN, self::EMAIL, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO', 'USUARIO', 'PASSWORD', 'ADMIN', 'EMAIL', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_usuario', 'usuario', 'password', 'admin', 'email', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -83,12 +80,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUsuario' => 0, 'Usuario' => 1, 'Password' => 2, 'Admin' => 3, 'Email' => 4, 'FisicaIdPfisica' => 5, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario' => 0, 'usuario' => 1, 'password' => 2, 'admin' => 3, 'email' => 4, 'fisicaIdPfisica' => 5, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO => 0, self::USUARIO => 1, self::PASSWORD => 2, self::ADMIN => 3, self::EMAIL => 4, self::FISICA_ID_PFISICA => 5, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO' => 0, 'USUARIO' => 1, 'PASSWORD' => 2, 'ADMIN' => 3, 'EMAIL' => 4, 'FISICA_ID_PFISICA' => 5, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_usuario' => 0, 'usuario' => 1, 'password' => 2, 'admin' => 3, 'email' => 4, 'fisica_id_pfisica' => 5, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('IdUsuario' => 0, 'Usuario' => 1, 'Password' => 2, 'Admin' => 3, 'Email' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario' => 0, 'usuario' => 1, 'password' => 2, 'admin' => 3, 'email' => 4, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO => 0, self::USUARIO => 1, self::PASSWORD => 2, self::ADMIN => 3, self::EMAIL => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO' => 0, 'USUARIO' => 1, 'PASSWORD' => 2, 'ADMIN' => 3, 'EMAIL' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_usuario' => 0, 'usuario' => 1, 'password' => 2, 'admin' => 3, 'email' => 4, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -167,14 +164,12 @@ abstract class BaseUsuarioPeer {
             $criteria->addSelectColumn(UsuarioPeer::PASSWORD);
             $criteria->addSelectColumn(UsuarioPeer::ADMIN);
             $criteria->addSelectColumn(UsuarioPeer::EMAIL);
-            $criteria->addSelectColumn(UsuarioPeer::FISICA_ID_PFISICA);
         } else {
             $criteria->addSelectColumn($alias . '.ID_USUARIO');
             $criteria->addSelectColumn($alias . '.USUARIO');
             $criteria->addSelectColumn($alias . '.PASSWORD');
             $criteria->addSelectColumn($alias . '.ADMIN');
             $criteria->addSelectColumn($alias . '.EMAIL');
-            $criteria->addSelectColumn($alias . '.FISICA_ID_PFISICA');
         }
     }
 
@@ -519,7 +514,7 @@ abstract class BaseUsuarioPeer {
             $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(UsuarioPeer::FISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
+        $criteria->addJoin(UsuarioPeer::ID_USUARIO, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -562,7 +557,7 @@ abstract class BaseUsuarioPeer {
         $startcol = UsuarioPeer::NUM_HYDRATE_COLUMNS;
         PfisicaPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(UsuarioPeer::FISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
+        $criteria->addJoin(UsuarioPeer::ID_USUARIO, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -601,7 +596,8 @@ abstract class BaseUsuarioPeer {
                 } // if obj2 already loaded
 
                 // Add the $obj1 (Usuario) to $obj2 (Pfisica)
-                $obj2->addUsuario($obj1);
+                // one to one relationship
+                $obj1->setPfisica($obj2);
 
             } // if joined row was not null
 
@@ -649,7 +645,7 @@ abstract class BaseUsuarioPeer {
             $con = Propel::getConnection(UsuarioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(UsuarioPeer::FISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
+        $criteria->addJoin(UsuarioPeer::ID_USUARIO, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -694,7 +690,7 @@ abstract class BaseUsuarioPeer {
         PfisicaPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + PfisicaPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(UsuarioPeer::FISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
+        $criteria->addJoin(UsuarioPeer::ID_USUARIO, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -734,7 +730,7 @@ abstract class BaseUsuarioPeer {
                 } // if obj2 loaded
 
                 // Add the $obj1 (Usuario) to the collection in $obj2 (Pfisica)
-                $obj2->addUsuario($obj1);
+                $obj1->setPfisica($obj2);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -797,10 +793,6 @@ abstract class BaseUsuarioPeer {
             $criteria = clone $values; // rename for clarity
         } else {
             $criteria = $values->buildCriteria(); // build Criteria from Usuario object
-        }
-
-        if ($criteria->containsKey(UsuarioPeer::ID_USUARIO) && $criteria->keyContainsValue(UsuarioPeer::ID_USUARIO) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.UsuarioPeer::ID_USUARIO.')');
         }
 
 

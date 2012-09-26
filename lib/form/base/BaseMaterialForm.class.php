@@ -16,7 +16,6 @@ abstract class BaseMaterialForm extends BaseFormPropel
     $this->setWidgets(array(
       'id_material'                  => new sfWidgetFormInputHidden(),
       'archivo'                      => new sfWidgetFormInputText(),
-      'nombre'                       => new sfWidgetFormInputText(),
       'titulo'                       => new sfWidgetFormInputText(),
       'editorial'                    => new sfWidgetFormInputText(),
       'autor'                        => new sfWidgetFormInputText(),
@@ -28,10 +27,9 @@ abstract class BaseMaterialForm extends BaseFormPropel
     $this->setValidators(array(
       'id_material'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdMaterial()), 'empty_value' => $this->getObject()->getIdMaterial(), 'required' => false)),
       'archivo'                      => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'nombre'                       => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'titulo'                       => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'editorial'                    => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'autor'                        => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'titulo'                       => new sfValidatorString(array('max_length' => 45)),
+      'editorial'                    => new sfValidatorString(array('max_length' => 45)),
+      'autor'                        => new sfValidatorString(array('max_length' => 45)),
       'descripcion'                  => new sfValidatorString(array('required' => false)),
       'subcontenido_id_subcontenido' => new sfValidatorPropelChoice(array('model' => 'Subcontenido', 'column' => 'id_subcontenido')),
       'biblioteca_id_biblioteca'     => new sfValidatorPropelChoice(array('model' => 'Biblioteca', 'column' => 'id_biblioteca')),

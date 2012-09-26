@@ -61,12 +61,6 @@ abstract class BaseUsuario extends BaseObject
     protected $email;
 
     /**
-     * The value for the fisica_id_pfisica field.
-     * @var        int
-     */
-    protected $fisica_id_pfisica;
-
-    /**
      * @var        Pfisica
      */
     protected $aPfisica;
@@ -152,17 +146,6 @@ abstract class BaseUsuario extends BaseObject
     }
 
     /**
-     * Get the [fisica_id_pfisica] column value.
-     * 
-     * @return   int
-     */
-    public function getFisicaIdPfisica()
-    {
-
-        return $this->fisica_id_pfisica;
-    }
-
-    /**
      * Set the value of [id_usuario] column.
      * 
      * @param      int $v new value
@@ -177,6 +160,10 @@ abstract class BaseUsuario extends BaseObject
         if ($this->id_usuario !== $v) {
             $this->id_usuario = $v;
             $this->modifiedColumns[] = UsuarioPeer::ID_USUARIO;
+        }
+
+        if ($this->aPfisica !== null && $this->aPfisica->getIdPfisica() !== $v) {
+            $this->aPfisica = null;
         }
 
 
@@ -276,31 +263,6 @@ abstract class BaseUsuario extends BaseObject
     } // setEmail()
 
     /**
-     * Set the value of [fisica_id_pfisica] column.
-     * 
-     * @param      int $v new value
-     * @return   Usuario The current object (for fluent API support)
-     */
-    public function setFisicaIdPfisica($v)
-    {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->fisica_id_pfisica !== $v) {
-            $this->fisica_id_pfisica = $v;
-            $this->modifiedColumns[] = UsuarioPeer::FISICA_ID_PFISICA;
-        }
-
-        if ($this->aPfisica !== null && $this->aPfisica->getIdPfisica() !== $v) {
-            $this->aPfisica = null;
-        }
-
-
-        return $this;
-    } // setFisicaIdPfisica()
-
-    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -337,7 +299,6 @@ abstract class BaseUsuario extends BaseObject
             $this->password = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->admin = ($row[$startcol + 3] !== null) ? (boolean) $row[$startcol + 3] : null;
             $this->email = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->fisica_id_pfisica = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -346,7 +307,7 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 5; // 5 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Usuario object", $e);
@@ -369,7 +330,7 @@ abstract class BaseUsuario extends BaseObject
     public function ensureConsistency()
     {
 
-        if ($this->aPfisica !== null && $this->fisica_id_pfisica !== $this->aPfisica->getIdPfisica()) {
+        if ($this->aPfisica !== null && $this->id_usuario !== $this->aPfisica->getIdPfisica()) {
             $this->aPfisica = null;
         }
     } // ensureConsistency
@@ -619,10 +580,6 @@ abstract class BaseUsuario extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = UsuarioPeer::ID_USUARIO;
-        if (null !== $this->id_usuario) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UsuarioPeer::ID_USUARIO . ')');
-        }
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(UsuarioPeer::ID_USUARIO)) {
@@ -639,9 +596,6 @@ abstract class BaseUsuario extends BaseObject
         }
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) {
             $modifiedColumns[':p' . $index++]  = '`EMAIL`';
-        }
-        if ($this->isColumnModified(UsuarioPeer::FISICA_ID_PFISICA)) {
-            $modifiedColumns[':p' . $index++]  = '`FISICA_ID_PFISICA`';
         }
 
         $sql = sprintf(
@@ -669,9 +623,6 @@ abstract class BaseUsuario extends BaseObject
                     case '`EMAIL`':						
 						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
                         break;
-                    case '`FISICA_ID_PFISICA`':						
-						$stmt->bindValue($identifier, $this->fisica_id_pfisica, PDO::PARAM_INT);
-                        break;
                 }
             }
             $stmt->execute();
@@ -679,13 +630,6 @@ abstract class BaseUsuario extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setIdUsuario($pk);
 
         $this->setNew(false);
     }
@@ -841,9 +785,6 @@ abstract class BaseUsuario extends BaseObject
             case 4:
                 return $this->getEmail();
                 break;
-            case 5:
-                return $this->getFisicaIdPfisica();
-                break;
             default:
                 return null;
                 break;
@@ -878,7 +819,6 @@ abstract class BaseUsuario extends BaseObject
             $keys[2] => $this->getPassword(),
             $keys[3] => $this->getAdmin(),
             $keys[4] => $this->getEmail(),
-            $keys[5] => $this->getFisicaIdPfisica(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aPfisica) {
@@ -936,9 +876,6 @@ abstract class BaseUsuario extends BaseObject
             case 4:
                 $this->setEmail($value);
                 break;
-            case 5:
-                $this->setFisicaIdPfisica($value);
-                break;
         } // switch()
     }
 
@@ -968,7 +905,6 @@ abstract class BaseUsuario extends BaseObject
         if (array_key_exists($keys[2], $arr)) $this->setPassword($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setAdmin($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setEmail($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setFisicaIdPfisica($arr[$keys[5]]);
     }
 
     /**
@@ -985,7 +921,6 @@ abstract class BaseUsuario extends BaseObject
         if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
         if ($this->isColumnModified(UsuarioPeer::ADMIN)) $criteria->add(UsuarioPeer::ADMIN, $this->admin);
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) $criteria->add(UsuarioPeer::EMAIL, $this->email);
-        if ($this->isColumnModified(UsuarioPeer::FISICA_ID_PFISICA)) $criteria->add(UsuarioPeer::FISICA_ID_PFISICA, $this->fisica_id_pfisica);
 
         return $criteria;
     }
@@ -1053,7 +988,6 @@ abstract class BaseUsuario extends BaseObject
         $copyObj->setPassword($this->getPassword());
         $copyObj->setAdmin($this->getAdmin());
         $copyObj->setEmail($this->getEmail());
-        $copyObj->setFisicaIdPfisica($this->getFisicaIdPfisica());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1066,6 +1000,11 @@ abstract class BaseUsuario extends BaseObject
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addAccesoMaterial($relObj->copy($deepCopy));
                 }
+            }
+
+            $relObj = $this->getPfisica();
+            if ($relObj) {
+                $copyObj->setPfisica($relObj->copy($deepCopy));
             }
 
             //unflag object copy
@@ -1128,17 +1067,16 @@ abstract class BaseUsuario extends BaseObject
     public function setPfisica(Pfisica $v = null)
     {
         if ($v === null) {
-            $this->setFisicaIdPfisica(NULL);
+            $this->setIdUsuario(NULL);
         } else {
-            $this->setFisicaIdPfisica($v->getIdPfisica());
+            $this->setIdUsuario($v->getIdPfisica());
         }
 
         $this->aPfisica = $v;
 
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Pfisica object, it will not be re-added.
+        // Add binding for other direction of this 1:1 relationship.
         if ($v !== null) {
-            $v->addUsuario($this);
+            $v->setUsuario($this);
         }
 
 
@@ -1155,15 +1093,10 @@ abstract class BaseUsuario extends BaseObject
      */
     public function getPfisica(PropelPDO $con = null)
     {
-        if ($this->aPfisica === null && ($this->fisica_id_pfisica !== null)) {
-            $this->aPfisica = PfisicaQuery::create()->findPk($this->fisica_id_pfisica, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aPfisica->addUsuarios($this);
-             */
+        if ($this->aPfisica === null && ($this->id_usuario !== null)) {
+            $this->aPfisica = PfisicaQuery::create()->findPk($this->id_usuario, $con);
+            // Because this foreign key represents a one-to-one relationship, we will create a bi-directional association.
+            $this->aPfisica->setUsuario($this);
         }
 
         return $this->aPfisica;
@@ -1387,7 +1320,6 @@ abstract class BaseUsuario extends BaseObject
         $this->password = null;
         $this->admin = null;
         $this->email = null;
-        $this->fisica_id_pfisica = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();

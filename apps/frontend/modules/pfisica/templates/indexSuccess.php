@@ -21,7 +21,7 @@
       <td><?php echo $Pfisica->getApellido() ?></td>
       <td><?php echo $Pfisica->getVaron() ?></td>
       <td><?php echo $Pfisica->getFechaNac() ?></td>
-      <td><?php echo $Pfisica->getTipoDocIdTipoDoc() ?></td>
+      <td><?php echo $Pfisica->getTipodoc()->getNombre()?></td>
       <td><?php echo $Pfisica->getDocumento() ?></td>
       <td><?php echo $Pfisica->getPersonaIdPersona() ?></td>
       <td>          
