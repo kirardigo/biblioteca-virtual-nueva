@@ -40,6 +40,7 @@ class CarreraTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_CARRERA', 'IdCarrera', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         // validators
     } // initialize()
 

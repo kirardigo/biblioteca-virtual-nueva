@@ -40,6 +40,7 @@ class BibliotecaTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_BIBLIOTECA', 'IdBiblioteca', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         $this->addForeignKey('PJURIDICA_ID_PJURIDICA', 'PjuridicaIdPjuridica', 'INTEGER', 'pjuridica', 'ID_PJURIDICA', true, null, null);
         // validators
     } // initialize()

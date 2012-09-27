@@ -2,3 +2,14 @@ propel:
   _attributes:
     package: lib.model
     defaultIdMethod: native
+  
+  tipo_doc:
+    nombre: { primaryString: true }
+  carrera:
+    nombre: { primaryString: true }
+  biblioteca:
+    nombre: { primaryString: true }
+  subcontenido:
+    nombre: { primaryString: true }
+  localidad:
+   nombre: { primaryString: true }   

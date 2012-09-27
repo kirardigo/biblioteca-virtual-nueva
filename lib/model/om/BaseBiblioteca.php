@@ -1249,11 +1249,11 @@ abstract class BaseBiblioteca extends BaseObject
     /**
      * Return the string representation of this object
      *
-     * @return string
+     * @return string The value of the 'nombre' column
      */
     public function __toString()
     {
-        return (string) $this->exportTo(BibliotecaPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->getNombre();
     }
 
     /**

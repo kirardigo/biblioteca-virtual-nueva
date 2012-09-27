@@ -6,7 +6,7 @@
       <th>Id contenido</th>
       <th>Numero contenido</th>
       <th>Nombre</th>
-      <th>Acciones</th>
+      
     </tr>
   </thead>
   <tbody>

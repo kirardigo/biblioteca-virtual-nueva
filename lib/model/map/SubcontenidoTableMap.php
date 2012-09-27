@@ -40,6 +40,7 @@ class SubcontenidoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_SUBCONTENIDO', 'IdSubcontenido', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         $this->addColumn('NUMERO_SUBCONTENIDO', 'NumeroSubcontenido', 'VARCHAR', false, 45, null);
         $this->addForeignKey('CONTENIDO_ID_CONTENIDO', 'ContenidoIdContenido', 'INTEGER', 'contenido', 'ID_CONTENIDO', true, null, null);
         // validators

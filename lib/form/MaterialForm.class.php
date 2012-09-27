@@ -37,20 +37,23 @@ class MaterialForm extends BaseMaterialForm
       
   }
     public function save ($con = null)
-  {
+  { 
     // Get the uploaded image
     $image = $this->getValue('archivo');
-    $archivin= $this->getValue('nombre');
-    $autor= $this->getValue('autor');
-    $titulo= $this->getValue('titulo');
-    $id= $this->getValue('id_material');
+    //$editorial=$this->getValue('editorial');
+    //pasar a mayusculas
+    $autor= strtoupper($this->getValue('autor'));
+    $titulo= strtoupper($this->getValue('titulo'));
+    //cambio espacios por guiones bajos
+    $autor=str_replace(" ", "_",$autor);
+    $titulo=str_replace(" ", "_",$titulo);
     
     $swimsuit = $this->getObject();
 
     if ($image)
     {
       $image->save( $autor.'_'.$titulo.'.pdf');
-     // $image->save( $image.'jpg');
+     //$editorial->save( 'vuili');
     }
 
     return parent::save($con);
