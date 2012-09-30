@@ -39,8 +39,8 @@ class PersonaTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_PERSONA', 'IdPersona', 'INTEGER', true, null, null);
-        $this->addColumn('DOMICILIO_LEGAL', 'DomicilioLegal', 'VARCHAR', false, 45, null);
-        $this->addColumn('DOMICILIO_POSTAL', 'DomicilioPostal', 'VARCHAR', false, 45, null);
+        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('JURIDICA', 'Juridica', 'BOOLEAN', false, 1, null);
         // validators
     } // initialize()
 
@@ -49,9 +49,6 @@ class PersonaTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Domicilio', 'Domicilio', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Domicilios');
-        $this->addRelation('Pfisica', 'Pfisica', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Pfisicas');
-        $this->addRelation('Pjuridica', 'Pjuridica', RelationMap::ONE_TO_MANY, array('id_persona' => 'persona_id_persona', ), null, null, 'Pjuridicas');
     } // buildRelations()
 
     /**

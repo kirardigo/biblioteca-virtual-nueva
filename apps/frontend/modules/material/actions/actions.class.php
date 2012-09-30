@@ -11,7 +11,63 @@ class materialActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+   // $this->Materials = MaterialQuery::create()->find();
+     
+          $this->elegido = array();
     $this->Materials = MaterialQuery::create()->find();
+    // si viene algo por el POST
+    if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
+        //guardo el id de esa pelicula
+        $autor = $request->getParameter('autor');
+        $titulo = $request->getParameter('titulo');
+        $editorial = $request->getParameter('editorial');
+        $carrera = $request->getParameter('carrera');
+        $contenido = $request->getParameter('contenido');
+        $subcontenido = $request->getParameter('subcontenido');
+        
+        if((empty($autor))){
+        $autor='*';    
+        }
+        if((empty($titulo))){
+        $titulo='*';    
+        }
+        if((empty($editorial))){
+        $editorial='*';    
+        }
+        if((empty($carrera))){
+        $carrera='*';    
+        }
+        if((empty($contenido))){
+        $contenido='*';    
+        }
+        if((empty($subcontenido))){
+        $subcontenido='*';    
+        }
+        
+            $consulta2 = MaterialQuery::create();
+            $consulta2->filterByAutor($autor)
+            ->filterByTitulo($titulo)
+            ->filterByEditorial($editorial)
+            
+                 ->useSubcontenidoQuery()
+                    ->filterByNombre($subcontenido)
+                    ->useContenidoQuery()
+                      ->filterByNombre($contenido)
+                        
+                    ->endUse()
+                    
+                  ->endUse()
+                  
+                    
+                  
+             
+                     
+                    
+            ;
+            $this->elegido = $consulta2->find();              
+       
+
+    }
   }
 
   public function executeNew(sfWebRequest $request)
@@ -101,5 +157,16 @@ class materialActions extends sfActions
                 // No retorne ninguna vista 
                 sfView::NONE; 
         } 
+        
+    public function getExtension($fileStr){
+         $this->palabra=strtolower(end(explode('.',$fileStr)));
+    
+         return $this;
+    }
+/*$nameFile=’mi.archivo.txt’;
 
+$ext = pathinfo($nameFile);
+
+echo $ext['extension'];
+ */
 }

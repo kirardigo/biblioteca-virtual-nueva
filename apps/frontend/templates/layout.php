@@ -83,7 +83,8 @@
               <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
               <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
              
-              <li><a href="<?php echo url_for('persona/index');?>">ABM Persona</a></li>
+                            <li><a href="<?php echo url_for('persona/index');?>">ABM Personas</a></li>
+
               
               <li><a href="<?php echo url_for('provincia/index');?>">ABM Provincia/Localidad</a></li>
               <li><a href="<?php echo url_for('domicilio/index');?>">ABM Domicilio</a></li>

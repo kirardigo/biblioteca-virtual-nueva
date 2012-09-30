@@ -39,7 +39,7 @@ class CarreraTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_CARRERA', 'IdCarrera', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
         $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         // validators
     } // initialize()
@@ -50,6 +50,7 @@ class CarreraTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), 'CASCADE', 'CASCADE', 'CarreraFisicas');
+        $this->addRelation('Material', 'Material', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), null, null, 'Materials');
     } // buildRelations()
 
     /**

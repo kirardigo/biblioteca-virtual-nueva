@@ -18,21 +18,19 @@ abstract class BasePfisicaForm extends BaseFormPropel
       'nombre'               => new sfWidgetFormInputText(),
       'apellido'             => new sfWidgetFormInputText(),
       'varon'                => new sfWidgetFormInputCheckbox(),
-      'fecha_nac'            => new sfWidgetFormInputText(),
+      'fecha_nac'            => new sfWidgetFormDate(),
       'tipo_doc_id_tipo_doc' => new sfWidgetFormPropelChoice(array('model' => 'TipoDoc', 'add_empty' => false)),
       'documento'            => new sfWidgetFormInputText(),
-      'persona_id_persona'   => new sfWidgetFormPropelChoice(array('model' => 'Persona', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
       'id_pfisica'           => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdPfisica()), 'empty_value' => $this->getObject()->getIdPfisica(), 'required' => false)),
-      'nombre'               => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'apellido'             => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'nombre'               => new sfValidatorString(array('max_length' => 45)),
+      'apellido'             => new sfValidatorString(array('max_length' => 45)),
       'varon'                => new sfValidatorBoolean(array('required' => false)),
-      'fecha_nac'            => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'fecha_nac'            => new sfValidatorDate(array('required' => false)),
       'tipo_doc_id_tipo_doc' => new sfValidatorPropelChoice(array('model' => 'TipoDoc', 'column' => 'id_tipo_doc')),
-      'documento'            => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'persona_id_persona'   => new sfValidatorPropelChoice(array('model' => 'Persona', 'column' => 'id_persona')),
+      'documento'            => new sfValidatorString(array('max_length' => 45)),
     ));
 
     $this->widgetSchema->setNameFormat('pfisica[%s]');

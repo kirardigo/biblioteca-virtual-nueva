@@ -12,4 +12,6 @@ propel:
   subcontenido:
     nombre: { primaryString: true }
   localidad:
-   nombre: { primaryString: true }   
+   nombre: { primaryString: true }
+  pjuridica:
+   nombre: { primaryString: true }  

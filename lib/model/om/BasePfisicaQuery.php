@@ -13,7 +13,6 @@
  * @method     PfisicaQuery orderByFechaNac($order = Criteria::ASC) Order by the fecha_nac column
  * @method     PfisicaQuery orderByTipoDocIdTipoDoc($order = Criteria::ASC) Order by the tipo_doc_id_tipo_doc column
  * @method     PfisicaQuery orderByDocumento($order = Criteria::ASC) Order by the documento column
- * @method     PfisicaQuery orderByPersonaIdPersona($order = Criteria::ASC) Order by the persona_id_persona column
  *
  * @method     PfisicaQuery groupByIdPfisica() Group by the id_pfisica column
  * @method     PfisicaQuery groupByNombre() Group by the nombre column
@@ -22,7 +21,6 @@
  * @method     PfisicaQuery groupByFechaNac() Group by the fecha_nac column
  * @method     PfisicaQuery groupByTipoDocIdTipoDoc() Group by the tipo_doc_id_tipo_doc column
  * @method     PfisicaQuery groupByDocumento() Group by the documento column
- * @method     PfisicaQuery groupByPersonaIdPersona() Group by the persona_id_persona column
  *
  * @method     PfisicaQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     PfisicaQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -32,13 +30,13 @@
  * @method     PfisicaQuery rightJoinTipoDoc($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TipoDoc relation
  * @method     PfisicaQuery innerJoinTipoDoc($relationAlias = null) Adds a INNER JOIN clause to the query using the TipoDoc relation
  *
- * @method     PfisicaQuery leftJoinPersona($relationAlias = null) Adds a LEFT JOIN clause to the query using the Persona relation
- * @method     PfisicaQuery rightJoinPersona($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Persona relation
- * @method     PfisicaQuery innerJoinPersona($relationAlias = null) Adds a INNER JOIN clause to the query using the Persona relation
- *
  * @method     PfisicaQuery leftJoinCarreraFisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarreraFisica relation
  * @method     PfisicaQuery rightJoinCarreraFisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarreraFisica relation
  * @method     PfisicaQuery innerJoinCarreraFisica($relationAlias = null) Adds a INNER JOIN clause to the query using the CarreraFisica relation
+ *
+ * @method     PfisicaQuery leftJoinDomicilio($relationAlias = null) Adds a LEFT JOIN clause to the query using the Domicilio relation
+ * @method     PfisicaQuery rightJoinDomicilio($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Domicilio relation
+ * @method     PfisicaQuery innerJoinDomicilio($relationAlias = null) Adds a INNER JOIN clause to the query using the Domicilio relation
  *
  * @method     PfisicaQuery leftJoinUsuario($relationAlias = null) Adds a LEFT JOIN clause to the query using the Usuario relation
  * @method     PfisicaQuery rightJoinUsuario($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Usuario relation
@@ -54,7 +52,6 @@
  * @method     Pfisica findOneByFechaNac(string $fecha_nac) Return the first Pfisica filtered by the fecha_nac column
  * @method     Pfisica findOneByTipoDocIdTipoDoc(int $tipo_doc_id_tipo_doc) Return the first Pfisica filtered by the tipo_doc_id_tipo_doc column
  * @method     Pfisica findOneByDocumento(string $documento) Return the first Pfisica filtered by the documento column
- * @method     Pfisica findOneByPersonaIdPersona(int $persona_id_persona) Return the first Pfisica filtered by the persona_id_persona column
  *
  * @method     array findByIdPfisica(int $id_pfisica) Return Pfisica objects filtered by the id_pfisica column
  * @method     array findByNombre(string $nombre) Return Pfisica objects filtered by the nombre column
@@ -63,7 +60,6 @@
  * @method     array findByFechaNac(string $fecha_nac) Return Pfisica objects filtered by the fecha_nac column
  * @method     array findByTipoDocIdTipoDoc(int $tipo_doc_id_tipo_doc) Return Pfisica objects filtered by the tipo_doc_id_tipo_doc column
  * @method     array findByDocumento(string $documento) Return Pfisica objects filtered by the documento column
- * @method     array findByPersonaIdPersona(int $persona_id_persona) Return Pfisica objects filtered by the persona_id_persona column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -154,7 +150,7 @@ abstract class BasePfisicaQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_PFISICA`, `NOMBRE`, `APELLIDO`, `VARON`, `FECHA_NAC`, `TIPO_DOC_ID_TIPO_DOC`, `DOCUMENTO`, `PERSONA_ID_PERSONA` FROM `pfisica` WHERE `ID_PFISICA` = :p0';
+        $sql = 'SELECT `ID_PFISICA`, `NOMBRE`, `APELLIDO`, `VARON`, `FECHA_NAC`, `TIPO_DOC_ID_TIPO_DOC`, `DOCUMENTO` FROM `pfisica` WHERE `ID_PFISICA` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -360,24 +356,38 @@ abstract class BasePfisicaQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByFechaNac('fooValue');   // WHERE fecha_nac = 'fooValue'
-     * $query->filterByFechaNac('%fooValue%'); // WHERE fecha_nac LIKE '%fooValue%'
+     * $query->filterByFechaNac('2011-03-14'); // WHERE fecha_nac = '2011-03-14'
+     * $query->filterByFechaNac('now'); // WHERE fecha_nac = '2011-03-14'
+     * $query->filterByFechaNac(array('max' => 'yesterday')); // WHERE fecha_nac > '2011-03-13'
      * </code>
      *
-     * @param     string $fechaNac The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     mixed $fechaNac The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return PfisicaQuery The current query, for fluid interface
      */
     public function filterByFechaNac($fechaNac = null, $comparison = null)
     {
-        if (null === $comparison) {
-            if (is_array($fechaNac)) {
+        if (is_array($fechaNac)) {
+            $useMinMax = false;
+            if (isset($fechaNac['min'])) {
+                $this->addUsingAlias(PfisicaPeer::FECHA_NAC, $fechaNac['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($fechaNac['max'])) {
+                $this->addUsingAlias(PfisicaPeer::FECHA_NAC, $fechaNac['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $fechaNac)) {
-                $fechaNac = str_replace('*', '%', $fechaNac);
-                $comparison = Criteria::LIKE;
             }
         }
 
@@ -457,49 +467,6 @@ abstract class BasePfisicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the persona_id_persona column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByPersonaIdPersona(1234); // WHERE persona_id_persona = 1234
-     * $query->filterByPersonaIdPersona(array(12, 34)); // WHERE persona_id_persona IN (12, 34)
-     * $query->filterByPersonaIdPersona(array('min' => 12)); // WHERE persona_id_persona > 12
-     * </code>
-     *
-     * @see       filterByPersona()
-     *
-     * @param     mixed $personaIdPersona The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return PfisicaQuery The current query, for fluid interface
-     */
-    public function filterByPersonaIdPersona($personaIdPersona = null, $comparison = null)
-    {
-        if (is_array($personaIdPersona)) {
-            $useMinMax = false;
-            if (isset($personaIdPersona['min'])) {
-                $this->addUsingAlias(PfisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($personaIdPersona['max'])) {
-                $this->addUsingAlias(PfisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(PfisicaPeer::PERSONA_ID_PERSONA, $personaIdPersona, $comparison);
-    }
-
-    /**
      * Filter the query by a related TipoDoc object
      *
      * @param   TipoDoc|PropelObjectCollection $tipoDoc The related object(s) to use as filter
@@ -576,82 +543,6 @@ abstract class BasePfisicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Persona object
-     *
-     * @param   Persona|PropelObjectCollection $persona The related object(s) to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return   PfisicaQuery The current query, for fluid interface
-     * @throws   PropelException - if the provided filter is invalid.
-     */
-    public function filterByPersona($persona, $comparison = null)
-    {
-        if ($persona instanceof Persona) {
-            return $this
-                ->addUsingAlias(PfisicaPeer::PERSONA_ID_PERSONA, $persona->getIdPersona(), $comparison);
-        } elseif ($persona instanceof PropelObjectCollection) {
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-
-            return $this
-                ->addUsingAlias(PfisicaPeer::PERSONA_ID_PERSONA, $persona->toKeyValue('PrimaryKey', 'IdPersona'), $comparison);
-        } else {
-            throw new PropelException('filterByPersona() only accepts arguments of type Persona or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the Persona relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return PfisicaQuery The current query, for fluid interface
-     */
-    public function joinPersona($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Persona');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'Persona');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the Persona relation Persona object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   PersonaQuery A secondary query class using the current class as primary query
-     */
-    public function usePersonaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinPersona($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Persona', 'PersonaQuery');
-    }
-
-    /**
      * Filter the query by a related CarreraFisica object
      *
      * @param   CarreraFisica|PropelObjectCollection $carreraFisica  the related object to use as filter
@@ -723,6 +614,80 @@ abstract class BasePfisicaQuery extends ModelCriteria
         return $this
             ->joinCarreraFisica($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'CarreraFisica', 'CarreraFisicaQuery');
+    }
+
+    /**
+     * Filter the query by a related Domicilio object
+     *
+     * @param   Domicilio|PropelObjectCollection $domicilio  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   PfisicaQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByDomicilio($domicilio, $comparison = null)
+    {
+        if ($domicilio instanceof Domicilio) {
+            return $this
+                ->addUsingAlias(PfisicaPeer::ID_PFISICA, $domicilio->getPfisicaIdPfisica(), $comparison);
+        } elseif ($domicilio instanceof PropelObjectCollection) {
+            return $this
+                ->useDomicilioQuery()
+                ->filterByPrimaryKeys($domicilio->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByDomicilio() only accepts arguments of type Domicilio or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Domicilio relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return PfisicaQuery The current query, for fluid interface
+     */
+    public function joinDomicilio($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Domicilio');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Domicilio');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Domicilio relation Domicilio object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   DomicilioQuery A secondary query class using the current class as primary query
+     */
+    public function useDomicilioQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinDomicilio($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Domicilio', 'DomicilioQuery');
     }
 
     /**

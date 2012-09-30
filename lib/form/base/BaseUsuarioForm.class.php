@@ -29,6 +29,10 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'email'      => new sfValidatorString(array('max_length' => 45, 'required' => false)),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorPropelUnique(array('model' => 'Usuario', 'column' => array('usuario')))
+    );
+
     $this->widgetSchema->setNameFormat('usuario[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

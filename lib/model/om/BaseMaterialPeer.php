@@ -23,13 +23,13 @@ abstract class BaseMaterialPeer {
     const TM_CLASS = 'MaterialTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 8;
+    const NUM_COLUMNS = 9;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 8;
+    const NUM_HYDRATE_COLUMNS = 9;
 
     /** the column name for the ID_MATERIAL field */
     const ID_MATERIAL = 'material.ID_MATERIAL';
@@ -55,6 +55,9 @@ abstract class BaseMaterialPeer {
     /** the column name for the BIBLIOTECA_ID_BIBLIOTECA field */
     const BIBLIOTECA_ID_BIBLIOTECA = 'material.BIBLIOTECA_ID_BIBLIOTECA';
 
+    /** the column name for the CARRERA_ID_CARRERA field */
+    const CARRERA_ID_CARRERA = 'material.CARRERA_ID_CARRERA';
+
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
@@ -74,12 +77,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'SubcontenidoIdSubcontenido', 'BibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenidoIdSubcontenido', 'bibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::SUBCONTENIDO_ID_SUBCONTENIDO, self::BIBLIOTECA_ID_BIBLIOTECA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'SUBCONTENIDO_ID_SUBCONTENIDO', 'BIBLIOTECA_ID_BIBLIOTECA', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenido_id_subcontenido', 'biblioteca_id_biblioteca', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'SubcontenidoIdSubcontenido', 'BibliotecaIdBiblioteca', 'CarreraIdCarrera', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenidoIdSubcontenido', 'bibliotecaIdBiblioteca', 'carreraIdCarrera', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::SUBCONTENIDO_ID_SUBCONTENIDO, self::BIBLIOTECA_ID_BIBLIOTECA, self::CARRERA_ID_CARRERA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'SUBCONTENIDO_ID_SUBCONTENIDO', 'BIBLIOTECA_ID_BIBLIOTECA', 'CARRERA_ID_CARRERA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'subcontenido_id_subcontenido', 'biblioteca_id_biblioteca', 'carrera_id_carrera', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -89,12 +92,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Titulo' => 2, 'Editorial' => 3, 'Autor' => 4, 'Descripcion' => 5, 'SubcontenidoIdSubcontenido' => 6, 'BibliotecaIdBiblioteca' => 7, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenidoIdSubcontenido' => 6, 'bibliotecaIdBiblioteca' => 7, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::TITULO => 2, self::EDITORIAL => 3, self::AUTOR => 4, self::DESCRIPCION => 5, self::SUBCONTENIDO_ID_SUBCONTENIDO => 6, self::BIBLIOTECA_ID_BIBLIOTECA => 7, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'TITULO' => 2, 'EDITORIAL' => 3, 'AUTOR' => 4, 'DESCRIPCION' => 5, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 6, 'BIBLIOTECA_ID_BIBLIOTECA' => 7, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenido_id_subcontenido' => 6, 'biblioteca_id_biblioteca' => 7, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Titulo' => 2, 'Editorial' => 3, 'Autor' => 4, 'Descripcion' => 5, 'SubcontenidoIdSubcontenido' => 6, 'BibliotecaIdBiblioteca' => 7, 'CarreraIdCarrera' => 8, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenidoIdSubcontenido' => 6, 'bibliotecaIdBiblioteca' => 7, 'carreraIdCarrera' => 8, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::TITULO => 2, self::EDITORIAL => 3, self::AUTOR => 4, self::DESCRIPCION => 5, self::SUBCONTENIDO_ID_SUBCONTENIDO => 6, self::BIBLIOTECA_ID_BIBLIOTECA => 7, self::CARRERA_ID_CARRERA => 8, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'TITULO' => 2, 'EDITORIAL' => 3, 'AUTOR' => 4, 'DESCRIPCION' => 5, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 6, 'BIBLIOTECA_ID_BIBLIOTECA' => 7, 'CARRERA_ID_CARRERA' => 8, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'subcontenido_id_subcontenido' => 6, 'biblioteca_id_biblioteca' => 7, 'carrera_id_carrera' => 8, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -176,6 +179,7 @@ abstract class BaseMaterialPeer {
             $criteria->addSelectColumn(MaterialPeer::DESCRIPCION);
             $criteria->addSelectColumn(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO);
             $criteria->addSelectColumn(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA);
+            $criteria->addSelectColumn(MaterialPeer::CARRERA_ID_CARRERA);
         } else {
             $criteria->addSelectColumn($alias . '.ID_MATERIAL');
             $criteria->addSelectColumn($alias . '.ARCHIVO');
@@ -185,6 +189,7 @@ abstract class BaseMaterialPeer {
             $criteria->addSelectColumn($alias . '.DESCRIPCION');
             $criteria->addSelectColumn($alias . '.SUBCONTENIDO_ID_SUBCONTENIDO');
             $criteria->addSelectColumn($alias . '.BIBLIOTECA_ID_BIBLIOTECA');
+            $criteria->addSelectColumn($alias . '.CARRERA_ID_CARRERA');
         }
     }
 
@@ -611,6 +616,63 @@ abstract class BaseMaterialPeer {
 
 
     /**
+     * Returns the number of rows matching criteria, joining the related Carrera table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinCarrera(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            MaterialPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
      * Selects a collection of Material objects pre-filled with their Subcontenido objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -757,6 +819,79 @@ abstract class BaseMaterialPeer {
 
 
     /**
+     * Selects a collection of Material objects pre-filled with their Carrera objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Material objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinCarrera(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        MaterialPeer::addSelectColumns($criteria);
+        $startcol = MaterialPeer::NUM_HYDRATE_COLUMNS;
+        CarreraPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = MaterialPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                MaterialPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = CarreraPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = CarreraPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    CarreraPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Material) to $obj2 (Carrera)
+                $obj2->addMaterial($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining all related tables
      *
      * @param      Criteria $criteria
@@ -795,6 +930,8 @@ abstract class BaseMaterialPeer {
         $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
         $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -842,9 +979,14 @@ abstract class BaseMaterialPeer {
         BibliotecaPeer::addSelectColumns($criteria);
         $startcol4 = $startcol3 + BibliotecaPeer::NUM_HYDRATE_COLUMNS;
 
+        CarreraPeer::addSelectColumns($criteria);
+        $startcol5 = $startcol4 + CarreraPeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
         $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -905,6 +1047,24 @@ abstract class BaseMaterialPeer {
                 $obj3->addMaterial($obj1);
             } // if joined row not null
 
+            // Add objects for joined Carrera rows
+
+            $key4 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+            if ($key4 !== null) {
+                $obj4 = CarreraPeer::getInstanceFromPool($key4);
+                if (!$obj4) {
+
+                    $cls = CarreraPeer::getOMClass();
+
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    CarreraPeer::addInstanceToPool($obj4, $key4);
+                } // if obj4 loaded
+
+                // Add the $obj1 (Material) to the collection in $obj4 (Carrera)
+                $obj4->addMaterial($obj1);
+            } // if joined row not null
+
             $results[] = $obj1;
         }
         $stmt->closeCursor();
@@ -950,6 +1110,8 @@ abstract class BaseMaterialPeer {
         }
     
         $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -1008,6 +1170,67 @@ abstract class BaseMaterialPeer {
     
         $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Carrera table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptCarrera(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            MaterialPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(self::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
@@ -1054,7 +1277,12 @@ abstract class BaseMaterialPeer {
         BibliotecaPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + BibliotecaPeer::NUM_HYDRATE_COLUMNS;
 
+        CarreraPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + CarreraPeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -1099,6 +1327,25 @@ abstract class BaseMaterialPeer {
 
             } // if joined row is not null
 
+                // Add objects for joined Carrera rows
+
+                $key3 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = CarreraPeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+    
+                        $cls = CarreraPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    CarreraPeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Material) to the collection in $obj3 (Carrera)
+                $obj3->addMaterial($obj1);
+
+            } // if joined row is not null
+
             $results[] = $obj1;
         }
         $stmt->closeCursor();
@@ -1134,7 +1381,12 @@ abstract class BaseMaterialPeer {
         SubcontenidoPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
 
+        CarreraPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + CarreraPeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -1176,6 +1428,129 @@ abstract class BaseMaterialPeer {
 
                 // Add the $obj1 (Material) to the collection in $obj2 (Subcontenido)
                 $obj2->addMaterial($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Carrera rows
+
+                $key3 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = CarreraPeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+    
+                        $cls = CarreraPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    CarreraPeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Material) to the collection in $obj3 (Carrera)
+                $obj3->addMaterial($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Material objects pre-filled with all related objects except Carrera.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Material objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptCarrera(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(self::DATABASE_NAME);
+        }
+
+        MaterialPeer::addSelectColumns($criteria);
+        $startcol2 = MaterialPeer::NUM_HYDRATE_COLUMNS;
+
+        SubcontenidoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
+
+        BibliotecaPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + BibliotecaPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
+
+        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+
+		// symfony_behaviors behavior
+		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
+		{
+		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		}
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = MaterialPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                MaterialPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Subcontenido rows
+
+                $key2 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = SubcontenidoPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = SubcontenidoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SubcontenidoPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Material) to the collection in $obj2 (Subcontenido)
+                $obj2->addMaterial($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Biblioteca rows
+
+                $key3 = BibliotecaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = BibliotecaPeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+    
+                        $cls = BibliotecaPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    BibliotecaPeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Material) to the collection in $obj3 (Biblioteca)
+                $obj3->addMaterial($obj1);
 
             } // if joined row is not null
 

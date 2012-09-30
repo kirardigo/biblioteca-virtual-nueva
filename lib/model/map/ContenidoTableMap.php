@@ -40,7 +40,7 @@ class ContenidoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_CONTENIDO', 'IdContenido', 'INTEGER', true, null, null);
         $this->addColumn('NUMERO_CONTENIDO', 'NumeroContenido', 'INTEGER', false, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()
 

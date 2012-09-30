@@ -39,11 +39,13 @@ class DomicilioTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_DOMICILIO', 'IdDomicilio', 'INTEGER', true, null, null);
-        $this->addColumn('CALLE', 'Calle', 'VARCHAR', false, 45, null);
-        $this->addColumn('ALTURA', 'Altura', 'VARCHAR', false, 45, null);
+        $this->addColumn('BARRIO', 'Barrio', 'VARCHAR', false, 45, null);
+        $this->addColumn('CALLE', 'Calle', 'VARCHAR', true, 45, null);
+        $this->addColumn('ALTURA', 'Altura', 'VARCHAR', true, 45, null);
         $this->addColumn('COD_POSTAL', 'CodPostal', 'VARCHAR', false, 45, null);
+        $this->addColumn('REAL', 'Real', 'BOOLEAN', false, 1, null);
         $this->addForeignKey('LOCALIDAD_ID_LOCALIDAD', 'LocalidadIdLocalidad', 'INTEGER', 'localidad', 'ID_LOCALIDAD', true, null, null);
-        $this->addForeignKey('PERSONA_ID_PERSONA', 'PersonaIdPersona', 'INTEGER', 'persona', 'ID_PERSONA', true, null, null);
+        $this->addForeignKey('PFISICA_ID_PFISICA', 'PfisicaIdPfisica', 'INTEGER', 'pfisica', 'ID_PFISICA', true, null, null);
         // validators
     } // initialize()
 
@@ -53,7 +55,7 @@ class DomicilioTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Localidad', 'Localidad', RelationMap::MANY_TO_ONE, array('localidad_id_localidad' => 'id_localidad', ), null, null);
-        $this->addRelation('Persona', 'Persona', RelationMap::MANY_TO_ONE, array('persona_id_persona' => 'id_persona', ), null, null);
+        $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('pfisica_id_pfisica' => 'id_pfisica', ), null, null);
     } // buildRelations()
 
     /**

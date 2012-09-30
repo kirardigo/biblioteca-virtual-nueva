@@ -1042,7 +1042,7 @@ abstract class BaseUsuarioPeer {
 	 */
 	static public function getUniqueColumnNames()
 	{
-	  return array();
+	  return array(array('usuario'));
 	}
 
 	// symfony_behaviors behavior

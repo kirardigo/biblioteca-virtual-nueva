@@ -20,7 +20,7 @@ abstract class BaseTipoDocForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_tipo_doc' => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdTipoDoc()), 'empty_value' => $this->getObject()->getIdTipoDoc(), 'required' => false)),
-      'nombre'      => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'nombre'      => new sfValidatorString(array('max_length' => 45)),
     ));
 
     $this->widgetSchema->setNameFormat('tipo_doc[%s]');

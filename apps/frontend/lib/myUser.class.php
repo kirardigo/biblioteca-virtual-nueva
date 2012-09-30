@@ -53,4 +53,5 @@ class myUser extends sfBasicSecurityUser{
         $this->getAttributeHolder()->remove('error_login');
     }        
     
+
 }

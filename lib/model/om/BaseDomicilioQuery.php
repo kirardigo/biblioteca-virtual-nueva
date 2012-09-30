@@ -7,18 +7,22 @@
  * 
  *
  * @method     DomicilioQuery orderByIdDomicilio($order = Criteria::ASC) Order by the id_domicilio column
+ * @method     DomicilioQuery orderByBarrio($order = Criteria::ASC) Order by the barrio column
  * @method     DomicilioQuery orderByCalle($order = Criteria::ASC) Order by the calle column
  * @method     DomicilioQuery orderByAltura($order = Criteria::ASC) Order by the altura column
  * @method     DomicilioQuery orderByCodPostal($order = Criteria::ASC) Order by the cod_postal column
+ * @method     DomicilioQuery orderByReal($order = Criteria::ASC) Order by the real column
  * @method     DomicilioQuery orderByLocalidadIdLocalidad($order = Criteria::ASC) Order by the localidad_id_localidad column
- * @method     DomicilioQuery orderByPersonaIdPersona($order = Criteria::ASC) Order by the persona_id_persona column
+ * @method     DomicilioQuery orderByPfisicaIdPfisica($order = Criteria::ASC) Order by the pfisica_id_pfisica column
  *
  * @method     DomicilioQuery groupByIdDomicilio() Group by the id_domicilio column
+ * @method     DomicilioQuery groupByBarrio() Group by the barrio column
  * @method     DomicilioQuery groupByCalle() Group by the calle column
  * @method     DomicilioQuery groupByAltura() Group by the altura column
  * @method     DomicilioQuery groupByCodPostal() Group by the cod_postal column
+ * @method     DomicilioQuery groupByReal() Group by the real column
  * @method     DomicilioQuery groupByLocalidadIdLocalidad() Group by the localidad_id_localidad column
- * @method     DomicilioQuery groupByPersonaIdPersona() Group by the persona_id_persona column
+ * @method     DomicilioQuery groupByPfisicaIdPfisica() Group by the pfisica_id_pfisica column
  *
  * @method     DomicilioQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     DomicilioQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -28,26 +32,30 @@
  * @method     DomicilioQuery rightJoinLocalidad($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Localidad relation
  * @method     DomicilioQuery innerJoinLocalidad($relationAlias = null) Adds a INNER JOIN clause to the query using the Localidad relation
  *
- * @method     DomicilioQuery leftJoinPersona($relationAlias = null) Adds a LEFT JOIN clause to the query using the Persona relation
- * @method     DomicilioQuery rightJoinPersona($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Persona relation
- * @method     DomicilioQuery innerJoinPersona($relationAlias = null) Adds a INNER JOIN clause to the query using the Persona relation
+ * @method     DomicilioQuery leftJoinPfisica($relationAlias = null) Adds a LEFT JOIN clause to the query using the Pfisica relation
+ * @method     DomicilioQuery rightJoinPfisica($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Pfisica relation
+ * @method     DomicilioQuery innerJoinPfisica($relationAlias = null) Adds a INNER JOIN clause to the query using the Pfisica relation
  *
  * @method     Domicilio findOne(PropelPDO $con = null) Return the first Domicilio matching the query
  * @method     Domicilio findOneOrCreate(PropelPDO $con = null) Return the first Domicilio matching the query, or a new Domicilio object populated from the query conditions when no match is found
  *
  * @method     Domicilio findOneByIdDomicilio(int $id_domicilio) Return the first Domicilio filtered by the id_domicilio column
+ * @method     Domicilio findOneByBarrio(string $barrio) Return the first Domicilio filtered by the barrio column
  * @method     Domicilio findOneByCalle(string $calle) Return the first Domicilio filtered by the calle column
  * @method     Domicilio findOneByAltura(string $altura) Return the first Domicilio filtered by the altura column
  * @method     Domicilio findOneByCodPostal(string $cod_postal) Return the first Domicilio filtered by the cod_postal column
+ * @method     Domicilio findOneByReal(boolean $real) Return the first Domicilio filtered by the real column
  * @method     Domicilio findOneByLocalidadIdLocalidad(int $localidad_id_localidad) Return the first Domicilio filtered by the localidad_id_localidad column
- * @method     Domicilio findOneByPersonaIdPersona(int $persona_id_persona) Return the first Domicilio filtered by the persona_id_persona column
+ * @method     Domicilio findOneByPfisicaIdPfisica(int $pfisica_id_pfisica) Return the first Domicilio filtered by the pfisica_id_pfisica column
  *
  * @method     array findByIdDomicilio(int $id_domicilio) Return Domicilio objects filtered by the id_domicilio column
+ * @method     array findByBarrio(string $barrio) Return Domicilio objects filtered by the barrio column
  * @method     array findByCalle(string $calle) Return Domicilio objects filtered by the calle column
  * @method     array findByAltura(string $altura) Return Domicilio objects filtered by the altura column
  * @method     array findByCodPostal(string $cod_postal) Return Domicilio objects filtered by the cod_postal column
+ * @method     array findByReal(boolean $real) Return Domicilio objects filtered by the real column
  * @method     array findByLocalidadIdLocalidad(int $localidad_id_localidad) Return Domicilio objects filtered by the localidad_id_localidad column
- * @method     array findByPersonaIdPersona(int $persona_id_persona) Return Domicilio objects filtered by the persona_id_persona column
+ * @method     array findByPfisicaIdPfisica(int $pfisica_id_pfisica) Return Domicilio objects filtered by the pfisica_id_pfisica column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -138,7 +146,7 @@ abstract class BaseDomicilioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_DOMICILIO`, `CALLE`, `ALTURA`, `COD_POSTAL`, `LOCALIDAD_ID_LOCALIDAD`, `PERSONA_ID_PERSONA` FROM `domicilio` WHERE `ID_DOMICILIO` = :p0';
+        $sql = 'SELECT `ID_DOMICILIO`, `BARRIO`, `CALLE`, `ALTURA`, `COD_POSTAL`, `REAL`, `LOCALIDAD_ID_LOCALIDAD`, `PFISICA_ID_PFISICA` FROM `domicilio` WHERE `ID_DOMICILIO` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -255,6 +263,35 @@ abstract class BaseDomicilioQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the barrio column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByBarrio('fooValue');   // WHERE barrio = 'fooValue'
+     * $query->filterByBarrio('%fooValue%'); // WHERE barrio LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $barrio The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return DomicilioQuery The current query, for fluid interface
+     */
+    public function filterByBarrio($barrio = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($barrio)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $barrio)) {
+                $barrio = str_replace('*', '%', $barrio);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(DomicilioPeer::BARRIO, $barrio, $comparison);
+    }
+
+    /**
      * Filter the query on the calle column
      *
      * Example usage:
@@ -342,6 +379,33 @@ abstract class BaseDomicilioQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the real column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByReal(true); // WHERE real = true
+     * $query->filterByReal('yes'); // WHERE real = true
+     * </code>
+     *
+     * @param     boolean|string $real The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return DomicilioQuery The current query, for fluid interface
+     */
+    public function filterByReal($real = null, $comparison = null)
+    {
+        if (is_string($real)) {
+            $real = in_array(strtolower($real), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(DomicilioPeer::REAL, $real, $comparison);
+    }
+
+    /**
      * Filter the query on the localidad_id_localidad column
      *
      * Example usage:
@@ -385,18 +449,18 @@ abstract class BaseDomicilioQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the persona_id_persona column
+     * Filter the query on the pfisica_id_pfisica column
      *
      * Example usage:
      * <code>
-     * $query->filterByPersonaIdPersona(1234); // WHERE persona_id_persona = 1234
-     * $query->filterByPersonaIdPersona(array(12, 34)); // WHERE persona_id_persona IN (12, 34)
-     * $query->filterByPersonaIdPersona(array('min' => 12)); // WHERE persona_id_persona > 12
+     * $query->filterByPfisicaIdPfisica(1234); // WHERE pfisica_id_pfisica = 1234
+     * $query->filterByPfisicaIdPfisica(array(12, 34)); // WHERE pfisica_id_pfisica IN (12, 34)
+     * $query->filterByPfisicaIdPfisica(array('min' => 12)); // WHERE pfisica_id_pfisica > 12
      * </code>
      *
-     * @see       filterByPersona()
+     * @see       filterByPfisica()
      *
-     * @param     mixed $personaIdPersona The value to use as filter.
+     * @param     mixed $pfisicaIdPfisica The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -404,16 +468,16 @@ abstract class BaseDomicilioQuery extends ModelCriteria
      *
      * @return DomicilioQuery The current query, for fluid interface
      */
-    public function filterByPersonaIdPersona($personaIdPersona = null, $comparison = null)
+    public function filterByPfisicaIdPfisica($pfisicaIdPfisica = null, $comparison = null)
     {
-        if (is_array($personaIdPersona)) {
+        if (is_array($pfisicaIdPfisica)) {
             $useMinMax = false;
-            if (isset($personaIdPersona['min'])) {
-                $this->addUsingAlias(DomicilioPeer::PERSONA_ID_PERSONA, $personaIdPersona['min'], Criteria::GREATER_EQUAL);
+            if (isset($pfisicaIdPfisica['min'])) {
+                $this->addUsingAlias(DomicilioPeer::PFISICA_ID_PFISICA, $pfisicaIdPfisica['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($personaIdPersona['max'])) {
-                $this->addUsingAlias(DomicilioPeer::PERSONA_ID_PERSONA, $personaIdPersona['max'], Criteria::LESS_EQUAL);
+            if (isset($pfisicaIdPfisica['max'])) {
+                $this->addUsingAlias(DomicilioPeer::PFISICA_ID_PFISICA, $pfisicaIdPfisica['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -424,7 +488,7 @@ abstract class BaseDomicilioQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(DomicilioPeer::PERSONA_ID_PERSONA, $personaIdPersona, $comparison);
+        return $this->addUsingAlias(DomicilioPeer::PFISICA_ID_PFISICA, $pfisicaIdPfisica, $comparison);
     }
 
     /**
@@ -504,43 +568,43 @@ abstract class BaseDomicilioQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Persona object
+     * Filter the query by a related Pfisica object
      *
-     * @param   Persona|PropelObjectCollection $persona The related object(s) to use as filter
+     * @param   Pfisica|PropelObjectCollection $pfisica The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   DomicilioQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterByPersona($persona, $comparison = null)
+    public function filterByPfisica($pfisica, $comparison = null)
     {
-        if ($persona instanceof Persona) {
+        if ($pfisica instanceof Pfisica) {
             return $this
-                ->addUsingAlias(DomicilioPeer::PERSONA_ID_PERSONA, $persona->getIdPersona(), $comparison);
-        } elseif ($persona instanceof PropelObjectCollection) {
+                ->addUsingAlias(DomicilioPeer::PFISICA_ID_PFISICA, $pfisica->getIdPfisica(), $comparison);
+        } elseif ($pfisica instanceof PropelObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(DomicilioPeer::PERSONA_ID_PERSONA, $persona->toKeyValue('PrimaryKey', 'IdPersona'), $comparison);
+                ->addUsingAlias(DomicilioPeer::PFISICA_ID_PFISICA, $pfisica->toKeyValue('PrimaryKey', 'IdPfisica'), $comparison);
         } else {
-            throw new PropelException('filterByPersona() only accepts arguments of type Persona or PropelCollection');
+            throw new PropelException('filterByPfisica() only accepts arguments of type Pfisica or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Persona relation
+     * Adds a JOIN clause to the query using the Pfisica relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return DomicilioQuery The current query, for fluid interface
      */
-    public function joinPersona($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPfisica($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Persona');
+        $relationMap = $tableMap->getRelation('Pfisica');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -555,14 +619,14 @@ abstract class BaseDomicilioQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Persona');
+            $this->addJoinObject($join, 'Pfisica');
         }
 
         return $this;
     }
 
     /**
-     * Use the Persona relation Persona object
+     * Use the Pfisica relation Pfisica object
      *
      * @see       useQuery()
      *
@@ -570,13 +634,13 @@ abstract class BaseDomicilioQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   PersonaQuery A secondary query class using the current class as primary query
+     * @return   PfisicaQuery A secondary query class using the current class as primary query
      */
-    public function usePersonaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePfisicaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPersona($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Persona', 'PersonaQuery');
+            ->joinPfisica($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Pfisica', 'PfisicaQuery');
     }
 
     /**

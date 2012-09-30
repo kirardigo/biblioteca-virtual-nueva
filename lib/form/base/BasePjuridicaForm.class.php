@@ -14,15 +14,17 @@ abstract class BasePjuridicaForm extends BaseFormPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'id_pjuridica'       => new sfWidgetFormInputHidden(),
-      'razon_social'       => new sfWidgetFormInputText(),
-      'persona_id_persona' => new sfWidgetFormPropelChoice(array('model' => 'Persona', 'add_empty' => false)),
+      'id_pjuridica' => new sfWidgetFormInputHidden(),
+      'nombre'       => new sfWidgetFormInputText(),
+      'razon_social' => new sfWidgetFormInputText(),
+      'cuit_cuil'    => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id_pjuridica'       => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdPjuridica()), 'empty_value' => $this->getObject()->getIdPjuridica(), 'required' => false)),
-      'razon_social'       => new sfValidatorString(array('max_length' => 45)),
-      'persona_id_persona' => new sfValidatorPropelChoice(array('model' => 'Persona', 'column' => 'id_persona')),
+      'id_pjuridica' => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdPjuridica()), 'empty_value' => $this->getObject()->getIdPjuridica(), 'required' => false)),
+      'nombre'       => new sfValidatorString(array('max_length' => 45)),
+      'razon_social' => new sfValidatorString(array('max_length' => 45)),
+      'cuit_cuil'    => new sfValidatorString(array('max_length' => 45)),
     ));
 
     $this->widgetSchema->setNameFormat('pjuridica[%s]');

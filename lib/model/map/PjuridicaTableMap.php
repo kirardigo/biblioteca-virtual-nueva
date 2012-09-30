@@ -39,8 +39,10 @@ class PjuridicaTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_PJURIDICA', 'IdPjuridica', 'INTEGER', true, null, null);
+        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         $this->addColumn('RAZON_SOCIAL', 'RazonSocial', 'VARCHAR', true, 45, null);
-        $this->addForeignKey('PERSONA_ID_PERSONA', 'PersonaIdPersona', 'INTEGER', 'persona', 'ID_PERSONA', true, null, null);
+        $this->addColumn('CUIT_CUIL', 'CuitCuil', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()
 
@@ -49,8 +51,8 @@ class PjuridicaTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Persona', 'Persona', RelationMap::MANY_TO_ONE, array('persona_id_persona' => 'id_persona', ), null, null);
         $this->addRelation('Biblioteca', 'Biblioteca', RelationMap::ONE_TO_MANY, array('id_pjuridica' => 'pjuridica_id_pjuridica', ), null, null, 'Bibliotecas');
+        $this->addRelation('DomicilioJ', 'DomicilioJ', RelationMap::ONE_TO_MANY, array('id_pjuridica' => 'pjuridica_id_pjuridica', ), null, null, 'DomicilioJs');
     } // buildRelations()
 
     /**

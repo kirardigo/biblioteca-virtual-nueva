@@ -8,7 +8,7 @@
       <th>Altura</th>
       <th>Cod postal</th>
       <th>Localidad id localidad</th>
-      <th>Persona id persona</th>
+
     </tr>
   </thead>
   <tbody>
@@ -19,7 +19,7 @@
       <td><?php echo $Domicilio->getAltura() ?></td>
       <td><?php echo $Domicilio->getCodPostal() ?></td>
       <td><?php echo $Domicilio->getLocalidadIdLocalidad() ?></td>
-      <td><?php echo $Domicilio->getPersonaIdPersona() ?></td>
+
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('domicilio/edit?id_domicilio='.$Domicilio->getIdDomicilio()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'domicilio/delete?id_domicilio='.$Domicilio->getIdDomicilio(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el domicilio?', 'class'=>"btn btn-danger btn-mini")) ?>

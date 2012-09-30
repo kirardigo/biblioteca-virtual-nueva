@@ -29,7 +29,7 @@ class MaterialForm extends BaseMaterialForm
     
  
   $this->setValidator('archivo', new sfValidatorFile(array(
-    'mime_types' => array('application/pdf'),
+    //'mime_types' => array('application/pdf'),
     'path' => sfConfig::get('sf_upload_dir').'/files',
     'required' => false,
       'validated_file_class' => 'SwimsuitValidatedFile',
@@ -39,7 +39,7 @@ class MaterialForm extends BaseMaterialForm
     public function save ($con = null)
   { 
     // Get the uploaded image
-    $image = $this->getValue('archivo');
+    $file = $this->getValue('archivo');
     //$editorial=$this->getValue('editorial');
     //pasar a mayusculas
     $autor= strtoupper($this->getValue('autor'));
@@ -48,11 +48,21 @@ class MaterialForm extends BaseMaterialForm
     $autor=str_replace(" ", "_",$autor);
     $titulo=str_replace(" ", "_",$titulo);
     
+    $autor=str_replace(".", "_",$autor);
+    $titulo=str_replace(".", "_",$titulo);
+    //extension de archivo
+    if (empty ($autor)){
+        $autor='NA';//anonimo, no autor, especial para caso de imagenes
+    }
+    // $filename = sha1($file->getOriginalName()).$file->getExtension($file->getOriginalExtension());
+    
     $swimsuit = $this->getObject();
 
-    if ($image)
+    if ($file)
     {
-      $image->save( $autor.'_'.$titulo.'.pdf');
+      
+       $extension = $file->getExtension($file->getOriginalExtension());
+       $file->save( $autor.'_'.$titulo.$extension);
      //$editorial->save( 'vuili');
     }
 

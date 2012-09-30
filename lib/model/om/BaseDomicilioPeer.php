@@ -23,16 +23,19 @@ abstract class BaseDomicilioPeer {
     const TM_CLASS = 'DomicilioTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 8;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 8;
 
     /** the column name for the ID_DOMICILIO field */
     const ID_DOMICILIO = 'domicilio.ID_DOMICILIO';
+
+    /** the column name for the BARRIO field */
+    const BARRIO = 'domicilio.BARRIO';
 
     /** the column name for the CALLE field */
     const CALLE = 'domicilio.CALLE';
@@ -43,11 +46,14 @@ abstract class BaseDomicilioPeer {
     /** the column name for the COD_POSTAL field */
     const COD_POSTAL = 'domicilio.COD_POSTAL';
 
+    /** the column name for the REAL field */
+    const REAL = 'domicilio.REAL';
+
     /** the column name for the LOCALIDAD_ID_LOCALIDAD field */
     const LOCALIDAD_ID_LOCALIDAD = 'domicilio.LOCALIDAD_ID_LOCALIDAD';
 
-    /** the column name for the PERSONA_ID_PERSONA field */
-    const PERSONA_ID_PERSONA = 'domicilio.PERSONA_ID_PERSONA';
+    /** the column name for the PFISICA_ID_PFISICA field */
+    const PFISICA_ID_PFISICA = 'domicilio.PFISICA_ID_PFISICA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -68,12 +74,12 @@ abstract class BaseDomicilioPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdDomicilio', 'Calle', 'Altura', 'CodPostal', 'LocalidadIdLocalidad', 'PersonaIdPersona', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idDomicilio', 'calle', 'altura', 'codPostal', 'localidadIdLocalidad', 'personaIdPersona', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_DOMICILIO, self::CALLE, self::ALTURA, self::COD_POSTAL, self::LOCALIDAD_ID_LOCALIDAD, self::PERSONA_ID_PERSONA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_DOMICILIO', 'CALLE', 'ALTURA', 'COD_POSTAL', 'LOCALIDAD_ID_LOCALIDAD', 'PERSONA_ID_PERSONA', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_domicilio', 'calle', 'altura', 'cod_postal', 'localidad_id_localidad', 'persona_id_persona', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('IdDomicilio', 'Barrio', 'Calle', 'Altura', 'CodPostal', 'Real', 'LocalidadIdLocalidad', 'PfisicaIdPfisica', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idDomicilio', 'barrio', 'calle', 'altura', 'codPostal', 'real', 'localidadIdLocalidad', 'pfisicaIdPfisica', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_DOMICILIO, self::BARRIO, self::CALLE, self::ALTURA, self::COD_POSTAL, self::REAL, self::LOCALIDAD_ID_LOCALIDAD, self::PFISICA_ID_PFISICA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_DOMICILIO', 'BARRIO', 'CALLE', 'ALTURA', 'COD_POSTAL', 'REAL', 'LOCALIDAD_ID_LOCALIDAD', 'PFISICA_ID_PFISICA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_domicilio', 'barrio', 'calle', 'altura', 'cod_postal', 'real', 'localidad_id_localidad', 'pfisica_id_pfisica', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -83,12 +89,12 @@ abstract class BaseDomicilioPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdDomicilio' => 0, 'Calle' => 1, 'Altura' => 2, 'CodPostal' => 3, 'LocalidadIdLocalidad' => 4, 'PersonaIdPersona' => 5, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idDomicilio' => 0, 'calle' => 1, 'altura' => 2, 'codPostal' => 3, 'localidadIdLocalidad' => 4, 'personaIdPersona' => 5, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_DOMICILIO => 0, self::CALLE => 1, self::ALTURA => 2, self::COD_POSTAL => 3, self::LOCALIDAD_ID_LOCALIDAD => 4, self::PERSONA_ID_PERSONA => 5, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_DOMICILIO' => 0, 'CALLE' => 1, 'ALTURA' => 2, 'COD_POSTAL' => 3, 'LOCALIDAD_ID_LOCALIDAD' => 4, 'PERSONA_ID_PERSONA' => 5, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_domicilio' => 0, 'calle' => 1, 'altura' => 2, 'cod_postal' => 3, 'localidad_id_localidad' => 4, 'persona_id_persona' => 5, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('IdDomicilio' => 0, 'Barrio' => 1, 'Calle' => 2, 'Altura' => 3, 'CodPostal' => 4, 'Real' => 5, 'LocalidadIdLocalidad' => 6, 'PfisicaIdPfisica' => 7, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idDomicilio' => 0, 'barrio' => 1, 'calle' => 2, 'altura' => 3, 'codPostal' => 4, 'real' => 5, 'localidadIdLocalidad' => 6, 'pfisicaIdPfisica' => 7, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_DOMICILIO => 0, self::BARRIO => 1, self::CALLE => 2, self::ALTURA => 3, self::COD_POSTAL => 4, self::REAL => 5, self::LOCALIDAD_ID_LOCALIDAD => 6, self::PFISICA_ID_PFISICA => 7, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_DOMICILIO' => 0, 'BARRIO' => 1, 'CALLE' => 2, 'ALTURA' => 3, 'COD_POSTAL' => 4, 'REAL' => 5, 'LOCALIDAD_ID_LOCALIDAD' => 6, 'PFISICA_ID_PFISICA' => 7, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_domicilio' => 0, 'barrio' => 1, 'calle' => 2, 'altura' => 3, 'cod_postal' => 4, 'real' => 5, 'localidad_id_localidad' => 6, 'pfisica_id_pfisica' => 7, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -163,18 +169,22 @@ abstract class BaseDomicilioPeer {
     {
         if (null === $alias) {
             $criteria->addSelectColumn(DomicilioPeer::ID_DOMICILIO);
+            $criteria->addSelectColumn(DomicilioPeer::BARRIO);
             $criteria->addSelectColumn(DomicilioPeer::CALLE);
             $criteria->addSelectColumn(DomicilioPeer::ALTURA);
             $criteria->addSelectColumn(DomicilioPeer::COD_POSTAL);
+            $criteria->addSelectColumn(DomicilioPeer::REAL);
             $criteria->addSelectColumn(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD);
-            $criteria->addSelectColumn(DomicilioPeer::PERSONA_ID_PERSONA);
+            $criteria->addSelectColumn(DomicilioPeer::PFISICA_ID_PFISICA);
         } else {
             $criteria->addSelectColumn($alias . '.ID_DOMICILIO');
+            $criteria->addSelectColumn($alias . '.BARRIO');
             $criteria->addSelectColumn($alias . '.CALLE');
             $criteria->addSelectColumn($alias . '.ALTURA');
             $criteria->addSelectColumn($alias . '.COD_POSTAL');
+            $criteria->addSelectColumn($alias . '.REAL');
             $criteria->addSelectColumn($alias . '.LOCALIDAD_ID_LOCALIDAD');
-            $criteria->addSelectColumn($alias . '.PERSONA_ID_PERSONA');
+            $criteria->addSelectColumn($alias . '.PFISICA_ID_PFISICA');
         }
     }
 
@@ -541,7 +551,7 @@ abstract class BaseDomicilioPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Persona table
+     * Returns the number of rows matching criteria, joining the related Pfisica table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -549,7 +559,7 @@ abstract class BaseDomicilioPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinPersona(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinPfisica(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -576,7 +586,7 @@ abstract class BaseDomicilioPeer {
             $con = Propel::getConnection(DomicilioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -671,7 +681,7 @@ abstract class BaseDomicilioPeer {
 
 
     /**
-     * Selects a collection of Domicilio objects pre-filled with their Persona objects.
+     * Selects a collection of Domicilio objects pre-filled with their Pfisica objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
@@ -679,7 +689,7 @@ abstract class BaseDomicilioPeer {
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinPersona(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinPfisica(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -690,9 +700,9 @@ abstract class BaseDomicilioPeer {
 
         DomicilioPeer::addSelectColumns($criteria);
         $startcol = DomicilioPeer::NUM_HYDRATE_COLUMNS;
-        PersonaPeer::addSelectColumns($criteria);
+        PfisicaPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -718,19 +728,19 @@ abstract class BaseDomicilioPeer {
                 DomicilioPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = PersonaPeer::getInstanceFromPool($key2);
+                $obj2 = PfisicaPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = PersonaPeer::getOMClass();
+                    $cls = PfisicaPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    PersonaPeer::addInstanceToPool($obj2, $key2);
+                    PfisicaPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (Domicilio) to $obj2 (Persona)
+                // Add the $obj1 (Domicilio) to $obj2 (Pfisica)
                 $obj2->addDomicilio($obj1);
 
             } // if joined row was not null
@@ -781,7 +791,7 @@ abstract class BaseDomicilioPeer {
 
         $criteria->addJoin(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD, LocalidadPeer::ID_LOCALIDAD, $join_behavior);
 
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -826,12 +836,12 @@ abstract class BaseDomicilioPeer {
         LocalidadPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + LocalidadPeer::NUM_HYDRATE_COLUMNS;
 
-        PersonaPeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + PersonaPeer::NUM_HYDRATE_COLUMNS;
+        PfisicaPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + PfisicaPeer::NUM_HYDRATE_COLUMNS;
 
         $criteria->addJoin(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD, LocalidadPeer::ID_LOCALIDAD, $join_behavior);
 
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -874,21 +884,21 @@ abstract class BaseDomicilioPeer {
                 $obj2->addDomicilio($obj1);
             } // if joined row not null
 
-            // Add objects for joined Persona rows
+            // Add objects for joined Pfisica rows
 
-            $key3 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            $key3 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
             if ($key3 !== null) {
-                $obj3 = PersonaPeer::getInstanceFromPool($key3);
+                $obj3 = PfisicaPeer::getInstanceFromPool($key3);
                 if (!$obj3) {
 
-                    $cls = PersonaPeer::getOMClass();
+                    $cls = PfisicaPeer::getOMClass();
 
                     $obj3 = new $cls();
                     $obj3->hydrate($row, $startcol3);
-                    PersonaPeer::addInstanceToPool($obj3, $key3);
+                    PfisicaPeer::addInstanceToPool($obj3, $key3);
                 } // if obj3 loaded
 
-                // Add the $obj1 (Domicilio) to the collection in $obj3 (Persona)
+                // Add the $obj1 (Domicilio) to the collection in $obj3 (Pfisica)
                 $obj3->addDomicilio($obj1);
             } // if joined row not null
 
@@ -936,7 +946,7 @@ abstract class BaseDomicilioPeer {
             $con = Propel::getConnection(DomicilioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
     
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -958,7 +968,7 @@ abstract class BaseDomicilioPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Persona table
+     * Returns the number of rows matching criteria, joining the related Pfisica table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -966,7 +976,7 @@ abstract class BaseDomicilioPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExceptPersona(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptPfisica(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -1038,10 +1048,10 @@ abstract class BaseDomicilioPeer {
         DomicilioPeer::addSelectColumns($criteria);
         $startcol2 = DomicilioPeer::NUM_HYDRATE_COLUMNS;
 
-        PersonaPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + PersonaPeer::NUM_HYDRATE_COLUMNS;
+        PfisicaPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + PfisicaPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(DomicilioPeer::PERSONA_ID_PERSONA, PersonaPeer::ID_PERSONA, $join_behavior);
+        $criteria->addJoin(DomicilioPeer::PFISICA_ID_PFISICA, PfisicaPeer::ID_PFISICA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
@@ -1067,21 +1077,21 @@ abstract class BaseDomicilioPeer {
                 DomicilioPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-                // Add objects for joined Persona rows
+                // Add objects for joined Pfisica rows
 
-                $key2 = PersonaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                $key2 = PfisicaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
                 if ($key2 !== null) {
-                    $obj2 = PersonaPeer::getInstanceFromPool($key2);
+                    $obj2 = PfisicaPeer::getInstanceFromPool($key2);
                     if (!$obj2) {
     
-                        $cls = PersonaPeer::getOMClass();
+                        $cls = PfisicaPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    PersonaPeer::addInstanceToPool($obj2, $key2);
+                    PfisicaPeer::addInstanceToPool($obj2, $key2);
                 } // if $obj2 already loaded
 
-                // Add the $obj1 (Domicilio) to the collection in $obj2 (Persona)
+                // Add the $obj1 (Domicilio) to the collection in $obj2 (Pfisica)
                 $obj2->addDomicilio($obj1);
 
             } // if joined row is not null
@@ -1095,7 +1105,7 @@ abstract class BaseDomicilioPeer {
 
 
     /**
-     * Selects a collection of Domicilio objects pre-filled with all related objects except Persona.
+     * Selects a collection of Domicilio objects pre-filled with all related objects except Pfisica.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -1104,7 +1114,7 @@ abstract class BaseDomicilioPeer {
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptPersona(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptPfisica(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 

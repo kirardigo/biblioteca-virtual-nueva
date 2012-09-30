@@ -23,7 +23,7 @@ abstract class BaseLocalidadForm extends BaseFormPropel
     $this->setValidators(array(
       'id_localidad'           => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdLocalidad()), 'empty_value' => $this->getObject()->getIdLocalidad(), 'required' => false)),
       'nombre'                 => new sfValidatorString(array('max_length' => 45)),
-      'cod_postal'             => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'cod_postal'             => new sfValidatorString(array('max_length' => 45)),
       'provincia_id_provincia' => new sfValidatorPropelChoice(array('model' => 'Provincia', 'column' => 'id_provincia')),
     ));
 

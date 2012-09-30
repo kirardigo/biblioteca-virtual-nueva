@@ -14,15 +14,15 @@ abstract class BasePersonaForm extends BaseFormPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'id_persona'       => new sfWidgetFormInputHidden(),
-      'domicilio_legal'  => new sfWidgetFormInputText(),
-      'domicilio_postal' => new sfWidgetFormInputText(),
+      'id_persona' => new sfWidgetFormInputHidden(),
+      'nombre'     => new sfWidgetFormInputText(),
+      'juridica'   => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
-      'id_persona'       => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdPersona()), 'empty_value' => $this->getObject()->getIdPersona(), 'required' => false)),
-      'domicilio_legal'  => new sfValidatorString(array('max_length' => 45, 'required' => false)),
-      'domicilio_postal' => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'id_persona' => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdPersona()), 'empty_value' => $this->getObject()->getIdPersona(), 'required' => false)),
+      'nombre'     => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'juridica'   => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('persona[%s]');

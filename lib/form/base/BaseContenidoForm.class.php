@@ -22,7 +22,7 @@ abstract class BaseContenidoForm extends BaseFormPropel
     $this->setValidators(array(
       'id_contenido'     => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdContenido()), 'empty_value' => $this->getObject()->getIdContenido(), 'required' => false)),
       'numero_contenido' => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
-      'nombre'           => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'nombre'           => new sfValidatorString(array('max_length' => 45)),
     ));
 
     $this->validatorSchema->setPostValidator(

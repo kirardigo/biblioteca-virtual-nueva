@@ -65,6 +65,11 @@ abstract class BaseLocalidad extends BaseObject
     protected $collDomicilios;
 
     /**
+     * @var        PropelObjectCollection|DomicilioJ[] Collection to store aggregation of DomicilioJ objects.
+     */
+    protected $collDomicilioJs;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -83,6 +88,12 @@ abstract class BaseLocalidad extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $domiciliosScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $domicilioJsScheduledForDeletion = null;
 
     /**
      * Get the [id_localidad] column value.
@@ -328,6 +339,8 @@ abstract class BaseLocalidad extends BaseObject
             $this->aProvincia = null;
             $this->collDomicilios = null;
 
+            $this->collDomicilioJs = null;
+
         } // if (deep)
     }
 
@@ -507,6 +520,23 @@ abstract class BaseLocalidad extends BaseObject
 
             if ($this->collDomicilios !== null) {
                 foreach ($this->collDomicilios as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->domicilioJsScheduledForDeletion !== null) {
+                if (!$this->domicilioJsScheduledForDeletion->isEmpty()) {
+                    DomicilioJQuery::create()
+                        ->filterByPrimaryKeys($this->domicilioJsScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->domicilioJsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collDomicilioJs !== null) {
+                foreach ($this->collDomicilioJs as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -693,6 +723,14 @@ abstract class BaseLocalidad extends BaseObject
                     }
                 }
 
+                if ($this->collDomicilioJs !== null) {
+                    foreach ($this->collDomicilioJs as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -780,6 +818,9 @@ abstract class BaseLocalidad extends BaseObject
             }
             if (null !== $this->collDomicilios) {
                 $result['Domicilios'] = $this->collDomicilios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collDomicilioJs) {
+                $result['DomicilioJs'] = $this->collDomicilioJs->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -950,6 +991,12 @@ abstract class BaseLocalidad extends BaseObject
                 }
             }
 
+            foreach ($this->getDomicilioJs() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addDomicilioJ($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
@@ -1064,6 +1111,9 @@ abstract class BaseLocalidad extends BaseObject
     {
         if ('Domicilio' == $relationName) {
             $this->initDomicilios();
+        }
+        if ('DomicilioJ' == $relationName) {
+            $this->initDomicilioJs();
         }
     }
 
@@ -1251,12 +1301,204 @@ abstract class BaseLocalidad extends BaseObject
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|Domicilio[] List of Domicilio objects
      */
-    public function getDomiciliosJoinPersona($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getDomiciliosJoinPfisica($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = DomicilioQuery::create(null, $criteria);
-        $query->joinWith('Persona', $join_behavior);
+        $query->joinWith('Pfisica', $join_behavior);
 
         return $this->getDomicilios($query, $con);
+    }
+
+    /**
+     * Clears out the collDomicilioJs collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addDomicilioJs()
+     */
+    public function clearDomicilioJs()
+    {
+        $this->collDomicilioJs = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collDomicilioJs collection.
+     *
+     * By default this just sets the collDomicilioJs collection to an empty array (like clearcollDomicilioJs());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initDomicilioJs($overrideExisting = true)
+    {
+        if (null !== $this->collDomicilioJs && !$overrideExisting) {
+            return;
+        }
+        $this->collDomicilioJs = new PropelObjectCollection();
+        $this->collDomicilioJs->setModel('DomicilioJ');
+    }
+
+    /**
+     * Gets an array of DomicilioJ objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Localidad is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|DomicilioJ[] List of DomicilioJ objects
+     * @throws PropelException
+     */
+    public function getDomicilioJs($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collDomicilioJs || null !== $criteria) {
+            if ($this->isNew() && null === $this->collDomicilioJs) {
+                // return empty collection
+                $this->initDomicilioJs();
+            } else {
+                $collDomicilioJs = DomicilioJQuery::create(null, $criteria)
+                    ->filterByLocalidad($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collDomicilioJs;
+                }
+                $this->collDomicilioJs = $collDomicilioJs;
+            }
+        }
+
+        return $this->collDomicilioJs;
+    }
+
+    /**
+     * Sets a collection of DomicilioJ objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $domicilioJs A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setDomicilioJs(PropelCollection $domicilioJs, PropelPDO $con = null)
+    {
+        $this->domicilioJsScheduledForDeletion = $this->getDomicilioJs(new Criteria(), $con)->diff($domicilioJs);
+
+        foreach ($this->domicilioJsScheduledForDeletion as $domicilioJRemoved) {
+            $domicilioJRemoved->setLocalidad(null);
+        }
+
+        $this->collDomicilioJs = null;
+        foreach ($domicilioJs as $domicilioJ) {
+            $this->addDomicilioJ($domicilioJ);
+        }
+
+        $this->collDomicilioJs = $domicilioJs;
+    }
+
+    /**
+     * Returns the number of related DomicilioJ objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related DomicilioJ objects.
+     * @throws PropelException
+     */
+    public function countDomicilioJs(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collDomicilioJs || null !== $criteria) {
+            if ($this->isNew() && null === $this->collDomicilioJs) {
+                return 0;
+            } else {
+                $query = DomicilioJQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByLocalidad($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collDomicilioJs);
+        }
+    }
+
+    /**
+     * Method called to associate a DomicilioJ object to this object
+     * through the DomicilioJ foreign key attribute.
+     *
+     * @param    DomicilioJ $l DomicilioJ
+     * @return   Localidad The current object (for fluent API support)
+     */
+    public function addDomicilioJ(DomicilioJ $l)
+    {
+        if ($this->collDomicilioJs === null) {
+            $this->initDomicilioJs();
+        }
+        if (!$this->collDomicilioJs->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddDomicilioJ($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	DomicilioJ $domicilioJ The domicilioJ object to add.
+     */
+    protected function doAddDomicilioJ($domicilioJ)
+    {
+        $this->collDomicilioJs[]= $domicilioJ;
+        $domicilioJ->setLocalidad($this);
+    }
+
+    /**
+     * @param	DomicilioJ $domicilioJ The domicilioJ object to remove.
+     */
+    public function removeDomicilioJ($domicilioJ)
+    {
+        if ($this->getDomicilioJs()->contains($domicilioJ)) {
+            $this->collDomicilioJs->remove($this->collDomicilioJs->search($domicilioJ));
+            if (null === $this->domicilioJsScheduledForDeletion) {
+                $this->domicilioJsScheduledForDeletion = clone $this->collDomicilioJs;
+                $this->domicilioJsScheduledForDeletion->clear();
+            }
+            $this->domicilioJsScheduledForDeletion[]= $domicilioJ;
+            $domicilioJ->setLocalidad(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Localidad is new, it will return
+     * an empty collection; or if this Localidad has previously
+     * been saved, it will retrieve related DomicilioJs from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Localidad.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|DomicilioJ[] List of DomicilioJ objects
+     */
+    public function getDomicilioJsJoinPjuridica($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = DomicilioJQuery::create(null, $criteria);
+        $query->joinWith('Pjuridica', $join_behavior);
+
+        return $this->getDomicilioJs($query, $con);
     }
 
     /**
@@ -1293,12 +1535,21 @@ abstract class BaseLocalidad extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collDomicilioJs) {
+                foreach ($this->collDomicilioJs as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collDomicilios instanceof PropelCollection) {
             $this->collDomicilios->clearIterator();
         }
         $this->collDomicilios = null;
+        if ($this->collDomicilioJs instanceof PropelCollection) {
+            $this->collDomicilioJs->clearIterator();
+        }
+        $this->collDomicilioJs = null;
         $this->aProvincia = null;
     }
 

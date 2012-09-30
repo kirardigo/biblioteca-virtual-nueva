@@ -39,13 +39,12 @@ class PfisicaTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_PFISICA', 'IdPfisica', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', false, 45, null);
-        $this->addColumn('APELLIDO', 'Apellido', 'VARCHAR', false, 45, null);
+        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
+        $this->addColumn('APELLIDO', 'Apellido', 'VARCHAR', true, 45, null);
         $this->addColumn('VARON', 'Varon', 'BOOLEAN', false, 1, null);
-        $this->addColumn('FECHA_NAC', 'FechaNac', 'VARCHAR', false, 45, null);
+        $this->addColumn('FECHA_NAC', 'FechaNac', 'DATE', false, null, null);
         $this->addForeignKey('TIPO_DOC_ID_TIPO_DOC', 'TipoDocIdTipoDoc', 'INTEGER', 'tipo_doc', 'ID_TIPO_DOC', true, null, null);
-        $this->addColumn('DOCUMENTO', 'Documento', 'VARCHAR', false, 45, null);
-        $this->addForeignKey('PERSONA_ID_PERSONA', 'PersonaIdPersona', 'INTEGER', 'persona', 'ID_PERSONA', true, null, null);
+        $this->addColumn('DOCUMENTO', 'Documento', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()
 
@@ -55,8 +54,8 @@ class PfisicaTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('TipoDoc', 'TipoDoc', RelationMap::MANY_TO_ONE, array('tipo_doc_id_tipo_doc' => 'id_tipo_doc', ), 'CASCADE', 'CASCADE');
-        $this->addRelation('Persona', 'Persona', RelationMap::MANY_TO_ONE, array('persona_id_persona' => 'id_persona', ), null, null);
         $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_pfisica' => 'pfisica_id_pfisica', ), null, null, 'CarreraFisicas');
+        $this->addRelation('Domicilio', 'Domicilio', RelationMap::ONE_TO_MANY, array('id_pfisica' => 'pfisica_id_pfisica', ), null, null, 'Domicilios');
         $this->addRelation('Usuario', 'Usuario', RelationMap::ONE_TO_ONE, array('id_pfisica' => 'id_usuario', ), 'CASCADE', 'CASCADE');
     } // buildRelations()
 

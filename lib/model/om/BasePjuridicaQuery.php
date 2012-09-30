@@ -7,35 +7,39 @@
  * 
  *
  * @method     PjuridicaQuery orderByIdPjuridica($order = Criteria::ASC) Order by the id_pjuridica column
+ * @method     PjuridicaQuery orderByNombre($order = Criteria::ASC) Order by the nombre column
  * @method     PjuridicaQuery orderByRazonSocial($order = Criteria::ASC) Order by the razon_social column
- * @method     PjuridicaQuery orderByPersonaIdPersona($order = Criteria::ASC) Order by the persona_id_persona column
+ * @method     PjuridicaQuery orderByCuitCuil($order = Criteria::ASC) Order by the cuit_cuil column
  *
  * @method     PjuridicaQuery groupByIdPjuridica() Group by the id_pjuridica column
+ * @method     PjuridicaQuery groupByNombre() Group by the nombre column
  * @method     PjuridicaQuery groupByRazonSocial() Group by the razon_social column
- * @method     PjuridicaQuery groupByPersonaIdPersona() Group by the persona_id_persona column
+ * @method     PjuridicaQuery groupByCuitCuil() Group by the cuit_cuil column
  *
  * @method     PjuridicaQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     PjuridicaQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     PjuridicaQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     PjuridicaQuery leftJoinPersona($relationAlias = null) Adds a LEFT JOIN clause to the query using the Persona relation
- * @method     PjuridicaQuery rightJoinPersona($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Persona relation
- * @method     PjuridicaQuery innerJoinPersona($relationAlias = null) Adds a INNER JOIN clause to the query using the Persona relation
- *
  * @method     PjuridicaQuery leftJoinBiblioteca($relationAlias = null) Adds a LEFT JOIN clause to the query using the Biblioteca relation
  * @method     PjuridicaQuery rightJoinBiblioteca($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Biblioteca relation
  * @method     PjuridicaQuery innerJoinBiblioteca($relationAlias = null) Adds a INNER JOIN clause to the query using the Biblioteca relation
+ *
+ * @method     PjuridicaQuery leftJoinDomicilioJ($relationAlias = null) Adds a LEFT JOIN clause to the query using the DomicilioJ relation
+ * @method     PjuridicaQuery rightJoinDomicilioJ($relationAlias = null) Adds a RIGHT JOIN clause to the query using the DomicilioJ relation
+ * @method     PjuridicaQuery innerJoinDomicilioJ($relationAlias = null) Adds a INNER JOIN clause to the query using the DomicilioJ relation
  *
  * @method     Pjuridica findOne(PropelPDO $con = null) Return the first Pjuridica matching the query
  * @method     Pjuridica findOneOrCreate(PropelPDO $con = null) Return the first Pjuridica matching the query, or a new Pjuridica object populated from the query conditions when no match is found
  *
  * @method     Pjuridica findOneByIdPjuridica(int $id_pjuridica) Return the first Pjuridica filtered by the id_pjuridica column
+ * @method     Pjuridica findOneByNombre(string $nombre) Return the first Pjuridica filtered by the nombre column
  * @method     Pjuridica findOneByRazonSocial(string $razon_social) Return the first Pjuridica filtered by the razon_social column
- * @method     Pjuridica findOneByPersonaIdPersona(int $persona_id_persona) Return the first Pjuridica filtered by the persona_id_persona column
+ * @method     Pjuridica findOneByCuitCuil(string $cuit_cuil) Return the first Pjuridica filtered by the cuit_cuil column
  *
  * @method     array findByIdPjuridica(int $id_pjuridica) Return Pjuridica objects filtered by the id_pjuridica column
+ * @method     array findByNombre(string $nombre) Return Pjuridica objects filtered by the nombre column
  * @method     array findByRazonSocial(string $razon_social) Return Pjuridica objects filtered by the razon_social column
- * @method     array findByPersonaIdPersona(int $persona_id_persona) Return Pjuridica objects filtered by the persona_id_persona column
+ * @method     array findByCuitCuil(string $cuit_cuil) Return Pjuridica objects filtered by the cuit_cuil column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -126,7 +130,7 @@ abstract class BasePjuridicaQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_PJURIDICA`, `RAZON_SOCIAL`, `PERSONA_ID_PERSONA` FROM `pjuridica` WHERE `ID_PJURIDICA` = :p0';
+        $sql = 'SELECT `ID_PJURIDICA`, `NOMBRE`, `RAZON_SOCIAL`, `CUIT_CUIL` FROM `pjuridica` WHERE `ID_PJURIDICA` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -243,6 +247,35 @@ abstract class BasePjuridicaQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the nombre column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByNombre('fooValue');   // WHERE nombre = 'fooValue'
+     * $query->filterByNombre('%fooValue%'); // WHERE nombre LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $nombre The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return PjuridicaQuery The current query, for fluid interface
+     */
+    public function filterByNombre($nombre = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($nombre)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $nombre)) {
+                $nombre = str_replace('*', '%', $nombre);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(PjuridicaPeer::NOMBRE, $nombre, $comparison);
+    }
+
+    /**
      * Filter the query on the razon_social column
      *
      * Example usage:
@@ -272,122 +305,32 @@ abstract class BasePjuridicaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the persona_id_persona column
+     * Filter the query on the cuit_cuil column
      *
      * Example usage:
      * <code>
-     * $query->filterByPersonaIdPersona(1234); // WHERE persona_id_persona = 1234
-     * $query->filterByPersonaIdPersona(array(12, 34)); // WHERE persona_id_persona IN (12, 34)
-     * $query->filterByPersonaIdPersona(array('min' => 12)); // WHERE persona_id_persona > 12
+     * $query->filterByCuitCuil('fooValue');   // WHERE cuit_cuil = 'fooValue'
+     * $query->filterByCuitCuil('%fooValue%'); // WHERE cuit_cuil LIKE '%fooValue%'
      * </code>
      *
-     * @see       filterByPersona()
-     *
-     * @param     mixed $personaIdPersona The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $cuitCuil The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return PjuridicaQuery The current query, for fluid interface
      */
-    public function filterByPersonaIdPersona($personaIdPersona = null, $comparison = null)
+    public function filterByCuitCuil($cuitCuil = null, $comparison = null)
     {
-        if (is_array($personaIdPersona)) {
-            $useMinMax = false;
-            if (isset($personaIdPersona['min'])) {
-                $this->addUsingAlias(PjuridicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($personaIdPersona['max'])) {
-                $this->addUsingAlias(PjuridicaPeer::PERSONA_ID_PERSONA, $personaIdPersona['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
+        if (null === $comparison) {
+            if (is_array($cuitCuil)) {
                 $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $cuitCuil)) {
+                $cuitCuil = str_replace('*', '%', $cuitCuil);
+                $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(PjuridicaPeer::PERSONA_ID_PERSONA, $personaIdPersona, $comparison);
-    }
-
-    /**
-     * Filter the query by a related Persona object
-     *
-     * @param   Persona|PropelObjectCollection $persona The related object(s) to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return   PjuridicaQuery The current query, for fluid interface
-     * @throws   PropelException - if the provided filter is invalid.
-     */
-    public function filterByPersona($persona, $comparison = null)
-    {
-        if ($persona instanceof Persona) {
-            return $this
-                ->addUsingAlias(PjuridicaPeer::PERSONA_ID_PERSONA, $persona->getIdPersona(), $comparison);
-        } elseif ($persona instanceof PropelObjectCollection) {
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-
-            return $this
-                ->addUsingAlias(PjuridicaPeer::PERSONA_ID_PERSONA, $persona->toKeyValue('PrimaryKey', 'IdPersona'), $comparison);
-        } else {
-            throw new PropelException('filterByPersona() only accepts arguments of type Persona or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the Persona relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return PjuridicaQuery The current query, for fluid interface
-     */
-    public function joinPersona($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Persona');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'Persona');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the Persona relation Persona object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   PersonaQuery A secondary query class using the current class as primary query
-     */
-    public function usePersonaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinPersona($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Persona', 'PersonaQuery');
+        return $this->addUsingAlias(PjuridicaPeer::CUIT_CUIL, $cuitCuil, $comparison);
     }
 
     /**
@@ -462,6 +405,80 @@ abstract class BasePjuridicaQuery extends ModelCriteria
         return $this
             ->joinBiblioteca($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Biblioteca', 'BibliotecaQuery');
+    }
+
+    /**
+     * Filter the query by a related DomicilioJ object
+     *
+     * @param   DomicilioJ|PropelObjectCollection $domicilioJ  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   PjuridicaQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByDomicilioJ($domicilioJ, $comparison = null)
+    {
+        if ($domicilioJ instanceof DomicilioJ) {
+            return $this
+                ->addUsingAlias(PjuridicaPeer::ID_PJURIDICA, $domicilioJ->getPjuridicaIdPjuridica(), $comparison);
+        } elseif ($domicilioJ instanceof PropelObjectCollection) {
+            return $this
+                ->useDomicilioJQuery()
+                ->filterByPrimaryKeys($domicilioJ->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByDomicilioJ() only accepts arguments of type DomicilioJ or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the DomicilioJ relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return PjuridicaQuery The current query, for fluid interface
+     */
+    public function joinDomicilioJ($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('DomicilioJ');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'DomicilioJ');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the DomicilioJ relation DomicilioJ object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   DomicilioJQuery A secondary query class using the current class as primary query
+     */
+    public function useDomicilioJQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinDomicilioJ($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'DomicilioJ', 'DomicilioJQuery');
     }
 
     /**

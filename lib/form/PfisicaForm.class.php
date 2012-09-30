@@ -30,7 +30,21 @@ class PfisicaForm extends BasePfisicaForm
 
        // unset($this['pedido_producto_list']);
    
-      $this->embedRelation('CarreraFisica');
+        $this->embedRelation('CarreraFisica');
+        $this->embedRelation('Domicilio');
+              
+
+
+            
+           
+        //$this->embedForm('usuario', $form22);
+      
+      
+
+      
+      
+      
+
       
   }
 }

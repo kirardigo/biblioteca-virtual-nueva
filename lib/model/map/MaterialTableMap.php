@@ -41,11 +41,12 @@ class MaterialTableMap extends TableMap
         $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
         $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
         $this->addColumn('TITULO', 'Titulo', 'VARCHAR', true, 45, null);
-        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', true, 45, null);
-        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', true, 45, null);
+        $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
+        $this->addColumn('AUTOR', 'Autor', 'VARCHAR', false, 45, null);
         $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);
         $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
         $this->addForeignKey('BIBLIOTECA_ID_BIBLIOTECA', 'BibliotecaIdBiblioteca', 'INTEGER', 'biblioteca', 'ID_BIBLIOTECA', true, null, null);
+        $this->addForeignKey('CARRERA_ID_CARRERA', 'CarreraIdCarrera', 'INTEGER', 'carrera', 'ID_CARRERA', true, null, null);
         // validators
     } // initialize()
 
@@ -56,6 +57,7 @@ class MaterialTableMap extends TableMap
     {
         $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::MANY_TO_ONE, array('subcontenido_id_subcontenido' => 'id_subcontenido', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Biblioteca', 'Biblioteca', RelationMap::MANY_TO_ONE, array('biblioteca_id_biblioteca' => 'id_biblioteca', ), null, null);
+        $this->addRelation('Carrera', 'Carrera', RelationMap::MANY_TO_ONE, array('carrera_id_carrera' => 'id_carrera', ), null, null);
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), 'CASCADE', 'CASCADE', 'AccesoMaterials');
     } // buildRelations()
 

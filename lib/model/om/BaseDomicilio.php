@@ -37,6 +37,12 @@ abstract class BaseDomicilio extends BaseObject
     protected $id_domicilio;
 
     /**
+     * The value for the barrio field.
+     * @var        string
+     */
+    protected $barrio;
+
+    /**
      * The value for the calle field.
      * @var        string
      */
@@ -55,16 +61,22 @@ abstract class BaseDomicilio extends BaseObject
     protected $cod_postal;
 
     /**
+     * The value for the real field.
+     * @var        boolean
+     */
+    protected $real;
+
+    /**
      * The value for the localidad_id_localidad field.
      * @var        int
      */
     protected $localidad_id_localidad;
 
     /**
-     * The value for the persona_id_persona field.
+     * The value for the pfisica_id_pfisica field.
      * @var        int
      */
-    protected $persona_id_persona;
+    protected $pfisica_id_pfisica;
 
     /**
      * @var        Localidad
@@ -72,9 +84,9 @@ abstract class BaseDomicilio extends BaseObject
     protected $aLocalidad;
 
     /**
-     * @var        Persona
+     * @var        Pfisica
      */
-    protected $aPersona;
+    protected $aPfisica;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -99,6 +111,17 @@ abstract class BaseDomicilio extends BaseObject
     {
 
         return $this->id_domicilio;
+    }
+
+    /**
+     * Get the [barrio] column value.
+     * 
+     * @return   string
+     */
+    public function getBarrio()
+    {
+
+        return $this->barrio;
     }
 
     /**
@@ -135,6 +158,17 @@ abstract class BaseDomicilio extends BaseObject
     }
 
     /**
+     * Get the [real] column value.
+     * 
+     * @return   boolean
+     */
+    public function getReal()
+    {
+
+        return $this->real;
+    }
+
+    /**
      * Get the [localidad_id_localidad] column value.
      * 
      * @return   int
@@ -146,14 +180,14 @@ abstract class BaseDomicilio extends BaseObject
     }
 
     /**
-     * Get the [persona_id_persona] column value.
+     * Get the [pfisica_id_pfisica] column value.
      * 
      * @return   int
      */
-    public function getPersonaIdPersona()
+    public function getPfisicaIdPfisica()
     {
 
-        return $this->persona_id_persona;
+        return $this->pfisica_id_pfisica;
     }
 
     /**
@@ -176,6 +210,27 @@ abstract class BaseDomicilio extends BaseObject
 
         return $this;
     } // setIdDomicilio()
+
+    /**
+     * Set the value of [barrio] column.
+     * 
+     * @param      string $v new value
+     * @return   Domicilio The current object (for fluent API support)
+     */
+    public function setBarrio($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->barrio !== $v) {
+            $this->barrio = $v;
+            $this->modifiedColumns[] = DomicilioPeer::BARRIO;
+        }
+
+
+        return $this;
+    } // setBarrio()
 
     /**
      * Set the value of [calle] column.
@@ -241,6 +296,35 @@ abstract class BaseDomicilio extends BaseObject
     } // setCodPostal()
 
     /**
+     * Sets the value of the [real] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * 
+     * @param      boolean|integer|string $v The new value
+     * @return   Domicilio The current object (for fluent API support)
+     */
+    public function setReal($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->real !== $v) {
+            $this->real = $v;
+            $this->modifiedColumns[] = DomicilioPeer::REAL;
+        }
+
+
+        return $this;
+    } // setReal()
+
+    /**
      * Set the value of [localidad_id_localidad] column.
      * 
      * @param      int $v new value
@@ -266,29 +350,29 @@ abstract class BaseDomicilio extends BaseObject
     } // setLocalidadIdLocalidad()
 
     /**
-     * Set the value of [persona_id_persona] column.
+     * Set the value of [pfisica_id_pfisica] column.
      * 
      * @param      int $v new value
      * @return   Domicilio The current object (for fluent API support)
      */
-    public function setPersonaIdPersona($v)
+    public function setPfisicaIdPfisica($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->persona_id_persona !== $v) {
-            $this->persona_id_persona = $v;
-            $this->modifiedColumns[] = DomicilioPeer::PERSONA_ID_PERSONA;
+        if ($this->pfisica_id_pfisica !== $v) {
+            $this->pfisica_id_pfisica = $v;
+            $this->modifiedColumns[] = DomicilioPeer::PFISICA_ID_PFISICA;
         }
 
-        if ($this->aPersona !== null && $this->aPersona->getIdPersona() !== $v) {
-            $this->aPersona = null;
+        if ($this->aPfisica !== null && $this->aPfisica->getIdPfisica() !== $v) {
+            $this->aPfisica = null;
         }
 
 
         return $this;
-    } // setPersonaIdPersona()
+    } // setPfisicaIdPfisica()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -323,11 +407,13 @@ abstract class BaseDomicilio extends BaseObject
         try {
 
             $this->id_domicilio = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->calle = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->altura = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->cod_postal = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->localidad_id_localidad = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
-            $this->persona_id_persona = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->barrio = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->calle = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->altura = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->cod_postal = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->real = ($row[$startcol + 5] !== null) ? (boolean) $row[$startcol + 5] : null;
+            $this->localidad_id_localidad = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
+            $this->pfisica_id_pfisica = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -336,7 +422,7 @@ abstract class BaseDomicilio extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = DomicilioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = DomicilioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Domicilio object", $e);
@@ -362,8 +448,8 @@ abstract class BaseDomicilio extends BaseObject
         if ($this->aLocalidad !== null && $this->localidad_id_localidad !== $this->aLocalidad->getIdLocalidad()) {
             $this->aLocalidad = null;
         }
-        if ($this->aPersona !== null && $this->persona_id_persona !== $this->aPersona->getIdPersona()) {
-            $this->aPersona = null;
+        if ($this->aPfisica !== null && $this->pfisica_id_pfisica !== $this->aPfisica->getIdPfisica()) {
+            $this->aPfisica = null;
         }
     } // ensureConsistency
 
@@ -405,7 +491,7 @@ abstract class BaseDomicilio extends BaseObject
         if ($deep) {  // also de-associate any related objects?
 
             $this->aLocalidad = null;
-            $this->aPersona = null;
+            $this->aPfisica = null;
         } // if (deep)
     }
 
@@ -563,11 +649,11 @@ abstract class BaseDomicilio extends BaseObject
                 $this->setLocalidad($this->aLocalidad);
             }
 
-            if ($this->aPersona !== null) {
-                if ($this->aPersona->isModified() || $this->aPersona->isNew()) {
-                    $affectedRows += $this->aPersona->save($con);
+            if ($this->aPfisica !== null) {
+                if ($this->aPfisica->isModified() || $this->aPfisica->isNew()) {
+                    $affectedRows += $this->aPfisica->save($con);
                 }
-                $this->setPersona($this->aPersona);
+                $this->setPfisica($this->aPfisica);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -610,6 +696,9 @@ abstract class BaseDomicilio extends BaseObject
         if ($this->isColumnModified(DomicilioPeer::ID_DOMICILIO)) {
             $modifiedColumns[':p' . $index++]  = '`ID_DOMICILIO`';
         }
+        if ($this->isColumnModified(DomicilioPeer::BARRIO)) {
+            $modifiedColumns[':p' . $index++]  = '`BARRIO`';
+        }
         if ($this->isColumnModified(DomicilioPeer::CALLE)) {
             $modifiedColumns[':p' . $index++]  = '`CALLE`';
         }
@@ -619,11 +708,14 @@ abstract class BaseDomicilio extends BaseObject
         if ($this->isColumnModified(DomicilioPeer::COD_POSTAL)) {
             $modifiedColumns[':p' . $index++]  = '`COD_POSTAL`';
         }
+        if ($this->isColumnModified(DomicilioPeer::REAL)) {
+            $modifiedColumns[':p' . $index++]  = '`REAL`';
+        }
         if ($this->isColumnModified(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD)) {
             $modifiedColumns[':p' . $index++]  = '`LOCALIDAD_ID_LOCALIDAD`';
         }
-        if ($this->isColumnModified(DomicilioPeer::PERSONA_ID_PERSONA)) {
-            $modifiedColumns[':p' . $index++]  = '`PERSONA_ID_PERSONA`';
+        if ($this->isColumnModified(DomicilioPeer::PFISICA_ID_PFISICA)) {
+            $modifiedColumns[':p' . $index++]  = '`PFISICA_ID_PFISICA`';
         }
 
         $sql = sprintf(
@@ -639,6 +731,9 @@ abstract class BaseDomicilio extends BaseObject
                     case '`ID_DOMICILIO`':						
 						$stmt->bindValue($identifier, $this->id_domicilio, PDO::PARAM_INT);
                         break;
+                    case '`BARRIO`':						
+						$stmt->bindValue($identifier, $this->barrio, PDO::PARAM_STR);
+                        break;
                     case '`CALLE`':						
 						$stmt->bindValue($identifier, $this->calle, PDO::PARAM_STR);
                         break;
@@ -648,11 +743,14 @@ abstract class BaseDomicilio extends BaseObject
                     case '`COD_POSTAL`':						
 						$stmt->bindValue($identifier, $this->cod_postal, PDO::PARAM_STR);
                         break;
+                    case '`REAL`':
+						$stmt->bindValue($identifier, (int) $this->real, PDO::PARAM_INT);
+                        break;
                     case '`LOCALIDAD_ID_LOCALIDAD`':						
 						$stmt->bindValue($identifier, $this->localidad_id_localidad, PDO::PARAM_INT);
                         break;
-                    case '`PERSONA_ID_PERSONA`':						
-						$stmt->bindValue($identifier, $this->persona_id_persona, PDO::PARAM_INT);
+                    case '`PFISICA_ID_PFISICA`':						
+						$stmt->bindValue($identifier, $this->pfisica_id_pfisica, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -759,9 +857,9 @@ abstract class BaseDomicilio extends BaseObject
                 }
             }
 
-            if ($this->aPersona !== null) {
-                if (!$this->aPersona->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aPersona->getValidationFailures());
+            if ($this->aPfisica !== null) {
+                if (!$this->aPfisica->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aPfisica->getValidationFailures());
                 }
             }
 
@@ -810,19 +908,25 @@ abstract class BaseDomicilio extends BaseObject
                 return $this->getIdDomicilio();
                 break;
             case 1:
-                return $this->getCalle();
+                return $this->getBarrio();
                 break;
             case 2:
-                return $this->getAltura();
+                return $this->getCalle();
                 break;
             case 3:
-                return $this->getCodPostal();
+                return $this->getAltura();
                 break;
             case 4:
-                return $this->getLocalidadIdLocalidad();
+                return $this->getCodPostal();
                 break;
             case 5:
-                return $this->getPersonaIdPersona();
+                return $this->getReal();
+                break;
+            case 6:
+                return $this->getLocalidadIdLocalidad();
+                break;
+            case 7:
+                return $this->getPfisicaIdPfisica();
                 break;
             default:
                 return null;
@@ -854,18 +958,20 @@ abstract class BaseDomicilio extends BaseObject
         $keys = DomicilioPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdDomicilio(),
-            $keys[1] => $this->getCalle(),
-            $keys[2] => $this->getAltura(),
-            $keys[3] => $this->getCodPostal(),
-            $keys[4] => $this->getLocalidadIdLocalidad(),
-            $keys[5] => $this->getPersonaIdPersona(),
+            $keys[1] => $this->getBarrio(),
+            $keys[2] => $this->getCalle(),
+            $keys[3] => $this->getAltura(),
+            $keys[4] => $this->getCodPostal(),
+            $keys[5] => $this->getReal(),
+            $keys[6] => $this->getLocalidadIdLocalidad(),
+            $keys[7] => $this->getPfisicaIdPfisica(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aLocalidad) {
                 $result['Localidad'] = $this->aLocalidad->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPersona) {
-                $result['Persona'] = $this->aPersona->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            if (null !== $this->aPfisica) {
+                $result['Pfisica'] = $this->aPfisica->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -905,19 +1011,25 @@ abstract class BaseDomicilio extends BaseObject
                 $this->setIdDomicilio($value);
                 break;
             case 1:
-                $this->setCalle($value);
+                $this->setBarrio($value);
                 break;
             case 2:
-                $this->setAltura($value);
+                $this->setCalle($value);
                 break;
             case 3:
-                $this->setCodPostal($value);
+                $this->setAltura($value);
                 break;
             case 4:
-                $this->setLocalidadIdLocalidad($value);
+                $this->setCodPostal($value);
                 break;
             case 5:
-                $this->setPersonaIdPersona($value);
+                $this->setReal($value);
+                break;
+            case 6:
+                $this->setLocalidadIdLocalidad($value);
+                break;
+            case 7:
+                $this->setPfisicaIdPfisica($value);
                 break;
         } // switch()
     }
@@ -944,11 +1056,13 @@ abstract class BaseDomicilio extends BaseObject
         $keys = DomicilioPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdDomicilio($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setCalle($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setAltura($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setCodPostal($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setLocalidadIdLocalidad($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setPersonaIdPersona($arr[$keys[5]]);
+        if (array_key_exists($keys[1], $arr)) $this->setBarrio($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCalle($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setAltura($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setCodPostal($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setReal($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setLocalidadIdLocalidad($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setPfisicaIdPfisica($arr[$keys[7]]);
     }
 
     /**
@@ -961,11 +1075,13 @@ abstract class BaseDomicilio extends BaseObject
         $criteria = new Criteria(DomicilioPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(DomicilioPeer::ID_DOMICILIO)) $criteria->add(DomicilioPeer::ID_DOMICILIO, $this->id_domicilio);
+        if ($this->isColumnModified(DomicilioPeer::BARRIO)) $criteria->add(DomicilioPeer::BARRIO, $this->barrio);
         if ($this->isColumnModified(DomicilioPeer::CALLE)) $criteria->add(DomicilioPeer::CALLE, $this->calle);
         if ($this->isColumnModified(DomicilioPeer::ALTURA)) $criteria->add(DomicilioPeer::ALTURA, $this->altura);
         if ($this->isColumnModified(DomicilioPeer::COD_POSTAL)) $criteria->add(DomicilioPeer::COD_POSTAL, $this->cod_postal);
+        if ($this->isColumnModified(DomicilioPeer::REAL)) $criteria->add(DomicilioPeer::REAL, $this->real);
         if ($this->isColumnModified(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD)) $criteria->add(DomicilioPeer::LOCALIDAD_ID_LOCALIDAD, $this->localidad_id_localidad);
-        if ($this->isColumnModified(DomicilioPeer::PERSONA_ID_PERSONA)) $criteria->add(DomicilioPeer::PERSONA_ID_PERSONA, $this->persona_id_persona);
+        if ($this->isColumnModified(DomicilioPeer::PFISICA_ID_PFISICA)) $criteria->add(DomicilioPeer::PFISICA_ID_PFISICA, $this->pfisica_id_pfisica);
 
         return $criteria;
     }
@@ -1029,11 +1145,13 @@ abstract class BaseDomicilio extends BaseObject
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
+        $copyObj->setBarrio($this->getBarrio());
         $copyObj->setCalle($this->getCalle());
         $copyObj->setAltura($this->getAltura());
         $copyObj->setCodPostal($this->getCodPostal());
+        $copyObj->setReal($this->getReal());
         $copyObj->setLocalidadIdLocalidad($this->getLocalidadIdLocalidad());
-        $copyObj->setPersonaIdPersona($this->getPersonaIdPersona());
+        $copyObj->setPfisicaIdPfisica($this->getPfisicaIdPfisica());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1144,24 +1262,24 @@ abstract class BaseDomicilio extends BaseObject
     }
 
     /**
-     * Declares an association between this object and a Persona object.
+     * Declares an association between this object and a Pfisica object.
      *
-     * @param                  Persona $v
+     * @param                  Pfisica $v
      * @return                 Domicilio The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPersona(Persona $v = null)
+    public function setPfisica(Pfisica $v = null)
     {
         if ($v === null) {
-            $this->setPersonaIdPersona(NULL);
+            $this->setPfisicaIdPfisica(NULL);
         } else {
-            $this->setPersonaIdPersona($v->getIdPersona());
+            $this->setPfisicaIdPfisica($v->getIdPfisica());
         }
 
-        $this->aPersona = $v;
+        $this->aPfisica = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Persona object, it will not be re-added.
+        // If this object has already been added to the Pfisica object, it will not be re-added.
         if ($v !== null) {
             $v->addDomicilio($this);
         }
@@ -1172,26 +1290,26 @@ abstract class BaseDomicilio extends BaseObject
 
 
     /**
-     * Get the associated Persona object
+     * Get the associated Pfisica object
      *
      * @param      PropelPDO $con Optional Connection object.
-     * @return                 Persona The associated Persona object.
+     * @return                 Pfisica The associated Pfisica object.
      * @throws PropelException
      */
-    public function getPersona(PropelPDO $con = null)
+    public function getPfisica(PropelPDO $con = null)
     {
-        if ($this->aPersona === null && ($this->persona_id_persona !== null)) {
-            $this->aPersona = PersonaQuery::create()->findPk($this->persona_id_persona, $con);
+        if ($this->aPfisica === null && ($this->pfisica_id_pfisica !== null)) {
+            $this->aPfisica = PfisicaQuery::create()->findPk($this->pfisica_id_pfisica, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPersona->addDomicilios($this);
+                $this->aPfisica->addDomicilios($this);
              */
         }
 
-        return $this->aPersona;
+        return $this->aPfisica;
     }
 
     /**
@@ -1200,11 +1318,13 @@ abstract class BaseDomicilio extends BaseObject
     public function clear()
     {
         $this->id_domicilio = null;
+        $this->barrio = null;
         $this->calle = null;
         $this->altura = null;
         $this->cod_postal = null;
+        $this->real = null;
         $this->localidad_id_localidad = null;
-        $this->persona_id_persona = null;
+        $this->pfisica_id_pfisica = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1228,7 +1348,7 @@ abstract class BaseDomicilio extends BaseObject
         } // if ($deep)
 
         $this->aLocalidad = null;
-        $this->aPersona = null;
+        $this->aPfisica = null;
     }
 
     /**

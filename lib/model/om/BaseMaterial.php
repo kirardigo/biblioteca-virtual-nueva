@@ -79,6 +79,12 @@ abstract class BaseMaterial extends BaseObject
     protected $biblioteca_id_biblioteca;
 
     /**
+     * The value for the carrera_id_carrera field.
+     * @var        int
+     */
+    protected $carrera_id_carrera;
+
+    /**
      * @var        Subcontenido
      */
     protected $aSubcontenido;
@@ -87,6 +93,11 @@ abstract class BaseMaterial extends BaseObject
      * @var        Biblioteca
      */
     protected $aBiblioteca;
+
+    /**
+     * @var        Carrera
+     */
+    protected $aCarrera;
 
     /**
      * @var        PropelObjectCollection|AccesoMaterial[] Collection to store aggregation of AccesoMaterial objects.
@@ -199,6 +210,17 @@ abstract class BaseMaterial extends BaseObject
     {
 
         return $this->biblioteca_id_biblioteca;
+    }
+
+    /**
+     * Get the [carrera_id_carrera] column value.
+     * 
+     * @return   int
+     */
+    public function getCarreraIdCarrera()
+    {
+
+        return $this->carrera_id_carrera;
     }
 
     /**
@@ -378,6 +400,31 @@ abstract class BaseMaterial extends BaseObject
     } // setBibliotecaIdBiblioteca()
 
     /**
+     * Set the value of [carrera_id_carrera] column.
+     * 
+     * @param      int $v new value
+     * @return   Material The current object (for fluent API support)
+     */
+    public function setCarreraIdCarrera($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->carrera_id_carrera !== $v) {
+            $this->carrera_id_carrera = $v;
+            $this->modifiedColumns[] = MaterialPeer::CARRERA_ID_CARRERA;
+        }
+
+        if ($this->aCarrera !== null && $this->aCarrera->getIdCarrera() !== $v) {
+            $this->aCarrera = null;
+        }
+
+
+        return $this;
+    } // setCarreraIdCarrera()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -417,6 +464,7 @@ abstract class BaseMaterial extends BaseObject
             $this->descripcion = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
             $this->subcontenido_id_subcontenido = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
             $this->biblioteca_id_biblioteca = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->carrera_id_carrera = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -425,7 +473,7 @@ abstract class BaseMaterial extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 8; // 8 = MaterialPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 9; // 9 = MaterialPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Material object", $e);
@@ -453,6 +501,9 @@ abstract class BaseMaterial extends BaseObject
         }
         if ($this->aBiblioteca !== null && $this->biblioteca_id_biblioteca !== $this->aBiblioteca->getIdBiblioteca()) {
             $this->aBiblioteca = null;
+        }
+        if ($this->aCarrera !== null && $this->carrera_id_carrera !== $this->aCarrera->getIdCarrera()) {
+            $this->aCarrera = null;
         }
     } // ensureConsistency
 
@@ -495,6 +546,7 @@ abstract class BaseMaterial extends BaseObject
 
             $this->aSubcontenido = null;
             $this->aBiblioteca = null;
+            $this->aCarrera = null;
             $this->collAccesoMaterials = null;
 
         } // if (deep)
@@ -661,6 +713,13 @@ abstract class BaseMaterial extends BaseObject
                 $this->setBiblioteca($this->aBiblioteca);
             }
 
+            if ($this->aCarrera !== null) {
+                if ($this->aCarrera->isModified() || $this->aCarrera->isNew()) {
+                    $affectedRows += $this->aCarrera->save($con);
+                }
+                $this->setCarrera($this->aCarrera);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -739,6 +798,9 @@ abstract class BaseMaterial extends BaseObject
         if ($this->isColumnModified(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA)) {
             $modifiedColumns[':p' . $index++]  = '`BIBLIOTECA_ID_BIBLIOTECA`';
         }
+        if ($this->isColumnModified(MaterialPeer::CARRERA_ID_CARRERA)) {
+            $modifiedColumns[':p' . $index++]  = '`CARRERA_ID_CARRERA`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `material` (%s) VALUES (%s)',
@@ -773,6 +835,9 @@ abstract class BaseMaterial extends BaseObject
                         break;
                     case '`BIBLIOTECA_ID_BIBLIOTECA`':						
 						$stmt->bindValue($identifier, $this->biblioteca_id_biblioteca, PDO::PARAM_INT);
+                        break;
+                    case '`CARRERA_ID_CARRERA`':						
+						$stmt->bindValue($identifier, $this->carrera_id_carrera, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -885,6 +950,12 @@ abstract class BaseMaterial extends BaseObject
                 }
             }
 
+            if ($this->aCarrera !== null) {
+                if (!$this->aCarrera->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aCarrera->getValidationFailures());
+                }
+            }
+
 
             if (($retval = MaterialPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
@@ -958,6 +1029,9 @@ abstract class BaseMaterial extends BaseObject
             case 7:
                 return $this->getBibliotecaIdBiblioteca();
                 break;
+            case 8:
+                return $this->getCarreraIdCarrera();
+                break;
             default:
                 return null;
                 break;
@@ -995,6 +1069,7 @@ abstract class BaseMaterial extends BaseObject
             $keys[5] => $this->getDescripcion(),
             $keys[6] => $this->getSubcontenidoIdSubcontenido(),
             $keys[7] => $this->getBibliotecaIdBiblioteca(),
+            $keys[8] => $this->getCarreraIdCarrera(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aSubcontenido) {
@@ -1002,6 +1077,9 @@ abstract class BaseMaterial extends BaseObject
             }
             if (null !== $this->aBiblioteca) {
                 $result['Biblioteca'] = $this->aBiblioteca->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aCarrera) {
+                $result['Carrera'] = $this->aCarrera->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->collAccesoMaterials) {
                 $result['AccesoMaterials'] = $this->collAccesoMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1064,6 +1142,9 @@ abstract class BaseMaterial extends BaseObject
             case 7:
                 $this->setBibliotecaIdBiblioteca($value);
                 break;
+            case 8:
+                $this->setCarreraIdCarrera($value);
+                break;
         } // switch()
     }
 
@@ -1096,6 +1177,7 @@ abstract class BaseMaterial extends BaseObject
         if (array_key_exists($keys[5], $arr)) $this->setDescripcion($arr[$keys[5]]);
         if (array_key_exists($keys[6], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[6]]);
         if (array_key_exists($keys[7], $arr)) $this->setBibliotecaIdBiblioteca($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setCarreraIdCarrera($arr[$keys[8]]);
     }
 
     /**
@@ -1115,6 +1197,7 @@ abstract class BaseMaterial extends BaseObject
         if ($this->isColumnModified(MaterialPeer::DESCRIPCION)) $criteria->add(MaterialPeer::DESCRIPCION, $this->descripcion);
         if ($this->isColumnModified(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) $criteria->add(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $this->subcontenido_id_subcontenido);
         if ($this->isColumnModified(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA)) $criteria->add(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $this->biblioteca_id_biblioteca);
+        if ($this->isColumnModified(MaterialPeer::CARRERA_ID_CARRERA)) $criteria->add(MaterialPeer::CARRERA_ID_CARRERA, $this->carrera_id_carrera);
 
         return $criteria;
     }
@@ -1185,6 +1268,7 @@ abstract class BaseMaterial extends BaseObject
         $copyObj->setDescripcion($this->getDescripcion());
         $copyObj->setSubcontenidoIdSubcontenido($this->getSubcontenidoIdSubcontenido());
         $copyObj->setBibliotecaIdBiblioteca($this->getBibliotecaIdBiblioteca());
+        $copyObj->setCarreraIdCarrera($this->getCarreraIdCarrera());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1349,6 +1433,57 @@ abstract class BaseMaterial extends BaseObject
         }
 
         return $this->aBiblioteca;
+    }
+
+    /**
+     * Declares an association between this object and a Carrera object.
+     *
+     * @param                  Carrera $v
+     * @return                 Material The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setCarrera(Carrera $v = null)
+    {
+        if ($v === null) {
+            $this->setCarreraIdCarrera(NULL);
+        } else {
+            $this->setCarreraIdCarrera($v->getIdCarrera());
+        }
+
+        $this->aCarrera = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Carrera object, it will not be re-added.
+        if ($v !== null) {
+            $v->addMaterial($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated Carrera object
+     *
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Carrera The associated Carrera object.
+     * @throws PropelException
+     */
+    public function getCarrera(PropelPDO $con = null)
+    {
+        if ($this->aCarrera === null && ($this->carrera_id_carrera !== null)) {
+            $this->aCarrera = CarreraQuery::create()->findPk($this->carrera_id_carrera, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aCarrera->addMaterials($this);
+             */
+        }
+
+        return $this->aCarrera;
     }
 
 
@@ -1572,6 +1707,7 @@ abstract class BaseMaterial extends BaseObject
         $this->descripcion = null;
         $this->subcontenido_id_subcontenido = null;
         $this->biblioteca_id_biblioteca = null;
+        $this->carrera_id_carrera = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1605,6 +1741,7 @@ abstract class BaseMaterial extends BaseObject
         $this->collAccesoMaterials = null;
         $this->aSubcontenido = null;
         $this->aBiblioteca = null;
+        $this->aCarrera = null;
     }
 
     /**

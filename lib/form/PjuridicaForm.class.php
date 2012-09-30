@@ -11,5 +11,6 @@ class PjuridicaForm extends BasePjuridicaForm
 {
   public function configure()
   {
+      $this->embedRelation('DomicilioJ');
   }
 }

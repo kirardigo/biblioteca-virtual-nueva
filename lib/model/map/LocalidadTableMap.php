@@ -41,7 +41,7 @@ class LocalidadTableMap extends TableMap
         $this->addPrimaryKey('ID_LOCALIDAD', 'IdLocalidad', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
         $this->getColumn('NOMBRE', false)->setPrimaryString(true);
-        $this->addColumn('COD_POSTAL', 'CodPostal', 'VARCHAR', false, 45, null);
+        $this->addColumn('COD_POSTAL', 'CodPostal', 'VARCHAR', true, 45, null);
         $this->addForeignKey('PROVINCIA_ID_PROVINCIA', 'ProvinciaIdProvincia', 'INTEGER', 'provincia', 'ID_PROVINCIA', true, null, null);
         // validators
     } // initialize()
@@ -53,6 +53,7 @@ class LocalidadTableMap extends TableMap
     {
         $this->addRelation('Provincia', 'Provincia', RelationMap::MANY_TO_ONE, array('provincia_id_provincia' => 'id_provincia', ), null, null);
         $this->addRelation('Domicilio', 'Domicilio', RelationMap::ONE_TO_MANY, array('id_localidad' => 'localidad_id_localidad', ), null, null, 'Domicilios');
+        $this->addRelation('DomicilioJ', 'DomicilioJ', RelationMap::ONE_TO_MANY, array('id_localidad' => 'localidad_id_localidad', ), null, null, 'DomicilioJs');
     } // buildRelations()
 
     /**

@@ -20,7 +20,7 @@ abstract class BaseCarreraForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_carrera' => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdCarrera()), 'empty_value' => $this->getObject()->getIdCarrera(), 'required' => false)),
-      'nombre'     => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'nombre'     => new sfValidatorString(array('max_length' => 45)),
     ));
 
     $this->widgetSchema->setNameFormat('carrera[%s]');

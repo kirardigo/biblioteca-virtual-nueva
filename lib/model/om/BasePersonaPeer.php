@@ -34,11 +34,11 @@ abstract class BasePersonaPeer {
     /** the column name for the ID_PERSONA field */
     const ID_PERSONA = 'persona.ID_PERSONA';
 
-    /** the column name for the DOMICILIO_LEGAL field */
-    const DOMICILIO_LEGAL = 'persona.DOMICILIO_LEGAL';
+    /** the column name for the NOMBRE field */
+    const NOMBRE = 'persona.NOMBRE';
 
-    /** the column name for the DOMICILIO_POSTAL field */
-    const DOMICILIO_POSTAL = 'persona.DOMICILIO_POSTAL';
+    /** the column name for the JURIDICA field */
+    const JURIDICA = 'persona.JURIDICA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -59,11 +59,11 @@ abstract class BasePersonaPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPersona', 'DomicilioLegal', 'DomicilioPostal', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPersona', 'domicilioLegal', 'domicilioPostal', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_PERSONA, self::DOMICILIO_LEGAL, self::DOMICILIO_POSTAL, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PERSONA', 'DOMICILIO_LEGAL', 'DOMICILIO_POSTAL', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_persona', 'domicilio_legal', 'domicilio_postal', ),
+        BasePeer::TYPE_PHPNAME => array ('IdPersona', 'Nombre', 'Juridica', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPersona', 'nombre', 'juridica', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_PERSONA, self::NOMBRE, self::JURIDICA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PERSONA', 'NOMBRE', 'JURIDICA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_persona', 'nombre', 'juridica', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
@@ -74,11 +74,11 @@ abstract class BasePersonaPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPersona' => 0, 'DomicilioLegal' => 1, 'DomicilioPostal' => 2, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPersona' => 0, 'domicilioLegal' => 1, 'domicilioPostal' => 2, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_PERSONA => 0, self::DOMICILIO_LEGAL => 1, self::DOMICILIO_POSTAL => 2, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PERSONA' => 0, 'DOMICILIO_LEGAL' => 1, 'DOMICILIO_POSTAL' => 2, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_persona' => 0, 'domicilio_legal' => 1, 'domicilio_postal' => 2, ),
+        BasePeer::TYPE_PHPNAME => array ('IdPersona' => 0, 'Nombre' => 1, 'Juridica' => 2, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPersona' => 0, 'nombre' => 1, 'juridica' => 2, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_PERSONA => 0, self::NOMBRE => 1, self::JURIDICA => 2, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PERSONA' => 0, 'NOMBRE' => 1, 'JURIDICA' => 2, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_persona' => 0, 'nombre' => 1, 'juridica' => 2, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
@@ -154,12 +154,12 @@ abstract class BasePersonaPeer {
     {
         if (null === $alias) {
             $criteria->addSelectColumn(PersonaPeer::ID_PERSONA);
-            $criteria->addSelectColumn(PersonaPeer::DOMICILIO_LEGAL);
-            $criteria->addSelectColumn(PersonaPeer::DOMICILIO_POSTAL);
+            $criteria->addSelectColumn(PersonaPeer::NOMBRE);
+            $criteria->addSelectColumn(PersonaPeer::JURIDICA);
         } else {
             $criteria->addSelectColumn($alias . '.ID_PERSONA');
-            $criteria->addSelectColumn($alias . '.DOMICILIO_LEGAL');
-            $criteria->addSelectColumn($alias . '.DOMICILIO_POSTAL');
+            $criteria->addSelectColumn($alias . '.NOMBRE');
+            $criteria->addSelectColumn($alias . '.JURIDICA');
         }
     }
 
