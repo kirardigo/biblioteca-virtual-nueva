@@ -73,7 +73,7 @@
                 </ul>
               </li>
               <?php endif;?>
-
+<?php if($sf_user->hasCredential('admin')):?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Administracion Extra <b class="caret"></b>
@@ -83,15 +83,15 @@
               <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
               <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
              
-                            <li><a href="<?php echo url_for('persona/index');?>">ABM Personas</a></li>
+                           
 
               
               <li><a href="<?php echo url_for('provincia/index');?>">ABM Provincia/Localidad</a></li>
-              <li><a href="<?php echo url_for('domicilio/index');?>">ABM Domicilio</a></li>
+              
               <li><a href="<?php echo url_for('biblioteca/index');?>">ABM Biblioteca</a></li>
                 <li><a href="<?php echo url_for('pjuridica/index');?>">ABM Persona juridica</a></li>
                 </ul>
-                  
+      <?php endif;?>             
                   
               <?php if($sf_user->isAuthenticated()):?>
               <li class="dropdown">

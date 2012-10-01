@@ -1,6 +1,4 @@
 <h1>ERROR de Ingreso</h1></br>
-
-<img src="<?php echo image_path('logo_exclamacion.png')?>" width="150" height="200" alt="No Autorizado"></img>
 <h3>Se encontró un error cuando ingresó sus datos, vuelva al inicio e intente nuevamente</h3></br>
 <fieldset>
     <label><strong>Mje. del Error: </strong></label>

@@ -19,4 +19,9 @@ class errorActions extends sfActions
   {
     
   }
+  
+  public function executeError(sfWebRequest $request)
+  {
+    
+  }
 }

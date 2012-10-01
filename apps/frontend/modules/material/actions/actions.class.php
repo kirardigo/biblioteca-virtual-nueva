@@ -21,7 +21,14 @@ class materialActions extends sfActions
         $autor = $request->getParameter('autor');
         $titulo = $request->getParameter('titulo');
         $editorial = $request->getParameter('editorial');
-        $carrera = $request->getParameter('carrera');
+//        $id = $request->getParameter('carrera');
+        
+       // $aux22= CarreraQuery::create();
+       // $aux22->findByNombre($carrera);
+       // $id=$aux22->get('id_carrera');        
+       // $dsa=$aux22->getHaving('nombre',$carrera);
+        
+        
         $contenido = $request->getParameter('contenido');
         $subcontenido = $request->getParameter('subcontenido');
         
@@ -34,9 +41,9 @@ class materialActions extends sfActions
         if((empty($editorial))){
         $editorial='*';    
         }
-        if((empty($carrera))){
-        $carrera='*';    
-        }
+//        if((empty($id))){
+//        $id='*';    
+//        }
         if((empty($contenido))){
         $contenido='*';    
         }
@@ -48,7 +55,7 @@ class materialActions extends sfActions
             $consulta2->filterByAutor($autor)
             ->filterByTitulo($titulo)
             ->filterByEditorial($editorial)
-            
+            //->filterByCarreraIdCarrera($id)
                  ->useSubcontenidoQuery()
                     ->filterByNombre($subcontenido)
                     ->useContenidoQuery()

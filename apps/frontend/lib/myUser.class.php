@@ -16,6 +16,7 @@ class myUser extends sfBasicSecurityUser{
         //seteo la credencial de usuario
         if ($usuario->getAdmin()==true){
         $this->addCredential('admin');
+        $this->setAttribute("admin", $usuario->getAdmin());
                 
         }else{$this->addCredential('user');};//getTipoSocioId());
         //Seteo el atributo "nombre" del usuario
@@ -23,6 +24,7 @@ class myUser extends sfBasicSecurityUser{
         $this->setAttribute("user", $usuario->getUsuario());//$usuario->getUsuario());
         //Seteo el atributo "dni" del usuario
         $this->setAttribute("id", $usuario->getIdUsuario());
+        //$this->setAttribute("admin", $usuario->getAdmin());        
         //autentico el usuario.
         $this->setAuthenticated(true);
     }       

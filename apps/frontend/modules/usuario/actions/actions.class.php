@@ -33,8 +33,13 @@ class usuarioActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   { 
     $Usuario = UsuarioQuery::create()->findPk($request->getParameter('id_usuario'));
+    
+    if (  ($this->getUser()->getAttribute('id')  )  ==  ($request->getParameter('id_usuario'))   ){
     $this->forward404Unless($Usuario, sprintf('Object Usuario does not exist (%s).', $request->getParameter('id_usuario')));
-    $this->form = new UsuarioForm($Usuario);
+    $this->form = new UsuarioForm($Usuario);}else{
+
+       $this->redirect('error/error');
+    }
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -67,7 +72,7 @@ class usuarioActions extends sfActions
     {
       $Usuario = $form->save();
       //$this->redirect('usuario/edit?id_usuario='.$Usuario->getIdUsuario());
-      $this->redirect('login/index');
+      $this->redirect('principal/guardado');
     }
   }
 }

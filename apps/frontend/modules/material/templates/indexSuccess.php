@@ -12,11 +12,11 @@
        <label>Editorial</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Editorial" name="editorial"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getEditorial()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
-       
+<!--       
        <label>Carrera</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Carrera" name="carrera"
-       data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getCarrera()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
-     
+       data-source='[<?php //foreach($Materials as $mat){echo "\"".$mat->getCarrera()->getIdCarrera()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
+     -->
        <label>Contenido</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Contenido" name="contenido"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getContenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
