@@ -11,7 +11,10 @@ propel:
     nombre: { primaryString: true }
   subcontenido:
     nombre: { primaryString: true }
+  provincia:
+    nombre: { primaryString: true }
   localidad:
-   nombre: { primaryString: true }
+    nombre: { primaryString: true }
+    provincia_id_provincia: { primaryString: true }
   pjuridica:
-   nombre: { primaryString: true }  
+    nombre: { primaryString: true }  

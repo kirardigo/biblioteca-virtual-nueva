@@ -12,7 +12,9 @@ class PfisicaForm extends BasePfisicaForm
   public function configure()
   {
       //$this->embedRelation('Usuario');
-      
+            $anios = range(date('Y') - 80, date('Y') - 18);
+      $this->widgetSchema['fecha_nac']->setOption('years', $anios);
+      $this->widgetSchema['fecha_nac']->setOption('years', array_combine($anios, $anios));
      // $this->validatorSchema->setOption('allow_extra_fields',true); 
    $this->widgetSchema['tipo_doc_id_tipo_doc']->setLabel('Tipo de Documento');
        $this->widgetSchema['fecha_nac']->setLabel('Fecha de Nacimiento');

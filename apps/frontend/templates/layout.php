@@ -61,35 +61,44 @@
 <?php if($sf_user->hasCredential('admin')):?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Administracion <b class="caret"></b>
+                  Administracion de Persona<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
 
-              <li><a href="<?php echo url_for('pfisica/index');?>">ABM Personas Fisicas</a></li>
-              <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
+               <li><a href="<?php echo url_for('pfisica/index');?>">ABM Personas Fisicas</a></li>
+               <li><a href="<?php echo url_for('pjuridica/index');?>">ABM Personas Juridicas</a></li>
+               <li><a href="<?php echo url_for('provincia/index');?>">ABM Provincia/Localidad</a></li>
+               <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
+               <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
+               <li><a href="<?php echo url_for('biblioteca/index');?>">ABM Biblioteca</a></li>
+               
              
-              <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
-              <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
+                           
+
+              
+              
+              
+              
+              
+              
+              
+              
                 </ul>
               </li>
               <?php endif;?>
 <?php if($sf_user->hasCredential('admin')):?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Administracion Extra <b class="caret"></b>
+                  Administracion de Material <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
 
-              <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
-              <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
+              
              
-                           
-
-              
-              <li><a href="<?php echo url_for('provincia/index');?>">ABM Provincia/Localidad</a></li>
-              
-              <li><a href="<?php echo url_for('biblioteca/index');?>">ABM Biblioteca</a></li>
-                <li><a href="<?php echo url_for('pjuridica/index');?>">ABM Persona juridica</a></li>
+              <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
+             <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
+              <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
+               
                 </ul>
       <?php endif;?>             
                   

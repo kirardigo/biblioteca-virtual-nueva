@@ -40,6 +40,7 @@ class ProvinciaTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_PROVINCIA', 'IdProvincia', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         // validators
     } // initialize()
 

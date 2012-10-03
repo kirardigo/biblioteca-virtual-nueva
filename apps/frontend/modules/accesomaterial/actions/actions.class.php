@@ -11,7 +11,7 @@ class accesomaterialActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->AccesoMaterials = AccesoMaterialQuery::create()->find();
+    $this->AccesoMaterials = AccesoMaterialQuery::create()->limit(10)->find();
   }
 
   public function executeNew(sfWebRequest $request)
