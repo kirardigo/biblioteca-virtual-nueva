@@ -28,9 +28,18 @@ class UsuarioForm extends BaseUsuarioForm
         // return;
 
      }  
+     //$this->setDefault('password', 'hola');
+    // $pass=$this->setWidget('password', 'hola');
+     //$this->widgetSchema['password'] = new sfWidgetFormInputText();
      $this->widgetSchema['password']->setAttribute('type','password');
- 
-      $this->validatorSchema['email'] = 
+     $this->validatorSchema['password']->setOption('min_length', 6);
+ //$this->widgetSchema['password']->set
+     
+
+//$this->validatorSchema['password']-> 
+     
+     
+     $this->validatorSchema['email'] = 
            new sfValidatorAnd(array(
            $this->validatorSchema['email'],
            new sfValidatorEmail()

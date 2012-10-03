@@ -11,7 +11,46 @@ class pfisicaActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+    //$this->Pfisicas = PfisicaQuery::create()->find();
+      // $this->Materials = MaterialQuery::create()->find();
+     
+          $this->elegido = array();
+    //$this->Materials = MaterialQuery::create()->find();
     $this->Pfisicas = PfisicaQuery::create()->find();
+    // si viene algo por el POST
+    if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
+        //guardo el id de esa pelicula
+        $nombre = $request->getParameter('nombre');
+        $apellido = $request->getParameter('apellido');
+        $documento = $request->getParameter('documento');
+
+        
+        if((empty($nombre))){
+        $nombre='*';    
+        }
+        if((empty($apellido))){
+        $apellido='*';    
+        }
+        if((empty($documento))){
+        $documento='*';    
+        }
+
+        
+            $consulta2 = PfisicaQuery::create();
+            $consulta2->filterByNombre($nombre)
+            ->filterByApellido($apellido)
+            ->filterByDocumento($documento)
+
+                  
+                    
+                  
+             
+                     
+                    
+            ;
+            $this->elegido = $consulta2->find();              
+       
+    }
   }
 
   public function executeNew(sfWebRequest $request)
