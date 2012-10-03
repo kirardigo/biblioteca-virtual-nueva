@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id pjuridica</th>
+      <th>Id</th>
       <th>Nombre</th>
       <th>Razon social</th>
       <th>Cuit/Cuil</th>

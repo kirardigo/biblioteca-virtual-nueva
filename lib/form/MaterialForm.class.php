@@ -11,7 +11,10 @@ class MaterialForm extends BaseMaterialForm
 {
   public function configure()
   {
-      
+     $this->widgetSchema['subcontenido_id_subcontenido']->setLabel('Subcontendio');
+     $this->widgetSchema['biblioteca_id_biblioteca']->setLabel('Biblioteca');
+     $this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
+
           parent::configure();
     
     //error de csrf token si no se metia el codigo siguiente

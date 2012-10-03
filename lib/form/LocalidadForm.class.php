@@ -11,5 +11,6 @@ class LocalidadForm extends BaseLocalidadForm
 {
   public function configure()
   {
+      $this->widgetSchema['cod_postal']->setLabel('Codigo Postal');
   }
 }

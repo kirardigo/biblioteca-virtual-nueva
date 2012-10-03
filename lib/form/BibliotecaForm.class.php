@@ -11,5 +11,6 @@ class BibliotecaForm extends BaseBibliotecaForm
 {
   public function configure()
   {
+      $this->widgetSchema['pjuridica_id_pjuridica']->setLabel('Persona Juridica');
   }
 }

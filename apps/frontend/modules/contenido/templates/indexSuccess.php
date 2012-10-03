@@ -3,8 +3,8 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id contenido</th>
-      <th>Numero contenido</th>
+      <th>Id</th>
+      <th>Numero de contenido</th>
       <th>Nombre</th>
       
     </tr>

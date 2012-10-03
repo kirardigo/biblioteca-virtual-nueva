@@ -3,10 +3,10 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id de acceso material</th>
+      <th>Id</th>
       <th>Usuario que accedió</th>
       <th>Id de Material accedido </th>
-      <th>Fecha de acceso</th>
+      <th>Fecha y hora de acceso</th>
     </tr>
   </thead>
   <tbody>

@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id provincia</th>
+      <th>Id</th>
       <th>Nombre</th>
     </tr>
   </thead>

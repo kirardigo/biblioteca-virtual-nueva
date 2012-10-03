@@ -14,8 +14,10 @@ class PfisicaForm extends BasePfisicaForm
       //$this->embedRelation('Usuario');
       
      // $this->validatorSchema->setOption('allow_extra_fields',true); 
-  
-           parent::configure();
+   $this->widgetSchema['tipo_doc_id_tipo_doc']->setLabel('Tipo de Documento');
+       $this->widgetSchema['fecha_nac']->setLabel('Fecha de Nacimiento');
+   $this->widgetSchema['varon']->setLabel('¿Es Masculino?');
+       parent::configure();
 
         if($this->isNew())
             $child = new Usuario ();

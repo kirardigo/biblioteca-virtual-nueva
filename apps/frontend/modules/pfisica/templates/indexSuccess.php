@@ -3,12 +3,12 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id pfisica</th>
+      <th>Id</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Varon</th>
-      <th>Fecha nac</th>
-      <th>Tipo doc id tipo doc</th>
+      <th>Sexo</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Tipo de Documento</th>
       <th>Documento</th>
      
     </tr>
@@ -19,7 +19,15 @@
       <td><?php echo $Pfisica->getIdPfisica() ?></td>
       <td><?php echo $Pfisica->getNombre() ?></td>
       <td><?php echo $Pfisica->getApellido() ?></td>
-      <td><?php echo $Pfisica->getVaron() ?></td>
+      <?php if($Pfisica->getVaron()){
+          echo '<td>Hombre</td>';
+      }else{echo '<td>Mujer</td>';}
+          
+          
+          ?>
+      
+      
+      
       <td><?php echo $Pfisica->getFechaNac() ?></td>
       <td><?php echo $Pfisica->getTipodoc()->getNombre()?></td>
       <td><?php echo $Pfisica->getDocumento() ?></td>

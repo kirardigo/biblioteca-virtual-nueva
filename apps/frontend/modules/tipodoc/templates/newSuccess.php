@@ -1,3 +1,3 @@
-<h1>New Tipodoc</h1>
+<h1>Nuevo Tipo de documento</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

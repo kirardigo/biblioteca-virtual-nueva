@@ -52,7 +52,7 @@ class loginActions extends sfActions
       
       $user_ok = UsuarioQuery::create();
       $user_ok->filterByUsuario($usuario);
-      $user_ok->filterByPassword(($pass));
+      $user_ok->filterByPassword(md5($pass));
       //echo md5('aadmi');
       $usr = $user_ok->findOne();      
       return $usr; 
