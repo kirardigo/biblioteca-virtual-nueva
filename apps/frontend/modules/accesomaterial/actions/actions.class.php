@@ -26,35 +26,35 @@ class accesomaterialActions extends sfActions
 
         
         if((empty($usuario))){
-        $usuario='*';    
+        $usuario='';    
         }
         if((empty($material))){
-        $material='*';    
+        $material='';    
         }
         if((empty($fecha))){
-        $fecha='*';    
+        //$fecha='*';    
         }
 
         
             $consulta2 = AccesoMaterialQuery::create();
             $consulta2
-                 ->useUsuarioQuery()
-                    ->filterByUsuario($usuario)
-                  ->endUse()
-                      
-                    
-                    
-                  
-                    ->orderBy('IdAccesoMaterial', Criteria::DESC)
+            ->joinWith('Material')
+            ->joinWith('Usuario');
+
+
+            if(!empty($material))        
+            $consulta2->where('Material.archivo = ?', $material);
+            
+            if(!empty($material) && !empty($usuario))
+            {$consulta2->_and();}else{$consulta2->_or();}
+            
+            if(!empty($usuario))        
+            $consulta2
+            ->where('Usuario.usuario = ?', $usuario);
+            $consulta2
+            ->orderBy('IdAccesoMaterial', Criteria::DESC)
             ->limit(10)
 
-
-                  
-                    
-                  
-             
-                     
-                    
             ;
             $this->elegido = $consulta2->find();              
        

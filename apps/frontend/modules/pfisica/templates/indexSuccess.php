@@ -13,8 +13,7 @@
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Documento" name="documento"
        data-source='[<?php foreach($Pfisicas as $mat){echo "\"".$mat->getDocumento()."\"";if($Pfisicas->getPosition()< sizeof($Pfisicas)-1){echo(",");}}?>]'>
 
-       
-       
+    
        
        <button type="reset" class="btn btn-toolbar">Limpiar</button>
        <button type="submit" class="btn btn-info">Buscar</button>

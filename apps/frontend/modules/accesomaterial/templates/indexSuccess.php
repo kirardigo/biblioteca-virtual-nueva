@@ -9,9 +9,7 @@
        <label>Material</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Material" name="material"
        data-source='[<?php foreach($AccesoMaterials as $mat){echo "\"".$mat->getMaterial()->getArchivo()."\"";if($AccesoMaterials->getPosition()< sizeof($AccesoMaterials)-1){echo(",");}}?>]'>
-       <label>Fecha</label>
-       <input type="text" data-provide="typeahead" data-items="5" placeholder="Fecha" name="fecha"
-       data-source='[<?php foreach($AccesoMaterials as $mat){echo "\"".$mat->getFechaAcceso()."\"";if($AccesoMaterials->getPosition()< sizeof($AccesoMaterials)-1){echo(",");}}?>]'>
+      
 
        
        <button type="reset" class="btn btn-toolbar">Limpiar</button>
