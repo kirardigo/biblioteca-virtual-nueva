@@ -50,15 +50,24 @@
       <td><?php echo $Pfisica->getNombre() ?></td>
       <td><?php echo $Pfisica->getApellido() ?></td>
       <?php if($Pfisica->getVaron()){
-          echo '<td>Hombre</td>';
-      }else{echo '<td>Mujer</td>';}
+          echo '<td>Masculino</td>';
+      }else{echo '<td>Femenino</td>';}
           
           
           ?>
       
       
       
-      <td><?php echo $Pfisica->getFechaNac() ?></td>
+<!--     1989-03-21-->
+      
+      <td><?php $cosa= $Pfisica->getFechaNac();
+      $m=substr($cosa,5,2);
+      $d=substr($cosa,8,2);
+      $a=substr($cosa,0,4);
+     // $h=substr($cosa,-9,10);
+      echo $d.'/'.$m.'/'.$a;
+      ?></td>
+      
       <td><?php echo $Pfisica->getTipodoc()->getNombre()?></td>
       <td><?php echo $Pfisica->getDocumento() ?></td>
      

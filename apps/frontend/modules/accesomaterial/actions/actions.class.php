@@ -11,7 +11,55 @@ class accesomaterialActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->AccesoMaterials = AccesoMaterialQuery::create()->limit(10)->find();
+    $this->AccesoMaterials = AccesoMaterialQuery::create()
+            ->find();
+    
+
+     
+          $this->elegido = array();
+
+    if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
+        //guardo el id de esa pelicula
+        $usuario = $request->getParameter('usuario');
+        $material = $request->getParameter('material');
+        $fecha = $request->getParameter('fecha');
+
+        
+        if((empty($usuario))){
+        $usuario='*';    
+        }
+        if((empty($material))){
+        $material='*';    
+        }
+        if((empty($fecha))){
+        $fecha='*';    
+        }
+
+        
+            $consulta2 = AccesoMaterialQuery::create();
+            $consulta2
+                 ->useUsuarioQuery()
+                    ->filterByUsuario($usuario)
+                  ->endUse()
+                      
+                    
+                    
+                  
+                    ->orderBy('IdAccesoMaterial', Criteria::DESC)
+            ->limit(10)
+
+
+                  
+                    
+                  
+             
+                     
+                    
+            ;
+            $this->elegido = $consulta2->find();              
+       
+    }
+    
   }
 
   public function executeNew(sfWebRequest $request)
