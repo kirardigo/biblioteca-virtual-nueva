@@ -69,7 +69,7 @@ class materialActions extends sfActions
                   
              
                      
-                    
+         ->orderBy('IdMaterial', Criteria::DESC)       
             ;
             $this->elegido = $consulta2->find();              
        
@@ -169,6 +169,13 @@ class materialActions extends sfActions
          $this->palabra=strtolower(end(explode('.',$fileStr)));
     
          return $this;
+    }
+      
+    
+    public function extension($filename){
+    $this->ext= substr(strrchr($filename, '.'), 1);
+    return $this->ext;
+    
     }
 /*$nameFile=’mi.archivo.txt’;
 

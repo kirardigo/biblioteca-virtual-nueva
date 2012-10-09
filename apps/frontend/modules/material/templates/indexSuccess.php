@@ -57,7 +57,9 @@
       <th>Editorial</th>
       
       <th>Descripcion</th>
+    
       <th>Leer</th>
+
       <th>Bajar</th>
       
     </tr>
@@ -74,11 +76,15 @@
       
       <td><?php echo $Material->getDescripcion() ?></td>
       
-      <?php if ($Material->getArchivo()!=null):?>     
+      <?php 
+      $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
+      
+      if ($ext=='jpg'||$ext=='png'||$ext=='bmp'||$ext=='pdf'):?>     
       <td><?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?></td>
-      <?php endif?>
-      
-      
+     
+        <?php else :?>
+      <td> </td>
+      <?php endif; ?>
       <?php if ($Material->getArchivo()!=null):?>
       <td><?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?></td>
       <?php endif?>

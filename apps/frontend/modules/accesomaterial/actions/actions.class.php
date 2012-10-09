@@ -118,4 +118,6 @@ class accesomaterialActions extends sfActions
       $this->redirect('accesomaterial/edit?id_acceso_material='.$AccesoMaterial->getIdAccesoMaterial());
     }
   }
+  
+
 }
