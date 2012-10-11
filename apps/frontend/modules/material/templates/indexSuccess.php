@@ -17,12 +17,14 @@
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Carrera" name="carrera"
        data-source='[<?php //foreach($Materials as $mat){echo "\"".$mat->getCarrera()->getIdCarrera()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
      -->
+     <?php if($sf_user->hasCredential('admin')):?>
        <label>Contenido</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Contenido" name="contenido"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getContenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
+      <?php endif;?> 
        
-       <label>Subcontenido</label>
-       <input type="text" data-provide="typeahead" data-items="5" placeholder="Subcontenido" name="subcontenido"
+       <label>Tema</label>
+       <input type="text" data-provide="typeahead" data-items="5" placeholder="Tema" name="subcontenido"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
        
        
@@ -79,7 +81,7 @@
       <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
       
-      if ($ext=='jpg'||$ext=='png'||$ext=='bmp'||$ext=='pdf'):?>     
+      if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'):?>     
       <td><?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?></td>
      
         <?php else :?>

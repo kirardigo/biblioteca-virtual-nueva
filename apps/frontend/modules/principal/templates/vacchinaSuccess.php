@@ -51,7 +51,7 @@
     }
     
     window.onload = function() {
-MakeStaticHeader('tablita', 710, 395, 45, false)
+MakeStaticHeader('tablita', 610, 395, 45, false)
 }
     </script>
 
@@ -65,6 +65,7 @@ table.tableizer-table {border: 1px solid #CCC; font-family: Arial, Helvetica, sa
 
      
         <div id="DivRoot" align="left" class="span5">
+            <fieldset class="well form-inline form-horizontal " > <h4>Material físico disponible en la biblioteca local Vacchina</h4></fieldset>
             <div style="overflow: hidden;" id="DivHeaderRow">
             </div>
 

@@ -11,7 +11,7 @@ class MaterialForm extends BaseMaterialForm
 {
   public function configure()
   {
-     $this->widgetSchema['subcontenido_id_subcontenido']->setLabel('Subcontendio');
+     $this->widgetSchema['subcontenido_id_subcontenido']->setLabel('Tema');
      $this->widgetSchema['biblioteca_id_biblioteca']->setLabel('Biblioteca');
      $this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
 
@@ -55,7 +55,7 @@ class MaterialForm extends BaseMaterialForm
     $titulo=str_replace(".", "_",$titulo);
     //extension de archivo
     if (empty ($autor)){
-        $autor='NA';//anonimo, no autor, especial para caso de imagenes
+        $autor='ANONIMO';//anonimo, no autor, especial para caso de imagenes
     }
     // $filename = sha1($file->getOriginalName()).$file->getExtension($file->getOriginalExtension());
     
@@ -64,7 +64,7 @@ class MaterialForm extends BaseMaterialForm
     if ($file)
     {
       
-       $extension = $file->getExtension($file->getOriginalExtension());
+       $extension = strtoupper( $file->getExtension($file->getOriginalExtension()) );
        $file->save( $autor.'_'.$titulo.$extension);
      //$editorial->save( 'vuili');
     }

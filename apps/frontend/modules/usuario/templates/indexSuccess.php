@@ -16,7 +16,7 @@
     <tr>
       <td><?php echo $Usuario->getIdUsuario() ?></td>
       <td><?php echo $Usuario->getUsuario() ?></td>
-      <td><?php echo $Usuario->getPassword() ?></td>
+      <td>******</td>
       <td><?php echo $Usuario->getAdmin() ?></td>
       <td><?php echo $Usuario->getEmail() ?></td>
       <td><?php echo $Usuario->getPfisica()->getNombre() ?></td>

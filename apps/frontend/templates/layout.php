@@ -23,14 +23,16 @@
 <table>
 <tr>
 <td><div class="span4">
-        
-     <img src="<?php echo image_path('vacchina.png')?>" width="300px">
+    <a  href="<?php echo url_for('principal/vacchina');?>">   
+     <img src="<?php echo image_path('vacchina.png')?>" width="300px"></a> 
         
         </div>
 </td>
 <td><div class="span7">
 <div class="offset1">
+    <a  href="<?php echo url_for('material/index');?>">   
             <img src="<?php echo image_path('virtual.png')?>"  width="300px"  >
+            </a>
 <div/>
     </div>
 </td>
@@ -54,7 +56,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?php echo url_for('principal/index');?>">Biblioteca Virtual UDC 2012</a>
+          <a class="brand" href="<?php echo url_for('principal/index');?>">Inicio</a>
           <div class="nav-collapse">
             <ul class="nav">
               

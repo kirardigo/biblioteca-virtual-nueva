@@ -1,2 +1,1 @@
-<h1>Error<h1/>
-Se requiere credencial de acceso.
+<h1>Error, se requiere credencial de acceso.</h1>

@@ -28,9 +28,12 @@ class UsuarioForm extends BaseUsuarioForm
         // return;
 
      }  
+    // $user= $this->getValue('id_usuario');
+     //keria sacar el usuario,, pero esto sirve cuando se guarda nomas
      //$this->setDefault('password', 'hola');
     // $pass=$this->setWidget('password', 'hola');
-     //$this->widgetSchema['password'] = new sfWidgetFormInputText();
+     //$this->widgetSchema['usuario']->setAttribute('value','userrr');
+     
      $this->widgetSchema['password']->setAttribute('type','password');
      $this->validatorSchema['password']->setOption('min_length', 6);
  //$this->widgetSchema['password']->set
