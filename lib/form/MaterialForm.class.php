@@ -58,7 +58,9 @@ class MaterialForm extends BaseMaterialForm
         $autor='ANONIMO';//anonimo, no autor, especial para caso de imagenes
     }
     // $filename = sha1($file->getOriginalName()).$file->getExtension($file->getOriginalExtension());
-    
+      $caca= $this->getValue('autor');
+      
+      
     $swimsuit = $this->getObject();
 
     if ($file)
@@ -66,7 +68,8 @@ class MaterialForm extends BaseMaterialForm
       
        $extension = strtoupper( $file->getExtension($file->getOriginalExtension()) );
        $file->save( $autor.'_'.$titulo.$extension);
-     //$editorial->save( 'vuili');
+    
+       $caca->save(strtoupper('  '.$caca));
     }
 
     return parent::save($con);
