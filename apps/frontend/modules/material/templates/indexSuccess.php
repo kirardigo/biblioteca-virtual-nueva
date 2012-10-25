@@ -50,7 +50,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Archivo</th>
       
 
@@ -69,7 +69,7 @@
   <tbody>
     <?php foreach ($elegido as $Material): ?>
     <tr>
-      <td><?php echo $Material->getIdMaterial() ?></a></td>
+
       <td><?php echo $Material->getArchivo()  ?></td>
       
       <td><?php echo $Material->getAutor() ?></td>

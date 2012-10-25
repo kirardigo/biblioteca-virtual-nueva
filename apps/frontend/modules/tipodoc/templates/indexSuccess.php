@@ -3,14 +3,14 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Nombre</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($Tipodocs as $Tipodoc): ?>
     <tr>
-      <td><?php echo $Tipodoc->getIdTipoDoc() ?></td>
+
       <td><?php echo $Tipodoc->getNombre() ?></td>
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('tipodoc/edit?id_tipo_doc='.$Tipodoc->getIdTipodoc()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>

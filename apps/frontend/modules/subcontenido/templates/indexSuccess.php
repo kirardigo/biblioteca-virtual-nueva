@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id subcontenido</th>
+
       <th>Nombre</th>
       <th>Numero subcontenido</th>
       <th>Contenido id contenido</th>
@@ -13,7 +13,7 @@
   <tbody>
     <?php foreach ($Subcontenidos as $Subcontenido): ?>
     <tr>
-      <td><?php echo $Subcontenido->getIdSubcontenido() ?></td>
+
       <td><?php echo $Subcontenido->getNombre() ?></td>
       <td><?php echo $Subcontenido->getNumeroSubcontenido() ?></td>
       <td><?php echo $Subcontenido->getContenidoIdContenido() ?></td>

@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Numero de contenido</th>
       <th>Nombre</th>
       
@@ -12,7 +12,7 @@
   <tbody>
     <?php foreach ($Contenidos as $Contenido): ?>
     <tr>
-      <td><?php echo $Contenido->getIdContenido() ?></td>
+
       <td><?php echo $Contenido->getNumeroContenido() ?></td>
       <td><?php echo $Contenido->getNombre() ?></td>
             <td>          

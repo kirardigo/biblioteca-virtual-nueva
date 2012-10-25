@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id persona</th>
+
       <th>Juridica?</th>
       <th>Nombre</th>
     </tr>
@@ -11,7 +11,7 @@
   <tbody>
     <?php foreach ($Personas as $Persona): ?>
     <tr>
-      <td><?php echo $Persona->getIdPersona() ?></td>
+
       <td><?php echo $Persona->getJuridica() ?></td>
       <td><?php echo $Persona->getNombre() ?></td>
       <td>          

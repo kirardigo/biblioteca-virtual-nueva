@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Nombre</th>
       <th>Razon social</th>
       <th>Cuit/Cuil</th>
@@ -12,7 +12,7 @@
   <tbody>
     <?php foreach ($Pjuridicas as $Pjuridica): ?>
     <tr>
-      <td><?php echo $Pjuridica->getIdPjuridica() ?></td>
+
       <td><?php echo $Pjuridica->getNombre() ?></td>
       <td><?php echo $Pjuridica->getRazonSocial() ?></td>
       <td><?php echo $Pjuridica->getCuitcuil() ?></td>

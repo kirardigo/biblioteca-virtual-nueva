@@ -3,14 +3,14 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Nombre</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($Provincias as $Provincia): ?>
     <tr>
-      <td><?php echo $Provincia->getIdProvincia() ?></td>
+
       <td><?php echo $Provincia->getNombre() ?></td>
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('provincia/edit?id_provincia='.$Provincia->getIdProvincia()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>

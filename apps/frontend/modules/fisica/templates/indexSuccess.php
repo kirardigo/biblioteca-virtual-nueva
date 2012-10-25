@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id fisica</th>
+
       <th>Nombre</th>
       <th>Apellido</th>
       <th>Usuario</th>
@@ -14,7 +14,7 @@
   <tbody>
     <?php foreach ($Fisicas as $Fisica): ?>
     <tr>
-      <td><?php echo $Fisica->getIdFisica() ?></td>
+
       <td><?php echo $Fisica->getNombre() ?></td>
       <td><?php echo $Fisica->getApellido() ?></td>
       <td><?php echo $Fisica->getUsuario() ?></td>

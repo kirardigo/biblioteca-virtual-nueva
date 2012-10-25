@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id domicilio</th>
+
       <th>Calle</th>
       <th>Altura</th>
       <th>Cod postal</th>
@@ -14,7 +14,7 @@
   <tbody>
     <?php foreach ($Domicilios as $Domicilio): ?>
     <tr>
-      <td><?php echo $Domicilio->getIdDomicilio() ?></td>
+
       <td><?php echo $Domicilio->getCalle() ?></td>
       <td><?php echo $Domicilio->getAltura() ?></td>
       <td><?php echo $Domicilio->getCodPostal() ?></td>

@@ -32,7 +32,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Nombre</th>
       <th>Apellido</th>
       <th>Sexo</th>
@@ -45,7 +45,7 @@
   <tbody>
     <?php foreach ($elegido as $Pfisica): ?>
     <tr>
-      <td><?php echo $Pfisica->getIdPfisica() ?></td>
+
       <td><?php echo $Pfisica->getNombre() ?></td>
       <td><?php echo $Pfisica->getApellido() ?></td>
       <?php if($Pfisica->getVaron()){

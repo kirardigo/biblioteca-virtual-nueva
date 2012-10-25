@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Id localidad</th>
+
       <th>Nombre</th>
       <th>Cod postal</th>
       <th>Provincia id provincia</th>
@@ -12,7 +12,7 @@
   <tbody>
     <?php foreach ($Localidads as $Localidad): ?>
     <tr>
-      <td><a href="<?php echo url_for('localidad/edit?id_localidad='.$Localidad->getIdLocalidad()) ?>"><?php echo $Localidad->getIdLocalidad() ?></a></td>
+    
       <td><?php echo $Localidad->getNombre() ?></td>
       <td><?php echo $Localidad->getCodPostal() ?></td>
       <td><?php echo $Localidad->getProvinciaIdProvincia() ?></td>

@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id de usuario</th>
+
       <th>Usuario</th>
       <th>Password</th>
       <th>¿Es administrador?</th>
@@ -14,7 +14,7 @@
   <tbody>
     <?php foreach ($Usuarios as $Usuario): ?>
     <tr>
-      <td><?php echo $Usuario->getIdUsuario() ?></td>
+
       <td><?php echo $Usuario->getUsuario() ?></td>
       <td>******</td>
       <td><?php echo $Usuario->getAdmin() ?></td>

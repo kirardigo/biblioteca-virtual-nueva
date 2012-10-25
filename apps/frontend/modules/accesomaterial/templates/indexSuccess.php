@@ -30,10 +30,10 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+      
       <th>Usuario que accedió</th>
       <th>Archivo accedido </th>
-      <th>Id de Material accedido </th>
+      
       
       <th>Fecha y hora de acceso</th>
     </tr>
@@ -41,11 +41,11 @@
   <tbody>
     <?php foreach ($elegido as $AccesoMaterial): ?>
     <tr>
-        <td><?php echo $AccesoMaterial->getIdAccesoMaterial() ?></td>
+       
             
       <td><?php echo $AccesoMaterial->getUsuario()->getUsuario() ?></td>
       <td><?php echo $AccesoMaterial->getMaterial()->getArchivo() ?></td>
-      <td><?php echo $AccesoMaterial->getMaterialIdMaterial() ?></td>
+      
       
       <td><?php $cosa= $AccesoMaterial->getFechaAcceso();
       $m=substr($cosa,-14,2);

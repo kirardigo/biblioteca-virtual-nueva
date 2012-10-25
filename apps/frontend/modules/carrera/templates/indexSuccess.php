@@ -3,7 +3,7 @@
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
     <tr>
-      <th>Id</th>
+
       <th>Nombre</th>
       
     </tr>
@@ -11,7 +11,7 @@
   <tbody>
     <?php foreach ($Carreras as $Carrera): ?>
     <tr>
-      <td><?php echo $Carrera->getIdCarrera() ?></td>
+
       <td><?php echo $Carrera->getNombre() ?></td>
       <td>          
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('carrera/edit?id_carrera='.$Carrera->getIdCarrera()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
