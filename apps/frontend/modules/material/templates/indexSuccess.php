@@ -81,7 +81,7 @@
       <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
       
-      if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'):?>     
+      if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>     
       <td><?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?></td>
      
         <?php else :?>

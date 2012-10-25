@@ -14,5 +14,33 @@
  * @package    propel.generator.lib.model
  */
 class Subcontenido extends BaseSubcontenido {
+    public function setNombre($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
 
+        if ($this->nombre !== $v) {
+            $this->nombre = $v;
+            $this->modifiedColumns[] = SubcontenidoPeer::NOMBRE;
+        }
+
+
+        return $this;
+    }
+    
+      public function setNumeroSubcontenido($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->numero_subcontenido !== $v) {
+            $this->numero_subcontenido = $v;
+            $this->modifiedColumns[] = SubcontenidoPeer::NUMERO_SUBCONTENIDO;
+        }
+
+
+        return $this;
+    }
 } // Subcontenido

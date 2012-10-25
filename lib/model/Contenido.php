@@ -14,5 +14,18 @@
  * @package    propel.generator.lib.model
  */
 class Contenido extends BaseContenido {
+    public function setNombre($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
 
+        if ($this->nombre !== $v) {
+            $this->nombre = $v;
+            $this->modifiedColumns[] = ContenidoPeer::NOMBRE;
+        }
+
+
+        return $this;
+    }
 } // Contenido

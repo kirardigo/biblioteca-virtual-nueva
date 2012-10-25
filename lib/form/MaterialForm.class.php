@@ -69,7 +69,7 @@ class MaterialForm extends BaseMaterialForm
        $extension = strtoupper( $file->getExtension($file->getOriginalExtension()) );
        $file->save( $autor.'_'.$titulo.$extension);
     
-       $caca->save(strtoupper('  '.$caca));
+      // $caca->save(strtoupper('  '.$caca));
     }
 
     return parent::save($con);

@@ -14,5 +14,33 @@
  * @package    propel.generator.lib.model
  */
 class Pjuridica extends BasePjuridica {
+    public function setNombre($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
 
+        if ($this->nombre !== $v) {
+            $this->nombre = $v;
+            $this->modifiedColumns[] = PjuridicaPeer::NOMBRE;
+        }
+
+
+        return $this;
+    }
+    
+      public function setRazonSocial($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->razon_social !== $v) {
+            $this->razon_social = $v;
+            $this->modifiedColumns[] = PjuridicaPeer::RAZON_SOCIAL;
+        }
+
+
+        return $this;
+    }
 } // Pjuridica

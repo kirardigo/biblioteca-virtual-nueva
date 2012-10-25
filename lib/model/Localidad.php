@@ -14,5 +14,18 @@
  * @package    propel.generator.lib.model
  */
 class Localidad extends BaseLocalidad {
+  public function setNombre($v)
+    { $v=strtoupper($v);
+        if ($v !== null) {
+            $v = (string) $v;
+        }
 
+        if ($this->nombre !== $v) {
+            $this->nombre = $v;
+            $this->modifiedColumns[] = LocalidadPeer::NOMBRE;
+        }
+
+
+        return $this;
+    }
 } // Localidad
