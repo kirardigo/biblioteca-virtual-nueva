@@ -1,3 +1,5 @@
+﻿<body background= "<?php echo image_path('fondo2.jpg')?>"></body>
+
 <script language="javascript" type="text/javascript">
     function MakeStaticHeader(gridId, height, width, headerHeight, isFooter) {
         var tbl = document.getElementById(gridId);
