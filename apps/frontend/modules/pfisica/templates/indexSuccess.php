@@ -27,10 +27,10 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
-<h1>Personas fisicas</h1>
+<h1 class ="h1info">Personas fisicas</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Nombre</th>
@@ -42,7 +42,7 @@
      
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <?php foreach ($elegido as $Pfisica): ?>
     <tr>
 
@@ -79,4 +79,6 @@
   </tbody>
 </table>
 <?php endif;?>
+
+<br>
   <a class="btn btn-success" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

@@ -1,7 +1,7 @@
-<h1>Provincias</h1>
+<h1 class="h1info">Provincias</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Nombre</th>
@@ -20,5 +20,5 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-
+<br>
 <a class="btn btn-success" href="<?php echo url_for('provincia/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

@@ -1,0 +1,60 @@
+
+thead.thinfo{
+background: sienna;
+opacity: .6;
+color: white;
+}
+tbody.tbinfo{
+background: white;
+opacity: .6;
+
+}
+h1.h1info{
+color:white;
+}
+
+
+thead{
+background: sienna;
+opacity: .8;
+color: white;
+}
+tbody{
+background: peru;
+opacity: .8;
+font-weight: bold;
+
+
+}
+.h1{
+color: white;
+}
+
+
+td{
+border: 1px double white;
+}
+th{
+border: 1px double white;
+}
+
+tbody.cabecera{
+background: none;
+}
+td.tdcabecera{
+border: none;
+}
+
+thead.blanco{
+background: white;
+}
+td.marron{
+border: 3px solid black;
+}
+
+
+form{
+background-color: peru;
+opacity: .9;
+
+}

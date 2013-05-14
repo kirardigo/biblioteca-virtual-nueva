@@ -47,10 +47,10 @@
 
 
 
-<h1>Materiales</h1>
+<h1 class="h1info" >Materiales</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Archivo</th>
@@ -62,9 +62,7 @@
       
       <th>Descripcion</th>
     
-      <th>Leer</th>
 
-      <th>Bajar</th>
       
     </tr>
   </thead>
@@ -106,5 +104,6 @@
 <?php endif;?>
 
 <?php if($sf_user->hasCredential('admin')):?>
+<br>
 <a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
 <?php endif;?>

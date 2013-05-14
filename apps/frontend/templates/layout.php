@@ -1,9 +1,14 @@
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
   <head>
+  <script type="text/javascript"> 
+	
+</script>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
@@ -17,31 +22,41 @@
     <?php include_partial('default/mpProjectPlugin_css_assets', array('load' => array('twitter_bootstrap'))); ?>
 
     <?php include_stylesheets() ?>
+    <?php include_javascripts() ?>
   </head>
   <body>
+   
+ 
+    <!-- fondo de pantalla  -->
+   
+   <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
+   
       
 <table>
+<tbody class="cabecera">
+
 <tr>
-<td><div class="span4">
+
+<td class="tdcabecera"><div class="span4">
     <a  href="<?php echo url_for('principal/vacchina');?>">   
-     <img src="<?php echo image_path('vacchina.png')?>" width="300px"></a> 
+     <img src="<?php //echo image_path('vacchina.png')?>" width="300px"></a> 
         
         </div>
 </td>
-<td><div class="span7">
+<td class="tdcabecera"><div class="span7">
 <div class="offset1">
     <a  href="<?php echo url_for('material/index');?>">   
-            <img src="<?php echo image_path('virtual.png')?>"  width="300px"  >
+            <img src="<?php //echo image_path('virtual.png')?>"  width="300px"  >
             </a>
 <div/>
     </div>
 </td>
-<td> <div class="span3">
+<td class="tdcabecera"> <div class="span3" >
          <?php include_partial("global/estado");?>
     </div>
 </td>
 </tr>
-
+<tbody>
 </table>
       
     
@@ -61,6 +76,7 @@
             <ul class="nav">
               
 <?php if($sf_user->hasCredential('admin')):?>
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Administracion de Persona<b class="caret"></b>
@@ -102,8 +118,10 @@
               <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
                
                 </ul>
-      <?php endif;?>             
+      <?php endif;?> 
                   
+               
+                
               <?php if($sf_user->isAuthenticated()):?>
               <li class="dropdown">
                 <a href="<?php echo url_for('material/index');?>">Material</a>
@@ -124,13 +142,18 @@
     </div>
     <div class="container-fluid">
       <?php echo $sf_content ?>
+      
+      <div style="margin-top:5%">
       <hr>
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
+      <p style="color:white" >&copy; Universidad del Chubut 2013</p>
+      </div>
+        
+      
     </div> <!-- /container -->
     <!-- include base js files from plugin -->
     <?php include_partial('default/mpProjectPlugin_js_assets', array('load' => array('jquery', 'twitter_bootstrap'))); ?>
     <?php include_javascripts() ?>
   </body>
+  
+   <audio src="C:\canon.mp3"></audio>
 </html>

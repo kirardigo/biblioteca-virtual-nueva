@@ -1,4 +1,4 @@
-
+﻿
 <h2 class="alert-heading offset1">Busqueda de Acceso al Material</h2>
 
 <fieldset>    
@@ -25,10 +25,15 @@
     if($cant >= 1):?>
 
 
-<h1>Acceso al Material</h1>
 
-<table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+
+
+
+
+<h1 class="h1info" >Acceso al Material</h1>
+
+<table class="table table-bordered" id='tab666'>
+  <thead>
     <tr>
       
       <th>Usuario que accedió</th>

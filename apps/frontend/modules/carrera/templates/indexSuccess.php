@@ -1,14 +1,14 @@
 <h1>Carreras</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Nombre</th>
       
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <?php foreach ($Carreras as $Carrera): ?>
     <tr>
 

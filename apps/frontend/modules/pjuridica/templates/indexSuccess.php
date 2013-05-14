@@ -1,7 +1,7 @@
-<h1>Personas juridicas</h1>
+<h1 class="h1info">Personas juridicas</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead>
     <tr>
 
       <th>Nombre</th>
@@ -9,7 +9,7 @@
       <th>Cuit/Cuil</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="tbinfo">
     <?php foreach ($Pjuridicas as $Pjuridica): ?>
     <tr>
 
@@ -25,5 +25,6 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+<br>
 
 <a class="btn btn-success" href="<?php echo url_for('pjuridica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

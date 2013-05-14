@@ -52,3 +52,8 @@ function MakeStaticHeader(gridId, height, width, headerHeight, isFooter) {
 window.onload = function() {
 MakeStaticHeader('caca', 300, 400, 52, true)
 }
+
+
+$(document).ready(function() {
+    $('#tab666').dataTable();
+} );

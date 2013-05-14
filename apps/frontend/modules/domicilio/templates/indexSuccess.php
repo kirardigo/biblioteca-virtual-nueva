@@ -1,7 +1,7 @@
 <h1>Domicilios</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Calle</th>

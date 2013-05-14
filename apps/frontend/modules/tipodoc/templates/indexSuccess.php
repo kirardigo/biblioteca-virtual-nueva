@@ -1,7 +1,7 @@
-<h1>Tipos de documentos</h1>
+<h1 class="h1info">Tipos de documentos</h1>
 
 <table class="table table-bordered">
-  <thead style="background: #7FDDCA">
+  <thead >
     <tr>
 
       <th>Nombre</th>
