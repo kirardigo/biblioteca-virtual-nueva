@@ -24,15 +24,21 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
+<script>
+$(document.ready(function(){
+
+	$("#example").dataTable();
+});
+
+</script>
 
 
-
-
+<a id="probar">probando js</a>
 
 
 <h1 class="h1info" >Acceso al Material</h1>
 
-<table class="table table-bordered" id='tab666'>
+<table  id="example">
   <thead>
     <tr>
       

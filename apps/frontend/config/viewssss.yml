@@ -1,0 +1,20 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    language:     es
+    #robots:       index, follow
+
+  stylesheets:    ["main.css", "ui-lightness/jquery-ui-1.8.16.custom.css", "demo_page.css", "demo_table.css", "demo_table_jui.css", "jquery.dataTables.css", "jquery.dataTables_themeroller.css"]
+
+  javascripts:    ["jquery.dataTables.js", "jquery.dataTables.min.js", "jquery.js", "funciones.js", "jquery.min.js", "jquery.ui.datepicker-es.js", "jquery-ui-1.8.16.custom.min.js", "mi_jquery.validate.js"]
+
+  has_layout:     true
+  layout:         layout

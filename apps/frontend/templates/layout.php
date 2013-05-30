@@ -31,23 +31,22 @@
    
    <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
    
-      
-<table>
-<tbody class="cabecera">
+<a id="probar">probando js</a>
+
+     
+<table id="mm">
+
 
 <tr>
 
-<td class="tdcabecera"><div class="span4">
-    <a  href="<?php echo url_for('principal/vacchina');?>">   
-     <img src="<?php //echo image_path('vacchina.png')?>" width="300px"></a> 
+<td class="tdcabecera6"><div class="span4">
+    holaaa
         
         </div>
 </td>
-<td class="tdcabecera"><div class="span7">
+<td class="tdcabecera6"><div class="span7">
 <div class="offset1">
-    <a  href="<?php echo url_for('material/index');?>">   
-            <img src="<?php //echo image_path('virtual.png')?>"  width="300px"  >
-            </a>
+    putaaa
 <div/>
     </div>
 </td>
@@ -56,7 +55,7 @@
     </div>
 </td>
 </tr>
-<tbody>
+
 </table>
       
     
