@@ -44,3 +44,31 @@
 
 </tbody>
 </table>
+
+<h1 class="h1info">Anuncios</h1>
+
+<table>
+  <thead>
+    <tr>
+      
+      <th>Archivo</th>
+      <th>Informacion</th>
+      <th>Fecha</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($Anuncios as $Anuncio): ?>
+    <tr>
+      
+      <td><?php echo $Anuncio->getArchivo() ?></td>
+      <td><?php echo $Anuncio->getInformacion() ?></td>
+      <td><?php echo $Anuncio->getFechaAnuncio() ?></td>
+      <td><?php echo $Anuncio->getUsuarioIdUsuario() ?></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+
+

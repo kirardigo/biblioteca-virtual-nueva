@@ -1,4 +1,4 @@
-<h1>Domicilios</h1>
+<h1 class="h1info">Domicilios</h1>
 
 <table class="table table-bordered">
   <thead >

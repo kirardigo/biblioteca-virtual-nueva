@@ -15,6 +15,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id_usuario' => new sfWidgetFormInputHidden(),
+      'valido'     => new sfWidgetFormInputCheckbox(),
       'usuario'    => new sfWidgetFormInputText(),
       'password'   => new sfWidgetFormInputText(),
       'admin'      => new sfWidgetFormInputCheckbox(),
@@ -23,6 +24,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_usuario' => new sfValidatorPropelChoice(array('model' => 'Pfisica', 'column' => 'id_pfisica', 'required' => false)),
+      'valido'     => new sfValidatorBoolean(array('required' => false)),
       'usuario'    => new sfValidatorString(array('max_length' => 45)),
       'password'   => new sfValidatorString(array('max_length' => 45)),
       'admin'      => new sfValidatorBoolean(array('required' => false)),

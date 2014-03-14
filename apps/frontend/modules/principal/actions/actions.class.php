@@ -17,7 +17,7 @@ class principalActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-  
+  $this->Anuncios = AnuncioQuery::create()->find();
   }
   
     public function executeVacchina(sfWebRequest $request)

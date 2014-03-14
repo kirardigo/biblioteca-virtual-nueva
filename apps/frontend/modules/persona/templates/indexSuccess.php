@@ -1,4 +1,4 @@
-<h1>Personas List</h1>
+<h1 class="h1info">Personas</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">

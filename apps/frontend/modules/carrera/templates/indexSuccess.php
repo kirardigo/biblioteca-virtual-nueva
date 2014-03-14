@@ -1,4 +1,4 @@
-<h1>Carreras</h1>
+<h1 class="h1info">Carreras</h1>
 
 <table class="table table-bordered">
   <thead >

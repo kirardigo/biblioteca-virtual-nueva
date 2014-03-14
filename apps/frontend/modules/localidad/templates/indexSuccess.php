@@ -1,4 +1,4 @@
-<h1>Localidades</h1>
+<h1 class="h1info">Localidades</h1>
 
 <table>
   <thead>

@@ -43,11 +43,11 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
-
-
-
-
 <h1 class="h1info" >Materiales</h1>
+
+
+
+
 
 <table class="table table-bordered">
   <thead >
@@ -61,8 +61,19 @@
       <th>Editorial</th>
       
       <th>Descripcion</th>
-    
+      <th>
+    <div class="pagination" >
+  <ul>
+    <li><a class="label label-warning" ><</a></li>
+    <li><a class="label label-inverse" href="#tab1" data-toggle="tab">1</a></li>
+    <li><a class="label label-inverse" href="#tab2" data-toggle="tab">2</a></li>
+    <li><a class="label label-inverse" href="#tab3" data-toggle="tab">3</a></li>
 
+    <li><a class="label label-warning" href="#">></a></li>
+  </ul>
+</div>
+
+</th>
       
     </tr>
   </thead>
@@ -77,27 +88,40 @@
       <td><?php echo $Material->getEditorial() ?></td>
       
       <td><?php echo $Material->getDescripcion() ?></td>
-      
-      <?php 
+     <div class="tab-content">
+    <div class="tab-pane" id="tab1">
+  
+    
+
+      <td nowrap>  
+          <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
       
       if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>     
-      <td><?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?></td>
+      <?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?>
      
         <?php else :?>
-      <td> </td>
+      
       <?php endif; ?>
-      <?php if ($Material->getArchivo()!=null):?>
-      <td><?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?></td>
-      <?php endif?>
+
 
       <?php if($sf_user->hasCredential('admin')):?>
-      <td nowrap>          
+      
+        
+            <?php if ($Material->getArchivo()!=null):?>
+      <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>
+      <?php endif?>
+      
+              
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
       </td>
       <?php endif;?>
     </tr>
+    
+      </div> 
+    
+    
     <?php endforeach; ?>
   </tbody>
 </table>
@@ -107,3 +131,19 @@
 <br>
 <a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
 <?php endif;?>
+
+
+ <!-- Only required for left/right tabs -->
+
+  <div class="tab-content">
+    <div class="tab-pane" id="tab1">
+      <p>I'm in Section 1.</p>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p>Howdy, I'm in Section 2.</p>
+    </div>
+    <div class="tab-pane" id="tab3">
+      <p>Nanda kore 3.</p>
+    </div>
+  </div>
+

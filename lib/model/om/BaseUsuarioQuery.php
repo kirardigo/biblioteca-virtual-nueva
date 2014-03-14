@@ -7,12 +7,14 @@
  * 
  *
  * @method     UsuarioQuery orderByIdUsuario($order = Criteria::ASC) Order by the id_usuario column
+ * @method     UsuarioQuery orderByValido($order = Criteria::ASC) Order by the valido column
  * @method     UsuarioQuery orderByUsuario($order = Criteria::ASC) Order by the usuario column
  * @method     UsuarioQuery orderByPassword($order = Criteria::ASC) Order by the password column
  * @method     UsuarioQuery orderByAdmin($order = Criteria::ASC) Order by the admin column
  * @method     UsuarioQuery orderByEmail($order = Criteria::ASC) Order by the email column
  *
  * @method     UsuarioQuery groupByIdUsuario() Group by the id_usuario column
+ * @method     UsuarioQuery groupByValido() Group by the valido column
  * @method     UsuarioQuery groupByUsuario() Group by the usuario column
  * @method     UsuarioQuery groupByPassword() Group by the password column
  * @method     UsuarioQuery groupByAdmin() Group by the admin column
@@ -30,16 +32,22 @@
  * @method     UsuarioQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
  * @method     UsuarioQuery innerJoinAccesoMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the AccesoMaterial relation
  *
+ * @method     UsuarioQuery leftJoinAnuncio($relationAlias = null) Adds a LEFT JOIN clause to the query using the Anuncio relation
+ * @method     UsuarioQuery rightJoinAnuncio($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Anuncio relation
+ * @method     UsuarioQuery innerJoinAnuncio($relationAlias = null) Adds a INNER JOIN clause to the query using the Anuncio relation
+ *
  * @method     Usuario findOne(PropelPDO $con = null) Return the first Usuario matching the query
  * @method     Usuario findOneOrCreate(PropelPDO $con = null) Return the first Usuario matching the query, or a new Usuario object populated from the query conditions when no match is found
  *
  * @method     Usuario findOneByIdUsuario(int $id_usuario) Return the first Usuario filtered by the id_usuario column
+ * @method     Usuario findOneByValido(boolean $valido) Return the first Usuario filtered by the valido column
  * @method     Usuario findOneByUsuario(string $usuario) Return the first Usuario filtered by the usuario column
  * @method     Usuario findOneByPassword(string $password) Return the first Usuario filtered by the password column
  * @method     Usuario findOneByAdmin(boolean $admin) Return the first Usuario filtered by the admin column
  * @method     Usuario findOneByEmail(string $email) Return the first Usuario filtered by the email column
  *
  * @method     array findByIdUsuario(int $id_usuario) Return Usuario objects filtered by the id_usuario column
+ * @method     array findByValido(boolean $valido) Return Usuario objects filtered by the valido column
  * @method     array findByUsuario(string $usuario) Return Usuario objects filtered by the usuario column
  * @method     array findByPassword(string $password) Return Usuario objects filtered by the password column
  * @method     array findByAdmin(boolean $admin) Return Usuario objects filtered by the admin column
@@ -134,7 +142,7 @@ abstract class BaseUsuarioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_USUARIO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL` FROM `usuario` WHERE `ID_USUARIO` = :p0';
+        $sql = 'SELECT `ID_USUARIO`, `VALIDO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL` FROM `usuario` WHERE `ID_USUARIO` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -250,6 +258,33 @@ abstract class BaseUsuarioQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(UsuarioPeer::ID_USUARIO, $idUsuario, $comparison);
+    }
+
+    /**
+     * Filter the query on the valido column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByValido(true); // WHERE valido = true
+     * $query->filterByValido('yes'); // WHERE valido = true
+     * </code>
+     *
+     * @param     boolean|string $valido The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return UsuarioQuery The current query, for fluid interface
+     */
+    public function filterByValido($valido = null, $comparison = null)
+    {
+        if (is_string($valido)) {
+            $valido = in_array(strtolower($valido), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(UsuarioPeer::VALIDO, $valido, $comparison);
     }
 
     /**
@@ -514,6 +549,80 @@ abstract class BaseUsuarioQuery extends ModelCriteria
         return $this
             ->joinAccesoMaterial($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'AccesoMaterial', 'AccesoMaterialQuery');
+    }
+
+    /**
+     * Filter the query by a related Anuncio object
+     *
+     * @param   Anuncio|PropelObjectCollection $anuncio  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   UsuarioQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByAnuncio($anuncio, $comparison = null)
+    {
+        if ($anuncio instanceof Anuncio) {
+            return $this
+                ->addUsingAlias(UsuarioPeer::ID_USUARIO, $anuncio->getUsuarioIdUsuario(), $comparison);
+        } elseif ($anuncio instanceof PropelObjectCollection) {
+            return $this
+                ->useAnuncioQuery()
+                ->filterByPrimaryKeys($anuncio->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByAnuncio() only accepts arguments of type Anuncio or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Anuncio relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UsuarioQuery The current query, for fluid interface
+     */
+    public function joinAnuncio($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Anuncio');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Anuncio');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Anuncio relation Anuncio object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   AnuncioQuery A secondary query class using the current class as primary query
+     */
+    public function useAnuncioQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinAnuncio($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Anuncio', 'AnuncioQuery');
     }
 
     /**

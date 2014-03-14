@@ -39,6 +39,7 @@ class UsuarioTableMap extends TableMap
         $this->setUseIdGenerator(false);
         // columns
         $this->addForeignPrimaryKey('ID_USUARIO', 'IdUsuario', 'INTEGER' , 'pfisica', 'ID_PFISICA', true, null, null);
+        $this->addColumn('VALIDO', 'Valido', 'BOOLEAN', false, 1, null);
         $this->addColumn('USUARIO', 'Usuario', 'VARCHAR', true, 45, null);
         $this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 45, null);
         $this->addColumn('ADMIN', 'Admin', 'BOOLEAN', false, 1, null);
@@ -53,6 +54,7 @@ class UsuarioTableMap extends TableMap
     {
         $this->addRelation('Pfisica', 'Pfisica', RelationMap::MANY_TO_ONE, array('id_usuario' => 'id_pfisica', ), 'CASCADE', 'CASCADE');
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'AccesoMaterials');
+        $this->addRelation('Anuncio', 'Anuncio', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'Anuncios');
     } // buildRelations()
 
     /**

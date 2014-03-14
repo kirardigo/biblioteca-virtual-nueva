@@ -5,7 +5,7 @@ INSERT INTO `biblioteca_2`.`tipo_doc` (`nombre`) VALUES ('dni');
 
 INSERT INTO `biblioteca_2`.`pfisica` (`nombre`, `apellido`, `tipo_doc_id_tipo_doc`, `documento`) VALUES ('gabriel', 'figueroa', 1, '123456');
 
-INSERT INTO `biblioteca_2`.`usuario` (`id_usuario`, `usuario`, `password`, `admin`) VALUES (1, 'kirardigo', '123', 1);
+INSERT INTO `biblioteca_2`.`usuario` (`id_usuario`, `usuario`, `password`, `admin`) VALUES (1, 'admin', '123456', 1);
 
 INSERT INTO `biblioteca_2`.`contenido` (`numero_contenido`, `nombre`) VALUES (1, 'Generalidades');
 INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('informatica', 'abc', 1);

@@ -37,6 +37,12 @@ abstract class BaseUsuario extends BaseObject
     protected $id_usuario;
 
     /**
+     * The value for the valido field.
+     * @var        boolean
+     */
+    protected $valido;
+
+    /**
      * The value for the usuario field.
      * @var        string
      */
@@ -71,6 +77,11 @@ abstract class BaseUsuario extends BaseObject
     protected $collAccesoMaterials;
 
     /**
+     * @var        PropelObjectCollection|Anuncio[] Collection to store aggregation of Anuncio objects.
+     */
+    protected $collAnuncios;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -91,6 +102,12 @@ abstract class BaseUsuario extends BaseObject
     protected $accesoMaterialsScheduledForDeletion = null;
 
     /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $anunciosScheduledForDeletion = null;
+
+    /**
      * Get the [id_usuario] column value.
      * 
      * @return   int
@@ -99,6 +116,17 @@ abstract class BaseUsuario extends BaseObject
     {
 
         return $this->id_usuario;
+    }
+
+    /**
+     * Get the [valido] column value.
+     * 
+     * @return   boolean
+     */
+    public function getValido()
+    {
+
+        return $this->valido;
     }
 
     /**
@@ -169,6 +197,35 @@ abstract class BaseUsuario extends BaseObject
 
         return $this;
     } // setIdUsuario()
+
+    /**
+     * Sets the value of the [valido] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * 
+     * @param      boolean|integer|string $v The new value
+     * @return   Usuario The current object (for fluent API support)
+     */
+    public function setValido($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->valido !== $v) {
+            $this->valido = $v;
+            $this->modifiedColumns[] = UsuarioPeer::VALIDO;
+        }
+
+
+        return $this;
+    } // setValido()
 
     /**
      * Set the value of [usuario] column.
@@ -295,10 +352,11 @@ abstract class BaseUsuario extends BaseObject
         try {
 
             $this->id_usuario = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->usuario = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->password = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->admin = ($row[$startcol + 3] !== null) ? (boolean) $row[$startcol + 3] : null;
-            $this->email = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->valido = ($row[$startcol + 1] !== null) ? (boolean) $row[$startcol + 1] : null;
+            $this->usuario = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->password = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->admin = ($row[$startcol + 4] !== null) ? (boolean) $row[$startcol + 4] : null;
+            $this->email = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -307,7 +365,7 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 5; // 5 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Usuario object", $e);
@@ -374,6 +432,8 @@ abstract class BaseUsuario extends BaseObject
 
             $this->aPfisica = null;
             $this->collAccesoMaterials = null;
+
+            $this->collAnuncios = null;
 
         } // if (deep)
     }
@@ -560,6 +620,23 @@ abstract class BaseUsuario extends BaseObject
                 }
             }
 
+            if ($this->anunciosScheduledForDeletion !== null) {
+                if (!$this->anunciosScheduledForDeletion->isEmpty()) {
+                    AnuncioQuery::create()
+                        ->filterByPrimaryKeys($this->anunciosScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->anunciosScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collAnuncios !== null) {
+                foreach ($this->collAnuncios as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -584,6 +661,9 @@ abstract class BaseUsuario extends BaseObject
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(UsuarioPeer::ID_USUARIO)) {
             $modifiedColumns[':p' . $index++]  = '`ID_USUARIO`';
+        }
+        if ($this->isColumnModified(UsuarioPeer::VALIDO)) {
+            $modifiedColumns[':p' . $index++]  = '`VALIDO`';
         }
         if ($this->isColumnModified(UsuarioPeer::USUARIO)) {
             $modifiedColumns[':p' . $index++]  = '`USUARIO`';
@@ -610,6 +690,9 @@ abstract class BaseUsuario extends BaseObject
                 switch ($columnName) {
                     case '`ID_USUARIO`':						
 						$stmt->bindValue($identifier, $this->id_usuario, PDO::PARAM_INT);
+                        break;
+                    case '`VALIDO`':
+						$stmt->bindValue($identifier, (int) $this->valido, PDO::PARAM_INT);
                         break;
                     case '`USUARIO`':						
 						$stmt->bindValue($identifier, $this->usuario, PDO::PARAM_STR);
@@ -735,6 +818,14 @@ abstract class BaseUsuario extends BaseObject
                     }
                 }
 
+                if ($this->collAnuncios !== null) {
+                    foreach ($this->collAnuncios as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -774,15 +865,18 @@ abstract class BaseUsuario extends BaseObject
                 return $this->getIdUsuario();
                 break;
             case 1:
-                return $this->getUsuario();
+                return $this->getValido();
                 break;
             case 2:
-                return $this->getPassword();
+                return $this->getUsuario();
                 break;
             case 3:
-                return $this->getAdmin();
+                return $this->getPassword();
                 break;
             case 4:
+                return $this->getAdmin();
+                break;
+            case 5:
                 return $this->getEmail();
                 break;
             default:
@@ -815,10 +909,11 @@ abstract class BaseUsuario extends BaseObject
         $keys = UsuarioPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdUsuario(),
-            $keys[1] => $this->getUsuario(),
-            $keys[2] => $this->getPassword(),
-            $keys[3] => $this->getAdmin(),
-            $keys[4] => $this->getEmail(),
+            $keys[1] => $this->getValido(),
+            $keys[2] => $this->getUsuario(),
+            $keys[3] => $this->getPassword(),
+            $keys[4] => $this->getAdmin(),
+            $keys[5] => $this->getEmail(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aPfisica) {
@@ -826,6 +921,9 @@ abstract class BaseUsuario extends BaseObject
             }
             if (null !== $this->collAccesoMaterials) {
                 $result['AccesoMaterials'] = $this->collAccesoMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collAnuncios) {
+                $result['Anuncios'] = $this->collAnuncios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -865,15 +963,18 @@ abstract class BaseUsuario extends BaseObject
                 $this->setIdUsuario($value);
                 break;
             case 1:
-                $this->setUsuario($value);
+                $this->setValido($value);
                 break;
             case 2:
-                $this->setPassword($value);
+                $this->setUsuario($value);
                 break;
             case 3:
-                $this->setAdmin($value);
+                $this->setPassword($value);
                 break;
             case 4:
+                $this->setAdmin($value);
+                break;
+            case 5:
                 $this->setEmail($value);
                 break;
         } // switch()
@@ -901,10 +1002,11 @@ abstract class BaseUsuario extends BaseObject
         $keys = UsuarioPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdUsuario($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setUsuario($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setPassword($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setAdmin($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setEmail($arr[$keys[4]]);
+        if (array_key_exists($keys[1], $arr)) $this->setValido($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setUsuario($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setPassword($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setAdmin($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setEmail($arr[$keys[5]]);
     }
 
     /**
@@ -917,6 +1019,7 @@ abstract class BaseUsuario extends BaseObject
         $criteria = new Criteria(UsuarioPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(UsuarioPeer::ID_USUARIO)) $criteria->add(UsuarioPeer::ID_USUARIO, $this->id_usuario);
+        if ($this->isColumnModified(UsuarioPeer::VALIDO)) $criteria->add(UsuarioPeer::VALIDO, $this->valido);
         if ($this->isColumnModified(UsuarioPeer::USUARIO)) $criteria->add(UsuarioPeer::USUARIO, $this->usuario);
         if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
         if ($this->isColumnModified(UsuarioPeer::ADMIN)) $criteria->add(UsuarioPeer::ADMIN, $this->admin);
@@ -984,6 +1087,7 @@ abstract class BaseUsuario extends BaseObject
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
+        $copyObj->setValido($this->getValido());
         $copyObj->setUsuario($this->getUsuario());
         $copyObj->setPassword($this->getPassword());
         $copyObj->setAdmin($this->getAdmin());
@@ -999,6 +1103,12 @@ abstract class BaseUsuario extends BaseObject
             foreach ($this->getAccesoMaterials() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addAccesoMaterial($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getAnuncios() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addAnuncio($relObj->copy($deepCopy));
                 }
             }
 
@@ -1115,6 +1225,9 @@ abstract class BaseUsuario extends BaseObject
     {
         if ('AccesoMaterial' == $relationName) {
             $this->initAccesoMaterials();
+        }
+        if ('Anuncio' == $relationName) {
+            $this->initAnuncios();
         }
     }
 
@@ -1311,11 +1424,179 @@ abstract class BaseUsuario extends BaseObject
     }
 
     /**
+     * Clears out the collAnuncios collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addAnuncios()
+     */
+    public function clearAnuncios()
+    {
+        $this->collAnuncios = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collAnuncios collection.
+     *
+     * By default this just sets the collAnuncios collection to an empty array (like clearcollAnuncios());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initAnuncios($overrideExisting = true)
+    {
+        if (null !== $this->collAnuncios && !$overrideExisting) {
+            return;
+        }
+        $this->collAnuncios = new PropelObjectCollection();
+        $this->collAnuncios->setModel('Anuncio');
+    }
+
+    /**
+     * Gets an array of Anuncio objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Usuario is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Anuncio[] List of Anuncio objects
+     * @throws PropelException
+     */
+    public function getAnuncios($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collAnuncios || null !== $criteria) {
+            if ($this->isNew() && null === $this->collAnuncios) {
+                // return empty collection
+                $this->initAnuncios();
+            } else {
+                $collAnuncios = AnuncioQuery::create(null, $criteria)
+                    ->filterByUsuario($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collAnuncios;
+                }
+                $this->collAnuncios = $collAnuncios;
+            }
+        }
+
+        return $this->collAnuncios;
+    }
+
+    /**
+     * Sets a collection of Anuncio objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $anuncios A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setAnuncios(PropelCollection $anuncios, PropelPDO $con = null)
+    {
+        $this->anunciosScheduledForDeletion = $this->getAnuncios(new Criteria(), $con)->diff($anuncios);
+
+        foreach ($this->anunciosScheduledForDeletion as $anuncioRemoved) {
+            $anuncioRemoved->setUsuario(null);
+        }
+
+        $this->collAnuncios = null;
+        foreach ($anuncios as $anuncio) {
+            $this->addAnuncio($anuncio);
+        }
+
+        $this->collAnuncios = $anuncios;
+    }
+
+    /**
+     * Returns the number of related Anuncio objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Anuncio objects.
+     * @throws PropelException
+     */
+    public function countAnuncios(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collAnuncios || null !== $criteria) {
+            if ($this->isNew() && null === $this->collAnuncios) {
+                return 0;
+            } else {
+                $query = AnuncioQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByUsuario($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collAnuncios);
+        }
+    }
+
+    /**
+     * Method called to associate a Anuncio object to this object
+     * through the Anuncio foreign key attribute.
+     *
+     * @param    Anuncio $l Anuncio
+     * @return   Usuario The current object (for fluent API support)
+     */
+    public function addAnuncio(Anuncio $l)
+    {
+        if ($this->collAnuncios === null) {
+            $this->initAnuncios();
+        }
+        if (!$this->collAnuncios->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddAnuncio($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Anuncio $anuncio The anuncio object to add.
+     */
+    protected function doAddAnuncio($anuncio)
+    {
+        $this->collAnuncios[]= $anuncio;
+        $anuncio->setUsuario($this);
+    }
+
+    /**
+     * @param	Anuncio $anuncio The anuncio object to remove.
+     */
+    public function removeAnuncio($anuncio)
+    {
+        if ($this->getAnuncios()->contains($anuncio)) {
+            $this->collAnuncios->remove($this->collAnuncios->search($anuncio));
+            if (null === $this->anunciosScheduledForDeletion) {
+                $this->anunciosScheduledForDeletion = clone $this->collAnuncios;
+                $this->anunciosScheduledForDeletion->clear();
+            }
+            $this->anunciosScheduledForDeletion[]= $anuncio;
+            $anuncio->setUsuario(null);
+        }
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
     {
         $this->id_usuario = null;
+        $this->valido = null;
         $this->usuario = null;
         $this->password = null;
         $this->admin = null;
@@ -1345,12 +1626,21 @@ abstract class BaseUsuario extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collAnuncios) {
+                foreach ($this->collAnuncios as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collAccesoMaterials instanceof PropelCollection) {
             $this->collAccesoMaterials->clearIterator();
         }
         $this->collAccesoMaterials = null;
+        if ($this->collAnuncios instanceof PropelCollection) {
+            $this->collAnuncios->clearIterator();
+        }
+        $this->collAnuncios = null;
         $this->aPfisica = null;
     }
 

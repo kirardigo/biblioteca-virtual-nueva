@@ -39,7 +39,7 @@ class ContenidoTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_CONTENIDO', 'IdContenido', 'INTEGER', true, null, null);
-        $this->addColumn('NUMERO_CONTENIDO', 'NumeroContenido', 'INTEGER', false, null, null);
+        $this->addColumn('NUMERO_CONTENIDO', 'NumeroContenido', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()

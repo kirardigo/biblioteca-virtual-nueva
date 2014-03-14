@@ -1,1 +1,1 @@
-<h1>Error</h1>
+<h1 class="h1info">Error</h1>

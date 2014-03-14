@@ -31,6 +31,14 @@ php symfony plugin:publish-assets
 
 ./symfony propel:build-model
 
+o para windows
+
+php symfony propel:build-schema
+
+php symfony propel:build-model
+
+
+
 
 $this->forward('default', 'module');
 

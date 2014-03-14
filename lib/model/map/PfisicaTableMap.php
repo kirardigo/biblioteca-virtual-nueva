@@ -42,7 +42,7 @@ class PfisicaTableMap extends TableMap
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
         $this->addColumn('APELLIDO', 'Apellido', 'VARCHAR', true, 45, null);
         $this->addColumn('VARON', 'Varon', 'BOOLEAN', false, 1, null);
-        $this->addColumn('FECHA_NAC', 'FechaNac', 'DATE', false, null, null);
+        $this->addColumn('FECHA_NAC', 'FechaNac', 'DATE', true, null, null);
         $this->addForeignKey('TIPO_DOC_ID_TIPO_DOC', 'TipoDocIdTipoDoc', 'INTEGER', 'tipo_doc', 'ID_TIPO_DOC', true, null, null);
         $this->addColumn('DOCUMENTO', 'Documento', 'VARCHAR', true, 45, null);
         // validators

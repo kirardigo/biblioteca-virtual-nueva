@@ -28,7 +28,7 @@ abstract class BasePfisicaForm extends BaseFormPropel
       'nombre'               => new sfValidatorString(array('max_length' => 45)),
       'apellido'             => new sfValidatorString(array('max_length' => 45)),
       'varon'                => new sfValidatorBoolean(array('required' => false)),
-      'fecha_nac'            => new sfValidatorDate(array('required' => false)),
+      'fecha_nac'            => new sfValidatorDate(),
       'tipo_doc_id_tipo_doc' => new sfValidatorPropelChoice(array('model' => 'TipoDoc', 'column' => 'id_tipo_doc')),
       'documento'            => new sfValidatorString(array('max_length' => 45)),
     ));

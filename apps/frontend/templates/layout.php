@@ -31,7 +31,7 @@
    
    <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
    
-<a id="probar">probando js</a>
+<!--<a id="probar">probando js</a>-->
 
      
 <table id="mm">
@@ -40,13 +40,13 @@
 <tr>
 
 <td class="tdcabecera6"><div class="span4">
-    holaaa
+   <a id="probar">probando js</a>
         
         </div>
 </td>
 <td class="tdcabecera6"><div class="span7">
 <div class="offset1">
-    putaaa
+    Bilbioteca Virtual 2014
 <div/>
     </div>
 </td>
@@ -144,7 +144,7 @@
       
       <div style="margin-top:5%">
       <hr>
-      <p style="color:white" >&copy; Universidad del Chubut 2013</p>
+      <p style="color:white" >&copy; Universidad del Chubut 2014</p>
       </div>
         
       

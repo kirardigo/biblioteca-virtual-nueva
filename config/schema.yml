@@ -9,6 +9,14 @@ propel:
     material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material, onDelete: CASCADE, onUpdate: CASCADE }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
     _indexes: { fk_acceso_material_material1: [material_id_material], fk_acceso_material_usuario1: [usuario_id_usuario] }
+  anuncio:
+    _attributes: { phpName: Anuncio, idMethod: native }
+    id_anuncio: { phpName: IdAnuncio, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: false }
+    informacion: { phpName: Informacion, type: CLOB, required: true }
+    fecha_anuncio: { phpName: FechaAnuncio, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
+    usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
+    _indexes: { fk_anuncio_usuario1: [usuario_id_usuario] }
   biblioteca:
     _attributes: { phpName: Biblioteca, idMethod: native }
     id_biblioteca: { phpName: IdBiblioteca, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -28,7 +36,7 @@ propel:
   contenido:
     _attributes: { phpName: Contenido, idMethod: native }
     id_contenido: { phpName: IdContenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    numero_contenido: { phpName: NumeroContenido, type: INTEGER, required: false, index: unique }
+    numero_contenido: { phpName: NumeroContenido, type: INTEGER, required: true, index: unique }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
   domicilio:
     _attributes: { phpName: Domicilio, idMethod: native }
@@ -77,7 +85,7 @@ propel:
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
     apellido: { phpName: Apellido, type: VARCHAR, size: '45', required: true }
     varon: { phpName: Varon, type: BOOLEAN, size: '1', required: false }
-    fecha_nac: { phpName: FechaNac, type: DATE, required: false }
+    fecha_nac: { phpName: FechaNac, type: DATE, required: true }
     tipo_doc_id_tipo_doc: { phpName: TipoDocIdTipoDoc, type: INTEGER, required: true, foreignTable: tipo_doc, foreignReference: id_tipo_doc, onDelete: CASCADE, onUpdate: CASCADE }
     documento: { phpName: Documento, type: VARCHAR, size: '45', required: true }
     _indexes: { fk_pfisica_tipo_doc1: [tipo_doc_id_tipo_doc] }
@@ -105,6 +113,7 @@ propel:
   usuario:
     _attributes: { phpName: Usuario, idMethod: native }
     id_usuario: { phpName: IdUsuario, type: INTEGER, primaryKey: true, required: true, foreignTable: pfisica, foreignReference: id_pfisica, onDelete: CASCADE, onUpdate: CASCADE }
+    valido: { phpName: Valido, type: BOOLEAN, size: '1', required: false }
     usuario: { phpName: Usuario, type: VARCHAR, size: '45', required: true, index: unique }
     password: { phpName: Password, type: VARCHAR, size: '45', required: true }
     admin: { phpName: Admin, type: BOOLEAN, size: '1', required: false }

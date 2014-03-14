@@ -33,7 +33,7 @@ $(document.ready(function(){
 </script>
 
 
-<a id="probar">probando js</a>
+
 
 
 <h1 class="h1info" >Acceso al Material</h1>

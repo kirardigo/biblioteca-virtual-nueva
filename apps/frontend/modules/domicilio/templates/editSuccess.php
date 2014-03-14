@@ -1,3 +1,3 @@
-<h1>Edit Domicilio</h1>
+<h1 class="h1info">Edit Domicilio</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

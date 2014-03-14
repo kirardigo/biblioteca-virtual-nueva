@@ -1,4 +1,4 @@
-<h1>Contenidos</h1>
+<h1 class="h1info">Contenidos</h1>
 
 <table class="table table-bordered">
   <thead >

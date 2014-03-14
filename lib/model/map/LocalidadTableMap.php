@@ -43,6 +43,7 @@ class LocalidadTableMap extends TableMap
         $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         $this->addColumn('COD_POSTAL', 'CodPostal', 'VARCHAR', true, 45, null);
         $this->addForeignKey('PROVINCIA_ID_PROVINCIA', 'ProvinciaIdProvincia', 'INTEGER', 'provincia', 'ID_PROVINCIA', true, null, null);
+        $this->getColumn('PROVINCIA_ID_PROVINCIA', false)->setPrimaryString(true);
         // validators
     } // initialize()
 

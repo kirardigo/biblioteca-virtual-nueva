@@ -1,4 +1,4 @@
-<h1>Usuarios</h1>
+<h1 class="h1info">Usuarios</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">

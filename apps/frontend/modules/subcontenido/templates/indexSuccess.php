@@ -1,4 +1,4 @@
-<h1>Subcontenidos List</h1>
+<h1 class="h1info">Subcontenidos</h1>
 
 <table class="table table-bordered">
   <thead style="background: #7FDDCA">
