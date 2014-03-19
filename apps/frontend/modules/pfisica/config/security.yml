@@ -1,5 +1,20 @@
 ## YAML Template.
 ---
-all:
+index:
   is_secure: on
   credentials: admin
+  
+edit:
+  is_secure: on
+  
+  
+update:
+  is_secure: on
+  
+  
+delete:
+  is_secure: on
+  credentials: admin
+  
+
+  

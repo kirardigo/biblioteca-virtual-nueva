@@ -36,7 +36,7 @@ class loginActions extends sfActions
                 }else{
                     //
                     //$this->getUser()->setErrorLogin("Login incorrecto");
-                    $this->mje = "Usuario o Password Incorrectos";                    
+                    $this->mje = "Usuario o Password Incorrectos. Si es un usuario nuevo necesita la aprobacion del administrador para iniciar sesion";                    
                     return sfView::ERROR;
                 }                
           }else{
@@ -51,10 +51,18 @@ class loginActions extends sfActions
   private function esLoginCorrecto($usuario,$pass){  
       
       $user_ok = UsuarioQuery::create();
+      //verificar si usuario es valido
+      $user_ok->filterByValido(true);
+      
       $user_ok->filterByUsuario($usuario);
-      $user_ok->filterByPassword(($pass));
+      $user_ok->filterByPassword(md5($pass));
       //echo md5('aadmi');md5($pass)
+
+      
       $usr = $user_ok->findOne();      
+      
+      
+      
       return $usr; 
   }    
  

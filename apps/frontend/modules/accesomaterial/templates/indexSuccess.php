@@ -38,7 +38,7 @@ $(document.ready(function(){
 
 <h1 class="h1info" >Acceso al Material</h1>
 
-<table  id="example">
+<table  id="example" class="table table-bordered">
   <thead>
     <tr>
       

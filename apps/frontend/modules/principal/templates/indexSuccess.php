@@ -7,68 +7,52 @@
 -->
 
 
-<table >
-<thead class = "thinfo">
-<tr>
-<td class= "marron">
-<h1 class="h1info"> Bibilioteca Virtual</h1>
-</td>
 
-<td class= "marron">
-<h1 class="h1info"> Biblioteca Vacchina</h1>
-</td>
-</tr>
-</thead> 
-
-<tr>
-<tbody class = "tbinfo">
-<td class= "marron">
-<div>
-
-<a  href="<?php echo url_for('material/index');?>"> 
-
-<img src="<?php echo image_path('virtual2.png')?>"  width="300px" ></img></a>
-</div>
-</td>
-
-<td class= "marron">
-<div>
-
-<a  href="<?php echo url_for('principal/vacchina');?>">
-
-
-<img src="<?php echo image_path('vacchina2.png')?>" width="300px" ></img></a> 
-</div>
-</td>
-</tr>
-
-</tbody>
-</table>
 
 <h1 class="h1info">Anuncios</h1>
 
-<table>
-  <thead>
-    <tr>
-      
-      <th>Archivo</th>
-      <th>Informacion</th>
-      <th>Fecha</th>
-      <th>Admin</th>
-    </tr>
-  </thead>
+<table class="table table-bordered">
+ 
+
+
   <tbody>
     <?php foreach ($Anuncios as $Anuncio): ?>
     <tr>
+     <thead> 
       
-      <td><?php echo $Anuncio->getArchivo() ?></td>
-      <td><?php echo $Anuncio->getInformacion() ?></td>
-      <td><?php echo $Anuncio->getFechaAnuncio() ?></td>
-      <td><?php echo $Anuncio->getUsuarioIdUsuario() ?></td>
+      <td><?php 
+      $cosa=$Anuncio->getFechaAnuncio();
+      $m=substr($cosa,-14,2);
+      $d=substr($cosa,-11,2);
+      $a=substr($cosa,-19,4);
+      $h=substr($cosa,-9,10);
+      $cosa= $d.'/'.$m.'/'.$a.' a las '.$h;
+      
+      echo $Anuncio->getArchivo()."</br>Creado el ".$cosa." por ".$Anuncio->getUsuario()->getUsuario()."."?></td>
+  
+  
+  <?php if($sf_user->hasCredential('admin')):?>
+      <td nowrap>          
+          
+          <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'anuncio/delete?id_anuncio='.$Anuncio->getIdAnuncio(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el anuncio', 'class'=>"btn btn-danger btn-mini")) ?>
+      </td>
+      
+   <?php endif;?>
+      </thead>
+    </tr>
+    <tr>
+    <td><?php echo $Anuncio->getInformacion() ?></td>
+    <?php if($sf_user->hasCredential('admin')):?>
+    <td><a class="btn btn-warning btn-mini" href="<?php echo url_for('anuncio/edit?id_anuncio='.$Anuncio->getIdAnuncio()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a></td>
+    <?php endif;?>
+    
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-
+<br>
+<?php if($sf_user->hasCredential('admin')):?>
+  <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<?php endif; ?>
 

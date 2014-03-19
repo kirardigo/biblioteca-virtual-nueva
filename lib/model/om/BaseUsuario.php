@@ -82,6 +82,11 @@ abstract class BaseUsuario extends BaseObject
     protected $collAnuncios;
 
     /**
+     * @var        PropelObjectCollection|Aporte[] Collection to store aggregation of Aporte objects.
+     */
+    protected $collAportes;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -106,6 +111,12 @@ abstract class BaseUsuario extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $anunciosScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $aportesScheduledForDeletion = null;
 
     /**
      * Get the [id_usuario] column value.
@@ -435,6 +446,8 @@ abstract class BaseUsuario extends BaseObject
 
             $this->collAnuncios = null;
 
+            $this->collAportes = null;
+
         } // if (deep)
     }
 
@@ -637,6 +650,23 @@ abstract class BaseUsuario extends BaseObject
                 }
             }
 
+            if ($this->aportesScheduledForDeletion !== null) {
+                if (!$this->aportesScheduledForDeletion->isEmpty()) {
+                    AporteQuery::create()
+                        ->filterByPrimaryKeys($this->aportesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->aportesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collAportes !== null) {
+                foreach ($this->collAportes as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -826,6 +856,14 @@ abstract class BaseUsuario extends BaseObject
                     }
                 }
 
+                if ($this->collAportes !== null) {
+                    foreach ($this->collAportes as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -924,6 +962,9 @@ abstract class BaseUsuario extends BaseObject
             }
             if (null !== $this->collAnuncios) {
                 $result['Anuncios'] = $this->collAnuncios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collAportes) {
+                $result['Aportes'] = $this->collAportes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1112,6 +1153,12 @@ abstract class BaseUsuario extends BaseObject
                 }
             }
 
+            foreach ($this->getAportes() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addAporte($relObj->copy($deepCopy));
+                }
+            }
+
             $relObj = $this->getPfisica();
             if ($relObj) {
                 $copyObj->setPfisica($relObj->copy($deepCopy));
@@ -1228,6 +1275,9 @@ abstract class BaseUsuario extends BaseObject
         }
         if ('Anuncio' == $relationName) {
             $this->initAnuncios();
+        }
+        if ('Aporte' == $relationName) {
+            $this->initAportes();
         }
     }
 
@@ -1591,6 +1641,173 @@ abstract class BaseUsuario extends BaseObject
     }
 
     /**
+     * Clears out the collAportes collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addAportes()
+     */
+    public function clearAportes()
+    {
+        $this->collAportes = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collAportes collection.
+     *
+     * By default this just sets the collAportes collection to an empty array (like clearcollAportes());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initAportes($overrideExisting = true)
+    {
+        if (null !== $this->collAportes && !$overrideExisting) {
+            return;
+        }
+        $this->collAportes = new PropelObjectCollection();
+        $this->collAportes->setModel('Aporte');
+    }
+
+    /**
+     * Gets an array of Aporte objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Usuario is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Aporte[] List of Aporte objects
+     * @throws PropelException
+     */
+    public function getAportes($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collAportes || null !== $criteria) {
+            if ($this->isNew() && null === $this->collAportes) {
+                // return empty collection
+                $this->initAportes();
+            } else {
+                $collAportes = AporteQuery::create(null, $criteria)
+                    ->filterByUsuario($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collAportes;
+                }
+                $this->collAportes = $collAportes;
+            }
+        }
+
+        return $this->collAportes;
+    }
+
+    /**
+     * Sets a collection of Aporte objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $aportes A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setAportes(PropelCollection $aportes, PropelPDO $con = null)
+    {
+        $this->aportesScheduledForDeletion = $this->getAportes(new Criteria(), $con)->diff($aportes);
+
+        foreach ($this->aportesScheduledForDeletion as $aporteRemoved) {
+            $aporteRemoved->setUsuario(null);
+        }
+
+        $this->collAportes = null;
+        foreach ($aportes as $aporte) {
+            $this->addAporte($aporte);
+        }
+
+        $this->collAportes = $aportes;
+    }
+
+    /**
+     * Returns the number of related Aporte objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Aporte objects.
+     * @throws PropelException
+     */
+    public function countAportes(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collAportes || null !== $criteria) {
+            if ($this->isNew() && null === $this->collAportes) {
+                return 0;
+            } else {
+                $query = AporteQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByUsuario($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collAportes);
+        }
+    }
+
+    /**
+     * Method called to associate a Aporte object to this object
+     * through the Aporte foreign key attribute.
+     *
+     * @param    Aporte $l Aporte
+     * @return   Usuario The current object (for fluent API support)
+     */
+    public function addAporte(Aporte $l)
+    {
+        if ($this->collAportes === null) {
+            $this->initAportes();
+        }
+        if (!$this->collAportes->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddAporte($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Aporte $aporte The aporte object to add.
+     */
+    protected function doAddAporte($aporte)
+    {
+        $this->collAportes[]= $aporte;
+        $aporte->setUsuario($this);
+    }
+
+    /**
+     * @param	Aporte $aporte The aporte object to remove.
+     */
+    public function removeAporte($aporte)
+    {
+        if ($this->getAportes()->contains($aporte)) {
+            $this->collAportes->remove($this->collAportes->search($aporte));
+            if (null === $this->aportesScheduledForDeletion) {
+                $this->aportesScheduledForDeletion = clone $this->collAportes;
+                $this->aportesScheduledForDeletion->clear();
+            }
+            $this->aportesScheduledForDeletion[]= $aporte;
+            $aporte->setUsuario(null);
+        }
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1631,6 +1848,11 @@ abstract class BaseUsuario extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collAportes) {
+                foreach ($this->collAportes as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collAccesoMaterials instanceof PropelCollection) {
@@ -1641,17 +1863,21 @@ abstract class BaseUsuario extends BaseObject
             $this->collAnuncios->clearIterator();
         }
         $this->collAnuncios = null;
+        if ($this->collAportes instanceof PropelCollection) {
+            $this->collAportes->clearIterator();
+        }
+        $this->collAportes = null;
         $this->aPfisica = null;
     }
 
     /**
      * Return the string representation of this object
      *
-     * @return string
+     * @return string The value of the 'usuario' column
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UsuarioPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->getUsuario();
     }
 
     /**

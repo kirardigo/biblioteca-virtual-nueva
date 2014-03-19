@@ -105,8 +105,10 @@ class pfisicaActions extends sfActions
     if ($form->isValid())
     {
       $Pfisica = $form->save();
-
-      $this->redirect('pfisica/index');
+		
+		if ($this->getUser()->hasCredential('admin')){
+      $this->redirect('pfisica/index');}else{
+		$this->redirect('principal/index');  };
     }
   }
 }

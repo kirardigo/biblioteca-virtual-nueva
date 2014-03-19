@@ -17,6 +17,14 @@ propel:
     fecha_anuncio: { phpName: FechaAnuncio, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
     _indexes: { fk_anuncio_usuario1: [usuario_id_usuario] }
+  aporte:
+    _attributes: { phpName: Aporte, idMethod: native }
+    id_aporte: { phpName: IdAporte, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: true }
+    titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: false }
+    descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
+    usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
+    _indexes: { fk_aporte_usuario1: [usuario_id_usuario] }
   biblioteca:
     _attributes: { phpName: Biblioteca, idMethod: native }
     id_biblioteca: { phpName: IdBiblioteca, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }

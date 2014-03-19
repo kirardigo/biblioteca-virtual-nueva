@@ -37,7 +37,7 @@ php symfony propel:build-schema
 
 php symfony propel:build-model
 
-
+php symfony cc
 
 
 $this->forward('default', 'module');
@@ -52,3 +52,5 @@ comentar esta linea en el archivo mpformpropel.class.php en la carpeta plugins
 
 post_maxsize 8M
 upload_max_filesize 2M
+
+cd C:\xampp\htdocs\biblioteca_virtual_2

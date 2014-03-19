@@ -15,7 +15,7 @@ class UsuarioForm extends BaseUsuarioForm
     //si el usuario no es admin saco cierttos campos
    $user = sfContext::getInstance()->getUser();
      if ($user->hasCredential('user') ){
-       
+       unset($this['valido']);
        unset($this['admin']);
        //quito la opcion de modificar el "usuario"
        unset($this['usuario']);
@@ -47,6 +47,14 @@ class UsuarioForm extends BaseUsuarioForm
            $this->validatorSchema['email'],
            new sfValidatorEmail()
         ));
+     
+     
+     if (!$user->isAuthenticated() ){
+		               unset($this['valido']);
+       unset($this['admin']);
+		 
+		 }
+     
      
      }
 }

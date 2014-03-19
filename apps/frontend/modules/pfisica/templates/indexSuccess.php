@@ -35,6 +35,7 @@
 
       <th>Nombre</th>
       <th>Apellido</th>
+      <th>¿Usuario Valido?</th>
       <th>Sexo</th>
       <th>Fecha de Nacimiento</th>
       <th>Tipo de Documento</th>
@@ -48,6 +49,15 @@
 
       <td><?php echo $Pfisica->getNombre() ?></td>
       <td><?php echo $Pfisica->getApellido() ?></td>
+      
+            
+            <?php if ($Pfisica->getUsuario()->getValido()){
+          echo '<td>Si</td>';
+      }else{echo '<td>No</td>';}
+          
+          
+          ?>
+      
       <?php if($Pfisica->getVaron()){
           echo '<td>Masculino</td>';
       }else{echo '<td>Femenino</td>';}
@@ -81,4 +91,4 @@
 <?php endif;?>
 
 <br>
-  <a class="btn btn-success" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+  <a class="btn btn-inverse" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

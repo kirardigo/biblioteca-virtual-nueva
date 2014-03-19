@@ -40,7 +40,53 @@
 <tr>
 
 <td class="tdcabecera6"><div class="span4">
-   <a id="probar">probando js</a>
+   
+   
+   
+   
+   <table >
+<thead class = "thinfo">
+<tr>
+<td class= "marron">
+B. Virtual
+</td>
+
+<td class= "marron">
+ B. Vacchina
+</td>
+</tr>
+</thead> 
+
+<tr>
+<tbody class = "tbinfo">
+<td class= "marron">
+<div>
+
+<a  href="<?php echo url_for('material/index');?>"> 
+
+<img src="<?php echo image_path('virtual2.png')?>"  width="100px" ></img></a>
+</div>
+</td>
+
+<td class= "marron">
+<div>
+
+<a  href="<?php echo url_for('principal/vacchina');?>">
+
+
+<img src="<?php echo image_path('vacchina2.png')?>" width="100px" ></img></a> 
+</div>
+</td>
+</tr>
+
+</tbody>
+</table>
+   
+   
+   
+   
+   
+   
         
         </div>
 </td>
@@ -132,7 +178,26 @@
                 <a href="<?php echo url_for('principal/vacchina');?>">Biblioteca Vacchina</a>
 
               </li>
-              
+              <?php if(!$sf_user->isAuthenticated()):?>
+              <li class="dropdown">
+                <a href="<?php echo url_for('pfisica/new');?>">Registrarse</a>
+
+              </li>
+              <?php endif ?>
+              <li class="dropdown">
+                <a href="http:\\www.udc.edu.ar">Universidad del Chubut</a>
+
+              </li>
+              <?php if($sf_user->isAuthenticated()):?>
+              <li class="dropdown">
+                <a href="<?php echo url_for('aporte/index');?>">Aportes</a>
+
+              </li>
+              <?php endif; ?>
+              <li class="dropdown">
+                <a href="#">Contacto</a>
+
+              </li>
               </li>
             </ul>
           </div><!--/.nav-collapse -->

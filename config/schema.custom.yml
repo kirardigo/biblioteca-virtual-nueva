@@ -17,4 +17,6 @@ propel:
     nombre: { primaryString: true }
     provincia_id_provincia: { primaryString: true }
   pjuridica:
-    nombre: { primaryString: true }  
+    nombre: { primaryString: true }
+  usuario:
+    usuario: { primaryString: true }  
