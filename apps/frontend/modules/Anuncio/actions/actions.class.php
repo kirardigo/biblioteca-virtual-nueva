@@ -12,11 +12,15 @@ class anuncioActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->Anuncios = AnuncioQuery::create()->find();
+
+    
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new AnuncioForm();
+    
+    //$this->form->setDefault('usuario_id_usuario', $this->getUser()->getAttribute('id'));
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -33,6 +37,11 @@ class anuncioActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $Anuncio = AnuncioQuery::create()->findPk($request->getParameter('id_anuncio'));
+    
+
+    
+    
+    
     $this->forward404Unless($Anuncio, sprintf('Object Anuncio does not exist (%s).', $request->getParameter('id_anuncio')));
     $this->form = new AnuncioForm($Anuncio);
   }
@@ -41,6 +50,11 @@ class anuncioActions extends sfActions
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $Anuncio = AnuncioQuery::create()->findPk($request->getParameter('id_anuncio'));
+    
+        //saco el id del usuario que esta editando el anuncio y lo seteo
+    //$id_user=$this->getUser()->getAttribute('id');
+    //$Anuncio->setUsuarioIdUsuario($id_user);
+    
     $this->forward404Unless($Anuncio, sprintf('Object Anuncio does not exist (%s).', $request->getParameter('id_anuncio')));
     $this->form = new AnuncioForm($Anuncio);
 
@@ -57,7 +71,7 @@ class anuncioActions extends sfActions
     $this->forward404Unless($Anuncio, sprintf('Object Anuncio does not exist (%s).', $request->getParameter('id_anuncio')));
     $Anuncio->delete();
 
-    $this->redirect('anuncio/index');
+    $this->redirect('principal/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -67,7 +81,7 @@ class anuncioActions extends sfActions
     {
       $Anuncio = $form->save();
 
-      $this->redirect('anuncio/edit?id_anuncio='.$Anuncio->getIdAnuncio());
+      $this->redirect('principal/index');
     }
   }
 }

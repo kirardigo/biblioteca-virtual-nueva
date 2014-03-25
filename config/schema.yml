@@ -12,7 +12,7 @@ propel:
   anuncio:
     _attributes: { phpName: Anuncio, idMethod: native }
     id_anuncio: { phpName: IdAnuncio, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: false }
+    titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: false }
     informacion: { phpName: Informacion, type: CLOB, required: true }
     fecha_anuncio: { phpName: FechaAnuncio, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
@@ -83,6 +83,7 @@ propel:
     editorial: { phpName: Editorial, type: VARCHAR, size: '45', required: false }
     autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
+    fisico: { phpName: Fisico, type: BOOLEAN, size: '1', required: false }
     subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido, onDelete: CASCADE, onUpdate: CASCADE }
     biblioteca_id_biblioteca: { phpName: BibliotecaIdBiblioteca, type: INTEGER, required: true, foreignTable: biblioteca, foreignReference: id_biblioteca }
     carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }

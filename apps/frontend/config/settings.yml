@@ -50,3 +50,6 @@ all:
     secure_module:          error
     secure_action:          index
     
+    # pagina de error 404 su modulo, y accion
+    error_404_module: error
+    error_404_action: error404

@@ -39,7 +39,7 @@ class AnuncioTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_ANUNCIO', 'IdAnuncio', 'INTEGER', true, null, null);
-        $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
+        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', false, 45, null);
         $this->addColumn('INFORMACION', 'Informacion', 'CLOB', true, null, null);
         $this->addColumn('FECHA_ANUNCIO', 'FechaAnuncio', 'TIMESTAMP', true, null, 'CURRENT_TIMESTAMP');
         $this->addForeignKey('USUARIO_ID_USUARIO', 'UsuarioIdUsuario', 'INTEGER', 'usuario', 'ID_USUARIO', true, null, null);

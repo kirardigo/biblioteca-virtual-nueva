@@ -11,7 +11,7 @@ class AporteForm extends BaseAporteForm
 {
   public function configure()
   {
-	 // unset($this['usuario_id_usuario']);
+	  unset($this['usuario_id_usuario']);
 	  parent::configure();
 	  
 	  //error de csrf token si no se metia el codigo siguiente
@@ -35,19 +35,20 @@ class AporteForm extends BaseAporteForm
       'validated_file_class' => 'SwimsuitValidatedFile',
   )));
   
-   $this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();   
+  // $this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();   
   }
     public function save ($con = null)
   { 
     // Get the uploaded image
     $file = $this->getValue('archivo');
-    //$editorial=$this->getValue('editorial');
-    //$mimi=$this->getValue('usuario_id_usuario');
-   // echo $this->getObject()->getUsuario()->getUsuario($mimi);
-    //
-    //pasar a mayusculas
-    //$autor= strtoupper($this->getValue('usuario_id_usuario'));
-    $autor='ANONIMO';
+
+          //obtengo el usuario
+    $user = sfContext::getInstance()->getUser();
+    //obtengo su id
+    $var=$user->getAttribute('user');
+    
+    
+    $autor=$var;
     $titulo= strtoupper($this->getValue('titulo'));
     //cambio espacios por guiones bajos
     $autor=str_replace(" ", "_",$autor);
@@ -69,7 +70,7 @@ class AporteForm extends BaseAporteForm
     {
       
        $extension = strtoupper( $file->getExtension($file->getOriginalExtension()) );
-       $file->save( $autor.'_'.$titulo.$extension);
+       $file->save( $titulo.'_AUTOR_'.$autor.$extension);
     
       // $caca->save(strtoupper('  '.$caca));
     }

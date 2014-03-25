@@ -14,7 +14,7 @@ class materialActions extends sfActions
    // $this->Materials = MaterialQuery::create()->find();
      
           $this->elegido = array();
-    $this->Materials = MaterialQuery::create()->find();
+    $this->Materials = MaterialQuery::create()->filterByFisico(false)->find();
     // si viene algo por el POST
     if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
         //guardo el id de esa pelicula
@@ -71,7 +71,7 @@ class materialActions extends sfActions
                      
          ->orderBy('IdMaterial', Criteria::DESC)       
             ;
-            $this->elegido = $consulta2->find();              
+            $this->elegido = $consulta2->filterByFisico(false)->find();              
        
 
     }
@@ -120,7 +120,8 @@ class materialActions extends sfActions
     $this->forward404Unless($Material, sprintf('Object Material does not exist (%s).', $request->getParameter('id_material')));
     $Material->delete();
 
-    $this->redirect('material/index');
+            if ($Material->getFisico()==true){$this->redirect('principal/vacchina');}
+            else{$this->redirect('material/index');}
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -129,8 +130,9 @@ class materialActions extends sfActions
     if ($form->isValid())
     {
       $Material = $form->save();
-
-      $this->redirect('material/index');
+            if ($Material->getFisico()==true){$this->redirect('principal/vacchina');}
+            else{$this->redirect('material/index');}
+      
     }
     
 

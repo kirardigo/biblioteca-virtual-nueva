@@ -28,7 +28,7 @@
       $h=substr($cosa,-9,10);
       $cosa= $d.'/'.$m.'/'.$a.' a las '.$h;
       
-      echo $Anuncio->getArchivo()."</br>Creado el ".$cosa." por ".$Anuncio->getUsuario()->getUsuario()."."?></td>
+      echo $Anuncio->getTitulo()."</br>Creado el ".$cosa." por ".$Anuncio->getUsuario()->getUsuario()."."?></td>
   
   
   <?php if($sf_user->hasCredential('admin')):?>

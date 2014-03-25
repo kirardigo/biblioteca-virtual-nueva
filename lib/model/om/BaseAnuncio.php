@@ -37,10 +37,10 @@ abstract class BaseAnuncio extends BaseObject
     protected $id_anuncio;
 
     /**
-     * The value for the archivo field.
+     * The value for the titulo field.
      * @var        string
      */
-    protected $archivo;
+    protected $titulo;
 
     /**
      * The value for the informacion field.
@@ -112,14 +112,14 @@ abstract class BaseAnuncio extends BaseObject
     }
 
     /**
-     * Get the [archivo] column value.
+     * Get the [titulo] column value.
      * 
      * @return   string
      */
-    public function getArchivo()
+    public function getTitulo()
     {
 
-        return $this->archivo;
+        return $this->titulo;
     }
 
     /**
@@ -204,25 +204,25 @@ abstract class BaseAnuncio extends BaseObject
     } // setIdAnuncio()
 
     /**
-     * Set the value of [archivo] column.
+     * Set the value of [titulo] column.
      * 
      * @param      string $v new value
      * @return   Anuncio The current object (for fluent API support)
      */
-    public function setArchivo($v)
+    public function setTitulo($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->archivo !== $v) {
-            $this->archivo = $v;
-            $this->modifiedColumns[] = AnuncioPeer::ARCHIVO;
+        if ($this->titulo !== $v) {
+            $this->titulo = $v;
+            $this->modifiedColumns[] = AnuncioPeer::TITULO;
         }
 
 
         return $this;
-    } // setArchivo()
+    } // setTitulo()
 
     /**
      * Set the value of [informacion] column.
@@ -326,7 +326,7 @@ abstract class BaseAnuncio extends BaseObject
         try {
 
             $this->id_anuncio = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->archivo = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->titulo = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->informacion = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->fecha_anuncio = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->usuario_id_usuario = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
@@ -601,8 +601,8 @@ abstract class BaseAnuncio extends BaseObject
         if ($this->isColumnModified(AnuncioPeer::ID_ANUNCIO)) {
             $modifiedColumns[':p' . $index++]  = '`ID_ANUNCIO`';
         }
-        if ($this->isColumnModified(AnuncioPeer::ARCHIVO)) {
-            $modifiedColumns[':p' . $index++]  = '`ARCHIVO`';
+        if ($this->isColumnModified(AnuncioPeer::TITULO)) {
+            $modifiedColumns[':p' . $index++]  = '`TITULO`';
         }
         if ($this->isColumnModified(AnuncioPeer::INFORMACION)) {
             $modifiedColumns[':p' . $index++]  = '`INFORMACION`';
@@ -627,8 +627,8 @@ abstract class BaseAnuncio extends BaseObject
                     case '`ID_ANUNCIO`':						
 						$stmt->bindValue($identifier, $this->id_anuncio, PDO::PARAM_INT);
                         break;
-                    case '`ARCHIVO`':						
-						$stmt->bindValue($identifier, $this->archivo, PDO::PARAM_STR);
+                    case '`TITULO`':						
+						$stmt->bindValue($identifier, $this->titulo, PDO::PARAM_STR);
                         break;
                     case '`INFORMACION`':						
 						$stmt->bindValue($identifier, $this->informacion, PDO::PARAM_STR);
@@ -789,7 +789,7 @@ abstract class BaseAnuncio extends BaseObject
                 return $this->getIdAnuncio();
                 break;
             case 1:
-                return $this->getArchivo();
+                return $this->getTitulo();
                 break;
             case 2:
                 return $this->getInformacion();
@@ -830,7 +830,7 @@ abstract class BaseAnuncio extends BaseObject
         $keys = AnuncioPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdAnuncio(),
-            $keys[1] => $this->getArchivo(),
+            $keys[1] => $this->getTitulo(),
             $keys[2] => $this->getInformacion(),
             $keys[3] => $this->getFechaAnuncio(),
             $keys[4] => $this->getUsuarioIdUsuario(),
@@ -877,7 +877,7 @@ abstract class BaseAnuncio extends BaseObject
                 $this->setIdAnuncio($value);
                 break;
             case 1:
-                $this->setArchivo($value);
+                $this->setTitulo($value);
                 break;
             case 2:
                 $this->setInformacion($value);
@@ -913,7 +913,7 @@ abstract class BaseAnuncio extends BaseObject
         $keys = AnuncioPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdAnuncio($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setArchivo($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setTitulo($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setInformacion($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setFechaAnuncio($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setUsuarioIdUsuario($arr[$keys[4]]);
@@ -929,7 +929,7 @@ abstract class BaseAnuncio extends BaseObject
         $criteria = new Criteria(AnuncioPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(AnuncioPeer::ID_ANUNCIO)) $criteria->add(AnuncioPeer::ID_ANUNCIO, $this->id_anuncio);
-        if ($this->isColumnModified(AnuncioPeer::ARCHIVO)) $criteria->add(AnuncioPeer::ARCHIVO, $this->archivo);
+        if ($this->isColumnModified(AnuncioPeer::TITULO)) $criteria->add(AnuncioPeer::TITULO, $this->titulo);
         if ($this->isColumnModified(AnuncioPeer::INFORMACION)) $criteria->add(AnuncioPeer::INFORMACION, $this->informacion);
         if ($this->isColumnModified(AnuncioPeer::FECHA_ANUNCIO)) $criteria->add(AnuncioPeer::FECHA_ANUNCIO, $this->fecha_anuncio);
         if ($this->isColumnModified(AnuncioPeer::USUARIO_ID_USUARIO)) $criteria->add(AnuncioPeer::USUARIO_ID_USUARIO, $this->usuario_id_usuario);
@@ -996,7 +996,7 @@ abstract class BaseAnuncio extends BaseObject
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setArchivo($this->getArchivo());
+        $copyObj->setTitulo($this->getTitulo());
         $copyObj->setInformacion($this->getInformacion());
         $copyObj->setFechaAnuncio($this->getFechaAnuncio());
         $copyObj->setUsuarioIdUsuario($this->getUsuarioIdUsuario());
@@ -1115,7 +1115,7 @@ abstract class BaseAnuncio extends BaseObject
     public function clear()
     {
         $this->id_anuncio = null;
-        $this->archivo = null;
+        $this->titulo = null;
         $this->informacion = null;
         $this->fecha_anuncio = null;
         $this->usuario_id_usuario = null;

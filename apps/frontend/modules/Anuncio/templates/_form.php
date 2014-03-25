@@ -5,15 +5,13 @@
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
-  <table>
-    <tfoot>
+  <table class="table table-bordered">
+    <tfoot style="background:sienna">
       <tr>
         <td colspan="2">
-          &nbsp;<a href="<?php echo url_for('anuncio/index') ?>">Back to list</a>
-          <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'anuncio/delete?id_anuncio='.$form->getObject()->getIdAnuncio(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
-          <?php endif; ?>
-          <input type="submit" value="Save" />
+          &nbsp;<a class="btn btn-inverse" href="<?php echo url_for('principal/index') ?>">Atras</a>
+
+          &nbsp;<input class="btn btn-inverse" type="submit" value="Guardar" />
         </td>
       </tr>
     </tfoot>
@@ -21,4 +19,5 @@
       <?php echo $form ?>
     </tbody>
   </table>
+
 </form>

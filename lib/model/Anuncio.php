@@ -15,4 +15,18 @@
  */
 class Anuncio extends BaseAnuncio {
 
+  public function save (PropelPDO $con = null){ 
+      //obtengo el usuario
+    $user = sfContext::getInstance()->getUser();
+    //obtengo su id
+    $var=$user->getAttribute('id');
+    //seteo su id en la bd
+    $this->setUsuarioIdUsuario($var);
+      
+    return parent::save($con);
+  }
+    
+    
+    
+    
 } // Anuncio

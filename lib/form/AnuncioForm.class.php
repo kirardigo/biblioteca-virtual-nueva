@@ -13,24 +13,30 @@ class AnuncioForm extends BaseAnuncioForm
   {
 	  
       unset($this['fecha_anuncio']);
-    //  unset($this['usuario_id_usuario']);
+unset($this['usuario_id_usuario']);
       
       
-      $user = sfContext::getInstance()->getUser();
-         $nombre= $user->getAttribute('id');
+      
+    //  $cosa=$this->getValue('titulo');
+    //  $cosa->save(strtoupper($cosa));
+   // unset($this['usuario_id_usuario']);
+      
+      
+ //   $user = sfContext::getInstance()->getUser();
+  //    $nombre= $user->getAttribute('id');
         
 
-$this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();
- $this->widgetSchema['usuario_id_usuario']->setLabel('Usuario'); 
-         $this->setDefault('usuario_id_usuario', $nombre);
-         
+//$this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();
+//$this->widgetSchema['usuario_id_usuario']->setLabel('Usuario'); 
+//$this->setDefault('usuario_id_usuario', 90);
+        // 
 
 
       
           
   }
 
-  
+
 
   
   

@@ -67,6 +67,12 @@ abstract class BaseMaterial extends BaseObject
     protected $descripcion;
 
     /**
+     * The value for the fisico field.
+     * @var        boolean
+     */
+    protected $fisico;
+
+    /**
      * The value for the subcontenido_id_subcontenido field.
      * @var        int
      */
@@ -188,6 +194,17 @@ abstract class BaseMaterial extends BaseObject
     {
 
         return $this->descripcion;
+    }
+
+    /**
+     * Get the [fisico] column value.
+     * 
+     * @return   boolean
+     */
+    public function getFisico()
+    {
+
+        return $this->fisico;
     }
 
     /**
@@ -350,6 +367,35 @@ abstract class BaseMaterial extends BaseObject
     } // setDescripcion()
 
     /**
+     * Sets the value of the [fisico] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * 
+     * @param      boolean|integer|string $v The new value
+     * @return   Material The current object (for fluent API support)
+     */
+    public function setFisico($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->fisico !== $v) {
+            $this->fisico = $v;
+            $this->modifiedColumns[] = MaterialPeer::FISICO;
+        }
+
+
+        return $this;
+    } // setFisico()
+
+    /**
      * Set the value of [subcontenido_id_subcontenido] column.
      * 
      * @param      int $v new value
@@ -462,9 +508,10 @@ abstract class BaseMaterial extends BaseObject
             $this->editorial = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->autor = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->descripcion = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->subcontenido_id_subcontenido = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
-            $this->biblioteca_id_biblioteca = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-            $this->carrera_id_carrera = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->fisico = ($row[$startcol + 6] !== null) ? (boolean) $row[$startcol + 6] : null;
+            $this->subcontenido_id_subcontenido = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->biblioteca_id_biblioteca = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->carrera_id_carrera = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -473,7 +520,7 @@ abstract class BaseMaterial extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 9; // 9 = MaterialPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = MaterialPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Material object", $e);
@@ -792,6 +839,9 @@ abstract class BaseMaterial extends BaseObject
         if ($this->isColumnModified(MaterialPeer::DESCRIPCION)) {
             $modifiedColumns[':p' . $index++]  = '`DESCRIPCION`';
         }
+        if ($this->isColumnModified(MaterialPeer::FISICO)) {
+            $modifiedColumns[':p' . $index++]  = '`FISICO`';
+        }
         if ($this->isColumnModified(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) {
             $modifiedColumns[':p' . $index++]  = '`SUBCONTENIDO_ID_SUBCONTENIDO`';
         }
@@ -829,6 +879,9 @@ abstract class BaseMaterial extends BaseObject
                         break;
                     case '`DESCRIPCION`':						
 						$stmt->bindValue($identifier, $this->descripcion, PDO::PARAM_STR);
+                        break;
+                    case '`FISICO`':
+						$stmt->bindValue($identifier, (int) $this->fisico, PDO::PARAM_INT);
                         break;
                     case '`SUBCONTENIDO_ID_SUBCONTENIDO`':						
 						$stmt->bindValue($identifier, $this->subcontenido_id_subcontenido, PDO::PARAM_INT);
@@ -1024,12 +1077,15 @@ abstract class BaseMaterial extends BaseObject
                 return $this->getDescripcion();
                 break;
             case 6:
-                return $this->getSubcontenidoIdSubcontenido();
+                return $this->getFisico();
                 break;
             case 7:
-                return $this->getBibliotecaIdBiblioteca();
+                return $this->getSubcontenidoIdSubcontenido();
                 break;
             case 8:
+                return $this->getBibliotecaIdBiblioteca();
+                break;
+            case 9:
                 return $this->getCarreraIdCarrera();
                 break;
             default:
@@ -1067,9 +1123,10 @@ abstract class BaseMaterial extends BaseObject
             $keys[3] => $this->getEditorial(),
             $keys[4] => $this->getAutor(),
             $keys[5] => $this->getDescripcion(),
-            $keys[6] => $this->getSubcontenidoIdSubcontenido(),
-            $keys[7] => $this->getBibliotecaIdBiblioteca(),
-            $keys[8] => $this->getCarreraIdCarrera(),
+            $keys[6] => $this->getFisico(),
+            $keys[7] => $this->getSubcontenidoIdSubcontenido(),
+            $keys[8] => $this->getBibliotecaIdBiblioteca(),
+            $keys[9] => $this->getCarreraIdCarrera(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aSubcontenido) {
@@ -1137,12 +1194,15 @@ abstract class BaseMaterial extends BaseObject
                 $this->setDescripcion($value);
                 break;
             case 6:
-                $this->setSubcontenidoIdSubcontenido($value);
+                $this->setFisico($value);
                 break;
             case 7:
-                $this->setBibliotecaIdBiblioteca($value);
+                $this->setSubcontenidoIdSubcontenido($value);
                 break;
             case 8:
+                $this->setBibliotecaIdBiblioteca($value);
+                break;
+            case 9:
                 $this->setCarreraIdCarrera($value);
                 break;
         } // switch()
@@ -1175,9 +1235,10 @@ abstract class BaseMaterial extends BaseObject
         if (array_key_exists($keys[3], $arr)) $this->setEditorial($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setAutor($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setDescripcion($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setBibliotecaIdBiblioteca($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setCarreraIdCarrera($arr[$keys[8]]);
+        if (array_key_exists($keys[6], $arr)) $this->setFisico($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setBibliotecaIdBiblioteca($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setCarreraIdCarrera($arr[$keys[9]]);
     }
 
     /**
@@ -1195,6 +1256,7 @@ abstract class BaseMaterial extends BaseObject
         if ($this->isColumnModified(MaterialPeer::EDITORIAL)) $criteria->add(MaterialPeer::EDITORIAL, $this->editorial);
         if ($this->isColumnModified(MaterialPeer::AUTOR)) $criteria->add(MaterialPeer::AUTOR, $this->autor);
         if ($this->isColumnModified(MaterialPeer::DESCRIPCION)) $criteria->add(MaterialPeer::DESCRIPCION, $this->descripcion);
+        if ($this->isColumnModified(MaterialPeer::FISICO)) $criteria->add(MaterialPeer::FISICO, $this->fisico);
         if ($this->isColumnModified(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) $criteria->add(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $this->subcontenido_id_subcontenido);
         if ($this->isColumnModified(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA)) $criteria->add(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, $this->biblioteca_id_biblioteca);
         if ($this->isColumnModified(MaterialPeer::CARRERA_ID_CARRERA)) $criteria->add(MaterialPeer::CARRERA_ID_CARRERA, $this->carrera_id_carrera);
@@ -1266,6 +1328,7 @@ abstract class BaseMaterial extends BaseObject
         $copyObj->setEditorial($this->getEditorial());
         $copyObj->setAutor($this->getAutor());
         $copyObj->setDescripcion($this->getDescripcion());
+        $copyObj->setFisico($this->getFisico());
         $copyObj->setSubcontenidoIdSubcontenido($this->getSubcontenidoIdSubcontenido());
         $copyObj->setBibliotecaIdBiblioteca($this->getBibliotecaIdBiblioteca());
         $copyObj->setCarreraIdCarrera($this->getCarreraIdCarrera());
@@ -1705,6 +1768,7 @@ abstract class BaseMaterial extends BaseObject
         $this->editorial = null;
         $this->autor = null;
         $this->descripcion = null;
+        $this->fisico = null;
         $this->subcontenido_id_subcontenido = null;
         $this->biblioteca_id_biblioteca = null;
         $this->carrera_id_carrera = null;

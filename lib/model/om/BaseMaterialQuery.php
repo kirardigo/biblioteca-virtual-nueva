@@ -12,6 +12,7 @@
  * @method     MaterialQuery orderByEditorial($order = Criteria::ASC) Order by the editorial column
  * @method     MaterialQuery orderByAutor($order = Criteria::ASC) Order by the autor column
  * @method     MaterialQuery orderByDescripcion($order = Criteria::ASC) Order by the descripcion column
+ * @method     MaterialQuery orderByFisico($order = Criteria::ASC) Order by the fisico column
  * @method     MaterialQuery orderBySubcontenidoIdSubcontenido($order = Criteria::ASC) Order by the subcontenido_id_subcontenido column
  * @method     MaterialQuery orderByBibliotecaIdBiblioteca($order = Criteria::ASC) Order by the biblioteca_id_biblioteca column
  * @method     MaterialQuery orderByCarreraIdCarrera($order = Criteria::ASC) Order by the carrera_id_carrera column
@@ -22,6 +23,7 @@
  * @method     MaterialQuery groupByEditorial() Group by the editorial column
  * @method     MaterialQuery groupByAutor() Group by the autor column
  * @method     MaterialQuery groupByDescripcion() Group by the descripcion column
+ * @method     MaterialQuery groupByFisico() Group by the fisico column
  * @method     MaterialQuery groupBySubcontenidoIdSubcontenido() Group by the subcontenido_id_subcontenido column
  * @method     MaterialQuery groupByBibliotecaIdBiblioteca() Group by the biblioteca_id_biblioteca column
  * @method     MaterialQuery groupByCarreraIdCarrera() Group by the carrera_id_carrera column
@@ -55,6 +57,7 @@
  * @method     Material findOneByEditorial(string $editorial) Return the first Material filtered by the editorial column
  * @method     Material findOneByAutor(string $autor) Return the first Material filtered by the autor column
  * @method     Material findOneByDescripcion(string $descripcion) Return the first Material filtered by the descripcion column
+ * @method     Material findOneByFisico(boolean $fisico) Return the first Material filtered by the fisico column
  * @method     Material findOneBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return the first Material filtered by the subcontenido_id_subcontenido column
  * @method     Material findOneByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return the first Material filtered by the biblioteca_id_biblioteca column
  * @method     Material findOneByCarreraIdCarrera(int $carrera_id_carrera) Return the first Material filtered by the carrera_id_carrera column
@@ -65,6 +68,7 @@
  * @method     array findByEditorial(string $editorial) Return Material objects filtered by the editorial column
  * @method     array findByAutor(string $autor) Return Material objects filtered by the autor column
  * @method     array findByDescripcion(string $descripcion) Return Material objects filtered by the descripcion column
+ * @method     array findByFisico(boolean $fisico) Return Material objects filtered by the fisico column
  * @method     array findBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return Material objects filtered by the subcontenido_id_subcontenido column
  * @method     array findByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return Material objects filtered by the biblioteca_id_biblioteca column
  * @method     array findByCarreraIdCarrera(int $carrera_id_carrera) Return Material objects filtered by the carrera_id_carrera column
@@ -158,7 +162,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA`, `CARRERA_ID_CARRERA` FROM `material` WHERE `ID_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `FISICO`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA`, `CARRERA_ID_CARRERA` FROM `material` WHERE `ID_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -417,6 +421,33 @@ abstract class BaseMaterialQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(MaterialPeer::DESCRIPCION, $descripcion, $comparison);
+    }
+
+    /**
+     * Filter the query on the fisico column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFisico(true); // WHERE fisico = true
+     * $query->filterByFisico('yes'); // WHERE fisico = true
+     * </code>
+     *
+     * @param     boolean|string $fisico The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return MaterialQuery The current query, for fluid interface
+     */
+    public function filterByFisico($fisico = null, $comparison = null)
+    {
+        if (is_string($fisico)) {
+            $fisico = in_array(strtolower($fisico), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(MaterialPeer::FISICO, $fisico, $comparison);
     }
 
     /**

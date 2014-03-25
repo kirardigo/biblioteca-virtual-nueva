@@ -7,13 +7,13 @@
  * 
  *
  * @method     AnuncioQuery orderByIdAnuncio($order = Criteria::ASC) Order by the id_anuncio column
- * @method     AnuncioQuery orderByArchivo($order = Criteria::ASC) Order by the archivo column
+ * @method     AnuncioQuery orderByTitulo($order = Criteria::ASC) Order by the titulo column
  * @method     AnuncioQuery orderByInformacion($order = Criteria::ASC) Order by the informacion column
  * @method     AnuncioQuery orderByFechaAnuncio($order = Criteria::ASC) Order by the fecha_anuncio column
  * @method     AnuncioQuery orderByUsuarioIdUsuario($order = Criteria::ASC) Order by the usuario_id_usuario column
  *
  * @method     AnuncioQuery groupByIdAnuncio() Group by the id_anuncio column
- * @method     AnuncioQuery groupByArchivo() Group by the archivo column
+ * @method     AnuncioQuery groupByTitulo() Group by the titulo column
  * @method     AnuncioQuery groupByInformacion() Group by the informacion column
  * @method     AnuncioQuery groupByFechaAnuncio() Group by the fecha_anuncio column
  * @method     AnuncioQuery groupByUsuarioIdUsuario() Group by the usuario_id_usuario column
@@ -30,13 +30,13 @@
  * @method     Anuncio findOneOrCreate(PropelPDO $con = null) Return the first Anuncio matching the query, or a new Anuncio object populated from the query conditions when no match is found
  *
  * @method     Anuncio findOneByIdAnuncio(int $id_anuncio) Return the first Anuncio filtered by the id_anuncio column
- * @method     Anuncio findOneByArchivo(string $archivo) Return the first Anuncio filtered by the archivo column
+ * @method     Anuncio findOneByTitulo(string $titulo) Return the first Anuncio filtered by the titulo column
  * @method     Anuncio findOneByInformacion(string $informacion) Return the first Anuncio filtered by the informacion column
  * @method     Anuncio findOneByFechaAnuncio(string $fecha_anuncio) Return the first Anuncio filtered by the fecha_anuncio column
  * @method     Anuncio findOneByUsuarioIdUsuario(int $usuario_id_usuario) Return the first Anuncio filtered by the usuario_id_usuario column
  *
  * @method     array findByIdAnuncio(int $id_anuncio) Return Anuncio objects filtered by the id_anuncio column
- * @method     array findByArchivo(string $archivo) Return Anuncio objects filtered by the archivo column
+ * @method     array findByTitulo(string $titulo) Return Anuncio objects filtered by the titulo column
  * @method     array findByInformacion(string $informacion) Return Anuncio objects filtered by the informacion column
  * @method     array findByFechaAnuncio(string $fecha_anuncio) Return Anuncio objects filtered by the fecha_anuncio column
  * @method     array findByUsuarioIdUsuario(int $usuario_id_usuario) Return Anuncio objects filtered by the usuario_id_usuario column
@@ -130,7 +130,7 @@ abstract class BaseAnuncioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_ANUNCIO`, `ARCHIVO`, `INFORMACION`, `FECHA_ANUNCIO`, `USUARIO_ID_USUARIO` FROM `anuncio` WHERE `ID_ANUNCIO` = :p0';
+        $sql = 'SELECT `ID_ANUNCIO`, `TITULO`, `INFORMACION`, `FECHA_ANUNCIO`, `USUARIO_ID_USUARIO` FROM `anuncio` WHERE `ID_ANUNCIO` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -247,32 +247,32 @@ abstract class BaseAnuncioQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the archivo column
+     * Filter the query on the titulo column
      *
      * Example usage:
      * <code>
-     * $query->filterByArchivo('fooValue');   // WHERE archivo = 'fooValue'
-     * $query->filterByArchivo('%fooValue%'); // WHERE archivo LIKE '%fooValue%'
+     * $query->filterByTitulo('fooValue');   // WHERE titulo = 'fooValue'
+     * $query->filterByTitulo('%fooValue%'); // WHERE titulo LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $archivo The value to use as filter.
+     * @param     string $titulo The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return AnuncioQuery The current query, for fluid interface
      */
-    public function filterByArchivo($archivo = null, $comparison = null)
+    public function filterByTitulo($titulo = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($archivo)) {
+            if (is_array($titulo)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $archivo)) {
-                $archivo = str_replace('*', '%', $archivo);
+            } elseif (preg_match('/[\%\*]/', $titulo)) {
+                $titulo = str_replace('*', '%', $titulo);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(AnuncioPeer::ARCHIVO, $archivo, $comparison);
+        return $this->addUsingAlias(AnuncioPeer::TITULO, $titulo, $comparison);
     }
 
     /**

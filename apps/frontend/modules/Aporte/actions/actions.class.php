@@ -67,7 +67,7 @@ class aporteActions extends sfActions
     {
       $Aporte = $form->save();
 
-      $this->redirect('aporte/edit?id_aporte='.$Aporte->getIdAporte());
+      $this->redirect('aporte/index');
     }
     
   }

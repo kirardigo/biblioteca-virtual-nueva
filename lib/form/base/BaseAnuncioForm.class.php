@@ -15,7 +15,7 @@ abstract class BaseAnuncioForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id_anuncio'         => new sfWidgetFormInputHidden(),
-      'archivo'            => new sfWidgetFormInputText(),
+      'titulo'             => new sfWidgetFormInputText(),
       'informacion'        => new sfWidgetFormTextarea(),
       'fecha_anuncio'      => new sfWidgetFormDateTime(),
       'usuario_id_usuario' => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => false)),
@@ -23,7 +23,7 @@ abstract class BaseAnuncioForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_anuncio'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdAnuncio()), 'empty_value' => $this->getObject()->getIdAnuncio(), 'required' => false)),
-      'archivo'            => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'titulo'             => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'informacion'        => new sfValidatorString(),
       'fecha_anuncio'      => new sfValidatorDateTime(),
       'usuario_id_usuario' => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id_usuario')),

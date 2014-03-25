@@ -34,8 +34,8 @@ abstract class BaseAnuncioPeer {
     /** the column name for the ID_ANUNCIO field */
     const ID_ANUNCIO = 'anuncio.ID_ANUNCIO';
 
-    /** the column name for the ARCHIVO field */
-    const ARCHIVO = 'anuncio.ARCHIVO';
+    /** the column name for the TITULO field */
+    const TITULO = 'anuncio.TITULO';
 
     /** the column name for the INFORMACION field */
     const INFORMACION = 'anuncio.INFORMACION';
@@ -65,11 +65,11 @@ abstract class BaseAnuncioPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdAnuncio', 'Archivo', 'Informacion', 'FechaAnuncio', 'UsuarioIdUsuario', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idAnuncio', 'archivo', 'informacion', 'fechaAnuncio', 'usuarioIdUsuario', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_ANUNCIO, self::ARCHIVO, self::INFORMACION, self::FECHA_ANUNCIO, self::USUARIO_ID_USUARIO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_ANUNCIO', 'ARCHIVO', 'INFORMACION', 'FECHA_ANUNCIO', 'USUARIO_ID_USUARIO', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_anuncio', 'archivo', 'informacion', 'fecha_anuncio', 'usuario_id_usuario', ),
+        BasePeer::TYPE_PHPNAME => array ('IdAnuncio', 'Titulo', 'Informacion', 'FechaAnuncio', 'UsuarioIdUsuario', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idAnuncio', 'titulo', 'informacion', 'fechaAnuncio', 'usuarioIdUsuario', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_ANUNCIO, self::TITULO, self::INFORMACION, self::FECHA_ANUNCIO, self::USUARIO_ID_USUARIO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_ANUNCIO', 'TITULO', 'INFORMACION', 'FECHA_ANUNCIO', 'USUARIO_ID_USUARIO', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_anuncio', 'titulo', 'informacion', 'fecha_anuncio', 'usuario_id_usuario', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -80,11 +80,11 @@ abstract class BaseAnuncioPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdAnuncio' => 0, 'Archivo' => 1, 'Informacion' => 2, 'FechaAnuncio' => 3, 'UsuarioIdUsuario' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idAnuncio' => 0, 'archivo' => 1, 'informacion' => 2, 'fechaAnuncio' => 3, 'usuarioIdUsuario' => 4, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_ANUNCIO => 0, self::ARCHIVO => 1, self::INFORMACION => 2, self::FECHA_ANUNCIO => 3, self::USUARIO_ID_USUARIO => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_ANUNCIO' => 0, 'ARCHIVO' => 1, 'INFORMACION' => 2, 'FECHA_ANUNCIO' => 3, 'USUARIO_ID_USUARIO' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_anuncio' => 0, 'archivo' => 1, 'informacion' => 2, 'fecha_anuncio' => 3, 'usuario_id_usuario' => 4, ),
+        BasePeer::TYPE_PHPNAME => array ('IdAnuncio' => 0, 'Titulo' => 1, 'Informacion' => 2, 'FechaAnuncio' => 3, 'UsuarioIdUsuario' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idAnuncio' => 0, 'titulo' => 1, 'informacion' => 2, 'fechaAnuncio' => 3, 'usuarioIdUsuario' => 4, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_ANUNCIO => 0, self::TITULO => 1, self::INFORMACION => 2, self::FECHA_ANUNCIO => 3, self::USUARIO_ID_USUARIO => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_ANUNCIO' => 0, 'TITULO' => 1, 'INFORMACION' => 2, 'FECHA_ANUNCIO' => 3, 'USUARIO_ID_USUARIO' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_anuncio' => 0, 'titulo' => 1, 'informacion' => 2, 'fecha_anuncio' => 3, 'usuario_id_usuario' => 4, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -160,13 +160,13 @@ abstract class BaseAnuncioPeer {
     {
         if (null === $alias) {
             $criteria->addSelectColumn(AnuncioPeer::ID_ANUNCIO);
-            $criteria->addSelectColumn(AnuncioPeer::ARCHIVO);
+            $criteria->addSelectColumn(AnuncioPeer::TITULO);
             $criteria->addSelectColumn(AnuncioPeer::INFORMACION);
             $criteria->addSelectColumn(AnuncioPeer::FECHA_ANUNCIO);
             $criteria->addSelectColumn(AnuncioPeer::USUARIO_ID_USUARIO);
         } else {
             $criteria->addSelectColumn($alias . '.ID_ANUNCIO');
-            $criteria->addSelectColumn($alias . '.ARCHIVO');
+            $criteria->addSelectColumn($alias . '.TITULO');
             $criteria->addSelectColumn($alias . '.INFORMACION');
             $criteria->addSelectColumn($alias . '.FECHA_ANUNCIO');
             $criteria->addSelectColumn($alias . '.USUARIO_ID_USUARIO');

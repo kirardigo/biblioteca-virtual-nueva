@@ -6,14 +6,12 @@
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
   <table class="table table-bordered">
-    <tfoot style="background: #7FDDCA">
+    <tfoot>
       <tr>
         <td colspan="2">
-          &nbsp;<a class="btn btn-info" href="<?php echo url_for('material/index') ?>">Atras</a>
-          <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php //echo link_to('Delete', 'material/delete?id_material='.$form->getObject()->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro?')) ?>
-          <?php endif; ?>
-          <input class="btn btn-info" type="submit" value="Guardar" />
+          &nbsp;<a class="btn btn-inverse" href="<?php echo url_for('material/index') ?>">Atras</a>
+
+          <input class="btn btn-inverse" type="submit" value="Guardar" />
         </td>
       </tr>
     </tfoot>
