@@ -31,6 +31,17 @@ class principalActions extends sfActions
           $this->elegido = array();
    $this->Materials = MaterialQuery::create()->filterByFisico(true)->find();
             
+                    $c = new Criteria();    
+$c->add(MaterialPeer::FISICO,true);
+        $pager = new sfPropelPager('Material', 10);
+   $pager->setCriteria($c);
+    $pager->setPage($this->getRequestParameter('page', 1));
+    $pager->init();
+    $this->pager = $pager;
+   
+   
+   
+   
     // si viene algo por el POST
     if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
         //guardo el id de esa pelicula

@@ -1,4 +1,4 @@
 
 
-<img src="<?php echo image_path('ayu404.jpg')?>"   ></img>
+<img src="<?php echo image_path('error404.jpg')?>"   ></img>
 

@@ -29,7 +29,7 @@
       <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'aporte/download?archivito='.$Aporte->getArchivo().'&id='.$Aporte->getIdAporte(),array( 'class'=>"btn btn-success btn-mini") ) ?>
       <?php endif; ?>
 
-      <?php if($sf_user->hasCredential('admin')):?>
+      <?php if( ($sf_user->getAttribute('id') == $Aporte->getUsuario()->getIdUsuario()) ||($sf_user->hascredential('admin')) ):?>
       
             <a class="btn btn-warning btn-mini" href="<?php echo url_for('aporte/edit?id_aporte='.$Aporte->getIdAporte()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'aporte/delete?id_aporte='.$Aporte->getIdAporte(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el aporte?', 'class'=>"btn btn-danger btn-mini")) ?>

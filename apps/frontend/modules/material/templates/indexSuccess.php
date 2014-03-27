@@ -62,23 +62,27 @@
       
       <th>Descripcion</th>
       <th>
-    <div class="pagination" >
-  <ul>
-    <li><a class="label label-warning" ><</a></li>
-    <li><a class="label label-inverse" href="#tab1" data-toggle="tab">1</a></li>
-    <li><a class="label label-inverse" href="#tab2" data-toggle="tab">2</a></li>
-    <li><a class="label label-inverse" href="#tab3" data-toggle="tab">3</a></li>
-
-    <li><a class="label label-warning" href="#">></a></li>
-  </ul>
-</div>
-
-</th>
+          
+          <?php //if ($pager->haveToPaginate()): ?>
+            <?php //echo link_to('&laquo;', 'material/index?page='.$pager->getFirstPage()) ?>
+            <?php //echo link_to('&lt;', 'material/index?page='.$pager->getPreviousPage()) ?>
+            <?php //$links = $pager->getLinks(); foreach ($links as $page): ?>
+            <?php //echo ($page == $pager->getPage()) ? $page : link_to($page, 'material/index?page='.$page) ?>
+            <?php //if ($page != $pager->getCurrentMaxLink()): ?> - <?php //endif ?>
+            <?php //endforeach ?>
+            <?php //echo link_to('&gt;', 'material/index?page='.$pager->getNextPage()) ?>
+            <?php //echo link_to('&raquo;', 'material/index?page='.$pager->getLastPage()) ?>
+          <?php //endif ?>
+          
+          
+          
+      </th>
       
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($elegido as $Material): ?>
+      <?php foreach ($elegido as $Material): ?>
+    
     <tr>
 
       <td><?php echo $Material->getArchivo()  ?></td>
@@ -88,8 +92,7 @@
       <td><?php echo $Material->getEditorial() ?></td>
       
       <td><?php echo $Material->getDescripcion() ?></td>
-     <div class="tab-content">
-    <div class="tab-pane" id="tab1">
+
   
     
 
@@ -119,10 +122,11 @@
       <?php endif;?>
     </tr>
     
-      </div> 
+     
     
     
     <?php endforeach; ?>
+
   </tbody>
 </table>
 <?php endif;?>
@@ -132,18 +136,4 @@
 <a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
 <?php endif;?>
 
-
- <!-- Only required for left/right tabs -->
-
-  <div class="tab-content">
-    <div class="tab-pane" id="tab1">
-      <p>I'm in Section 1.</p>
-    </div>
-    <div class="tab-pane" id="tab2">
-      <p>Howdy, I'm in Section 2.</p>
-    </div>
-    <div class="tab-pane" id="tab3">
-      <p>Nanda kore 3.</p>
-    </div>
-  </div>
 

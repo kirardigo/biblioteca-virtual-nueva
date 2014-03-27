@@ -58,23 +58,23 @@
       
       <th>Descripcion</th>
       <th>
-    <div class="pagination" >
-  <ul>
-    <li><a class="label label-warning" ><</a></li>
-    <li><a class="label label-inverse" href="#tab1" data-toggle="tab">1</a></li>
-    <li><a class="label label-inverse" href="#tab2" data-toggle="tab">2</a></li>
-    <li><a class="label label-inverse" href="#tab3" data-toggle="tab">3</a></li>
-
-    <li><a class="label label-warning" href="#">></a></li>
-  </ul>
-</div>
+          <?php if ($pager->haveToPaginate()): ?>
+            <?php echo link_to('&laquo;', 'principal/vacchina?page='.$pager->getFirstPage()) ?>
+            <?php echo link_to('&lt;', 'principal/vacchina?page='.$pager->getPreviousPage()) ?>
+            <?php $links = $pager->getLinks(); foreach ($links as $page): ?>
+            <?php echo ($page == $pager->getPage()) ? $page : link_to($page, 'principal/vacchina?page='.$page) ?>
+            <?php if ($page != $pager->getCurrentMaxLink()): ?> - <?php endif ?>
+            <?php endforeach ?>
+            <?php echo link_to('&gt;', 'principal/vacchina?page='.$pager->getNextPage()) ?>
+            <?php echo link_to('&raquo;', 'principal/vacchina?page='.$pager->getLastPage()) ?>
+          <?php endif ?>
 
 </th>
       
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($elegido as $Material): ?>
+    <?php foreach ($pager as $Material): ?>
     <tr>
 
       <td><?php echo $Material->getArchivo()  ?></td>
@@ -84,8 +84,7 @@
       <td><?php echo $Material->getEditorial() ?></td>
       
       <td><?php echo $Material->getDescripcion() ?></td>
-     <div class="tab-content">
-    <div class="tab-pane" id="tab1">
+ 
   
     
 
@@ -115,7 +114,7 @@
       <?php endif;?>
     </tr>
     
-      </div> 
+       
     
     
     <?php endforeach; ?>

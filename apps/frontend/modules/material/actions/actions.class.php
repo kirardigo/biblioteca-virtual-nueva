@@ -9,12 +9,50 @@
  */
 class materialActions extends sfActions
 {
+    
+    
+    
+    
   public function executeIndex(sfWebRequest $request)
   {
    // $this->Materials = MaterialQuery::create()->find();
      
+     // $this->Materials = $this->getRoute()->getObject();
+       
+        
+//$this->pager->setCriteria($this->materials->getActiveJobsCriteria());
+//$this->pager->setPage($request->getParameter('page', 1));
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
           $this->elegido = array();
     $this->Materials = MaterialQuery::create()->filterByFisico(false)->find();
+    
+    
+    
+     //$this->pager = new sfDoctrinePager('Material',2);
+    
+    
+//                    $c = new Criteria();    
+//$c->add(MaterialPeer::FISICO,false);
+//        $pager = new sfPropelPager('Material', 2);
+//    $pager->setCriteria($c);
+//    $pager->setPage($this->getRequestParameter('page', 1));
+//    $pager->init();
+//    $this->pager = $pager;
+    
+
+    
+    
+    
+    
     // si viene algo por el POST
     if(($request->isMethod(sfWebRequest::POST))||($request->isMethod(sfWebRequest::GET))){     
         //guardo el id de esa pelicula
@@ -74,6 +112,10 @@ class materialActions extends sfActions
             $this->elegido = $consulta2->filterByFisico(false)->find();              
        
 
+
+            
+            
+            
     }
   }
 

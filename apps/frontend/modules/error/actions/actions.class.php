@@ -28,4 +28,12 @@ class errorActions extends sfActions
   {
     
   }
+      public function executeError401(sfWebRequest $request)
+  {
+    
+  }
+      public function executeError403(sfWebRequest $request)
+  {
+    
+  }
 }
