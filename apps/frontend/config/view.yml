@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css, "demo_page.css", "demo_table.css", "demo_table_jui.css", "jquery.dataTables.css", "jquery.dataTables_themeroller.css"]
+  stylesheets:    [main.css, "jquery-ui-1.10.4.custom.css", "jquery-ui-1.10.4.custom.min.css"]
 
-  javascripts:    ["funciones.js", "jquery.dataTables.js", "jquery.dataTables.min.js", "jquery.js"]
+  javascripts:    ["jquery-1.10.2.js", "jquery-ui-1.10.4.custom.min.js", "jquery-ui-1.10.4.custom.js", "funciones.js"]
 
   has_layout:     true
   layout:         layout

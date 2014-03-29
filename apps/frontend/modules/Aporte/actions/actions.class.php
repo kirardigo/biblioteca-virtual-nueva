@@ -32,9 +32,19 @@ class aporteActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
+      
     $Aporte = AporteQuery::create()->findPk($request->getParameter('id_aporte'));
     $this->forward404Unless($Aporte, sprintf('Object Aporte does not exist (%s).', $request->getParameter('id_aporte')));
-    $this->form = new AporteForm($Aporte);
+    //si usuario kiere editar otro aporte lo redirecciono
+    if(   ($this->getUser()->getAttribute('id')==$Aporte->getUsuarioIdUsuario()) || ($this->getUser()->hasCredential('admin'))   ){
+        $this->form = new AporteForm($Aporte);
+    }
+    else{
+        $this->redirect('error/error401');
+    }
+    
+    
+    
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -55,7 +65,16 @@ class aporteActions extends sfActions
 
     $Aporte = AporteQuery::create()->findPk($request->getParameter('id_aporte'));
     $this->forward404Unless($Aporte, sprintf('Object Aporte does not exist (%s).', $request->getParameter('id_aporte')));
-    $Aporte->delete();
+        //si usuario kiere eliminar otro aporte lo redirecciono
+    if(   ($this->getUser()->getAttribute('id')==$Aporte->getUsuarioIdUsuario()) || ($this->getUser()->hasCredential('admin'))   ){
+        $Aporte->delete();
+    }
+    else{
+        $this->redirect('error/error401');
+    }
+    
+    
+    
 
     $this->redirect('aporte/index');
   }

@@ -6,24 +6,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
   <head>
-  <script type="text/javascript"> 
-	
-</script>
+
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
       
     <!-- more metas -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+    <meta name="viewport" content="width=device-width"></meta>
 
     <!-- include base css files from plugin -->
     <?php include_partial('default/mpProjectPlugin_css_assets', array('load' => array('twitter_bootstrap'))); ?>
 
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
-  </head>
+</head>
   <body>
    
  
@@ -42,47 +40,7 @@
 <td class="tdcabecera6"><div class="span4">
    
    
-   
-   
-   <table >
-<thead class = "thinfo">
-<tr>
-<td class= "marron">
-B. Virtual
-</td>
-
-<td class= "marron">
- B. Vacchina
-</td>
-</tr>
-</thead> 
-
-<tr>
-<tbody class = "tbinfo">
-<td class= "marron">
-<div>
-
-<a  href="<?php echo url_for('material/index');?>"> 
-
-<img src="<?php echo image_path('virtual2.png')?>"  width="100px" ></img></a>
-</div>
-</td>
-
-<td class= "marron">
-<div>
-
-<a  href="<?php echo url_for('principal/vacchina');?>">
-
-
-<img src="<?php echo image_path('vacchina2.png')?>" width="100px" ></img></a> 
-</div>
-</td>
-</tr>
-
-</tbody>
-</table>
-   
-   
+  
    
    
    
@@ -90,10 +48,11 @@ B. Virtual
         
         </div>
 </td>
-<td class="tdcabecera6"><div class="span7">
-<div class="offset1">
-    Bilbioteca Virtual 2014
-<div/>
+<td class="tdcabecera6">
+    <div class="span7">
+        <div class="offset1">
+            Bilbioteca Virtual 2014
+        </div>
     </div>
 </td>
 <td class="tdcabecera"> <div class="span3" >
@@ -219,5 +178,5 @@ B. Virtual
     <?php include_javascripts() ?>
   </body>
   
-   <audio src="C:\canon.mp3"></audio>
+
 </html>

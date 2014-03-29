@@ -8,7 +8,7 @@
 
 
 
-
+<a id="mierda">probando js</a>
 <h1 class="h1info">Anuncios</h1>
 
 <table class="table table-bordered">
