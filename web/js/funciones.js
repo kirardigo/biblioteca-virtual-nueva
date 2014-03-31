@@ -19,11 +19,16 @@ jQuery(document).ready(function(){
 					items_per_page : 5,
 					item_container_id : '.alt_content',
 					nav_panel_id : '.alt_page_navigation',
-                                        nav_label_first:"Primero" ,
-                                        nav_label_prev:"Anterior",
-                                        nav_label_next:"Siguiente",
-                                        nav_label_last:"Ultimo"			
-				});
+//                                        nav_label_first:'<div class="btn btn-inverse" >Primero</div>' ,
+//                                        nav_label_prev:'<div class="btn btn-inverse" >Anterior</div>',
+//                                        nav_label_next:'<div class="btn btn-inverse" >Siguiente</div>',
+//                                        nav_label_last:'<div class="btn btn-inverse" >Ultimo</div>'
+                                        
+                                        nav_label_first:'<<',
+                                        nav_label_prev:'<',
+                                        nav_label_next:'>',
+                                        nav_label_last:'>>'
+                            });
                 
                 
                 

@@ -33,7 +33,7 @@ class materialActions extends sfActions
       
       
           $this->elegido = array();
-    $this->Materials = MaterialQuery::create()->filterByFisico(false)->find();
+    $this->Materials = MaterialQuery::create()->filterByBibliotecaIdBiblioteca(1)->find();  
     
     
     
@@ -109,7 +109,7 @@ class materialActions extends sfActions
                      
          ->orderBy('IdMaterial', Criteria::DESC)       
             ;
-            $this->elegido = $consulta2->filterByFisico(false)->find();              
+            $this->elegido = $consulta2->filterByBibliotecaIdBiblioteca(1)->find();          
        
 
 

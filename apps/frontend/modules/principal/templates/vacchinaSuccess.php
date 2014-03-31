@@ -1,4 +1,4 @@
-<body background= "<?php echo image_path('fondo mesa.jpg')?>"></body>
+
 
 
 <h2 class="alert-heading offset1">Busqueda de Material</h2>
@@ -44,7 +44,7 @@
     if($cant >= 1):?>
 
 
-<h1 class="h1info" >Materiales Físicos</h1>
+<h1 class="h1info" >Materiales Vacchina</h1>
 
 
  
@@ -52,7 +52,7 @@
 
 <div id="paging_container3" class="container">
     
-    <div class="alt_page_navigation"></div><br></br>
+    <div  class="alt_page_navigation"></div><br></br>
       <table class="table table-bordered">  
            <thead >
     <tr>

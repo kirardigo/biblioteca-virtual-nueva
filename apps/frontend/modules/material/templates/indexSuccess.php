@@ -43,14 +43,18 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
-<h1 class="h1info" >Materiales</h1>
+<h1 class="h1info" >Materiales UDC</h1>
 
 
 
+ 
 
 
-<table class="table table-bordered">
-  <thead >
+<div id="paging_container3" class="container">
+    
+    <div  class="alt_page_navigation"></div><br></br>
+      <table class="table table-bordered">  
+           <thead >
     <tr>
 
       <th>Archivo</th>
@@ -61,42 +65,28 @@
       <th>Editorial</th>
       
       <th>Descripcion</th>
-      <th>
-          
-          <?php //if ($pager->haveToPaginate()): ?>
-            <?php //echo link_to('&laquo;', 'material/index?page='.$pager->getFirstPage()) ?>
-            <?php //echo link_to('&lt;', 'material/index?page='.$pager->getPreviousPage()) ?>
-            <?php //$links = $pager->getLinks(); foreach ($links as $page): ?>
-            <?php //echo ($page == $pager->getPage()) ? $page : link_to($page, 'material/index?page='.$page) ?>
-            <?php //if ($page != $pager->getCurrentMaxLink()): ?> - <?php //endif ?>
-            <?php //endforeach ?>
-            <?php //echo link_to('&gt;', 'material/index?page='.$pager->getNextPage()) ?>
-            <?php //echo link_to('&raquo;', 'material/index?page='.$pager->getLastPage()) ?>
-          <?php //endif ?>
-          
-          
-          
-      </th>
-      
+      <th ></th> 
     </tr>
-  </thead>
-  <tbody>
-      <?php foreach ($elegido as $Material): ?>
-    
-    <tr>
+    </thead>
+          
+    <?php foreach ($elegido as $Material): ?>
 
-      <td><?php echo $Material->getArchivo()  ?></td>
-      
+
+
+     
+
+        <tbody class="alt_content">
+      <tr><td><?php echo $Material->getArchivo()  ?></td>
       <td><?php echo $Material->getAutor() ?></td>
       <td><?php echo $Material->getTitulo() ?></td>
       <td><?php echo $Material->getEditorial() ?></td>
       
       <td><?php echo $Material->getDescripcion() ?></td>
-
+ 
   
     
 
-      <td nowrap>  
+       <td nowrap>
           <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
       
@@ -118,17 +108,14 @@
               
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
-      </td>
+      
       <?php endif;?>
-    </tr>
-    
-     
-    
-    
-    <?php endforeach; ?>
+</td></tr>  </tbody>
 
-  </tbody>
-</table>
+    
+    <?php endforeach; ?></table> 
+   </div>
+   
 <?php endif;?>
 
 <?php if($sf_user->hasCredential('admin')):?>
@@ -137,3 +124,5 @@
 <?php endif;?>
 
 
+
+	

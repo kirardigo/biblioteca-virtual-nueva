@@ -29,15 +29,9 @@ class principalActions extends sfActions
      // $this->Materials = MaterialQuery::create()->find();
      
           $this->elegido = array();
-   $this->Materials = MaterialQuery::create()->filterByFisico(true)->find();
+   $this->Materials = MaterialQuery::create()->filterByBibliotecaIdBiblioteca(2)->find();  
             
-                    $c = new Criteria();    
-$c->add(MaterialPeer::FISICO,true);
-        $pager = new sfPropelPager('Material', 10);
-   $pager->setCriteria($c);
-    $pager->setPage($this->getRequestParameter('page', 1));
-    $pager->init();
-    $this->pager = $pager;
+
    
    
    
@@ -98,7 +92,7 @@ $c->add(MaterialPeer::FISICO,true);
                      
          ->orderBy('IdMaterial', Criteria::DESC)       
             ;
-            $this->elegido = $consulta2->filterByFisico(true)->find();              
+            $this->elegido = $consulta2->filterByBibliotecaIdBiblioteca(2)->find();                
     }
   }
   

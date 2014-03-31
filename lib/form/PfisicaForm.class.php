@@ -38,8 +38,32 @@ class PfisicaForm extends BasePfisicaForm
        
 
    
-        $this->embedRelation('CarreraFisica');
-        $this->embedRelation('Domicilio');
+        $this->embedRelation('CarreraFisica',
+                              array('add_link'=>'<div class="btn btn-inverse">Agregar Carrera</div>',
+                                  
+                                    'delete_name'=>'Eliminar', 
+                                    'post_add'=>'add_new_link_post',
+                                    'title'=>'Carreras',
+                                    'post'=>'nada',
+                                    'empty_label'=>'Nueva Carrera',
+                                  
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'no loko')
+                                     
+                                            ),
+                                  ));
+        $this->embedRelation('Domicilio', 
+                                 array('add_link'=>'<div class="btn btn-inverse">Agregar Domicilio</div>',
+                                  
+                                    'delete_name'=>'Eliminar', 
+                                    'post_add'=>'add_new_link_post',
+                                    'title'=>'Domicilios',
+                                    'post'=>'nada',
+                                    'empty_label'=>'Nuevo Domicilio',
+                                  
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'no loko')
+                                     
+                                            ),
+                                  ));
               
 
 
