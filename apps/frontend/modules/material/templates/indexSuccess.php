@@ -51,8 +51,12 @@
 
 
 <div id="paging_container3" class="container">
-    
+
     <div  class="alt_page_navigation"></div><br></br>
+
+    
+    
+    
       <table class="table table-bordered">  
            <thead >
     <tr>
@@ -93,17 +97,17 @@
       if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>     
       <?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?>
      
-        <?php else :?>
+        
       
       <?php endif; ?>
-
+            <?php if ($Material->getArchivo()!=null):?>
+      <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>
+      <?php endif?>
 
       <?php if($sf_user->hasCredential('admin')):?>
       
         
-            <?php if ($Material->getArchivo()!=null):?>
-      <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>
-      <?php endif?>
+
       
               
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>

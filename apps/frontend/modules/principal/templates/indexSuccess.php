@@ -10,7 +10,7 @@
 
 <h1 class="h1info">Anuncios</h1>
 
-<div id="accordion" style="width: 700px; height: 700px;">
+<div id="accordion" style="width: 700px;">
 
  
 
@@ -34,7 +34,7 @@
 
 <div nowrap style="float: right;"> 
       <?php if($sf_user->hasCredential('admin')):?>
-    <a class="btn btn-warning btn-mini" href="<?php echo url_for('anuncio/edit?id_anuncio='.$Anuncio->getIdAnuncio()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
+    
     <?php echo link_to('<i class="icon-pencil icon-white"></i>Modificar', 'anuncio/edit?id_anuncio='.$Anuncio->getIdAnuncio(), array('method' => 'delete', 'class'=>"btn btn-warning btn-mini")) ?>
     <?php endif;?>
   
@@ -56,6 +56,6 @@
 </div>
 <br>
 <?php if($sf_user->hasCredential('admin')):?>
-  <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+  <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 <?php endif; ?>
 

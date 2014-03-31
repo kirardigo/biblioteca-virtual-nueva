@@ -32,7 +32,7 @@ class loginActions extends sfActions
                    // $this->getUser()->addCredential('cliente');
                     
                     
-                  //  return $this->redirect('@homepage'); //vuelvo a cargar el home
+                  return $this->redirect('@homepage'); //vuelvo a cargar el home
                 }else{
                     //
                     //$this->getUser()->setErrorLogin("Login incorrecto");

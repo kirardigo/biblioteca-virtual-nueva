@@ -28,41 +28,14 @@
     <!-- fondo de pantalla  -->
    
    <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
-   
-<!--<a id="probar">probando js</a>-->
-
-     
-<table id="mm">
-
-
-<tr>
-
-<td class="tdcabecera6"><div class="span4">
-   
-   
-  
-   
-   
-   
-   
-        
-        </div>
-</td>
-<td class="tdcabecera6">
-    <div class="span7">
-        <div class="offset1">
-            Bilbioteca Virtual 2014
-        </div>
-    </div>
-</td>
-<td class="tdcabecera"> <div class="span3" >
+   <div align="left" class="span8"> 
+   <img style="width: 500px; height: 150px;" src="<?php echo image_path('logo.png')?>"></img>
+</div>
+  <div align="right" class="span3" >
          <?php include_partial("global/estado");?>
     </div>
-</td>
-</tr>
 
-</table>
-      
+      <br></br><br></br><br></br><br></br><br></br>
     
       
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->

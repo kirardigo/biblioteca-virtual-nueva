@@ -85,7 +85,7 @@
  
   
     
-
+<?php if($sf_user->isAuthenticated()):?>
        <td nowrap>
           <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
@@ -93,24 +93,28 @@
       if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>     
       <?php echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") )  ?>
      
-        <?php else :?>
+
       
       <?php endif; ?>
-
+      
+      <?php if ($Material->getArchivo()!=null):?>
+      <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>
+      <?php endif?>
 
       <?php if($sf_user->hasCredential('admin')):?>
       
         
-            <?php if ($Material->getArchivo()!=null):?>
-      <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>
-      <?php endif?>
+
       
               
           <a class="btn btn-warning btn-mini" href="<?php echo url_for('material/edit?id_material='.$Material->getIdMaterial()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
       
       <?php endif;?>
-</td></tr>  </tbody>
+</td>
+      <?php endif;?>
+
+      </tr>  </tbody>
 
     
     <?php endforeach; ?></table> 

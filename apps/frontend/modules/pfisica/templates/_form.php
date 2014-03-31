@@ -9,10 +9,11 @@
     <tfoot style="background: sienna">
       <tr>
         <td colspan="2">
-         &nbsp;<a class="btn btn-inverse" href="<?php echo url_for('pfisica/index') ?>">Atras</a>
-          <?php if (!$form->getObject()->isNew()): ?>
-           
-          <?php endif; ?>
+            <?php if ($sf_user->isAuthenticated()):?>
+         <a class="btn btn-inverse" href="<?php echo url_for('pfisica/index') ?>">Atras</a>
+         <?php else:?>
+         <a class="btn btn-inverse" href="<?php echo url_for('principal/index') ?>">Atras</a>
+         <?php endif;?>
          <input class="btn btn-inverse" type="submit" value="Guardar" />
         </td>
       </tr>
