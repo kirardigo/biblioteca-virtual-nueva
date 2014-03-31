@@ -65,7 +65,7 @@
       <th>Editorial</th>
       
       <th>Descripcion</th>
-      <th></th> 
+     
     </tr>
     </thead>
           

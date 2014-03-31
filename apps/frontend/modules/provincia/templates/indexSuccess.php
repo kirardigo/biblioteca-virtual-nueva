@@ -21,4 +21,4 @@
   </tbody>
 </table>
 <br>
-<a class="btn btn-success" href="<?php echo url_for('provincia/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<a class="btn btn-inverse" href="<?php echo url_for('provincia/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>

@@ -47,7 +47,7 @@ class PfisicaForm extends BasePfisicaForm
                                     'post'=>'nada',
                                     'empty_label'=>'Nueva Carrera',
                                   
-                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'no loko')
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'¿Esta seguro de elminar la carrera?')
                                      
                                             ),
                                   ));
@@ -60,7 +60,7 @@ class PfisicaForm extends BasePfisicaForm
                                     'post'=>'nada',
                                     'empty_label'=>'Nuevo Domicilio',
                                   
-                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'no loko')
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'¿Esta seguro de elminar el domicilio?')
                                      
                                             ),
                                   ));

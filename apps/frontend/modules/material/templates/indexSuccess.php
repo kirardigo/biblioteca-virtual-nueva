@@ -1,4 +1,4 @@
-<body background= "<?php echo image_path('fondo mesa.jpg')?>"></body>
+
 
 
 <h2 class="alert-heading offset1">Busqueda de Material</h2>
@@ -65,7 +65,7 @@
       <th>Editorial</th>
       
       <th>Descripcion</th>
-      <th ></th> 
+      
     </tr>
     </thead>
           

@@ -11,5 +11,6 @@ class CarreraFisicaForm extends BaseCarreraFisicaForm
 {
   public function configure()
   {
+      $this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
   }
 }

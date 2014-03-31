@@ -9,7 +9,7 @@
       <th>Cuit/Cuil</th>
     </tr>
   </thead>
-  <tbody class="tbinfo">
+  <tbody>
     <?php foreach ($Pjuridicas as $Pjuridica): ?>
     <tr>
 
@@ -27,4 +27,4 @@
 </table>
 <br>
 
-<a class="btn btn-success" href="<?php echo url_for('pjuridica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<a class="btn btn-inverse" href="<?php echo url_for('pjuridica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
