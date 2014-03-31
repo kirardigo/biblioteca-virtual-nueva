@@ -46,6 +46,6 @@
   </tbody>
 </table>
 <?php if($sf_user->isAuthenticated()):?>
-<a class="btn btn-inverse" href="<?php echo url_for('aporte/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<a class="btn btn-inverse" href="<?php echo url_for('aporte/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 
 <?php endif;?>

@@ -1,4 +1,8 @@
+label.busqueda{
+color: white;
+font:bold 20px "Trebuchet MS"; 
 
+}
 thead.thinfo{
 background: sienna;
 opacity: .6;
@@ -16,12 +20,12 @@ color:white;
 
 thead{
 background: sienna;
-opacity: .8;
+opacity: .9;
 color: white;
 }
 tbody{
 background: peru;
-opacity: .8;
+opacity: .9;
 font-weight: bold;
 
 

@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
- <a class="btn btn-inverse" href="<?php echo url_for('biblioteca/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+ <a class="btn btn-inverse" href="<?php echo url_for('biblioteca/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>

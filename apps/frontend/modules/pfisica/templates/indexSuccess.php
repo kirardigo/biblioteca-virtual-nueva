@@ -1,22 +1,22 @@
 
-<h2 class="alert-heading offset1">Busqueda de Personas</h2>
+<h2 style="color: white;" class="alert-heading offset1">Busqueda de Personas</h2>
 
 <fieldset>    
-    <form class="well form-search span3 offset1" action="<?php echo url_for('pfisica/index') ?>" method="POST">
-       <label>Nombre</label>
+    <form style="background: sienna;"class="well form-search span3 offset1" action="<?php echo url_for('pfisica/index') ?>" method="POST">
+       <label class="busqueda">Nombre</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Nombre" name="nombre"
        data-source='[<?php foreach($Pfisicas as $mat){echo "\"".$mat->getNombre()."\"";if($Pfisicas->getPosition()< sizeof($Pfisicas)-1){echo(",");}}?>]'>
-       <label>Apellido</label>
+       <label class="busqueda">Apellido</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Apellido" name="apellido"
        data-source='[<?php foreach($Pfisicas as $mat){echo "\"".$mat->getApellido()."\"";if($Pfisicas->getPosition()< sizeof($Pfisicas)-1){echo(",");}}?>]'>
-       <label>Documento</label>
+       <label class="busqueda">Documento</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Documento" name="documento"
        data-source='[<?php foreach($Pfisicas as $mat){echo "\"".$mat->getDocumento()."\"";if($Pfisicas->getPosition()< sizeof($Pfisicas)-1){echo(",");}}?>]'>
 
     
        
        <button type="reset" class="btn btn-toolbar">Limpiar</button>
-       <button type="submit" class="btn btn-info">Buscar</button>
+       <button type="submit" class="btn btn-inverse">Buscar</button>
     </form>
 </fieldset>
 <br>
@@ -91,4 +91,4 @@
 <?php endif;?>
 
 <br>
-  <a class="btn btn-inverse" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+  <a class="btn btn-inverse" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>

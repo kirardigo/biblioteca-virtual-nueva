@@ -1,19 +1,19 @@
 ﻿
-<h2 class="alert-heading offset1">Busqueda de Acceso al Material</h2>
+<h2 style="color: white;" class="alert-heading offset1">Busqueda de Acceso al Material</h2>
 
-<fieldset>    
-    <form class="well form-search span3 offset1" action="<?php echo url_for('accesomaterial/index') ?>" method="POST">
-       <label>Usuario</label>
+<fieldset >    
+    <form  style="background: sienna;" class="well form-search span3 offset1" action="<?php echo url_for('accesomaterial/index') ?>" method="POST">
+       <label class="busqueda">Usuario</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Usuario" name="usuario"
        data-source='[<?php foreach($AccesoMaterials as $mat){echo "\"".$mat->getUsuario()->getUsuario()."\"";if($AccesoMaterials->getPosition()< sizeof($AccesoMaterials)-1){echo(",");}}?>]'>
-       <label>Material</label>
+       <label class="busqueda">Material</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Material" name="material"
        data-source='[<?php foreach($AccesoMaterials as $mat){echo "\"".$mat->getMaterial()->getArchivo()."\"";if($AccesoMaterials->getPosition()< sizeof($AccesoMaterials)-1){echo(",");}}?>]'>
       
 
        
        <button type="reset" class="btn btn-toolbar">Limpiar</button>
-       <button type="submit" class="btn btn-info">Buscar</button>
+       <button type="submit" class="btn btn-inverse">Buscar</button>
     </form>
 </fieldset>
 <br>

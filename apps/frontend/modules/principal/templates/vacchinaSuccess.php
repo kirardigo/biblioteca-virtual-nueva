@@ -1,17 +1,17 @@
 
 
 
-<h2 class="alert-heading offset1">Busqueda de Material</h2>
+<h2 style="color: white;" class="alert-heading offset1">Busqueda de Material</h2>
 
 <fieldset>    
-    <form class="well form-search span3 offset1" action="<?php echo url_for('principal/vacchina') ?>" method="POST">
-       <label>Autor</label>
+    <form style="background: sienna;" class="well form-search span3 offset1" action="<?php echo url_for('principal/vacchina') ?>" method="POST">
+       <label class="busqueda">Autor</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Autor" name="autor"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getAutor()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
-       <label>Titulo</label>
+       <label class="busqueda">Titulo</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Titulo" name="titulo"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getTitulo()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
-       <label>Editorial</label>
+       <label class="busqueda">Editorial</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Editorial" name="editorial"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getEditorial()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
 <!--       
@@ -20,19 +20,19 @@
        data-source='[<?php //foreach($Materials as $mat){echo "\"".$mat->getCarrera()->getIdCarrera()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
      -->
      <?php if($sf_user->hasCredential('admin')):?>
-       <label>Contenido</label>
+       <label class="busqueda">Contenido</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Contenido" name="contenido"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getContenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
       <?php endif;?> 
        
-       <label>Tema</label>
+       <label class="busqueda">Tema</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Tema" name="subcontenido"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
        
        
        
        <button type="reset" class="btn btn-toolbar">Limpiar</button>
-       <button type="submit" class="btn btn-info">Buscar</button>
+       <button type="submit" class="btn btn-inverse">Buscar</button>
     </form>
 </fieldset>
 <br>
@@ -120,7 +120,7 @@
 
 <?php if($sf_user->hasCredential('admin')):?>
 <br>
-<a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-fire icon-white"></i>Agregar</a>
+<a class="btn btn-inverse" href="<?php echo url_for('material/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 <?php endif;?>
 
 
