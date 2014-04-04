@@ -88,7 +88,7 @@
       <td><?php echo $Material->getDescripcion() ?></td>
  
   
-    
+    <?php if($sf_user->isAuthenticated()):?>
 
        <td nowrap>
           <?php 
@@ -114,7 +114,7 @@
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'material/delete?id_material='.$Material->getIdMaterial(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar el material?', 'class'=>"btn btn-danger btn-mini")) ?>
       
       <?php endif;?>
-</td></tr>  </tbody>
+</td><?php endif;?></tr>  </tbody>
 
     
     <?php endforeach; ?></table> 

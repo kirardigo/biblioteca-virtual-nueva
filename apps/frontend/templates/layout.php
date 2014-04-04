@@ -25,9 +25,9 @@
   <body>
    
  
-    <!-- fondo de pantalla  -->
+
    
-   <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
+ 
    <div align="left" class="span8"> 
    <img style="width: 700px; height: 150px;" src="<?php echo image_path('logo.png')?>"></img>
 </div>
@@ -99,15 +99,15 @@
                   
                
                 
-              <?php if($sf_user->isAuthenticated()):?>
-              <li class="dropdown">
-                <a href="<?php echo url_for('material/index');?>">Material</a>
-
-              </li>
-              <?php endif?>
               
               <li class="dropdown">
-                <a href="<?php echo url_for('principal/vacchina');?>">Biblioteca Vacchina</a>
+                <a href="<?php echo url_for('material/index');?>">Material UDC</a>
+
+              </li>
+              
+              
+              <li class="dropdown">
+                <a href="<?php echo url_for('principal/vacchina');?>">Material Vacchina</a>
 
               </li>
               <?php if(!$sf_user->isAuthenticated()):?>
@@ -116,10 +116,6 @@
 
               </li>
               <?php endif ?>
-              <li class="dropdown">
-                <a href="http:\\www.udc.edu.ar">Universidad del Chubut</a>
-
-              </li>
               <?php if($sf_user->isAuthenticated()):?>
               <li class="dropdown">
                 <a href="<?php echo url_for('aporte/index');?>">Aportes</a>
@@ -127,9 +123,11 @@
               </li>
               <?php endif; ?>
               <li class="dropdown">
-                <a href="#">Contacto</a>
+                <a href="http:\\www.udc.edu.ar">Universidad del Chubut</a>
 
               </li>
+
+
               </li>
             </ul>
           </div><!--/.nav-collapse -->

@@ -1,11 +1,4 @@
-
-<!--<h1>Logueate para acceder al material</h1>-->
-
-<!--<
-<img src="<?php //echo image_path('banner.png')?>" alt="Fondo" width="600px" ></img>
-
--->
-
+   <div style="margin-left:100px;">
 
 
 <h1 class="h1info">Anuncios</h1>
@@ -58,4 +51,4 @@
 <?php if($sf_user->hasCredential('admin')):?>
   <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 <?php endif; ?>
-
+</div>
