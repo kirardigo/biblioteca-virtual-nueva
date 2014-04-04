@@ -29,14 +29,14 @@
    
    <body background ="<?php echo image_path('fondo1.jpg')?>" ></body> 
    <div align="left" class="span8"> 
-   <img style="width: 500px; height: 150px;" src="<?php echo image_path('logo.png')?>"></img>
+   <img style="width: 700px; height: 150px;" src="<?php echo image_path('logo.png')?>"></img>
 </div>
   <div align="right" class="span3" >
          <?php include_partial("global/estado");?>
     </div>
 
       <br></br><br></br><br></br><br></br><br></br>
-    
+
       
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <!-- sample navbar -->
@@ -144,11 +144,13 @@
       <p style="color:white" >&copy; Universidad del Chubut 2014</p>
       </div>
         
+
       
     </div> <!-- /container -->
+
     <!-- include base js files from plugin -->
     <?php include_partial('default/mpProjectPlugin_js_assets', array('load' => array('jquery', 'twitter_bootstrap'))); ?>
-    <?php include_javascripts() ?>
+    <?php //include_javascripts() ?>
   </body>
   
 

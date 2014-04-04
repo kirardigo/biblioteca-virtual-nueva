@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css, "jquery-ui-1.10.4.custom.css", "jquery-ui-1.10.4.custom.min.css"]
+  stylesheets:    [main.css, "styles.css", "jquery-ui-1.10.4.custom.css", "jquery-ui-1.10.4.custom.min.css"]
 
-  javascripts:    ["jquery-1.10.2.js", "jquery.pajinate.min.js", "jquery.pajinate.js", "jquery-ui-1.10.4.custom.min.js", "jquery-ui-1.10.4.custom.js", "funciones.js"]
+  javascripts:    ["jquery-1.10.2.js", "jquery-ui-1.8.21.custom.min.js", "jquery-1.7.2.min.js", "main.js", "jquery.pajinate.min.js", "jquery.pajinate.js", "jquery-ui-1.10.4.custom.min.js", "jquery-ui-1.10.4.custom.js", "funciones.js"]
 
   has_layout:     true
   layout:         layout
