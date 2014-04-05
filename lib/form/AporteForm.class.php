@@ -10,10 +10,11 @@
 class AporteForm extends BaseAporteForm
 {
   public function configure()
-  {
+  {	 
 	  unset($this['usuario_id_usuario']);
 	  parent::configure();
-	  
+          
+ 
 	  //error de csrf token si no se metia el codigo siguiente
     $this->disableLocalCSRFProtection(); 
 
@@ -22,6 +23,7 @@ class AporteForm extends BaseAporteForm
       'file_src'  => '/uploads/files/'.$this->getObject()->getArchivo(),
       'is_image'  => false,
       'edit_mode' => !$this->isNew(),
+      'delete_label'=>'¿Eliminar el archivo?',
       'template'  => '<div>%file%<br />%input%<br />%delete% %delete_label%</div>',
     ));
 
@@ -36,6 +38,22 @@ class AporteForm extends BaseAporteForm
   )));
   
   // $this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();   
+  
+  
+        $this->embedRelation('MaterialAporte', 
+                                 array('add_link'=>'<div class="btn btn-inverse">Agregar Material</div>',
+                                  
+                                    'delete_name'=>'Eliminar', 
+                                    'post_add'=>'add_new_link_post',
+                                    'title'=>'Materiales',
+                                    'post'=>'nada',
+                                    'empty_label'=>'Nuevo material',
+                                  
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'¿Esta seguro de elminar el material?')
+                                     
+                                            ),
+                                  ));
+  
   }
     public function save ($con = null)
   { 

@@ -11,5 +11,6 @@ class MaterialAporteForm extends BaseMaterialAporteForm
 {
   public function configure()
   {
+      $this->widgetSchema['material_id_material']->setLabel('Material');
   }
 }

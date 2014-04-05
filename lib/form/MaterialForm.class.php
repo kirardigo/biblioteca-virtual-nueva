@@ -25,6 +25,7 @@ class MaterialForm extends BaseMaterialForm
       'file_src'  => '/uploads/files/'.$this->getObject()->getArchivo(),
       'is_image'  => false,
       'edit_mode' => !$this->isNew(),
+      'delete_label'=>'¿Eliminar el archivo?',
       'template'  => '<div>%file%<br />%input%<br />%delete% %delete_label%</div>',
     ));
 

@@ -19,4 +19,6 @@ propel:
   pjuridica:
     nombre: { primaryString: true }
   usuario:
-    usuario: { primaryString: true }  
+    usuario: { primaryString: true }
+  material:
+    titulo: { primaryString: true }

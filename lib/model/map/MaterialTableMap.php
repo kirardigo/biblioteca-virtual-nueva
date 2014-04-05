@@ -41,6 +41,7 @@ class MaterialTableMap extends TableMap
         $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
         $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
         $this->addColumn('TITULO', 'Titulo', 'VARCHAR', true, 45, null);
+        $this->getColumn('TITULO', false)->setPrimaryString(true);
         $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
         $this->addColumn('AUTOR', 'Autor', 'VARCHAR', false, 45, null);
         $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);

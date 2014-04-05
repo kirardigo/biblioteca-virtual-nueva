@@ -36,6 +36,8 @@ class UsuarioForm extends BaseUsuarioForm
      
      $this->widgetSchema['password']->setAttribute('type','password');
      $this->validatorSchema['password']->setOption('min_length', 6);
+     $this->widgetSchema['valido']->setLabel('¿Es un usuario valido?');
+           $this->widgetSchema['admin']->setLabel('¿Es administrador?');
  //$this->widgetSchema['password']->set
      
 

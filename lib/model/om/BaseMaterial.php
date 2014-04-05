@@ -2062,11 +2062,11 @@ abstract class BaseMaterial extends BaseObject
     /**
      * Return the string representation of this object
      *
-     * @return string
+     * @return string The value of the 'titulo' column
      */
     public function __toString()
     {
-        return (string) $this->exportTo(MaterialPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->getTitulo();
     }
 
     /**
