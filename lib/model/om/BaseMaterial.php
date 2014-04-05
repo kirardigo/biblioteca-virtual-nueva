@@ -111,6 +111,11 @@ abstract class BaseMaterial extends BaseObject
     protected $collAccesoMaterials;
 
     /**
+     * @var        PropelObjectCollection|MaterialAporte[] Collection to store aggregation of MaterialAporte objects.
+     */
+    protected $collMaterialAportes;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -129,6 +134,12 @@ abstract class BaseMaterial extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $accesoMaterialsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $materialAportesScheduledForDeletion = null;
 
     /**
      * Get the [id_material] column value.
@@ -596,6 +607,8 @@ abstract class BaseMaterial extends BaseObject
             $this->aCarrera = null;
             $this->collAccesoMaterials = null;
 
+            $this->collMaterialAportes = null;
+
         } // if (deep)
     }
 
@@ -789,6 +802,23 @@ abstract class BaseMaterial extends BaseObject
 
             if ($this->collAccesoMaterials !== null) {
                 foreach ($this->collAccesoMaterials as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->materialAportesScheduledForDeletion !== null) {
+                if (!$this->materialAportesScheduledForDeletion->isEmpty()) {
+                    MaterialAporteQuery::create()
+                        ->filterByPrimaryKeys($this->materialAportesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->materialAportesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collMaterialAportes !== null) {
+                foreach ($this->collMaterialAportes as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1023,6 +1053,14 @@ abstract class BaseMaterial extends BaseObject
                     }
                 }
 
+                if ($this->collMaterialAportes !== null) {
+                    foreach ($this->collMaterialAportes as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -1140,6 +1178,9 @@ abstract class BaseMaterial extends BaseObject
             }
             if (null !== $this->collAccesoMaterials) {
                 $result['AccesoMaterials'] = $this->collAccesoMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collMaterialAportes) {
+                $result['MaterialAportes'] = $this->collMaterialAportes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1343,6 +1384,12 @@ abstract class BaseMaterial extends BaseObject
             foreach ($this->getAccesoMaterials() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addAccesoMaterial($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getMaterialAportes() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addMaterialAporte($relObj->copy($deepCopy));
                 }
             }
 
@@ -1563,6 +1610,9 @@ abstract class BaseMaterial extends BaseObject
         if ('AccesoMaterial' == $relationName) {
             $this->initAccesoMaterials();
         }
+        if ('MaterialAporte' == $relationName) {
+            $this->initMaterialAportes();
+        }
     }
 
     /**
@@ -1758,6 +1808,198 @@ abstract class BaseMaterial extends BaseObject
     }
 
     /**
+     * Clears out the collMaterialAportes collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addMaterialAportes()
+     */
+    public function clearMaterialAportes()
+    {
+        $this->collMaterialAportes = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collMaterialAportes collection.
+     *
+     * By default this just sets the collMaterialAportes collection to an empty array (like clearcollMaterialAportes());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initMaterialAportes($overrideExisting = true)
+    {
+        if (null !== $this->collMaterialAportes && !$overrideExisting) {
+            return;
+        }
+        $this->collMaterialAportes = new PropelObjectCollection();
+        $this->collMaterialAportes->setModel('MaterialAporte');
+    }
+
+    /**
+     * Gets an array of MaterialAporte objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Material is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|MaterialAporte[] List of MaterialAporte objects
+     * @throws PropelException
+     */
+    public function getMaterialAportes($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collMaterialAportes || null !== $criteria) {
+            if ($this->isNew() && null === $this->collMaterialAportes) {
+                // return empty collection
+                $this->initMaterialAportes();
+            } else {
+                $collMaterialAportes = MaterialAporteQuery::create(null, $criteria)
+                    ->filterByMaterial($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collMaterialAportes;
+                }
+                $this->collMaterialAportes = $collMaterialAportes;
+            }
+        }
+
+        return $this->collMaterialAportes;
+    }
+
+    /**
+     * Sets a collection of MaterialAporte objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $materialAportes A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setMaterialAportes(PropelCollection $materialAportes, PropelPDO $con = null)
+    {
+        $this->materialAportesScheduledForDeletion = $this->getMaterialAportes(new Criteria(), $con)->diff($materialAportes);
+
+        foreach ($this->materialAportesScheduledForDeletion as $materialAporteRemoved) {
+            $materialAporteRemoved->setMaterial(null);
+        }
+
+        $this->collMaterialAportes = null;
+        foreach ($materialAportes as $materialAporte) {
+            $this->addMaterialAporte($materialAporte);
+        }
+
+        $this->collMaterialAportes = $materialAportes;
+    }
+
+    /**
+     * Returns the number of related MaterialAporte objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related MaterialAporte objects.
+     * @throws PropelException
+     */
+    public function countMaterialAportes(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collMaterialAportes || null !== $criteria) {
+            if ($this->isNew() && null === $this->collMaterialAportes) {
+                return 0;
+            } else {
+                $query = MaterialAporteQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByMaterial($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collMaterialAportes);
+        }
+    }
+
+    /**
+     * Method called to associate a MaterialAporte object to this object
+     * through the MaterialAporte foreign key attribute.
+     *
+     * @param    MaterialAporte $l MaterialAporte
+     * @return   Material The current object (for fluent API support)
+     */
+    public function addMaterialAporte(MaterialAporte $l)
+    {
+        if ($this->collMaterialAportes === null) {
+            $this->initMaterialAportes();
+        }
+        if (!$this->collMaterialAportes->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddMaterialAporte($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	MaterialAporte $materialAporte The materialAporte object to add.
+     */
+    protected function doAddMaterialAporte($materialAporte)
+    {
+        $this->collMaterialAportes[]= $materialAporte;
+        $materialAporte->setMaterial($this);
+    }
+
+    /**
+     * @param	MaterialAporte $materialAporte The materialAporte object to remove.
+     */
+    public function removeMaterialAporte($materialAporte)
+    {
+        if ($this->getMaterialAportes()->contains($materialAporte)) {
+            $this->collMaterialAportes->remove($this->collMaterialAportes->search($materialAporte));
+            if (null === $this->materialAportesScheduledForDeletion) {
+                $this->materialAportesScheduledForDeletion = clone $this->collMaterialAportes;
+                $this->materialAportesScheduledForDeletion->clear();
+            }
+            $this->materialAportesScheduledForDeletion[]= $materialAporte;
+            $materialAporte->setMaterial(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Material is new, it will return
+     * an empty collection; or if this Material has previously
+     * been saved, it will retrieve related MaterialAportes from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Material.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|MaterialAporte[] List of MaterialAporte objects
+     */
+    public function getMaterialAportesJoinAporte($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = MaterialAporteQuery::create(null, $criteria);
+        $query->joinWith('Aporte', $join_behavior);
+
+        return $this->getMaterialAportes($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1797,12 +2039,21 @@ abstract class BaseMaterial extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collMaterialAportes) {
+                foreach ($this->collMaterialAportes as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collAccesoMaterials instanceof PropelCollection) {
             $this->collAccesoMaterials->clearIterator();
         }
         $this->collAccesoMaterials = null;
+        if ($this->collMaterialAportes instanceof PropelCollection) {
+            $this->collMaterialAportes->clearIterator();
+        }
+        $this->collMaterialAportes = null;
         $this->aSubcontenido = null;
         $this->aBiblioteca = null;
         $this->aCarrera = null;

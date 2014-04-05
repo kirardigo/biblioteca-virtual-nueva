@@ -3,6 +3,10 @@
 
 <h1 class="h1info">Anuncios</h1>
 
+<div id="paging_container3" class="container">
+
+    <div  class="alt_page_navigation"></div><br></br>
+
 <div id="accordion" style="width: 700px;">
 
  
@@ -11,8 +15,8 @@
 
     <?php foreach ($Anuncios as $Anuncio): ?>
 
-      
-      <h3><?php 
+    <div id="muchas" class="alt_content">
+      <h3 ><?php 
       $cosa=$Anuncio->getFechaAnuncio();
       $m=substr($cosa,-14,2);
       $d=substr($cosa,-11,2);
@@ -43,9 +47,9 @@
  <div><?php echo $Anuncio->getInformacion() ?>
 
  
- </div>
+ </div></div>
     <?php endforeach; ?>
-
+ </div>
 </div>
 <br>
 <?php if($sf_user->hasCredential('admin')):?>

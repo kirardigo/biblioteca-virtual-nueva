@@ -1,5 +1,9 @@
 <h1 class="h1info">De alumnos para alumnos</h1>
 
+<div id="paging_container3" class="container">
+
+    <div  class="alt_page_navigation"></div><br></br>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -10,8 +14,9 @@
       <th>Autor</th>
     </tr>
   </thead>
-  <tbody>
+
     <?php foreach ($Aportes as $Aporte): ?>
+          <tbody class="alt_content">
     <tr>
 
       <td><?php echo $Aporte->getArchivo() ?></td>
@@ -41,10 +46,11 @@
       
       
       
-    </tr>
+    </tr>  </tbody>
     <?php endforeach; ?>
-  </tbody>
-</table>
+
+</table> 
+   </div>
 <?php if($sf_user->isAuthenticated()):?>
 <a class="btn btn-inverse" href="<?php echo url_for('aporte/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 

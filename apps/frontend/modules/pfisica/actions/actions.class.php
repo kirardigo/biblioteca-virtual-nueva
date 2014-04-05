@@ -15,6 +15,7 @@ class pfisicaActions extends sfActions
       // $this->Materials = MaterialQuery::create()->find();
      
           $this->elegido = array();
+          $this->elegido2 = array();
     //$this->Materials = MaterialQuery::create()->find();
     $this->Pfisicas = PfisicaQuery::create()->find();
     // si viene algo por el POST
@@ -40,15 +41,23 @@ class pfisicaActions extends sfActions
             $consulta2->filterByNombre($nombre)
             ->filterByApellido($apellido)
             ->filterByDocumento($documento)
+                    ->orderBy('Apellido', Criteria::ASC)
+                            ->orderBy('Nombre', Criteria::ASC);
 
                   
-                    
-                  
+            $consulta4 = PfisicaQuery::create();
+            $consulta4->filterByNombre($nombre)
+            ->filterByApellido($apellido)
+            ->filterByDocumento($documento)           
+                    ->orderBy('Apellido', Criteria::ASC)
+                            ->orderBy('Nombre', Criteria::ASC);
              
                      
                     
-            ;
-            $this->elegido = $consulta2->find();              
+            
+
+            $this->elegido = $consulta2->useUsuarioQuery()->filterByValido(true)->endUse()->find();  
+           $this->elegido2 = $consulta4->useUsuarioQuery()->filterByValido(false)->endUse()->find(); 
        
     }
   }

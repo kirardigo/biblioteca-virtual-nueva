@@ -12,26 +12,23 @@
                 <div class="fwd"></div>
             </div>
             <div class="volume"></div>
+            <div class="tracker"></div>
             
         </div>
         <ul class="playlist hidden">
-            <li audiourl="../musica/canon.mp3" cover="../musica/coverudc.jpg" artist="Artist 1">Canon</li>
-            <li audiourl="../musica/porunacabeza.mp3" cover="../musica/cover2.jpg" artist="Artist 2">Por una cabeza</li>
-            <li audiourl="../musica/kodoku.mp3" cover="../musica/cover3.jpg" artist="Artist 3">Kodoku na junrei</li>
+            <li audiourl="canon.mp3" cover="cover1.jpg" artist="hola">Canon</li>
+            <li audiourl="porunacabeza.mp3" cover="cover2.jpg" artist="Artist 2">Por una cabeza</li>
+            <li audiourl="kodoku.mp3" cover="cover3.jpg" artist="Artist 3">Kodoku na junrei</li>
   
         </ul>
 
     </div>
 </div>
 </br> </br>
-
-<!--<audio preload="auto" controls>
-
-	<source src="<?php// echo image_path('../musica/kodoku.mp3')?>" /> 
-	    
-</audio>
-</br> </br>-->
+<?php //echo url_fo('@my_rule',true) ?>
 
 
-<embed src="<?php echo image_path('../uploads/files/'.$arch)?>" width="850" height="1075"></embed>
+
+<embed style="margin-left: 100px;" src="<?php echo image_path('../uploads/files/'.$arch)?>" width="850" height="1075"></embed>
+<!--<iframe id="viewer" src="{{ asset('/plugins/sfViewerPlugin/index.html') }}#{{ asset('/uploads/files/ANONIMO_REDES.PDF') }}" width='900' height='600' allowfullscreen webkitallowfullscreen></iframe>-->
 

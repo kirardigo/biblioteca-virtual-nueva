@@ -27,15 +27,21 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
-<h1 class ="h1info">Personas fisicas</h1>
+<h1 class ="h1info">Personas fisicas validas</h1>
+
+
+<div id="paging_container3" class="container">
+
+    <div  class="alt_page_navigation"></div><br></br>
+
 
 <table class="table table-bordered">
   <thead >
     <tr>
 
-      <th>Nombre</th>
+      
       <th>Apellido</th>
-      <th>¿Usuario Valido?</th>
+     <th>Nombre</th>
       <th>Sexo</th>
       <th>Fecha de Nacimiento</th>
       <th>Tipo de Documento</th>
@@ -43,24 +49,92 @@
      
     </tr>
   </thead>
-  <tbody >
+
     <?php foreach ($elegido as $Pfisica): ?>
+          <tbody class="alt_content">
     <tr>
 
-      <td><?php echo $Pfisica->getNombre() ?></td>
+
       <td><?php echo $Pfisica->getApellido() ?></td>
-      
+            <td><?php echo $Pfisica->getNombre() ?></td>
             
-            <?php if ($Pfisica->getUsuario()->getValido()){
-          echo '<td>Si</td>';
-      }else{echo '<td>No</td>';}
+
+      
+      <?php if($Pfisica->getVaron()){
+          echo '<td>MASCULINO</td>';
+      }else{echo '<td>FEMENINO</td>';}
           
           
           ?>
       
+      
+      
+<!--     1989-03-21-->
+      
+      <td><?php $cosa= $Pfisica->getFechaNac();
+      $m=substr($cosa,5,2);
+      $d=substr($cosa,8,2);
+      $a=substr($cosa,0,4);
+     // $h=substr($cosa,-9,10);
+      echo $d.'/'.$m.'/'.$a;
+      ?></td>
+      
+      <td><?php echo $Pfisica->getTipodoc()->getNombre()?></td>
+      <td><?php echo $Pfisica->getDocumento() ?></td>
+     
+      <td>          
+          <a class="btn btn-warning btn-mini" href="<?php echo url_for('pfisica/edit?id_pfisica='.$Pfisica->getIdPfisica()) ?>"><i class="icon-pencil icon-white"></i>Modificar</a>
+          <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'pfisica/delete?id_pfisica='.$Pfisica->getIdPfisica(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar la persona?', 'class'=>"btn btn-danger btn-mini")) ?>
+      </td>
+    </tr></tbody>
+    <?php endforeach; ?>
+</table> 
+   </div>
+<?php endif;?>
+
+<br>
+
+
+<?php 
+    $cant = sizeof($elegido2);
+    if($cant >= 1):?>
+
+<h1 class ="h1info">Personas fisicas NO validas</h1>
+
+
+<div id="paging_container4" class="container">
+
+    <div  class="alt_page_navigation"></div><br></br>
+
+
+<table class="table table-bordered">
+  <thead >
+    <tr>
+
+
+      <th>Apellido</th>
+      <th>Nombre</th>
+      <th>Sexo</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Tipo de Documento</th>
+      <th>Documento</th>
+     
+    </tr>
+  </thead>
+
+    <?php foreach ($elegido2 as $Pfisica): ?>
+          <tbody class="alt_content">
+    <tr>
+
+
+      <td><?php echo $Pfisica->getApellido() ?></td>
+      
+                <td><?php echo $Pfisica->getNombre() ?></td>  
+            
+      
       <?php if($Pfisica->getVaron()){
-          echo '<td>Masculino</td>';
-      }else{echo '<td>Femenino</td>';}
+          echo '<td>MASCULINO</td>';
+      }else{echo '<td>FEMENINO</td>';}
           
           
           ?>
@@ -85,10 +159,12 @@
           <?php echo link_to('<i class="icon-trash icon-white"></i>Eliminar', 'pfisica/delete?id_pfisica='.$Pfisica->getIdPfisica(), array('method' => 'delete', 'confirm' => 'Esta seguro de eliminar la persona?', 'class'=>"btn btn-danger btn-mini")) ?>
       </td>
     </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
+    </tbody><?php endforeach; ?></table> 
+   </div>
 <?php endif;?>
 
 <br>
+
+
+
   <a class="btn btn-inverse" href="<?php echo url_for('pfisica/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>

@@ -52,6 +52,7 @@ class AporteTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Usuario', 'Usuario', RelationMap::MANY_TO_ONE, array('usuario_id_usuario' => 'id_usuario', ), null, null);
+        $this->addRelation('MaterialAporte', 'MaterialAporte', RelationMap::ONE_TO_MANY, array('id_aporte' => 'aporte_id_aporte', ), null, null, 'MaterialAportes');
     } // buildRelations()
 
     /**

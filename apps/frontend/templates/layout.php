@@ -20,7 +20,7 @@
     <?php include_partial('default/mpProjectPlugin_css_assets', array('load' => array('twitter_bootstrap'))); ?>
 
     <?php include_stylesheets() ?>
-    <?php include_javascripts() ?>
+    <?php //include_javascripts() ?>
 </head>
   <body>
    
@@ -134,21 +134,21 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div  style="" class="container-fluid">
       <?php echo $sf_content ?>
       
-      <div style="margin-top:5%">
-      <hr>
-      <p style="color:white" >&copy; Universidad del Chubut 2014</p>
-      </div>
+
         
 
       
     </div> <!-- /container -->
-
+      <div style="margin-top:5%; text-align: center;">
+      <hr>
+      <p style="color:white" >&copy; Universidad del Chubut 2014</p>
+      </div>
     <!-- include base js files from plugin -->
     <?php include_partial('default/mpProjectPlugin_js_assets', array('load' => array('jquery', 'twitter_bootstrap'))); ?>
-    <?php //include_javascripts() ?>
+    <?php include_javascripts() ?>
   </body>
   
 

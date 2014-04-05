@@ -39,7 +39,7 @@ class PfisicaForm extends BasePfisicaForm
 
    
         $this->embedRelation('CarreraFisica',
-                              array('add_link'=>'<div class="btn btn-inverse">Agregar Carrera</div>',
+                              array('add_link'=>'<div class="btn btn-inverse" onclick="confirm("Esta seguro de eliminar la persona?")">Agregar Carrera</div>',
                                   
                                     'delete_name'=>'Eliminar', 
                                     'post_add'=>'add_new_link_post',
@@ -65,7 +65,6 @@ class PfisicaForm extends BasePfisicaForm
                                             ),
                                   ));
               
-
 
             
            

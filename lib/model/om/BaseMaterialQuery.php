@@ -48,6 +48,10 @@
  * @method     MaterialQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
  * @method     MaterialQuery innerJoinAccesoMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the AccesoMaterial relation
  *
+ * @method     MaterialQuery leftJoinMaterialAporte($relationAlias = null) Adds a LEFT JOIN clause to the query using the MaterialAporte relation
+ * @method     MaterialQuery rightJoinMaterialAporte($relationAlias = null) Adds a RIGHT JOIN clause to the query using the MaterialAporte relation
+ * @method     MaterialQuery innerJoinMaterialAporte($relationAlias = null) Adds a INNER JOIN clause to the query using the MaterialAporte relation
+ *
  * @method     Material findOne(PropelPDO $con = null) Return the first Material matching the query
  * @method     Material findOneOrCreate(PropelPDO $con = null) Return the first Material matching the query, or a new Material object populated from the query conditions when no match is found
  *
@@ -879,6 +883,80 @@ abstract class BaseMaterialQuery extends ModelCriteria
         return $this
             ->joinAccesoMaterial($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'AccesoMaterial', 'AccesoMaterialQuery');
+    }
+
+    /**
+     * Filter the query by a related MaterialAporte object
+     *
+     * @param   MaterialAporte|PropelObjectCollection $materialAporte  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   MaterialQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByMaterialAporte($materialAporte, $comparison = null)
+    {
+        if ($materialAporte instanceof MaterialAporte) {
+            return $this
+                ->addUsingAlias(MaterialPeer::ID_MATERIAL, $materialAporte->getMaterialIdMaterial(), $comparison);
+        } elseif ($materialAporte instanceof PropelObjectCollection) {
+            return $this
+                ->useMaterialAporteQuery()
+                ->filterByPrimaryKeys($materialAporte->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByMaterialAporte() only accepts arguments of type MaterialAporte or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the MaterialAporte relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return MaterialQuery The current query, for fluid interface
+     */
+    public function joinMaterialAporte($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('MaterialAporte');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'MaterialAporte');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the MaterialAporte relation MaterialAporte object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   MaterialAporteQuery A secondary query class using the current class as primary query
+     */
+    public function useMaterialAporteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinMaterialAporte($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'MaterialAporte', 'MaterialAporteQuery');
     }
 
     /**
