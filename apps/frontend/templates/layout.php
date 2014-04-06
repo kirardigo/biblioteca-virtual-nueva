@@ -66,18 +66,7 @@
                <li><a href="<?php echo url_for('carrera/index');?>">ABM Carreras</a></li>
                <li><a href="<?php echo url_for('tipodoc/index');?>">ABM Tipo de Documento</a></li>
                <li><a href="<?php echo url_for('biblioteca/index');?>">ABM Biblioteca</a></li>
-               
-             
-                           
 
-              
-              
-              
-              
-              
-              
-              
-              
                 </ul>
               </li>
               <?php endif;?>
@@ -91,10 +80,12 @@
               
              
               <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
-             <li><a href="<?php echo url_for('subcontenido/index');?>">ABM Contenido</a></li>
+             <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
+             <li><a href="<?php echo url_for('subcontenido/index');?>">ABM Subcontenido</a></li>
               <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
                
                 </ul>
+                  </li>
       <?php endif;?> 
                   
                
@@ -128,7 +119,7 @@
               </li>
 
 
-              </li>
+              
             </ul>
           </div><!--/.nav-collapse -->
         </div>

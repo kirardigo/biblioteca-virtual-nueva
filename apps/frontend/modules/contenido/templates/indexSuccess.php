@@ -1,4 +1,4 @@
-<h1 class="h1info">Contenidos</h1>
+<h1 class="h1info">Contenidos - Clasificacion Decimal Universal</h1>
 
 <table class="table table-bordered">
   <thead >
@@ -13,7 +13,7 @@
   <tbody>
     <?php foreach ($Contenidos as $Contenido): ?>
       
-      <tr><td><?php echo $Contenido->getIdContenido() ?></td></tr>
+
       
     <tr>
 

@@ -19,15 +19,15 @@
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Carrera" name="carrera"
        data-source='[<?php //foreach($Materials as $mat){echo "\"".$mat->getCarrera()->getIdCarrera()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
      -->
-     <?php if($sf_user->hasCredential('admin')):?>
-       <label class="busqueda">Contenido</label>
-       <input type="text" data-provide="typeahead" data-items="5" placeholder="Contenido" name="contenido"
-       data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getContenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
-      <?php endif;?> 
+     <?php //if($sf_user->hasCredential('admin')):?>
+       <label class="busqueda">Subcontenido</label>
+       <input type="text" data-provide="typeahead" data-items="5" placeholder="Subcontenido" name="subcontenido"
+       data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getTema()->getSubcontenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
+      <?php //endif;?> 
        
        <label class="busqueda">Tema</label>
-       <input type="text" data-provide="typeahead" data-items="5" placeholder="Tema" name="subcontenido"
-       data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getSubcontenido()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
+       <input type="text" data-provide="typeahead" data-items="5" placeholder="Tema" name="tema"
+       data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getTema()->getNombre()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
        
        
        

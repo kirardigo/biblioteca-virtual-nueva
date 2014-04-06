@@ -1,4 +1,4 @@
-<h1 class="h1info">Subcontenidos</h1>
+<h1 class="h1info">Subcontenidos - Clasificacion Decimal Universal</h1>
 
 <table class="table table-bordered">
   
@@ -11,7 +11,7 @@
        
        <thead>             
    <tr>
-<tr ><th style="text-align: center; background: black; color: white;" colspan="2"><?php echo $Contenido->getNombre() ?></th></tr>
+<tr ><th style="text-align: center; background: black; color: white;" colspan="2"><?php echo $Contenido->getNumeroContenido().' - '.$Contenido->getNombre() ?></th></tr>
       <th>Nombre</th>
       <th>Numero subcontenido</th>
       
@@ -36,7 +36,7 @@
               <?php endif; ?>
               <?php endforeach; ?>
 
-    
+    <tr><td colspan="3" style="background: gray;" ></td></tr>
    
     <?php endforeach; ?>
   </tbody>

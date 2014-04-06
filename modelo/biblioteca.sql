@@ -64,7 +64,7 @@ INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `con
 INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('ARTE', '', 9);
 INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('DEPORTES', '', 9);
 
-INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('LINGÜISTICA. FILOLOGIA', '', 10);
+INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('LINGUISTICA. FILOLOGIA', '', 10);
 INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('LITERATURA', '', 10);
 
 INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `contenido_id_contenido`) VALUES ('GEOGRAFIA', '', 11);
@@ -75,7 +75,7 @@ INSERT INTO `biblioteca_2`.`subcontenido` (`nombre`, `numero_subcontenido`, `con
 
 
 
-
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('COMPUTACION Y SUS APLICACIONES', '681.3', 28);
 INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('TELECOMUNICACIONES', '621.3/9', 24);
 
 INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('EMBRIOLOGIA', '611.013', 22);
@@ -91,9 +91,11 @@ INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_sub
 INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('ALGEBRA', '512', 17);
 INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('ANALISIS MATEMATICO', '517', 17);
 INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('MATEMATICAS GENERALIDADES', '51', 17);
-INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('ARITMETICA', '511', 17);
-
-
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('ARITMETICA', '', 17);
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('DICCIONARIO MEDICO', '511', 1);
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('DICCIONARIO INFORMATICO', '', 1);
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('DICCIONARIO IDIOMA', '', 1);
+INSERT INTO `biblioteca_2`.`tema` (`nombre`, `numero_tema`, `subcontenido_id_subcontenido`) VALUES ('GERONTOLOGIA', '613.98', 22);
 
 
 
@@ -105,14 +107,14 @@ INSERT INTO `biblioteca_2`.`biblioteca` (`nombre`, `pjuridica_id_pjuridica`) VAL
 
 
 
-INSERT INTO `biblioteca_2`.`pjuridica` (`nombre`, `razon_social`, `cuit_cuil`) VALUES ('CENTRO DE CULTURA', 'CDC-123', '123-123-123');
+INSERT INTO `biblioteca_2`.`pjuridica` (`nombre`, `razon_social`, `cuit_cuil`) VALUES ('SECRETARIA DE CULTURA', 'CDC-123', '123-123-123');
 
 INSERT INTO `biblioteca_2`.`biblioteca` (`nombre`, `pjuridica_id_pjuridica`) VALUES ('BIBLIOTECA VACCHINA', 2);
 
 
 
 
-INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('TECNICATURA EN DESARROLLO DE SOFTWARE');
-INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('REDES');
+INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('DESARROLLO DE SOFTWARE');
+INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('REDES y TELECOMUNICACIONES');
 INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('ENFERMERIA');
 

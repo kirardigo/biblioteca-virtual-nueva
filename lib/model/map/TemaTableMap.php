@@ -40,6 +40,7 @@ class TemaTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID_TEMA', 'IdTema', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
+        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
         $this->addColumn('NUMERO_TEMA', 'NumeroTema', 'VARCHAR', false, 45, null);
         $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
         // validators

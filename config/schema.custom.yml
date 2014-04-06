@@ -24,3 +24,5 @@ propel:
     titulo: { primaryString: true }
   contenido:
     nombre: { primaryString: true }
+  tema:
+    nombre: { primaryString: true }    

@@ -50,8 +50,9 @@ class principalActions extends sfActions
        // $dsa=$aux22->getHaving('nombre',$carrera);
         
         
-        $contenido = $request->getParameter('contenido');
+        //$contenido = $request->getParameter('contenido');
         $subcontenido = $request->getParameter('subcontenido');
+        $tema = $request->getParameter('tema');
         
         if((empty($autor))){
         $autor='*';    
@@ -65,8 +66,8 @@ class principalActions extends sfActions
 //        if((empty($id))){
 //        $id='*';    
 //        }
-        if((empty($contenido))){
-        $contenido='*';    
+        if((empty($tema))){
+        $tema='*';    
         }
         if((empty($subcontenido))){
         $subcontenido='*';    
@@ -76,11 +77,11 @@ class principalActions extends sfActions
             $consulta2->filterByAutor($autor)
             ->filterByTitulo($titulo)
             ->filterByEditorial($editorial)
-            //->filterByCarreraIdCarrera($id)
-                 ->useSubcontenidoQuery()
-                    ->filterByNombre($subcontenido)
-                    ->useContenidoQuery()
-                      ->filterByNombre($contenido)
+            
+                 ->useTemaQuery()
+                    ->filterByNombre($tema)
+                    ->useSubcontenidoQuery()
+                      ->filterByNombre($subcontenido)
                         
                     ->endUse()
                     
