@@ -91,7 +91,7 @@
               
              
               <li><a href="<?php echo url_for('material/index');?>">ABM Material</a></li>
-             <li><a href="<?php echo url_for('contenido/index');?>">ABM Contenido</a></li>
+             <li><a href="<?php echo url_for('subcontenido/index');?>">ABM Contenido</a></li>
               <li><a href="<?php echo url_for('accesomaterial/index');?>">Registro de acceso al Material</a></li>
                
                 </ul>

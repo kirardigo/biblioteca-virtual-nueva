@@ -2,25 +2,25 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'subcontenido' table.
+ * Base static class for performing query and update operations on the 'tema' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseSubcontenidoPeer {
+abstract class BaseTemaPeer {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'propel';
 
     /** the table name for this class */
-    const TABLE_NAME = 'subcontenido';
+    const TABLE_NAME = 'tema';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'Subcontenido';
+    const OM_CLASS = 'Tema';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'SubcontenidoTableMap';
+    const TM_CLASS = 'TemaTableMap';
 
     /** The total number of columns. */
     const NUM_COLUMNS = 4;
@@ -31,26 +31,26 @@ abstract class BaseSubcontenidoPeer {
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
     const NUM_HYDRATE_COLUMNS = 4;
 
-    /** the column name for the ID_SUBCONTENIDO field */
-    const ID_SUBCONTENIDO = 'subcontenido.ID_SUBCONTENIDO';
+    /** the column name for the ID_TEMA field */
+    const ID_TEMA = 'tema.ID_TEMA';
 
     /** the column name for the NOMBRE field */
-    const NOMBRE = 'subcontenido.NOMBRE';
+    const NOMBRE = 'tema.NOMBRE';
 
-    /** the column name for the NUMERO_SUBCONTENIDO field */
-    const NUMERO_SUBCONTENIDO = 'subcontenido.NUMERO_SUBCONTENIDO';
+    /** the column name for the NUMERO_TEMA field */
+    const NUMERO_TEMA = 'tema.NUMERO_TEMA';
 
-    /** the column name for the CONTENIDO_ID_CONTENIDO field */
-    const CONTENIDO_ID_CONTENIDO = 'subcontenido.CONTENIDO_ID_CONTENIDO';
+    /** the column name for the SUBCONTENIDO_ID_SUBCONTENIDO field */
+    const SUBCONTENIDO_ID_SUBCONTENIDO = 'tema.SUBCONTENIDO_ID_SUBCONTENIDO';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identiy map to hold any loaded instances of Subcontenido objects.
+     * An identiy map to hold any loaded instances of Tema objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array Subcontenido[]
+     * @var        array Tema[]
      */
     public static $instances = array();
 
@@ -62,11 +62,11 @@ abstract class BaseSubcontenidoPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdSubcontenido', 'Nombre', 'NumeroSubcontenido', 'ContenidoIdContenido', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idSubcontenido', 'nombre', 'numeroSubcontenido', 'contenidoIdContenido', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_SUBCONTENIDO, self::NOMBRE, self::NUMERO_SUBCONTENIDO, self::CONTENIDO_ID_CONTENIDO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_SUBCONTENIDO', 'NOMBRE', 'NUMERO_SUBCONTENIDO', 'CONTENIDO_ID_CONTENIDO', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_subcontenido', 'nombre', 'numero_subcontenido', 'contenido_id_contenido', ),
+        BasePeer::TYPE_PHPNAME => array ('IdTema', 'Nombre', 'NumeroTema', 'SubcontenidoIdSubcontenido', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idTema', 'nombre', 'numeroTema', 'subcontenidoIdSubcontenido', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_TEMA, self::NOMBRE, self::NUMERO_TEMA, self::SUBCONTENIDO_ID_SUBCONTENIDO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_TEMA', 'NOMBRE', 'NUMERO_TEMA', 'SUBCONTENIDO_ID_SUBCONTENIDO', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_tema', 'nombre', 'numero_tema', 'subcontenido_id_subcontenido', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
@@ -77,11 +77,11 @@ abstract class BaseSubcontenidoPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdSubcontenido' => 0, 'Nombre' => 1, 'NumeroSubcontenido' => 2, 'ContenidoIdContenido' => 3, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idSubcontenido' => 0, 'nombre' => 1, 'numeroSubcontenido' => 2, 'contenidoIdContenido' => 3, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_SUBCONTENIDO => 0, self::NOMBRE => 1, self::NUMERO_SUBCONTENIDO => 2, self::CONTENIDO_ID_CONTENIDO => 3, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_SUBCONTENIDO' => 0, 'NOMBRE' => 1, 'NUMERO_SUBCONTENIDO' => 2, 'CONTENIDO_ID_CONTENIDO' => 3, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_subcontenido' => 0, 'nombre' => 1, 'numero_subcontenido' => 2, 'contenido_id_contenido' => 3, ),
+        BasePeer::TYPE_PHPNAME => array ('IdTema' => 0, 'Nombre' => 1, 'NumeroTema' => 2, 'SubcontenidoIdSubcontenido' => 3, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idTema' => 0, 'nombre' => 1, 'numeroTema' => 2, 'subcontenidoIdSubcontenido' => 3, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_TEMA => 0, self::NOMBRE => 1, self::NUMERO_TEMA => 2, self::SUBCONTENIDO_ID_SUBCONTENIDO => 3, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_TEMA' => 0, 'NOMBRE' => 1, 'NUMERO_TEMA' => 2, 'SUBCONTENIDO_ID_SUBCONTENIDO' => 3, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_tema' => 0, 'nombre' => 1, 'numero_tema' => 2, 'subcontenido_id_subcontenido' => 3, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
@@ -133,12 +133,12 @@ abstract class BaseSubcontenidoPeer {
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. SubcontenidoPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. TemaPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(SubcontenidoPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(TemaPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -156,15 +156,15 @@ abstract class BaseSubcontenidoPeer {
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(SubcontenidoPeer::ID_SUBCONTENIDO);
-            $criteria->addSelectColumn(SubcontenidoPeer::NOMBRE);
-            $criteria->addSelectColumn(SubcontenidoPeer::NUMERO_SUBCONTENIDO);
-            $criteria->addSelectColumn(SubcontenidoPeer::CONTENIDO_ID_CONTENIDO);
+            $criteria->addSelectColumn(TemaPeer::ID_TEMA);
+            $criteria->addSelectColumn(TemaPeer::NOMBRE);
+            $criteria->addSelectColumn(TemaPeer::NUMERO_TEMA);
+            $criteria->addSelectColumn(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO);
         } else {
-            $criteria->addSelectColumn($alias . '.ID_SUBCONTENIDO');
+            $criteria->addSelectColumn($alias . '.ID_TEMA');
             $criteria->addSelectColumn($alias . '.NOMBRE');
-            $criteria->addSelectColumn($alias . '.NUMERO_SUBCONTENIDO');
-            $criteria->addSelectColumn($alias . '.CONTENIDO_ID_CONTENIDO');
+            $criteria->addSelectColumn($alias . '.NUMERO_TEMA');
+            $criteria->addSelectColumn($alias . '.SUBCONTENIDO_ID_SUBCONTENIDO');
         }
     }
 
@@ -184,26 +184,26 @@ abstract class BaseSubcontenidoPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SubcontenidoPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(TemaPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            SubcontenidoPeer::addSelectColumns($criteria);
+            TemaPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
         $criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
         // BasePeer returns a PDOStatement
@@ -223,7 +223,7 @@ abstract class BaseSubcontenidoPeer {
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return                 Subcontenido
+     * @return                 Tema
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -231,7 +231,7 @@ abstract class BaseSubcontenidoPeer {
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = SubcontenidoPeer::doSelect($critcopy, $con);
+        $objects = TemaPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -249,7 +249,7 @@ abstract class BaseSubcontenidoPeer {
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return SubcontenidoPeer::populateObjects(SubcontenidoPeer::doSelectStmt($criteria, $con));
+        return TemaPeer::populateObjects(TemaPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -267,12 +267,12 @@ abstract class BaseSubcontenidoPeer {
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            SubcontenidoPeer::addSelectColumns($criteria);
+            TemaPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
@@ -280,7 +280,7 @@ abstract class BaseSubcontenidoPeer {
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
 
@@ -296,14 +296,14 @@ abstract class BaseSubcontenidoPeer {
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param      Subcontenido $obj A Subcontenido object.
+     * @param      Tema $obj A Tema object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdSubcontenido();
+                $key = (string) $obj->getIdTema();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -317,7 +317,7 @@ abstract class BaseSubcontenidoPeer {
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A Subcontenido object or a primary key value.
+     * @param      mixed $value A Tema object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -325,13 +325,13 @@ abstract class BaseSubcontenidoPeer {
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof Subcontenido) {
-                $key = (string) $value->getIdSubcontenido();
+            if (is_object($value) && $value instanceof Tema) {
+                $key = (string) $value->getIdTema();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Subcontenido object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Tema object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
@@ -346,7 +346,7 @@ abstract class BaseSubcontenidoPeer {
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return   Subcontenido Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return   Tema Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
@@ -371,7 +371,7 @@ abstract class BaseSubcontenidoPeer {
     }
     
     /**
-     * Method to invalidate the instance pool of all tables related to subcontenido
+     * Method to invalidate the instance pool of all tables related to tema
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
@@ -425,11 +425,11 @@ abstract class BaseSubcontenidoPeer {
         $results = array();
     
         // set the class once to avoid overhead in the loop
-        $cls = SubcontenidoPeer::getOMClass();
+        $cls = TemaPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = SubcontenidoPeer::getInstanceFromPool($key))) {
+            $key = TemaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = TemaPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -438,7 +438,7 @@ abstract class BaseSubcontenidoPeer {
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                SubcontenidoPeer::addInstanceToPool($obj, $key);
+                TemaPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -452,21 +452,21 @@ abstract class BaseSubcontenidoPeer {
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (Subcontenido object, last column rank)
+     * @return array (Tema object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = SubcontenidoPeer::getInstanceFromPool($key))) {
+        $key = TemaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = TemaPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + TemaPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = SubcontenidoPeer::OM_CLASS;
+            $cls = TemaPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            SubcontenidoPeer::addInstanceToPool($obj, $key);
+            TemaPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -474,7 +474,7 @@ abstract class BaseSubcontenidoPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Contenido table
+     * Returns the number of rows matching criteria, joining the related Subcontenido table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -482,7 +482,7 @@ abstract class BaseSubcontenidoPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinContenido(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinSubcontenido(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -490,14 +490,14 @@ abstract class BaseSubcontenidoPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SubcontenidoPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(TemaPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            SubcontenidoPeer::addSelectColumns($criteria);
+            TemaPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -506,15 +506,15 @@ abstract class BaseSubcontenidoPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(SubcontenidoPeer::CONTENIDO_ID_CONTENIDO, ContenidoPeer::ID_CONTENIDO, $join_behavior);
+        $criteria->addJoin(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -531,15 +531,15 @@ abstract class BaseSubcontenidoPeer {
 
 
     /**
-     * Selects a collection of Subcontenido objects pre-filled with their Contenido objects.
+     * Selects a collection of Tema objects pre-filled with their Subcontenido objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Subcontenido objects.
+     * @return array           Array of Tema objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinContenido(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinSubcontenido(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -548,50 +548,50 @@ abstract class BaseSubcontenidoPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
+        TemaPeer::addSelectColumns($criteria);
+        $startcol = TemaPeer::NUM_HYDRATE_COLUMNS;
         SubcontenidoPeer::addSelectColumns($criteria);
-        $startcol = SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
-        ContenidoPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(SubcontenidoPeer::CONTENIDO_ID_CONTENIDO, ContenidoPeer::ID_CONTENIDO, $join_behavior);
+        $criteria->addJoin(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = SubcontenidoPeer::getInstanceFromPool($key1))) {
+            $key1 = TemaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = TemaPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
 
-                $cls = SubcontenidoPeer::getOMClass();
+                $cls = TemaPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                SubcontenidoPeer::addInstanceToPool($obj1, $key1);
+                TemaPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = ContenidoPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = ContenidoPeer::getInstanceFromPool($key2);
+                $obj2 = SubcontenidoPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = ContenidoPeer::getOMClass();
+                    $cls = SubcontenidoPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    ContenidoPeer::addInstanceToPool($obj2, $key2);
+                    SubcontenidoPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (Subcontenido) to $obj2 (Contenido)
-                $obj2->addSubcontenido($obj1);
+                // Add the $obj1 (Tema) to $obj2 (Subcontenido)
+                $obj2->addTema($obj1);
 
             } // if joined row was not null
 
@@ -620,14 +620,14 @@ abstract class BaseSubcontenidoPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SubcontenidoPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(TemaPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            SubcontenidoPeer::addSelectColumns($criteria);
+            TemaPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -636,15 +636,15 @@ abstract class BaseSubcontenidoPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(SubcontenidoPeer::CONTENIDO_ID_CONTENIDO, ContenidoPeer::ID_CONTENIDO, $join_behavior);
+        $criteria->addJoin(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -660,12 +660,12 @@ abstract class BaseSubcontenidoPeer {
     }
 
     /**
-     * Selects a collection of Subcontenido objects pre-filled with all related objects.
+     * Selects a collection of Tema objects pre-filled with all related objects.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Subcontenido objects.
+     * @return array           Array of Tema objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -678,53 +678,53 @@ abstract class BaseSubcontenidoPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
+        TemaPeer::addSelectColumns($criteria);
+        $startcol2 = TemaPeer::NUM_HYDRATE_COLUMNS;
+
         SubcontenidoPeer::addSelectColumns($criteria);
-        $startcol2 = SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
+        $startcol3 = $startcol2 + SubcontenidoPeer::NUM_HYDRATE_COLUMNS;
 
-        ContenidoPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + ContenidoPeer::NUM_HYDRATE_COLUMNS;
-
-        $criteria->addJoin(SubcontenidoPeer::CONTENIDO_ID_CONTENIDO, ContenidoPeer::ID_CONTENIDO, $join_behavior);
+        $criteria->addJoin(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, SubcontenidoPeer::ID_SUBCONTENIDO, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseSubcontenidoPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseTemaPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = SubcontenidoPeer::getInstanceFromPool($key1))) {
+            $key1 = TemaPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = TemaPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
-                $cls = SubcontenidoPeer::getOMClass();
+                $cls = TemaPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                SubcontenidoPeer::addInstanceToPool($obj1, $key1);
+                TemaPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined Contenido rows
+            // Add objects for joined Subcontenido rows
 
-            $key2 = ContenidoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            $key2 = SubcontenidoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
             if ($key2 !== null) {
-                $obj2 = ContenidoPeer::getInstanceFromPool($key2);
+                $obj2 = SubcontenidoPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = ContenidoPeer::getOMClass();
+                    $cls = SubcontenidoPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    ContenidoPeer::addInstanceToPool($obj2, $key2);
+                    SubcontenidoPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 loaded
 
-                // Add the $obj1 (Subcontenido) to the collection in $obj2 (Contenido)
-                $obj2->addSubcontenido($obj1);
+                // Add the $obj1 (Tema) to the collection in $obj2 (Subcontenido)
+                $obj2->addTema($obj1);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -751,9 +751,9 @@ abstract class BaseSubcontenidoPeer {
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseSubcontenidoPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseSubcontenidoPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new SubcontenidoTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseTemaPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseTemaPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new TemaTableMap());
       }
     }
 
@@ -765,13 +765,13 @@ abstract class BaseSubcontenidoPeer {
      */
     public static function getOMClass()
     {
-        return SubcontenidoPeer::OM_CLASS;
+        return TemaPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a Subcontenido or Criteria object.
+     * Performs an INSERT on the database, given a Tema or Criteria object.
      *
-     * @param      mixed $values Criteria or Subcontenido object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or Tema object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -780,17 +780,17 @@ abstract class BaseSubcontenidoPeer {
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from Subcontenido object
+            $criteria = $values->buildCriteria(); // build Criteria from Tema object
         }
 
-        if ($criteria->containsKey(SubcontenidoPeer::ID_SUBCONTENIDO) && $criteria->keyContainsValue(SubcontenidoPeer::ID_SUBCONTENIDO) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.SubcontenidoPeer::ID_SUBCONTENIDO.')');
+        if ($criteria->containsKey(TemaPeer::ID_TEMA) && $criteria->keyContainsValue(TemaPeer::ID_TEMA) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.TemaPeer::ID_TEMA.')');
         }
 
 
@@ -812,9 +812,9 @@ abstract class BaseSubcontenidoPeer {
     }
 
     /**
-     * Performs an UPDATE on the database, given a Subcontenido or Criteria object.
+     * Performs an UPDATE on the database, given a Tema or Criteria object.
      *
-     * @param      mixed $values Criteria or Subcontenido object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or Tema object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -823,7 +823,7 @@ abstract class BaseSubcontenidoPeer {
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -831,15 +831,15 @@ abstract class BaseSubcontenidoPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(SubcontenidoPeer::ID_SUBCONTENIDO);
-            $value = $criteria->remove(SubcontenidoPeer::ID_SUBCONTENIDO);
+            $comparison = $criteria->getComparison(TemaPeer::ID_TEMA);
+            $value = $criteria->remove(TemaPeer::ID_TEMA);
             if ($value) {
-                $selectCriteria->add(SubcontenidoPeer::ID_SUBCONTENIDO, $value, $comparison);
+                $selectCriteria->add(TemaPeer::ID_TEMA, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(SubcontenidoPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(TemaPeer::TABLE_NAME);
             }
 
-        } else { // $values is Subcontenido object
+        } else { // $values is Tema object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
@@ -851,7 +851,7 @@ abstract class BaseSubcontenidoPeer {
     }
 
     /**
-     * Deletes all rows from the subcontenido table.
+     * Deletes all rows from the tema table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -860,19 +860,19 @@ abstract class BaseSubcontenidoPeer {
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += BasePeer::doDeleteAll(SubcontenidoPeer::TABLE_NAME, $con, SubcontenidoPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(TemaPeer::TABLE_NAME, $con, TemaPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            SubcontenidoPeer::clearInstancePool();
-            SubcontenidoPeer::clearRelatedInstancePool();
+            TemaPeer::clearInstancePool();
+            TemaPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -883,9 +883,9 @@ abstract class BaseSubcontenidoPeer {
     }
 
     /**
-     * Performs a DELETE on the database, given a Subcontenido or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a Tema or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or Subcontenido object or primary key or array of primary keys
+     * @param      mixed $values Criteria or Tema object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -896,27 +896,27 @@ abstract class BaseSubcontenidoPeer {
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // invalidate the cache for all objects of this type, since we have no
             // way of knowing (without running a query) what objects should be invalidated
             // from the cache based on this Criteria.
-            SubcontenidoPeer::clearInstancePool();
+            TemaPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof Subcontenido) { // it's a model object
+        } elseif ($values instanceof Tema) { // it's a model object
             // invalidate the cache for this single object
-            SubcontenidoPeer::removeInstanceFromPool($values);
+            TemaPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(SubcontenidoPeer::ID_SUBCONTENIDO, (array) $values, Criteria::IN);
+            $criteria->add(TemaPeer::ID_TEMA, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
-                SubcontenidoPeer::removeInstanceFromPool($singleval);
+                TemaPeer::removeInstanceFromPool($singleval);
             }
         }
 
@@ -931,7 +931,7 @@ abstract class BaseSubcontenidoPeer {
             $con->beginTransaction();
             
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            SubcontenidoPeer::clearRelatedInstancePool();
+            TemaPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -942,13 +942,13 @@ abstract class BaseSubcontenidoPeer {
     }
 
     /**
-     * Validates all modified columns of given Subcontenido object.
+     * Validates all modified columns of given Tema object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param      Subcontenido $obj The object to validate.
+     * @param      Tema $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -958,8 +958,8 @@ abstract class BaseSubcontenidoPeer {
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(SubcontenidoPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(SubcontenidoPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(TemaPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(TemaPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -975,7 +975,7 @@ abstract class BaseSubcontenidoPeer {
 
         }
 
-        return BasePeer::doValidate(SubcontenidoPeer::DATABASE_NAME, SubcontenidoPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(TemaPeer::DATABASE_NAME, TemaPeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -983,23 +983,23 @@ abstract class BaseSubcontenidoPeer {
      *
      * @param      int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return Subcontenido
+     * @return Tema
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = SubcontenidoPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = TemaPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(SubcontenidoPeer::DATABASE_NAME);
-        $criteria->add(SubcontenidoPeer::ID_SUBCONTENIDO, $pk);
+        $criteria = new Criteria(TemaPeer::DATABASE_NAME);
+        $criteria->add(TemaPeer::ID_TEMA, $pk);
 
-        $v = SubcontenidoPeer::doSelect($criteria, $con);
+        $v = TemaPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -1009,23 +1009,23 @@ abstract class BaseSubcontenidoPeer {
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return Subcontenido[]
+     * @return Tema[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SubcontenidoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(SubcontenidoPeer::DATABASE_NAME);
-            $criteria->add(SubcontenidoPeer::ID_SUBCONTENIDO, $pks, Criteria::IN);
-            $objs = SubcontenidoPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(TemaPeer::DATABASE_NAME);
+            $criteria->add(TemaPeer::ID_TEMA, $pks, Criteria::IN);
+            $objs = TemaPeer::doSelect($criteria, $con);
         }
 
         return $objs;
@@ -1058,15 +1058,15 @@ abstract class BaseSubcontenidoPeer {
 	{
 	  if (preg_match('/^do(Select|Count)(Join(All(Except)?)?|Stmt)?/', $method, $match))
 	  {
-	    return sprintf('BaseSubcontenidoPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
+	    return sprintf('BaseTemaPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
 	  }
 	
 	  throw new LogicException(sprintf('Unrecognized function "%s"', $method));
 	}
 
-} // BaseSubcontenidoPeer
+} // BaseTemaPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseSubcontenidoPeer::buildTableMap();
+BaseTemaPeer::buildTableMap();
 

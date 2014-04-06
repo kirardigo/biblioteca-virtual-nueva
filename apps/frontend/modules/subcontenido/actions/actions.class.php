@@ -11,6 +11,7 @@ class subcontenidoActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+      $this->Contenidos = ContenidoQuery::create()->find();
     $this->Subcontenidos = SubcontenidoQuery::create()->find();
   }
 

@@ -44,7 +44,7 @@ propel:
   contenido:
     _attributes: { phpName: Contenido, idMethod: native }
     id_contenido: { phpName: IdContenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    numero_contenido: { phpName: NumeroContenido, type: INTEGER, required: true, index: unique }
+    numero_contenido: { phpName: NumeroContenido, type: VARCHAR, size: '45', required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
   domicilio:
     _attributes: { phpName: Domicilio, idMethod: native }
@@ -84,10 +84,10 @@ propel:
     autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
     fisico: { phpName: Fisico, type: BOOLEAN, size: '1', required: false }
-    subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido, onDelete: CASCADE, onUpdate: CASCADE }
+    tema_id_tema: { phpName: TemaIdTema, type: INTEGER, required: true, foreignTable: tema, foreignReference: id_tema }
     biblioteca_id_biblioteca: { phpName: BibliotecaIdBiblioteca, type: INTEGER, required: true, foreignTable: biblioteca, foreignReference: id_biblioteca }
     carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }
-    _indexes: { fk_material_subcontenido1: [subcontenido_id_subcontenido], fk_material_biblioteca1: [biblioteca_id_biblioteca], fk_material_carrera1: [carrera_id_carrera] }
+    _indexes: { fk_material_biblioteca1: [biblioteca_id_biblioteca], fk_material_carrera1: [carrera_id_carrera], fk_material_tema1: [tema_id_tema] }
   material_aporte:
     _attributes: { phpName: MaterialAporte, idMethod: native }
     id_material_aporte: { phpName: IdMaterialAporte, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -118,9 +118,16 @@ propel:
     _attributes: { phpName: Subcontenido, idMethod: native }
     id_subcontenido: { phpName: IdSubcontenido, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
-    numero_subcontenido: { phpName: NumeroSubcontenido, type: VARCHAR, size: '45', required: false, index: unique }
+    numero_subcontenido: { phpName: NumeroSubcontenido, type: VARCHAR, size: '45', required: false }
     contenido_id_contenido: { phpName: ContenidoIdContenido, type: INTEGER, required: true, foreignTable: contenido, foreignReference: id_contenido, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { fk_subcontenido_contenido1: [contenido_id_contenido] }
+  tema:
+    _attributes: { phpName: Tema, idMethod: native }
+    id_tema: { phpName: IdTema, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, size: '45', required: true }
+    numero_tema: { phpName: NumeroTema, type: VARCHAR, size: '45', required: false }
+    subcontenido_id_subcontenido: { phpName: SubcontenidoIdSubcontenido, type: INTEGER, required: true, foreignTable: subcontenido, foreignReference: id_subcontenido }
+    _indexes: { fk_tema_subcontenido1: [subcontenido_id_subcontenido] }
   tipo_doc:
     _attributes: { phpName: TipoDoc, idMethod: native }
     id_tipo_doc: { phpName: IdTipoDoc, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }

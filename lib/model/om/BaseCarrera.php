@@ -1292,10 +1292,10 @@ abstract class BaseCarrera extends BaseObject
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|Material[] List of Material objects
      */
-    public function getMaterialsJoinSubcontenido($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getMaterialsJoinTema($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Subcontenido', $join_behavior);
+        $query->joinWith('Tema', $join_behavior);
 
         return $this->getMaterials($query, $con);
     }

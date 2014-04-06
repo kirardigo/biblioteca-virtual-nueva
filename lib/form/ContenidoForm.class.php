@@ -11,8 +11,7 @@ class ContenidoForm extends BaseContenidoForm
 {
   public function configure()
   {
-        $this->embedRelation('Subcontenido');
-       // unset($this['pedido_producto_list']);
+
         
                 $this->embedRelation('Subcontenido', 
                                  array('add_link'=>'<div class="btn btn-inverse">Agregar Subcontenido</div>',
@@ -25,7 +24,7 @@ class ContenidoForm extends BaseContenidoForm
                                   
                                     'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'¿Esta seguro de elminar el subcontenido?')
                                      
-                                            ),
+                                            )
                                   ));
   }
 }

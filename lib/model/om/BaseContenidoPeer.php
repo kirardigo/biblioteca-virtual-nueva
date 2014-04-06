@@ -817,7 +817,7 @@ abstract class BaseContenidoPeer {
 	 */
 	static public function getUniqueColumnNames()
 	{
-	  return array(array('numero_contenido'));
+	  return array();
 	}
 
 	// symfony_behaviors behavior

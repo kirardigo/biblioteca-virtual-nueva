@@ -11,7 +11,7 @@ class MaterialForm extends BaseMaterialForm
 {
   public function configure()
   {
-     $this->widgetSchema['subcontenido_id_subcontenido']->setLabel('Tema');
+     $this->widgetSchema['tema_id_tema']->setLabel('Tema');
      $this->widgetSchema['biblioteca_id_biblioteca']->setLabel('Biblioteca');
      $this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
 

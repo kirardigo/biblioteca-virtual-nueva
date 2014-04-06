@@ -22,3 +22,5 @@ propel:
     usuario: { primaryString: true }
   material:
     titulo: { primaryString: true }
+  contenido:
+    nombre: { primaryString: true }

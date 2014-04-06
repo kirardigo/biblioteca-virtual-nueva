@@ -60,9 +60,9 @@ abstract class BaseSubcontenido extends BaseObject
     protected $aContenido;
 
     /**
-     * @var        PropelObjectCollection|Material[] Collection to store aggregation of Material objects.
+     * @var        PropelObjectCollection|Tema[] Collection to store aggregation of Tema objects.
      */
-    protected $collMaterials;
+    protected $collTemas;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -82,7 +82,7 @@ abstract class BaseSubcontenido extends BaseObject
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $materialsScheduledForDeletion = null;
+    protected $temasScheduledForDeletion = null;
 
     /**
      * Get the [id_subcontenido] column value.
@@ -326,7 +326,7 @@ abstract class BaseSubcontenido extends BaseObject
         if ($deep) {  // also de-associate any related objects?
 
             $this->aContenido = null;
-            $this->collMaterials = null;
+            $this->collTemas = null;
 
         } // if (deep)
     }
@@ -496,17 +496,17 @@ abstract class BaseSubcontenido extends BaseObject
                 $this->resetModified();
             }
 
-            if ($this->materialsScheduledForDeletion !== null) {
-                if (!$this->materialsScheduledForDeletion->isEmpty()) {
-                    MaterialQuery::create()
-                        ->filterByPrimaryKeys($this->materialsScheduledForDeletion->getPrimaryKeys(false))
+            if ($this->temasScheduledForDeletion !== null) {
+                if (!$this->temasScheduledForDeletion->isEmpty()) {
+                    TemaQuery::create()
+                        ->filterByPrimaryKeys($this->temasScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
-                    $this->materialsScheduledForDeletion = null;
+                    $this->temasScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collMaterials !== null) {
-                foreach ($this->collMaterials as $referrerFK) {
+            if ($this->collTemas !== null) {
+                foreach ($this->collTemas as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -685,8 +685,8 @@ abstract class BaseSubcontenido extends BaseObject
             }
 
 
-                if ($this->collMaterials !== null) {
-                    foreach ($this->collMaterials as $referrerFK) {
+                if ($this->collTemas !== null) {
+                    foreach ($this->collTemas as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -778,8 +778,8 @@ abstract class BaseSubcontenido extends BaseObject
             if (null !== $this->aContenido) {
                 $result['Contenido'] = $this->aContenido->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collMaterials) {
-                $result['Materials'] = $this->collMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->collTemas) {
+                $result['Temas'] = $this->collTemas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -944,9 +944,9 @@ abstract class BaseSubcontenido extends BaseObject
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getMaterials() as $relObj) {
+            foreach ($this->getTemas() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addMaterial($relObj->copy($deepCopy));
+                    $copyObj->addTema($relObj->copy($deepCopy));
                 }
             }
 
@@ -1062,29 +1062,29 @@ abstract class BaseSubcontenido extends BaseObject
      */
     public function initRelation($relationName)
     {
-        if ('Material' == $relationName) {
-            $this->initMaterials();
+        if ('Tema' == $relationName) {
+            $this->initTemas();
         }
     }
 
     /**
-     * Clears out the collMaterials collection
+     * Clears out the collTemas collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addMaterials()
+     * @see        addTemas()
      */
-    public function clearMaterials()
+    public function clearTemas()
     {
-        $this->collMaterials = null; // important to set this to NULL since that means it is uninitialized
+        $this->collTemas = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Initializes the collMaterials collection.
+     * Initializes the collTemas collection.
      *
-     * By default this just sets the collMaterials collection to an empty array (like clearcollMaterials());
+     * By default this just sets the collTemas collection to an empty array (like clearcollTemas());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1093,17 +1093,17 @@ abstract class BaseSubcontenido extends BaseObject
      *
      * @return void
      */
-    public function initMaterials($overrideExisting = true)
+    public function initTemas($overrideExisting = true)
     {
-        if (null !== $this->collMaterials && !$overrideExisting) {
+        if (null !== $this->collTemas && !$overrideExisting) {
             return;
         }
-        $this->collMaterials = new PropelObjectCollection();
-        $this->collMaterials->setModel('Material');
+        $this->collTemas = new PropelObjectCollection();
+        $this->collTemas->setModel('Tema');
     }
 
     /**
-     * Gets an array of Material objects which contain a foreign key that references this object.
+     * Gets an array of Tema objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -1113,70 +1113,70 @@ abstract class BaseSubcontenido extends BaseObject
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Material[] List of Material objects
+     * @return PropelObjectCollection|Tema[] List of Tema objects
      * @throws PropelException
      */
-    public function getMaterials($criteria = null, PropelPDO $con = null)
+    public function getTemas($criteria = null, PropelPDO $con = null)
     {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
+        if (null === $this->collTemas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTemas) {
                 // return empty collection
-                $this->initMaterials();
+                $this->initTemas();
             } else {
-                $collMaterials = MaterialQuery::create(null, $criteria)
+                $collTemas = TemaQuery::create(null, $criteria)
                     ->filterBySubcontenido($this)
                     ->find($con);
                 if (null !== $criteria) {
-                    return $collMaterials;
+                    return $collTemas;
                 }
-                $this->collMaterials = $collMaterials;
+                $this->collTemas = $collTemas;
             }
         }
 
-        return $this->collMaterials;
+        return $this->collTemas;
     }
 
     /**
-     * Sets a collection of Material objects related by a one-to-many relationship
+     * Sets a collection of Tema objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      PropelCollection $materials A Propel collection.
+     * @param      PropelCollection $temas A Propel collection.
      * @param      PropelPDO $con Optional connection object
      */
-    public function setMaterials(PropelCollection $materials, PropelPDO $con = null)
+    public function setTemas(PropelCollection $temas, PropelPDO $con = null)
     {
-        $this->materialsScheduledForDeletion = $this->getMaterials(new Criteria(), $con)->diff($materials);
+        $this->temasScheduledForDeletion = $this->getTemas(new Criteria(), $con)->diff($temas);
 
-        foreach ($this->materialsScheduledForDeletion as $materialRemoved) {
-            $materialRemoved->setSubcontenido(null);
+        foreach ($this->temasScheduledForDeletion as $temaRemoved) {
+            $temaRemoved->setSubcontenido(null);
         }
 
-        $this->collMaterials = null;
-        foreach ($materials as $material) {
-            $this->addMaterial($material);
+        $this->collTemas = null;
+        foreach ($temas as $tema) {
+            $this->addTema($tema);
         }
 
-        $this->collMaterials = $materials;
+        $this->collTemas = $temas;
     }
 
     /**
-     * Returns the number of related Material objects.
+     * Returns the number of related Tema objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      PropelPDO $con
-     * @return int             Count of related Material objects.
+     * @return int             Count of related Tema objects.
      * @throws PropelException
      */
-    public function countMaterials(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    public function countTemas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
     {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
+        if (null === $this->collTemas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTemas) {
                 return 0;
             } else {
-                $query = MaterialQuery::create(null, $criteria);
+                $query = TemaQuery::create(null, $criteria);
                 if ($distinct) {
                     $query->distinct();
                 }
@@ -1186,102 +1186,52 @@ abstract class BaseSubcontenido extends BaseObject
                     ->count($con);
             }
         } else {
-            return count($this->collMaterials);
+            return count($this->collTemas);
         }
     }
 
     /**
-     * Method called to associate a Material object to this object
-     * through the Material foreign key attribute.
+     * Method called to associate a Tema object to this object
+     * through the Tema foreign key attribute.
      *
-     * @param    Material $l Material
+     * @param    Tema $l Tema
      * @return   Subcontenido The current object (for fluent API support)
      */
-    public function addMaterial(Material $l)
+    public function addTema(Tema $l)
     {
-        if ($this->collMaterials === null) {
-            $this->initMaterials();
+        if ($this->collTemas === null) {
+            $this->initTemas();
         }
-        if (!$this->collMaterials->contains($l)) { // only add it if the **same** object is not already associated
-            $this->doAddMaterial($l);
+        if (!$this->collTemas->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddTema($l);
         }
 
         return $this;
     }
 
     /**
-     * @param	Material $material The material object to add.
+     * @param	Tema $tema The tema object to add.
      */
-    protected function doAddMaterial($material)
+    protected function doAddTema($tema)
     {
-        $this->collMaterials[]= $material;
-        $material->setSubcontenido($this);
+        $this->collTemas[]= $tema;
+        $tema->setSubcontenido($this);
     }
 
     /**
-     * @param	Material $material The material object to remove.
+     * @param	Tema $tema The tema object to remove.
      */
-    public function removeMaterial($material)
+    public function removeTema($tema)
     {
-        if ($this->getMaterials()->contains($material)) {
-            $this->collMaterials->remove($this->collMaterials->search($material));
-            if (null === $this->materialsScheduledForDeletion) {
-                $this->materialsScheduledForDeletion = clone $this->collMaterials;
-                $this->materialsScheduledForDeletion->clear();
+        if ($this->getTemas()->contains($tema)) {
+            $this->collTemas->remove($this->collTemas->search($tema));
+            if (null === $this->temasScheduledForDeletion) {
+                $this->temasScheduledForDeletion = clone $this->collTemas;
+                $this->temasScheduledForDeletion->clear();
             }
-            $this->materialsScheduledForDeletion[]= $material;
-            $material->setSubcontenido(null);
+            $this->temasScheduledForDeletion[]= $tema;
+            $tema->setSubcontenido(null);
         }
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Subcontenido is new, it will return
-     * an empty collection; or if this Subcontenido has previously
-     * been saved, it will retrieve related Materials from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Subcontenido.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Material[] List of Material objects
-     */
-    public function getMaterialsJoinBiblioteca($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Biblioteca', $join_behavior);
-
-        return $this->getMaterials($query, $con);
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Subcontenido is new, it will return
-     * an empty collection; or if this Subcontenido has previously
-     * been saved, it will retrieve related Materials from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Subcontenido.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Material[] List of Material objects
-     */
-    public function getMaterialsJoinCarrera($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Carrera', $join_behavior);
-
-        return $this->getMaterials($query, $con);
     }
 
     /**
@@ -1313,17 +1263,17 @@ abstract class BaseSubcontenido extends BaseObject
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collMaterials) {
-                foreach ($this->collMaterials as $o) {
+            if ($this->collTemas) {
+                foreach ($this->collTemas as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
         } // if ($deep)
 
-        if ($this->collMaterials instanceof PropelCollection) {
-            $this->collMaterials->clearIterator();
+        if ($this->collTemas instanceof PropelCollection) {
+            $this->collTemas->clearIterator();
         }
-        $this->collMaterials = null;
+        $this->collTemas = null;
         $this->aContenido = null;
     }
 

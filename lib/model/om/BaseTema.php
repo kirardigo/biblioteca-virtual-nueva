@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'biblioteca' table.
+ * Base class that represents a row from the 'tema' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseBiblioteca extends BaseObject 
+abstract class BaseTema extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'BibliotecaPeer';
+    const PEER = 'TemaPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        BibliotecaPeer
+     * @var        TemaPeer
      */
     protected static $peer;
 
@@ -31,10 +31,10 @@ abstract class BaseBiblioteca extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the id_biblioteca field.
+     * The value for the id_tema field.
      * @var        int
      */
-    protected $id_biblioteca;
+    protected $id_tema;
 
     /**
      * The value for the nombre field.
@@ -43,15 +43,21 @@ abstract class BaseBiblioteca extends BaseObject
     protected $nombre;
 
     /**
-     * The value for the pjuridica_id_pjuridica field.
-     * @var        int
+     * The value for the numero_tema field.
+     * @var        string
      */
-    protected $pjuridica_id_pjuridica;
+    protected $numero_tema;
 
     /**
-     * @var        Pjuridica
+     * The value for the subcontenido_id_subcontenido field.
+     * @var        int
      */
-    protected $aPjuridica;
+    protected $subcontenido_id_subcontenido;
+
+    /**
+     * @var        Subcontenido
+     */
+    protected $aSubcontenido;
 
     /**
      * @var        PropelObjectCollection|Material[] Collection to store aggregation of Material objects.
@@ -79,14 +85,14 @@ abstract class BaseBiblioteca extends BaseObject
     protected $materialsScheduledForDeletion = null;
 
     /**
-     * Get the [id_biblioteca] column value.
+     * Get the [id_tema] column value.
      * 
      * @return   int
      */
-    public function getIdBiblioteca()
+    public function getIdTema()
     {
 
-        return $this->id_biblioteca;
+        return $this->id_tema;
     }
 
     /**
@@ -101,42 +107,53 @@ abstract class BaseBiblioteca extends BaseObject
     }
 
     /**
-     * Get the [pjuridica_id_pjuridica] column value.
+     * Get the [numero_tema] column value.
      * 
-     * @return   int
+     * @return   string
      */
-    public function getPjuridicaIdPjuridica()
+    public function getNumeroTema()
     {
 
-        return $this->pjuridica_id_pjuridica;
+        return $this->numero_tema;
     }
 
     /**
-     * Set the value of [id_biblioteca] column.
+     * Get the [subcontenido_id_subcontenido] column value.
+     * 
+     * @return   int
+     */
+    public function getSubcontenidoIdSubcontenido()
+    {
+
+        return $this->subcontenido_id_subcontenido;
+    }
+
+    /**
+     * Set the value of [id_tema] column.
      * 
      * @param      int $v new value
-     * @return   Biblioteca The current object (for fluent API support)
+     * @return   Tema The current object (for fluent API support)
      */
-    public function setIdBiblioteca($v)
+    public function setIdTema($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->id_biblioteca !== $v) {
-            $this->id_biblioteca = $v;
-            $this->modifiedColumns[] = BibliotecaPeer::ID_BIBLIOTECA;
+        if ($this->id_tema !== $v) {
+            $this->id_tema = $v;
+            $this->modifiedColumns[] = TemaPeer::ID_TEMA;
         }
 
 
         return $this;
-    } // setIdBiblioteca()
+    } // setIdTema()
 
     /**
      * Set the value of [nombre] column.
      * 
      * @param      string $v new value
-     * @return   Biblioteca The current object (for fluent API support)
+     * @return   Tema The current object (for fluent API support)
      */
     public function setNombre($v)
     {
@@ -146,7 +163,7 @@ abstract class BaseBiblioteca extends BaseObject
 
         if ($this->nombre !== $v) {
             $this->nombre = $v;
-            $this->modifiedColumns[] = BibliotecaPeer::NOMBRE;
+            $this->modifiedColumns[] = TemaPeer::NOMBRE;
         }
 
 
@@ -154,29 +171,50 @@ abstract class BaseBiblioteca extends BaseObject
     } // setNombre()
 
     /**
-     * Set the value of [pjuridica_id_pjuridica] column.
+     * Set the value of [numero_tema] column.
+     * 
+     * @param      string $v new value
+     * @return   Tema The current object (for fluent API support)
+     */
+    public function setNumeroTema($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->numero_tema !== $v) {
+            $this->numero_tema = $v;
+            $this->modifiedColumns[] = TemaPeer::NUMERO_TEMA;
+        }
+
+
+        return $this;
+    } // setNumeroTema()
+
+    /**
+     * Set the value of [subcontenido_id_subcontenido] column.
      * 
      * @param      int $v new value
-     * @return   Biblioteca The current object (for fluent API support)
+     * @return   Tema The current object (for fluent API support)
      */
-    public function setPjuridicaIdPjuridica($v)
+    public function setSubcontenidoIdSubcontenido($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->pjuridica_id_pjuridica !== $v) {
-            $this->pjuridica_id_pjuridica = $v;
-            $this->modifiedColumns[] = BibliotecaPeer::PJURIDICA_ID_PJURIDICA;
+        if ($this->subcontenido_id_subcontenido !== $v) {
+            $this->subcontenido_id_subcontenido = $v;
+            $this->modifiedColumns[] = TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO;
         }
 
-        if ($this->aPjuridica !== null && $this->aPjuridica->getIdPjuridica() !== $v) {
-            $this->aPjuridica = null;
+        if ($this->aSubcontenido !== null && $this->aSubcontenido->getIdSubcontenido() !== $v) {
+            $this->aSubcontenido = null;
         }
 
 
         return $this;
-    } // setPjuridicaIdPjuridica()
+    } // setSubcontenidoIdSubcontenido()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -210,9 +248,10 @@ abstract class BaseBiblioteca extends BaseObject
     {
         try {
 
-            $this->id_biblioteca = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->id_tema = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->pjuridica_id_pjuridica = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->numero_tema = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->subcontenido_id_subcontenido = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -221,10 +260,10 @@ abstract class BaseBiblioteca extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = BibliotecaPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = TemaPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Biblioteca object", $e);
+            throw new PropelException("Error populating Tema object", $e);
         }
     }
 
@@ -244,8 +283,8 @@ abstract class BaseBiblioteca extends BaseObject
     public function ensureConsistency()
     {
 
-        if ($this->aPjuridica !== null && $this->pjuridica_id_pjuridica !== $this->aPjuridica->getIdPjuridica()) {
-            $this->aPjuridica = null;
+        if ($this->aSubcontenido !== null && $this->subcontenido_id_subcontenido !== $this->aSubcontenido->getIdSubcontenido()) {
+            $this->aSubcontenido = null;
         }
     } // ensureConsistency
 
@@ -270,13 +309,13 @@ abstract class BaseBiblioteca extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(BibliotecaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = BibliotecaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = TemaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -286,7 +325,7 @@ abstract class BaseBiblioteca extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aPjuridica = null;
+            $this->aSubcontenido = null;
             $this->collMaterials = null;
 
         } // if (deep)
@@ -309,16 +348,16 @@ abstract class BaseBiblioteca extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(BibliotecaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = BibliotecaQuery::create()
+            $deleteQuery = TemaQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseBiblioteca:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseTema:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -331,7 +370,7 @@ abstract class BaseBiblioteca extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseBiblioteca:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseTema:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -368,7 +407,7 @@ abstract class BaseBiblioteca extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(BibliotecaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -376,7 +415,7 @@ abstract class BaseBiblioteca extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseBiblioteca:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseTema:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -399,12 +438,12 @@ abstract class BaseBiblioteca extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseBiblioteca:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseTema:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                BibliotecaPeer::addInstanceToPool($this);
+                TemaPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -439,11 +478,11 @@ abstract class BaseBiblioteca extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aPjuridica !== null) {
-                if ($this->aPjuridica->isModified() || $this->aPjuridica->isNew()) {
-                    $affectedRows += $this->aPjuridica->save($con);
+            if ($this->aSubcontenido !== null) {
+                if ($this->aSubcontenido->isModified() || $this->aSubcontenido->isNew()) {
+                    $affectedRows += $this->aSubcontenido->save($con);
                 }
-                $this->setPjuridica($this->aPjuridica);
+                $this->setSubcontenido($this->aSubcontenido);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -494,24 +533,27 @@ abstract class BaseBiblioteca extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = BibliotecaPeer::ID_BIBLIOTECA;
-        if (null !== $this->id_biblioteca) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . BibliotecaPeer::ID_BIBLIOTECA . ')');
+        $this->modifiedColumns[] = TemaPeer::ID_TEMA;
+        if (null !== $this->id_tema) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . TemaPeer::ID_TEMA . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(BibliotecaPeer::ID_BIBLIOTECA)) {
-            $modifiedColumns[':p' . $index++]  = '`ID_BIBLIOTECA`';
+        if ($this->isColumnModified(TemaPeer::ID_TEMA)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_TEMA`';
         }
-        if ($this->isColumnModified(BibliotecaPeer::NOMBRE)) {
+        if ($this->isColumnModified(TemaPeer::NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
         }
-        if ($this->isColumnModified(BibliotecaPeer::PJURIDICA_ID_PJURIDICA)) {
-            $modifiedColumns[':p' . $index++]  = '`PJURIDICA_ID_PJURIDICA`';
+        if ($this->isColumnModified(TemaPeer::NUMERO_TEMA)) {
+            $modifiedColumns[':p' . $index++]  = '`NUMERO_TEMA`';
+        }
+        if ($this->isColumnModified(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) {
+            $modifiedColumns[':p' . $index++]  = '`SUBCONTENIDO_ID_SUBCONTENIDO`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `biblioteca` (%s) VALUES (%s)',
+            'INSERT INTO `tema` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -520,14 +562,17 @@ abstract class BaseBiblioteca extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID_BIBLIOTECA`':						
-						$stmt->bindValue($identifier, $this->id_biblioteca, PDO::PARAM_INT);
+                    case '`ID_TEMA`':						
+						$stmt->bindValue($identifier, $this->id_tema, PDO::PARAM_INT);
                         break;
                     case '`NOMBRE`':						
 						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
                         break;
-                    case '`PJURIDICA_ID_PJURIDICA`':						
-						$stmt->bindValue($identifier, $this->pjuridica_id_pjuridica, PDO::PARAM_INT);
+                    case '`NUMERO_TEMA`':						
+						$stmt->bindValue($identifier, $this->numero_tema, PDO::PARAM_STR);
+                        break;
+                    case '`SUBCONTENIDO_ID_SUBCONTENIDO`':						
+						$stmt->bindValue($identifier, $this->subcontenido_id_subcontenido, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -542,7 +587,7 @@ abstract class BaseBiblioteca extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdBiblioteca($pk);
+        $this->setIdTema($pk);
 
         $this->setNew(false);
     }
@@ -628,14 +673,14 @@ abstract class BaseBiblioteca extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aPjuridica !== null) {
-                if (!$this->aPjuridica->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aPjuridica->getValidationFailures());
+            if ($this->aSubcontenido !== null) {
+                if (!$this->aSubcontenido->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSubcontenido->getValidationFailures());
                 }
             }
 
 
-            if (($retval = BibliotecaPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = TemaPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
@@ -667,7 +712,7 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = BibliotecaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = TemaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -684,13 +729,16 @@ abstract class BaseBiblioteca extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdBiblioteca();
+                return $this->getIdTema();
                 break;
             case 1:
                 return $this->getNombre();
                 break;
             case 2:
-                return $this->getPjuridicaIdPjuridica();
+                return $this->getNumeroTema();
+                break;
+            case 3:
+                return $this->getSubcontenidoIdSubcontenido();
                 break;
             default:
                 return null;
@@ -715,19 +763,20 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Biblioteca'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['Tema'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Biblioteca'][$this->getPrimaryKey()] = true;
-        $keys = BibliotecaPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['Tema'][$this->getPrimaryKey()] = true;
+        $keys = TemaPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdBiblioteca(),
+            $keys[0] => $this->getIdTema(),
             $keys[1] => $this->getNombre(),
-            $keys[2] => $this->getPjuridicaIdPjuridica(),
+            $keys[2] => $this->getNumeroTema(),
+            $keys[3] => $this->getSubcontenidoIdSubcontenido(),
         );
         if ($includeForeignObjects) {
-            if (null !== $this->aPjuridica) {
-                $result['Pjuridica'] = $this->aPjuridica->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            if (null !== $this->aSubcontenido) {
+                $result['Subcontenido'] = $this->aSubcontenido->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->collMaterials) {
                 $result['Materials'] = $this->collMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -750,7 +799,7 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = BibliotecaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = TemaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -767,13 +816,16 @@ abstract class BaseBiblioteca extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdBiblioteca($value);
+                $this->setIdTema($value);
                 break;
             case 1:
                 $this->setNombre($value);
                 break;
             case 2:
-                $this->setPjuridicaIdPjuridica($value);
+                $this->setNumeroTema($value);
+                break;
+            case 3:
+                $this->setSubcontenidoIdSubcontenido($value);
                 break;
         } // switch()
     }
@@ -797,11 +849,12 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = BibliotecaPeer::getFieldNames($keyType);
+        $keys = TemaPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdBiblioteca($arr[$keys[0]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdTema($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setPjuridicaIdPjuridica($arr[$keys[2]]);
+        if (array_key_exists($keys[2], $arr)) $this->setNumeroTema($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[3]]);
     }
 
     /**
@@ -811,11 +864,12 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(BibliotecaPeer::DATABASE_NAME);
+        $criteria = new Criteria(TemaPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(BibliotecaPeer::ID_BIBLIOTECA)) $criteria->add(BibliotecaPeer::ID_BIBLIOTECA, $this->id_biblioteca);
-        if ($this->isColumnModified(BibliotecaPeer::NOMBRE)) $criteria->add(BibliotecaPeer::NOMBRE, $this->nombre);
-        if ($this->isColumnModified(BibliotecaPeer::PJURIDICA_ID_PJURIDICA)) $criteria->add(BibliotecaPeer::PJURIDICA_ID_PJURIDICA, $this->pjuridica_id_pjuridica);
+        if ($this->isColumnModified(TemaPeer::ID_TEMA)) $criteria->add(TemaPeer::ID_TEMA, $this->id_tema);
+        if ($this->isColumnModified(TemaPeer::NOMBRE)) $criteria->add(TemaPeer::NOMBRE, $this->nombre);
+        if ($this->isColumnModified(TemaPeer::NUMERO_TEMA)) $criteria->add(TemaPeer::NUMERO_TEMA, $this->numero_tema);
+        if ($this->isColumnModified(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) $criteria->add(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $this->subcontenido_id_subcontenido);
 
         return $criteria;
     }
@@ -830,8 +884,8 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(BibliotecaPeer::DATABASE_NAME);
-        $criteria->add(BibliotecaPeer::ID_BIBLIOTECA, $this->id_biblioteca);
+        $criteria = new Criteria(TemaPeer::DATABASE_NAME);
+        $criteria->add(TemaPeer::ID_TEMA, $this->id_tema);
 
         return $criteria;
     }
@@ -842,18 +896,18 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdBiblioteca();
+        return $this->getIdTema();
     }
 
     /**
-     * Generic method to set the primary key (id_biblioteca column).
+     * Generic method to set the primary key (id_tema column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdBiblioteca($key);
+        $this->setIdTema($key);
     }
 
     /**
@@ -863,7 +917,7 @@ abstract class BaseBiblioteca extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdBiblioteca();
+        return null === $this->getIdTema();
     }
 
     /**
@@ -872,7 +926,7 @@ abstract class BaseBiblioteca extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Biblioteca (or compatible) type.
+     * @param      object $copyObj An object of Tema (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -880,7 +934,8 @@ abstract class BaseBiblioteca extends BaseObject
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setNombre($this->getNombre());
-        $copyObj->setPjuridicaIdPjuridica($this->getPjuridicaIdPjuridica());
+        $copyObj->setNumeroTema($this->getNumeroTema());
+        $copyObj->setSubcontenidoIdSubcontenido($this->getSubcontenidoIdSubcontenido());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -901,7 +956,7 @@ abstract class BaseBiblioteca extends BaseObject
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdBiblioteca(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdTema(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -914,7 +969,7 @@ abstract class BaseBiblioteca extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Biblioteca Clone of current object.
+     * @return                 Tema Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -934,38 +989,38 @@ abstract class BaseBiblioteca extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   BibliotecaPeer
+     * @return   TemaPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new BibliotecaPeer();
+            self::$peer = new TemaPeer();
         }
 
         return self::$peer;
     }
 
     /**
-     * Declares an association between this object and a Pjuridica object.
+     * Declares an association between this object and a Subcontenido object.
      *
-     * @param                  Pjuridica $v
-     * @return                 Biblioteca The current object (for fluent API support)
+     * @param                  Subcontenido $v
+     * @return                 Tema The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPjuridica(Pjuridica $v = null)
+    public function setSubcontenido(Subcontenido $v = null)
     {
         if ($v === null) {
-            $this->setPjuridicaIdPjuridica(NULL);
+            $this->setSubcontenidoIdSubcontenido(NULL);
         } else {
-            $this->setPjuridicaIdPjuridica($v->getIdPjuridica());
+            $this->setSubcontenidoIdSubcontenido($v->getIdSubcontenido());
         }
 
-        $this->aPjuridica = $v;
+        $this->aSubcontenido = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Pjuridica object, it will not be re-added.
+        // If this object has already been added to the Subcontenido object, it will not be re-added.
         if ($v !== null) {
-            $v->addBiblioteca($this);
+            $v->addTema($this);
         }
 
 
@@ -974,26 +1029,26 @@ abstract class BaseBiblioteca extends BaseObject
 
 
     /**
-     * Get the associated Pjuridica object
+     * Get the associated Subcontenido object
      *
      * @param      PropelPDO $con Optional Connection object.
-     * @return                 Pjuridica The associated Pjuridica object.
+     * @return                 Subcontenido The associated Subcontenido object.
      * @throws PropelException
      */
-    public function getPjuridica(PropelPDO $con = null)
+    public function getSubcontenido(PropelPDO $con = null)
     {
-        if ($this->aPjuridica === null && ($this->pjuridica_id_pjuridica !== null)) {
-            $this->aPjuridica = PjuridicaQuery::create()->findPk($this->pjuridica_id_pjuridica, $con);
+        if ($this->aSubcontenido === null && ($this->subcontenido_id_subcontenido !== null)) {
+            $this->aSubcontenido = SubcontenidoQuery::create()->findPk($this->subcontenido_id_subcontenido, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPjuridica->addBibliotecas($this);
+                $this->aSubcontenido->addTemas($this);
              */
         }
 
-        return $this->aPjuridica;
+        return $this->aSubcontenido;
     }
 
 
@@ -1053,7 +1108,7 @@ abstract class BaseBiblioteca extends BaseObject
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Biblioteca is new, it will return
+     * If this Tema is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -1069,7 +1124,7 @@ abstract class BaseBiblioteca extends BaseObject
                 $this->initMaterials();
             } else {
                 $collMaterials = MaterialQuery::create(null, $criteria)
-                    ->filterByBiblioteca($this)
+                    ->filterByTema($this)
                     ->find($con);
                 if (null !== $criteria) {
                     return $collMaterials;
@@ -1095,7 +1150,7 @@ abstract class BaseBiblioteca extends BaseObject
         $this->materialsScheduledForDeletion = $this->getMaterials(new Criteria(), $con)->diff($materials);
 
         foreach ($this->materialsScheduledForDeletion as $materialRemoved) {
-            $materialRemoved->setBiblioteca(null);
+            $materialRemoved->setTema(null);
         }
 
         $this->collMaterials = null;
@@ -1127,7 +1182,7 @@ abstract class BaseBiblioteca extends BaseObject
                 }
 
                 return $query
-                    ->filterByBiblioteca($this)
+                    ->filterByTema($this)
                     ->count($con);
             }
         } else {
@@ -1140,7 +1195,7 @@ abstract class BaseBiblioteca extends BaseObject
      * through the Material foreign key attribute.
      *
      * @param    Material $l Material
-     * @return   Biblioteca The current object (for fluent API support)
+     * @return   Tema The current object (for fluent API support)
      */
     public function addMaterial(Material $l)
     {
@@ -1160,7 +1215,7 @@ abstract class BaseBiblioteca extends BaseObject
     protected function doAddMaterial($material)
     {
         $this->collMaterials[]= $material;
-        $material->setBiblioteca($this);
+        $material->setTema($this);
     }
 
     /**
@@ -1175,7 +1230,7 @@ abstract class BaseBiblioteca extends BaseObject
                 $this->materialsScheduledForDeletion->clear();
             }
             $this->materialsScheduledForDeletion[]= $material;
-            $material->setBiblioteca(null);
+            $material->setTema(null);
         }
     }
 
@@ -1183,23 +1238,23 @@ abstract class BaseBiblioteca extends BaseObject
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this Biblioteca is new, it will return
-     * an empty collection; or if this Biblioteca has previously
+     * Otherwise if this Tema is new, it will return
+     * an empty collection; or if this Tema has previously
      * been saved, it will retrieve related Materials from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in Biblioteca.
+     * actually need in Tema.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|Material[] List of Material objects
      */
-    public function getMaterialsJoinTema($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getMaterialsJoinBiblioteca($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Tema', $join_behavior);
+        $query->joinWith('Biblioteca', $join_behavior);
 
         return $this->getMaterials($query, $con);
     }
@@ -1208,13 +1263,13 @@ abstract class BaseBiblioteca extends BaseObject
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this Biblioteca is new, it will return
-     * an empty collection; or if this Biblioteca has previously
+     * Otherwise if this Tema is new, it will return
+     * an empty collection; or if this Tema has previously
      * been saved, it will retrieve related Materials from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in Biblioteca.
+     * actually need in Tema.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
@@ -1234,9 +1289,10 @@ abstract class BaseBiblioteca extends BaseObject
      */
     public function clear()
     {
-        $this->id_biblioteca = null;
+        $this->id_tema = null;
         $this->nombre = null;
-        $this->pjuridica_id_pjuridica = null;
+        $this->numero_tema = null;
+        $this->subcontenido_id_subcontenido = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1268,17 +1324,17 @@ abstract class BaseBiblioteca extends BaseObject
             $this->collMaterials->clearIterator();
         }
         $this->collMaterials = null;
-        $this->aPjuridica = null;
+        $this->aSubcontenido = null;
     }
 
     /**
      * Return the string representation of this object
      *
-     * @return string The value of the 'nombre' column
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->getNombre();
+        return (string) $this->exportTo(TemaPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -1288,7 +1344,7 @@ abstract class BaseBiblioteca extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseBiblioteca:' . $name))
+		if ($callable = sfMixer::getCallable('BaseTema:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -1298,4 +1354,4 @@ abstract class BaseBiblioteca extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseBiblioteca
+} // BaseTema

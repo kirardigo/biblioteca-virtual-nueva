@@ -24,9 +24,9 @@
  * @method     SubcontenidoQuery rightJoinContenido($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Contenido relation
  * @method     SubcontenidoQuery innerJoinContenido($relationAlias = null) Adds a INNER JOIN clause to the query using the Contenido relation
  *
- * @method     SubcontenidoQuery leftJoinMaterial($relationAlias = null) Adds a LEFT JOIN clause to the query using the Material relation
- * @method     SubcontenidoQuery rightJoinMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Material relation
- * @method     SubcontenidoQuery innerJoinMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the Material relation
+ * @method     SubcontenidoQuery leftJoinTema($relationAlias = null) Adds a LEFT JOIN clause to the query using the Tema relation
+ * @method     SubcontenidoQuery rightJoinTema($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Tema relation
+ * @method     SubcontenidoQuery innerJoinTema($relationAlias = null) Adds a INNER JOIN clause to the query using the Tema relation
  *
  * @method     Subcontenido findOne(PropelPDO $con = null) Return the first Subcontenido matching the query
  * @method     Subcontenido findOneOrCreate(PropelPDO $con = null) Return the first Subcontenido matching the query, or a new Subcontenido object populated from the query conditions when no match is found
@@ -424,41 +424,41 @@ abstract class BaseSubcontenidoQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Material object
+     * Filter the query by a related Tema object
      *
-     * @param   Material|PropelObjectCollection $material  the related object to use as filter
+     * @param   Tema|PropelObjectCollection $tema  the related object to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   SubcontenidoQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterByMaterial($material, $comparison = null)
+    public function filterByTema($tema, $comparison = null)
     {
-        if ($material instanceof Material) {
+        if ($tema instanceof Tema) {
             return $this
-                ->addUsingAlias(SubcontenidoPeer::ID_SUBCONTENIDO, $material->getSubcontenidoIdSubcontenido(), $comparison);
-        } elseif ($material instanceof PropelObjectCollection) {
+                ->addUsingAlias(SubcontenidoPeer::ID_SUBCONTENIDO, $tema->getSubcontenidoIdSubcontenido(), $comparison);
+        } elseif ($tema instanceof PropelObjectCollection) {
             return $this
-                ->useMaterialQuery()
-                ->filterByPrimaryKeys($material->getPrimaryKeys())
+                ->useTemaQuery()
+                ->filterByPrimaryKeys($tema->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByMaterial() only accepts arguments of type Material or PropelCollection');
+            throw new PropelException('filterByTema() only accepts arguments of type Tema or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Material relation
+     * Adds a JOIN clause to the query using the Tema relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return SubcontenidoQuery The current query, for fluid interface
      */
-    public function joinMaterial($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinTema($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Material');
+        $relationMap = $tableMap->getRelation('Tema');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -473,14 +473,14 @@ abstract class BaseSubcontenidoQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Material');
+            $this->addJoinObject($join, 'Tema');
         }
 
         return $this;
     }
 
     /**
-     * Use the Material relation Material object
+     * Use the Tema relation Tema object
      *
      * @see       useQuery()
      *
@@ -488,13 +488,13 @@ abstract class BaseSubcontenidoQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   MaterialQuery A secondary query class using the current class as primary query
+     * @return   TemaQuery A secondary query class using the current class as primary query
      */
-    public function useMaterialQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useTemaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinMaterial($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Material', 'MaterialQuery');
+            ->joinTema($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Tema', 'TemaQuery');
     }
 
     /**

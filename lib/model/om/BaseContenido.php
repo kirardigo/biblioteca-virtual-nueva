@@ -38,7 +38,7 @@ abstract class BaseContenido extends BaseObject
 
     /**
      * The value for the numero_contenido field.
-     * @var        int
+     * @var        string
      */
     protected $numero_contenido;
 
@@ -87,7 +87,7 @@ abstract class BaseContenido extends BaseObject
     /**
      * Get the [numero_contenido] column value.
      * 
-     * @return   int
+     * @return   string
      */
     public function getNumeroContenido()
     {
@@ -130,13 +130,13 @@ abstract class BaseContenido extends BaseObject
     /**
      * Set the value of [numero_contenido] column.
      * 
-     * @param      int $v new value
+     * @param      string $v new value
      * @return   Contenido The current object (for fluent API support)
      */
     public function setNumeroContenido($v)
     {
         if ($v !== null) {
-            $v = (int) $v;
+            $v = (string) $v;
         }
 
         if ($this->numero_contenido !== $v) {
@@ -202,7 +202,7 @@ abstract class BaseContenido extends BaseObject
         try {
 
             $this->id_contenido = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->numero_contenido = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->numero_contenido = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->nombre = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->resetModified();
 
@@ -499,7 +499,7 @@ abstract class BaseContenido extends BaseObject
 						$stmt->bindValue($identifier, $this->id_contenido, PDO::PARAM_INT);
                         break;
                     case '`NUMERO_CONTENIDO`':						
-						$stmt->bindValue($identifier, $this->numero_contenido, PDO::PARAM_INT);
+						$stmt->bindValue($identifier, $this->numero_contenido, PDO::PARAM_STR);
                         break;
                     case '`NOMBRE`':						
 						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
@@ -1132,11 +1132,11 @@ abstract class BaseContenido extends BaseObject
     /**
      * Return the string representation of this object
      *
-     * @return string
+     * @return string The value of the 'nombre' column
      */
     public function __toString()
     {
-        return (string) $this->exportTo(ContenidoPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->getNombre();
     }
 
     /**

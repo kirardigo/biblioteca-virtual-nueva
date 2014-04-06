@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'contenido' table.
+ * This class defines the structure of the 'tema' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class ContenidoTableMap extends TableMap
+class TemaTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.ContenidoTableMap';
+    const CLASS_NAME = 'lib.model.map.TemaTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,16 +32,16 @@ class ContenidoTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('contenido');
-        $this->setPhpName('Contenido');
-        $this->setClassname('Contenido');
+        $this->setName('tema');
+        $this->setPhpName('Tema');
+        $this->setClassname('Tema');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('ID_CONTENIDO', 'IdContenido', 'INTEGER', true, null, null);
-        $this->addColumn('NUMERO_CONTENIDO', 'NumeroContenido', 'VARCHAR', true, 45, null);
+        $this->addPrimaryKey('ID_TEMA', 'IdTema', 'INTEGER', true, null, null);
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
-        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
+        $this->addColumn('NUMERO_TEMA', 'NumeroTema', 'VARCHAR', false, 45, null);
+        $this->addForeignKey('SUBCONTENIDO_ID_SUBCONTENIDO', 'SubcontenidoIdSubcontenido', 'INTEGER', 'subcontenido', 'ID_SUBCONTENIDO', true, null, null);
         // validators
     } // initialize()
 
@@ -50,7 +50,8 @@ class ContenidoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::ONE_TO_MANY, array('id_contenido' => 'contenido_id_contenido', ), 'CASCADE', 'CASCADE', 'Subcontenidos');
+        $this->addRelation('Subcontenido', 'Subcontenido', RelationMap::MANY_TO_ONE, array('subcontenido_id_subcontenido' => 'id_subcontenido', ), null, null);
+        $this->addRelation('Material', 'Material', RelationMap::ONE_TO_MANY, array('id_tema' => 'tema_id_tema', ), null, null, 'Materials');
     } // buildRelations()
 
     /**
@@ -67,4 +68,4 @@ class ContenidoTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // ContenidoTableMap
+} // TemaTableMap

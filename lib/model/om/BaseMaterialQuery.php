@@ -13,7 +13,7 @@
  * @method     MaterialQuery orderByAutor($order = Criteria::ASC) Order by the autor column
  * @method     MaterialQuery orderByDescripcion($order = Criteria::ASC) Order by the descripcion column
  * @method     MaterialQuery orderByFisico($order = Criteria::ASC) Order by the fisico column
- * @method     MaterialQuery orderBySubcontenidoIdSubcontenido($order = Criteria::ASC) Order by the subcontenido_id_subcontenido column
+ * @method     MaterialQuery orderByTemaIdTema($order = Criteria::ASC) Order by the tema_id_tema column
  * @method     MaterialQuery orderByBibliotecaIdBiblioteca($order = Criteria::ASC) Order by the biblioteca_id_biblioteca column
  * @method     MaterialQuery orderByCarreraIdCarrera($order = Criteria::ASC) Order by the carrera_id_carrera column
  *
@@ -24,7 +24,7 @@
  * @method     MaterialQuery groupByAutor() Group by the autor column
  * @method     MaterialQuery groupByDescripcion() Group by the descripcion column
  * @method     MaterialQuery groupByFisico() Group by the fisico column
- * @method     MaterialQuery groupBySubcontenidoIdSubcontenido() Group by the subcontenido_id_subcontenido column
+ * @method     MaterialQuery groupByTemaIdTema() Group by the tema_id_tema column
  * @method     MaterialQuery groupByBibliotecaIdBiblioteca() Group by the biblioteca_id_biblioteca column
  * @method     MaterialQuery groupByCarreraIdCarrera() Group by the carrera_id_carrera column
  *
@@ -32,9 +32,9 @@
  * @method     MaterialQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     MaterialQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     MaterialQuery leftJoinSubcontenido($relationAlias = null) Adds a LEFT JOIN clause to the query using the Subcontenido relation
- * @method     MaterialQuery rightJoinSubcontenido($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Subcontenido relation
- * @method     MaterialQuery innerJoinSubcontenido($relationAlias = null) Adds a INNER JOIN clause to the query using the Subcontenido relation
+ * @method     MaterialQuery leftJoinTema($relationAlias = null) Adds a LEFT JOIN clause to the query using the Tema relation
+ * @method     MaterialQuery rightJoinTema($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Tema relation
+ * @method     MaterialQuery innerJoinTema($relationAlias = null) Adds a INNER JOIN clause to the query using the Tema relation
  *
  * @method     MaterialQuery leftJoinBiblioteca($relationAlias = null) Adds a LEFT JOIN clause to the query using the Biblioteca relation
  * @method     MaterialQuery rightJoinBiblioteca($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Biblioteca relation
@@ -62,7 +62,7 @@
  * @method     Material findOneByAutor(string $autor) Return the first Material filtered by the autor column
  * @method     Material findOneByDescripcion(string $descripcion) Return the first Material filtered by the descripcion column
  * @method     Material findOneByFisico(boolean $fisico) Return the first Material filtered by the fisico column
- * @method     Material findOneBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return the first Material filtered by the subcontenido_id_subcontenido column
+ * @method     Material findOneByTemaIdTema(int $tema_id_tema) Return the first Material filtered by the tema_id_tema column
  * @method     Material findOneByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return the first Material filtered by the biblioteca_id_biblioteca column
  * @method     Material findOneByCarreraIdCarrera(int $carrera_id_carrera) Return the first Material filtered by the carrera_id_carrera column
  *
@@ -73,7 +73,7 @@
  * @method     array findByAutor(string $autor) Return Material objects filtered by the autor column
  * @method     array findByDescripcion(string $descripcion) Return Material objects filtered by the descripcion column
  * @method     array findByFisico(boolean $fisico) Return Material objects filtered by the fisico column
- * @method     array findBySubcontenidoIdSubcontenido(int $subcontenido_id_subcontenido) Return Material objects filtered by the subcontenido_id_subcontenido column
+ * @method     array findByTemaIdTema(int $tema_id_tema) Return Material objects filtered by the tema_id_tema column
  * @method     array findByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return Material objects filtered by the biblioteca_id_biblioteca column
  * @method     array findByCarreraIdCarrera(int $carrera_id_carrera) Return Material objects filtered by the carrera_id_carrera column
  *
@@ -166,7 +166,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `FISICO`, `SUBCONTENIDO_ID_SUBCONTENIDO`, `BIBLIOTECA_ID_BIBLIOTECA`, `CARRERA_ID_CARRERA` FROM `material` WHERE `ID_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `FISICO`, `TEMA_ID_TEMA`, `BIBLIOTECA_ID_BIBLIOTECA`, `CARRERA_ID_CARRERA` FROM `material` WHERE `ID_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -455,18 +455,18 @@ abstract class BaseMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the subcontenido_id_subcontenido column
+     * Filter the query on the tema_id_tema column
      *
      * Example usage:
      * <code>
-     * $query->filterBySubcontenidoIdSubcontenido(1234); // WHERE subcontenido_id_subcontenido = 1234
-     * $query->filterBySubcontenidoIdSubcontenido(array(12, 34)); // WHERE subcontenido_id_subcontenido IN (12, 34)
-     * $query->filterBySubcontenidoIdSubcontenido(array('min' => 12)); // WHERE subcontenido_id_subcontenido > 12
+     * $query->filterByTemaIdTema(1234); // WHERE tema_id_tema = 1234
+     * $query->filterByTemaIdTema(array(12, 34)); // WHERE tema_id_tema IN (12, 34)
+     * $query->filterByTemaIdTema(array('min' => 12)); // WHERE tema_id_tema > 12
      * </code>
      *
-     * @see       filterBySubcontenido()
+     * @see       filterByTema()
      *
-     * @param     mixed $subcontenidoIdSubcontenido The value to use as filter.
+     * @param     mixed $temaIdTema The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -474,16 +474,16 @@ abstract class BaseMaterialQuery extends ModelCriteria
      *
      * @return MaterialQuery The current query, for fluid interface
      */
-    public function filterBySubcontenidoIdSubcontenido($subcontenidoIdSubcontenido = null, $comparison = null)
+    public function filterByTemaIdTema($temaIdTema = null, $comparison = null)
     {
-        if (is_array($subcontenidoIdSubcontenido)) {
+        if (is_array($temaIdTema)) {
             $useMinMax = false;
-            if (isset($subcontenidoIdSubcontenido['min'])) {
-                $this->addUsingAlias(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $subcontenidoIdSubcontenido['min'], Criteria::GREATER_EQUAL);
+            if (isset($temaIdTema['min'])) {
+                $this->addUsingAlias(MaterialPeer::TEMA_ID_TEMA, $temaIdTema['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($subcontenidoIdSubcontenido['max'])) {
-                $this->addUsingAlias(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $subcontenidoIdSubcontenido['max'], Criteria::LESS_EQUAL);
+            if (isset($temaIdTema['max'])) {
+                $this->addUsingAlias(MaterialPeer::TEMA_ID_TEMA, $temaIdTema['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -494,7 +494,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $subcontenidoIdSubcontenido, $comparison);
+        return $this->addUsingAlias(MaterialPeer::TEMA_ID_TEMA, $temaIdTema, $comparison);
     }
 
     /**
@@ -584,43 +584,43 @@ abstract class BaseMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Subcontenido object
+     * Filter the query by a related Tema object
      *
-     * @param   Subcontenido|PropelObjectCollection $subcontenido The related object(s) to use as filter
+     * @param   Tema|PropelObjectCollection $tema The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return   MaterialQuery The current query, for fluid interface
      * @throws   PropelException - if the provided filter is invalid.
      */
-    public function filterBySubcontenido($subcontenido, $comparison = null)
+    public function filterByTema($tema, $comparison = null)
     {
-        if ($subcontenido instanceof Subcontenido) {
+        if ($tema instanceof Tema) {
             return $this
-                ->addUsingAlias(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $subcontenido->getIdSubcontenido(), $comparison);
-        } elseif ($subcontenido instanceof PropelObjectCollection) {
+                ->addUsingAlias(MaterialPeer::TEMA_ID_TEMA, $tema->getIdTema(), $comparison);
+        } elseif ($tema instanceof PropelObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(MaterialPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $subcontenido->toKeyValue('PrimaryKey', 'IdSubcontenido'), $comparison);
+                ->addUsingAlias(MaterialPeer::TEMA_ID_TEMA, $tema->toKeyValue('PrimaryKey', 'IdTema'), $comparison);
         } else {
-            throw new PropelException('filterBySubcontenido() only accepts arguments of type Subcontenido or PropelCollection');
+            throw new PropelException('filterByTema() only accepts arguments of type Tema or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Subcontenido relation
+     * Adds a JOIN clause to the query using the Tema relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return MaterialQuery The current query, for fluid interface
      */
-    public function joinSubcontenido($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinTema($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Subcontenido');
+        $relationMap = $tableMap->getRelation('Tema');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -635,14 +635,14 @@ abstract class BaseMaterialQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Subcontenido');
+            $this->addJoinObject($join, 'Tema');
         }
 
         return $this;
     }
 
     /**
-     * Use the Subcontenido relation Subcontenido object
+     * Use the Tema relation Tema object
      *
      * @see       useQuery()
      *
@@ -650,13 +650,13 @@ abstract class BaseMaterialQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   SubcontenidoQuery A secondary query class using the current class as primary query
+     * @return   TemaQuery A secondary query class using the current class as primary query
      */
-    public function useSubcontenidoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useTemaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinSubcontenido($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Subcontenido', 'SubcontenidoQuery');
+            ->joinTema($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Tema', 'TemaQuery');
     }
 
     /**

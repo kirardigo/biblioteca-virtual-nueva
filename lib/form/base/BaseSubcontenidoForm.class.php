@@ -27,10 +27,6 @@ abstract class BaseSubcontenidoForm extends BaseFormPropel
       'contenido_id_contenido' => new sfValidatorPropelChoice(array('model' => 'Contenido', 'column' => 'id_contenido')),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorPropelUnique(array('model' => 'Subcontenido', 'column' => array('numero_subcontenido')))
-    );
-
     $this->widgetSchema->setNameFormat('subcontenido[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

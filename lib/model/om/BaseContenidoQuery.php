@@ -26,11 +26,11 @@
  * @method     Contenido findOneOrCreate(PropelPDO $con = null) Return the first Contenido matching the query, or a new Contenido object populated from the query conditions when no match is found
  *
  * @method     Contenido findOneByIdContenido(int $id_contenido) Return the first Contenido filtered by the id_contenido column
- * @method     Contenido findOneByNumeroContenido(int $numero_contenido) Return the first Contenido filtered by the numero_contenido column
+ * @method     Contenido findOneByNumeroContenido(string $numero_contenido) Return the first Contenido filtered by the numero_contenido column
  * @method     Contenido findOneByNombre(string $nombre) Return the first Contenido filtered by the nombre column
  *
  * @method     array findByIdContenido(int $id_contenido) Return Contenido objects filtered by the id_contenido column
- * @method     array findByNumeroContenido(int $numero_contenido) Return Contenido objects filtered by the numero_contenido column
+ * @method     array findByNumeroContenido(string $numero_contenido) Return Contenido objects filtered by the numero_contenido column
  * @method     array findByNombre(string $nombre) Return Contenido objects filtered by the nombre column
  *
  * @package    propel.generator.lib.model.om
@@ -243,36 +243,24 @@ abstract class BaseContenidoQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByNumeroContenido(1234); // WHERE numero_contenido = 1234
-     * $query->filterByNumeroContenido(array(12, 34)); // WHERE numero_contenido IN (12, 34)
-     * $query->filterByNumeroContenido(array('min' => 12)); // WHERE numero_contenido > 12
+     * $query->filterByNumeroContenido('fooValue');   // WHERE numero_contenido = 'fooValue'
+     * $query->filterByNumeroContenido('%fooValue%'); // WHERE numero_contenido LIKE '%fooValue%'
      * </code>
      *
-     * @param     mixed $numeroContenido The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $numeroContenido The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ContenidoQuery The current query, for fluid interface
      */
     public function filterByNumeroContenido($numeroContenido = null, $comparison = null)
     {
-        if (is_array($numeroContenido)) {
-            $useMinMax = false;
-            if (isset($numeroContenido['min'])) {
-                $this->addUsingAlias(ContenidoPeer::NUMERO_CONTENIDO, $numeroContenido['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($numeroContenido['max'])) {
-                $this->addUsingAlias(ContenidoPeer::NUMERO_CONTENIDO, $numeroContenido['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
+        if (null === $comparison) {
+            if (is_array($numeroContenido)) {
                 $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $numeroContenido)) {
+                $numeroContenido = str_replace('*', '%', $numeroContenido);
+                $comparison = Criteria::LIKE;
             }
         }
 
