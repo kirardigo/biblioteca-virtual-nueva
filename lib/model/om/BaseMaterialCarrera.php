@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'tema' table.
+ * Base class that represents a row from the 'material_carrera' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseTema extends BaseObject 
+abstract class BaseMaterialCarrera extends BaseObject 
 {
 
     /**
      * Peer class name
      */
-    const PEER = 'TemaPeer';
+    const PEER = 'MaterialCarreraPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        TemaPeer
+     * @var        MaterialCarreraPeer
      */
     protected static $peer;
 
@@ -31,38 +31,32 @@ abstract class BaseTema extends BaseObject
     protected $startCopy = false;
 
     /**
-     * The value for the id_tema field.
+     * The value for the id_material_carrera field.
      * @var        int
      */
-    protected $id_tema;
+    protected $id_material_carrera;
 
     /**
-     * The value for the nombre field.
-     * @var        string
-     */
-    protected $nombre;
-
-    /**
-     * The value for the numero_tema field.
-     * @var        string
-     */
-    protected $numero_tema;
-
-    /**
-     * The value for the subcontenido_id_subcontenido field.
+     * The value for the material_id_material field.
      * @var        int
      */
-    protected $subcontenido_id_subcontenido;
+    protected $material_id_material;
 
     /**
-     * @var        Subcontenido
+     * The value for the carrera_id_carrera field.
+     * @var        int
      */
-    protected $aSubcontenido;
+    protected $carrera_id_carrera;
 
     /**
-     * @var        PropelObjectCollection|Material[] Collection to store aggregation of Material objects.
+     * @var        Material
      */
-    protected $collMaterials;
+    protected $aMaterial;
+
+    /**
+     * @var        Carrera
+     */
+    protected $aCarrera;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -79,142 +73,108 @@ abstract class BaseTema extends BaseObject
     protected $alreadyInValidation = false;
 
     /**
-     * An array of objects scheduled for deletion.
-     * @var		PropelObjectCollection
-     */
-    protected $materialsScheduledForDeletion = null;
-
-    /**
-     * Get the [id_tema] column value.
+     * Get the [id_material_carrera] column value.
      * 
      * @return   int
      */
-    public function getIdTema()
+    public function getIdMaterialCarrera()
     {
 
-        return $this->id_tema;
+        return $this->id_material_carrera;
     }
 
     /**
-     * Get the [nombre] column value.
-     * 
-     * @return   string
-     */
-    public function getNombre()
-    {
-
-        return $this->nombre;
-    }
-
-    /**
-     * Get the [numero_tema] column value.
-     * 
-     * @return   string
-     */
-    public function getNumeroTema()
-    {
-
-        return $this->numero_tema;
-    }
-
-    /**
-     * Get the [subcontenido_id_subcontenido] column value.
+     * Get the [material_id_material] column value.
      * 
      * @return   int
      */
-    public function getSubcontenidoIdSubcontenido()
+    public function getMaterialIdMaterial()
     {
 
-        return $this->subcontenido_id_subcontenido;
+        return $this->material_id_material;
     }
 
     /**
-     * Set the value of [id_tema] column.
+     * Get the [carrera_id_carrera] column value.
+     * 
+     * @return   int
+     */
+    public function getCarreraIdCarrera()
+    {
+
+        return $this->carrera_id_carrera;
+    }
+
+    /**
+     * Set the value of [id_material_carrera] column.
      * 
      * @param      int $v new value
-     * @return   Tema The current object (for fluent API support)
+     * @return   MaterialCarrera The current object (for fluent API support)
      */
-    public function setIdTema($v)
+    public function setIdMaterialCarrera($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->id_tema !== $v) {
-            $this->id_tema = $v;
-            $this->modifiedColumns[] = TemaPeer::ID_TEMA;
+        if ($this->id_material_carrera !== $v) {
+            $this->id_material_carrera = $v;
+            $this->modifiedColumns[] = MaterialCarreraPeer::ID_MATERIAL_CARRERA;
         }
 
 
         return $this;
-    } // setIdTema()
+    } // setIdMaterialCarrera()
 
     /**
-     * Set the value of [nombre] column.
-     * 
-     * @param      string $v new value
-     * @return   Tema The current object (for fluent API support)
-     */
-    public function setNombre($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->nombre !== $v) {
-            $this->nombre = $v;
-            $this->modifiedColumns[] = TemaPeer::NOMBRE;
-        }
-
-
-        return $this;
-    } // setNombre()
-
-    /**
-     * Set the value of [numero_tema] column.
-     * 
-     * @param      string $v new value
-     * @return   Tema The current object (for fluent API support)
-     */
-    public function setNumeroTema($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->numero_tema !== $v) {
-            $this->numero_tema = $v;
-            $this->modifiedColumns[] = TemaPeer::NUMERO_TEMA;
-        }
-
-
-        return $this;
-    } // setNumeroTema()
-
-    /**
-     * Set the value of [subcontenido_id_subcontenido] column.
+     * Set the value of [material_id_material] column.
      * 
      * @param      int $v new value
-     * @return   Tema The current object (for fluent API support)
+     * @return   MaterialCarrera The current object (for fluent API support)
      */
-    public function setSubcontenidoIdSubcontenido($v)
+    public function setMaterialIdMaterial($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->subcontenido_id_subcontenido !== $v) {
-            $this->subcontenido_id_subcontenido = $v;
-            $this->modifiedColumns[] = TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO;
+        if ($this->material_id_material !== $v) {
+            $this->material_id_material = $v;
+            $this->modifiedColumns[] = MaterialCarreraPeer::MATERIAL_ID_MATERIAL;
         }
 
-        if ($this->aSubcontenido !== null && $this->aSubcontenido->getIdSubcontenido() !== $v) {
-            $this->aSubcontenido = null;
+        if ($this->aMaterial !== null && $this->aMaterial->getIdMaterial() !== $v) {
+            $this->aMaterial = null;
         }
 
 
         return $this;
-    } // setSubcontenidoIdSubcontenido()
+    } // setMaterialIdMaterial()
+
+    /**
+     * Set the value of [carrera_id_carrera] column.
+     * 
+     * @param      int $v new value
+     * @return   MaterialCarrera The current object (for fluent API support)
+     */
+    public function setCarreraIdCarrera($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->carrera_id_carrera !== $v) {
+            $this->carrera_id_carrera = $v;
+            $this->modifiedColumns[] = MaterialCarreraPeer::CARRERA_ID_CARRERA;
+        }
+
+        if ($this->aCarrera !== null && $this->aCarrera->getIdCarrera() !== $v) {
+            $this->aCarrera = null;
+        }
+
+
+        return $this;
+    } // setCarreraIdCarrera()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -248,10 +208,9 @@ abstract class BaseTema extends BaseObject
     {
         try {
 
-            $this->id_tema = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->numero_tema = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->subcontenido_id_subcontenido = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
+            $this->id_material_carrera = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->material_id_material = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->carrera_id_carrera = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -260,10 +219,10 @@ abstract class BaseTema extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 4; // 4 = TemaPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 3; // 3 = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Tema object", $e);
+            throw new PropelException("Error populating MaterialCarrera object", $e);
         }
     }
 
@@ -283,8 +242,11 @@ abstract class BaseTema extends BaseObject
     public function ensureConsistency()
     {
 
-        if ($this->aSubcontenido !== null && $this->subcontenido_id_subcontenido !== $this->aSubcontenido->getIdSubcontenido()) {
-            $this->aSubcontenido = null;
+        if ($this->aMaterial !== null && $this->material_id_material !== $this->aMaterial->getIdMaterial()) {
+            $this->aMaterial = null;
+        }
+        if ($this->aCarrera !== null && $this->carrera_id_carrera !== $this->aCarrera->getIdCarrera()) {
+            $this->aCarrera = null;
         }
     } // ensureConsistency
 
@@ -309,13 +271,13 @@ abstract class BaseTema extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = TemaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = MaterialCarreraPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -325,9 +287,8 @@ abstract class BaseTema extends BaseObject
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aSubcontenido = null;
-            $this->collMaterials = null;
-
+            $this->aMaterial = null;
+            $this->aCarrera = null;
         } // if (deep)
     }
 
@@ -348,16 +309,16 @@ abstract class BaseTema extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = TemaQuery::create()
+            $deleteQuery = MaterialCarreraQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseTema:delete:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseMaterialCarrera:delete:pre') as $callable)
 			{
 			  if (call_user_func($callable, $this, $con))
 			  {
@@ -370,7 +331,7 @@ abstract class BaseTema extends BaseObject
                 $deleteQuery->delete($con);
                 $this->postDelete($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseTema:delete:post') as $callable)
+				foreach (sfMixer::getCallables('BaseMaterialCarrera:delete:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con);
 				}
@@ -407,7 +368,7 @@ abstract class BaseTema extends BaseObject
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(TemaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -415,7 +376,7 @@ abstract class BaseTema extends BaseObject
         try {
             $ret = $this->preSave($con);
 			// symfony_behaviors behavior
-			foreach (sfMixer::getCallables('BaseTema:save:pre') as $callable)
+			foreach (sfMixer::getCallables('BaseMaterialCarrera:save:pre') as $callable)
 			{
 			  if (is_integer($affectedRows = call_user_func($callable, $this, $con)))
 			  {
@@ -438,12 +399,12 @@ abstract class BaseTema extends BaseObject
                 }
                 $this->postSave($con);
 				// symfony_behaviors behavior
-				foreach (sfMixer::getCallables('BaseTema:save:post') as $callable)
+				foreach (sfMixer::getCallables('BaseMaterialCarrera:save:post') as $callable)
 				{
 				  call_user_func($callable, $this, $con, $affectedRows);
 				}
 
-                TemaPeer::addInstanceToPool($this);
+                MaterialCarreraPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -478,11 +439,18 @@ abstract class BaseTema extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSubcontenido !== null) {
-                if ($this->aSubcontenido->isModified() || $this->aSubcontenido->isNew()) {
-                    $affectedRows += $this->aSubcontenido->save($con);
+            if ($this->aMaterial !== null) {
+                if ($this->aMaterial->isModified() || $this->aMaterial->isNew()) {
+                    $affectedRows += $this->aMaterial->save($con);
                 }
-                $this->setSubcontenido($this->aSubcontenido);
+                $this->setMaterial($this->aMaterial);
+            }
+
+            if ($this->aCarrera !== null) {
+                if ($this->aCarrera->isModified() || $this->aCarrera->isNew()) {
+                    $affectedRows += $this->aCarrera->save($con);
+                }
+                $this->setCarrera($this->aCarrera);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -494,23 +462,6 @@ abstract class BaseTema extends BaseObject
                 }
                 $affectedRows += 1;
                 $this->resetModified();
-            }
-
-            if ($this->materialsScheduledForDeletion !== null) {
-                if (!$this->materialsScheduledForDeletion->isEmpty()) {
-                    MaterialQuery::create()
-                        ->filterByPrimaryKeys($this->materialsScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
-                    $this->materialsScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collMaterials !== null) {
-                foreach ($this->collMaterials as $referrerFK) {
-                    if (!$referrerFK->isDeleted()) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
-                }
             }
 
             $this->alreadyInSave = false;
@@ -533,27 +484,24 @@ abstract class BaseTema extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = TemaPeer::ID_TEMA;
-        if (null !== $this->id_tema) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . TemaPeer::ID_TEMA . ')');
+        $this->modifiedColumns[] = MaterialCarreraPeer::ID_MATERIAL_CARRERA;
+        if (null !== $this->id_material_carrera) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . MaterialCarreraPeer::ID_MATERIAL_CARRERA . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(TemaPeer::ID_TEMA)) {
-            $modifiedColumns[':p' . $index++]  = '`ID_TEMA`';
+        if ($this->isColumnModified(MaterialCarreraPeer::ID_MATERIAL_CARRERA)) {
+            $modifiedColumns[':p' . $index++]  = '`ID_MATERIAL_CARRERA`';
         }
-        if ($this->isColumnModified(TemaPeer::NOMBRE)) {
-            $modifiedColumns[':p' . $index++]  = '`NOMBRE`';
+        if ($this->isColumnModified(MaterialCarreraPeer::MATERIAL_ID_MATERIAL)) {
+            $modifiedColumns[':p' . $index++]  = '`MATERIAL_ID_MATERIAL`';
         }
-        if ($this->isColumnModified(TemaPeer::NUMERO_TEMA)) {
-            $modifiedColumns[':p' . $index++]  = '`NUMERO_TEMA`';
-        }
-        if ($this->isColumnModified(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) {
-            $modifiedColumns[':p' . $index++]  = '`SUBCONTENIDO_ID_SUBCONTENIDO`';
+        if ($this->isColumnModified(MaterialCarreraPeer::CARRERA_ID_CARRERA)) {
+            $modifiedColumns[':p' . $index++]  = '`CARRERA_ID_CARRERA`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `tema` (%s) VALUES (%s)',
+            'INSERT INTO `material_carrera` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -562,17 +510,14 @@ abstract class BaseTema extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID_TEMA`':						
-						$stmt->bindValue($identifier, $this->id_tema, PDO::PARAM_INT);
+                    case '`ID_MATERIAL_CARRERA`':						
+						$stmt->bindValue($identifier, $this->id_material_carrera, PDO::PARAM_INT);
                         break;
-                    case '`NOMBRE`':						
-						$stmt->bindValue($identifier, $this->nombre, PDO::PARAM_STR);
+                    case '`MATERIAL_ID_MATERIAL`':						
+						$stmt->bindValue($identifier, $this->material_id_material, PDO::PARAM_INT);
                         break;
-                    case '`NUMERO_TEMA`':						
-						$stmt->bindValue($identifier, $this->numero_tema, PDO::PARAM_STR);
-                        break;
-                    case '`SUBCONTENIDO_ID_SUBCONTENIDO`':						
-						$stmt->bindValue($identifier, $this->subcontenido_id_subcontenido, PDO::PARAM_INT);
+                    case '`CARRERA_ID_CARRERA`':						
+						$stmt->bindValue($identifier, $this->carrera_id_carrera, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -587,7 +532,7 @@ abstract class BaseTema extends BaseObject
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdTema($pk);
+        $this->setIdMaterialCarrera($pk);
 
         $this->setNew(false);
     }
@@ -673,25 +618,23 @@ abstract class BaseTema extends BaseObject
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSubcontenido !== null) {
-                if (!$this->aSubcontenido->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSubcontenido->getValidationFailures());
+            if ($this->aMaterial !== null) {
+                if (!$this->aMaterial->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aMaterial->getValidationFailures());
+                }
+            }
+
+            if ($this->aCarrera !== null) {
+                if (!$this->aCarrera->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aCarrera->getValidationFailures());
                 }
             }
 
 
-            if (($retval = TemaPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = MaterialCarreraPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
-
-                if ($this->collMaterials !== null) {
-                    foreach ($this->collMaterials as $referrerFK) {
-                        if (!$referrerFK->validate($columns)) {
-                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-                        }
-                    }
-                }
 
 
             $this->alreadyInValidation = false;
@@ -712,7 +655,7 @@ abstract class BaseTema extends BaseObject
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = TemaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = MaterialCarreraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -729,16 +672,13 @@ abstract class BaseTema extends BaseObject
     {
         switch ($pos) {
             case 0:
-                return $this->getIdTema();
+                return $this->getIdMaterialCarrera();
                 break;
             case 1:
-                return $this->getNombre();
+                return $this->getMaterialIdMaterial();
                 break;
             case 2:
-                return $this->getNumeroTema();
-                break;
-            case 3:
-                return $this->getSubcontenidoIdSubcontenido();
+                return $this->getCarreraIdCarrera();
                 break;
             default:
                 return null;
@@ -763,23 +703,22 @@ abstract class BaseTema extends BaseObject
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Tema'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['MaterialCarrera'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Tema'][$this->getPrimaryKey()] = true;
-        $keys = TemaPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['MaterialCarrera'][$this->getPrimaryKey()] = true;
+        $keys = MaterialCarreraPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdTema(),
-            $keys[1] => $this->getNombre(),
-            $keys[2] => $this->getNumeroTema(),
-            $keys[3] => $this->getSubcontenidoIdSubcontenido(),
+            $keys[0] => $this->getIdMaterialCarrera(),
+            $keys[1] => $this->getMaterialIdMaterial(),
+            $keys[2] => $this->getCarreraIdCarrera(),
         );
         if ($includeForeignObjects) {
-            if (null !== $this->aSubcontenido) {
-                $result['Subcontenido'] = $this->aSubcontenido->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            if (null !== $this->aMaterial) {
+                $result['Material'] = $this->aMaterial->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collMaterials) {
-                $result['Materials'] = $this->collMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->aCarrera) {
+                $result['Carrera'] = $this->aCarrera->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -799,7 +738,7 @@ abstract class BaseTema extends BaseObject
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = TemaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = MaterialCarreraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -816,16 +755,13 @@ abstract class BaseTema extends BaseObject
     {
         switch ($pos) {
             case 0:
-                $this->setIdTema($value);
+                $this->setIdMaterialCarrera($value);
                 break;
             case 1:
-                $this->setNombre($value);
+                $this->setMaterialIdMaterial($value);
                 break;
             case 2:
-                $this->setNumeroTema($value);
-                break;
-            case 3:
-                $this->setSubcontenidoIdSubcontenido($value);
+                $this->setCarreraIdCarrera($value);
                 break;
         } // switch()
     }
@@ -849,12 +785,11 @@ abstract class BaseTema extends BaseObject
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = TemaPeer::getFieldNames($keyType);
+        $keys = MaterialCarreraPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdTema($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setNumeroTema($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setSubcontenidoIdSubcontenido($arr[$keys[3]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdMaterialCarrera($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setMaterialIdMaterial($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCarreraIdCarrera($arr[$keys[2]]);
     }
 
     /**
@@ -864,12 +799,11 @@ abstract class BaseTema extends BaseObject
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(TemaPeer::DATABASE_NAME);
+        $criteria = new Criteria(MaterialCarreraPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(TemaPeer::ID_TEMA)) $criteria->add(TemaPeer::ID_TEMA, $this->id_tema);
-        if ($this->isColumnModified(TemaPeer::NOMBRE)) $criteria->add(TemaPeer::NOMBRE, $this->nombre);
-        if ($this->isColumnModified(TemaPeer::NUMERO_TEMA)) $criteria->add(TemaPeer::NUMERO_TEMA, $this->numero_tema);
-        if ($this->isColumnModified(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO)) $criteria->add(TemaPeer::SUBCONTENIDO_ID_SUBCONTENIDO, $this->subcontenido_id_subcontenido);
+        if ($this->isColumnModified(MaterialCarreraPeer::ID_MATERIAL_CARRERA)) $criteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, $this->id_material_carrera);
+        if ($this->isColumnModified(MaterialCarreraPeer::MATERIAL_ID_MATERIAL)) $criteria->add(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, $this->material_id_material);
+        if ($this->isColumnModified(MaterialCarreraPeer::CARRERA_ID_CARRERA)) $criteria->add(MaterialCarreraPeer::CARRERA_ID_CARRERA, $this->carrera_id_carrera);
 
         return $criteria;
     }
@@ -884,8 +818,8 @@ abstract class BaseTema extends BaseObject
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(TemaPeer::DATABASE_NAME);
-        $criteria->add(TemaPeer::ID_TEMA, $this->id_tema);
+        $criteria = new Criteria(MaterialCarreraPeer::DATABASE_NAME);
+        $criteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, $this->id_material_carrera);
 
         return $criteria;
     }
@@ -896,18 +830,18 @@ abstract class BaseTema extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getIdTema();
+        return $this->getIdMaterialCarrera();
     }
 
     /**
-     * Generic method to set the primary key (id_tema column).
+     * Generic method to set the primary key (id_material_carrera column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdTema($key);
+        $this->setIdMaterialCarrera($key);
     }
 
     /**
@@ -917,7 +851,7 @@ abstract class BaseTema extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdTema();
+        return null === $this->getIdMaterialCarrera();
     }
 
     /**
@@ -926,16 +860,15 @@ abstract class BaseTema extends BaseObject
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of Tema (or compatible) type.
+     * @param      object $copyObj An object of MaterialCarrera (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setNombre($this->getNombre());
-        $copyObj->setNumeroTema($this->getNumeroTema());
-        $copyObj->setSubcontenidoIdSubcontenido($this->getSubcontenidoIdSubcontenido());
+        $copyObj->setMaterialIdMaterial($this->getMaterialIdMaterial());
+        $copyObj->setCarreraIdCarrera($this->getCarreraIdCarrera());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -944,19 +877,13 @@ abstract class BaseTema extends BaseObject
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getMaterials() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addMaterial($relObj->copy($deepCopy));
-                }
-            }
-
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdTema(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdMaterialCarrera(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -969,7 +896,7 @@ abstract class BaseTema extends BaseObject
      * objects.
      *
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return                 Tema Clone of current object.
+     * @return                 MaterialCarrera Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -989,38 +916,38 @@ abstract class BaseTema extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return   TemaPeer
+     * @return   MaterialCarreraPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new TemaPeer();
+            self::$peer = new MaterialCarreraPeer();
         }
 
         return self::$peer;
     }
 
     /**
-     * Declares an association between this object and a Subcontenido object.
+     * Declares an association between this object and a Material object.
      *
-     * @param                  Subcontenido $v
-     * @return                 Tema The current object (for fluent API support)
+     * @param                  Material $v
+     * @return                 MaterialCarrera The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setSubcontenido(Subcontenido $v = null)
+    public function setMaterial(Material $v = null)
     {
         if ($v === null) {
-            $this->setSubcontenidoIdSubcontenido(NULL);
+            $this->setMaterialIdMaterial(NULL);
         } else {
-            $this->setSubcontenidoIdSubcontenido($v->getIdSubcontenido());
+            $this->setMaterialIdMaterial($v->getIdMaterial());
         }
 
-        $this->aSubcontenido = $v;
+        $this->aMaterial = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Subcontenido object, it will not be re-added.
+        // If this object has already been added to the Material object, it will not be re-added.
         if ($v !== null) {
-            $v->addTema($this);
+            $v->addMaterialCarrera($this);
         }
 
 
@@ -1029,234 +956,77 @@ abstract class BaseTema extends BaseObject
 
 
     /**
-     * Get the associated Subcontenido object
+     * Get the associated Material object
      *
      * @param      PropelPDO $con Optional Connection object.
-     * @return                 Subcontenido The associated Subcontenido object.
+     * @return                 Material The associated Material object.
      * @throws PropelException
      */
-    public function getSubcontenido(PropelPDO $con = null)
+    public function getMaterial(PropelPDO $con = null)
     {
-        if ($this->aSubcontenido === null && ($this->subcontenido_id_subcontenido !== null)) {
-            $this->aSubcontenido = SubcontenidoQuery::create()->findPk($this->subcontenido_id_subcontenido, $con);
+        if ($this->aMaterial === null && ($this->material_id_material !== null)) {
+            $this->aMaterial = MaterialQuery::create()->findPk($this->material_id_material, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aSubcontenido->addTemas($this);
+                $this->aMaterial->addMaterialCarreras($this);
              */
         }
 
-        return $this->aSubcontenido;
-    }
-
-
-    /**
-     * Initializes a collection based on the name of a relation.
-     * Avoids crafting an 'init[$relationName]s' method name
-     * that wouldn't work when StandardEnglishPluralizer is used.
-     *
-     * @param      string $relationName The name of the relation to initialize
-     * @return void
-     */
-    public function initRelation($relationName)
-    {
-        if ('Material' == $relationName) {
-            $this->initMaterials();
-        }
+        return $this->aMaterial;
     }
 
     /**
-     * Clears out the collMaterials collection
+     * Declares an association between this object and a Carrera object.
      *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return void
-     * @see        addMaterials()
-     */
-    public function clearMaterials()
-    {
-        $this->collMaterials = null; // important to set this to NULL since that means it is uninitialized
-    }
-
-    /**
-     * Initializes the collMaterials collection.
-     *
-     * By default this just sets the collMaterials collection to an empty array (like clearcollMaterials());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param      boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initMaterials($overrideExisting = true)
-    {
-        if (null !== $this->collMaterials && !$overrideExisting) {
-            return;
-        }
-        $this->collMaterials = new PropelObjectCollection();
-        $this->collMaterials->setModel('Material');
-    }
-
-    /**
-     * Gets an array of Material objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Tema is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Material[] List of Material objects
+     * @param                  Carrera $v
+     * @return                 MaterialCarrera The current object (for fluent API support)
      * @throws PropelException
      */
-    public function getMaterials($criteria = null, PropelPDO $con = null)
+    public function setCarrera(Carrera $v = null)
     {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
-                // return empty collection
-                $this->initMaterials();
-            } else {
-                $collMaterials = MaterialQuery::create(null, $criteria)
-                    ->filterByTema($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    return $collMaterials;
-                }
-                $this->collMaterials = $collMaterials;
-            }
-        }
-
-        return $this->collMaterials;
-    }
-
-    /**
-     * Sets a collection of Material objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param      PropelCollection $materials A Propel collection.
-     * @param      PropelPDO $con Optional connection object
-     */
-    public function setMaterials(PropelCollection $materials, PropelPDO $con = null)
-    {
-        $this->materialsScheduledForDeletion = $this->getMaterials(new Criteria(), $con)->diff($materials);
-
-        foreach ($this->materialsScheduledForDeletion as $materialRemoved) {
-            $materialRemoved->setTema(null);
-        }
-
-        $this->collMaterials = null;
-        foreach ($materials as $material) {
-            $this->addMaterial($material);
-        }
-
-        $this->collMaterials = $materials;
-    }
-
-    /**
-     * Returns the number of related Material objects.
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct
-     * @param      PropelPDO $con
-     * @return int             Count of related Material objects.
-     * @throws PropelException
-     */
-    public function countMaterials(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-    {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
-                return 0;
-            } else {
-                $query = MaterialQuery::create(null, $criteria);
-                if ($distinct) {
-                    $query->distinct();
-                }
-
-                return $query
-                    ->filterByTema($this)
-                    ->count($con);
-            }
+        if ($v === null) {
+            $this->setCarreraIdCarrera(NULL);
         } else {
-            return count($this->collMaterials);
+            $this->setCarreraIdCarrera($v->getIdCarrera());
         }
-    }
 
-    /**
-     * Method called to associate a Material object to this object
-     * through the Material foreign key attribute.
-     *
-     * @param    Material $l Material
-     * @return   Tema The current object (for fluent API support)
-     */
-    public function addMaterial(Material $l)
-    {
-        if ($this->collMaterials === null) {
-            $this->initMaterials();
+        $this->aCarrera = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Carrera object, it will not be re-added.
+        if ($v !== null) {
+            $v->addMaterialCarrera($this);
         }
-        if (!$this->collMaterials->contains($l)) { // only add it if the **same** object is not already associated
-            $this->doAddMaterial($l);
-        }
+
 
         return $this;
     }
 
-    /**
-     * @param	Material $material The material object to add.
-     */
-    protected function doAddMaterial($material)
-    {
-        $this->collMaterials[]= $material;
-        $material->setTema($this);
-    }
 
     /**
-     * @param	Material $material The material object to remove.
+     * Get the associated Carrera object
+     *
+     * @param      PropelPDO $con Optional Connection object.
+     * @return                 Carrera The associated Carrera object.
+     * @throws PropelException
      */
-    public function removeMaterial($material)
+    public function getCarrera(PropelPDO $con = null)
     {
-        if ($this->getMaterials()->contains($material)) {
-            $this->collMaterials->remove($this->collMaterials->search($material));
-            if (null === $this->materialsScheduledForDeletion) {
-                $this->materialsScheduledForDeletion = clone $this->collMaterials;
-                $this->materialsScheduledForDeletion->clear();
-            }
-            $this->materialsScheduledForDeletion[]= $material;
-            $material->setTema(null);
+        if ($this->aCarrera === null && ($this->carrera_id_carrera !== null)) {
+            $this->aCarrera = CarreraQuery::create()->findPk($this->carrera_id_carrera, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aCarrera->addMaterialCarreras($this);
+             */
         }
-    }
 
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Tema is new, it will return
-     * an empty collection; or if this Tema has previously
-     * been saved, it will retrieve related Materials from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Tema.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Material[] List of Material objects
-     */
-    public function getMaterialsJoinBiblioteca($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Biblioteca', $join_behavior);
-
-        return $this->getMaterials($query, $con);
+        return $this->aCarrera;
     }
 
     /**
@@ -1264,10 +1034,9 @@ abstract class BaseTema extends BaseObject
      */
     public function clear()
     {
-        $this->id_tema = null;
-        $this->nombre = null;
-        $this->numero_tema = null;
-        $this->subcontenido_id_subcontenido = null;
+        $this->id_material_carrera = null;
+        $this->material_id_material = null;
+        $this->carrera_id_carrera = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1288,28 +1057,20 @@ abstract class BaseTema extends BaseObject
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collMaterials) {
-                foreach ($this->collMaterials as $o) {
-                    $o->clearAllReferences($deep);
-                }
-            }
         } // if ($deep)
 
-        if ($this->collMaterials instanceof PropelCollection) {
-            $this->collMaterials->clearIterator();
-        }
-        $this->collMaterials = null;
-        $this->aSubcontenido = null;
+        $this->aMaterial = null;
+        $this->aCarrera = null;
     }
 
     /**
      * Return the string representation of this object
      *
-     * @return string The value of the 'nombre' column
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->getNombre();
+        return (string) $this->exportTo(MaterialCarreraPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**
@@ -1319,7 +1080,7 @@ abstract class BaseTema extends BaseObject
     {
         
 		// symfony_behaviors behavior
-		if ($callable = sfMixer::getCallable('BaseTema:' . $name))
+		if ($callable = sfMixer::getCallable('BaseMaterialCarrera:' . $name))
 		{
 		  array_unshift($params, $this);
 		  return call_user_func_array($callable, $params);
@@ -1329,4 +1090,4 @@ abstract class BaseTema extends BaseObject
         return parent::__call($name, $params);
     }
 
-} // BaseTema
+} // BaseMaterialCarrera

@@ -13,8 +13,20 @@ class MaterialForm extends BaseMaterialForm
   {
      $this->widgetSchema['tema_id_tema']->setLabel('Tema');
      $this->widgetSchema['biblioteca_id_biblioteca']->setLabel('Biblioteca');
-     $this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
-
+     //$this->widgetSchema['carrera_id_carrera']->setLabel('Carrera');
+        $this->embedRelation('MaterialCarrera', 
+                                 array('add_link'=>'<div class="btn btn-inverse">Agregar Carrera</div>',
+                                  
+                                    'delete_name'=>'Eliminar', 
+                                    'post_add'=>'add_new_link_post',
+                                    'title'=>'Carreras',
+                                    'post'=>'nada',
+                                    'empty_label'=>'Nueva Carrera',
+                                  
+                                    'delete_widget' => new sfWidgetFormDelete(array('alert_text'=>'¿Esta seguro de elminar la carrera?')
+                                     
+                                            ),
+                                  ));
           parent::configure();
     
     //error de csrf token si no se metia el codigo siguiente
@@ -22,7 +34,7 @@ class MaterialForm extends BaseMaterialForm
 
     $this->widgetSchema['archivo'] = new sfWidgetFormInputFileEditable(array(
       'label'     => 'Cargar archivo',
-      'file_src'  => '/uploads/files/'.$this->getObject()->getArchivo(),
+      'file_src'  => '/uploads/material/'.$this->getObject()->getArchivo(),
       'is_image'  => false,
       'edit_mode' => !$this->isNew(),
       'delete_label'=>'¿Eliminar el archivo?',
@@ -34,7 +46,8 @@ class MaterialForm extends BaseMaterialForm
  
   $this->setValidator('archivo', new sfValidatorFile(array(
     //'mime_types' => array('application/pdf'),
-    'path' => sfConfig::get('sf_upload_dir').'/files',
+    //'max_size'=>'999M',
+    'path' => sfConfig::get('sf_upload_dir').'/material',
     'required' => false,
       'validated_file_class' => 'SwimsuitValidatedFile',
   )));
@@ -49,11 +62,11 @@ class MaterialForm extends BaseMaterialForm
     $autor= strtoupper($this->getValue('autor'));
     $titulo= strtoupper($this->getValue('titulo'));
     //cambio espacios por guiones bajos
-    $autor=str_replace(" ", "_",$autor);
-    $titulo=str_replace(" ", "_",$titulo);
-    
-    $autor=str_replace(".", "_",$autor);
-    $titulo=str_replace(".", "_",$titulo);
+
+$revisador= new myFunctions();
+
+$autor=$revisador->sanearString($autor);
+$titulo=$revisador->sanearString($titulo);
     //extension de archivo
     if (empty ($autor)){
         $autor='ANONIMO';//anonimo, no autor, especial para caso de imagenes

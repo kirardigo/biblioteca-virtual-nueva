@@ -39,7 +39,7 @@ class MaterialTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID_MATERIAL', 'IdMaterial', 'INTEGER', true, null, null);
-        $this->addColumn('ARCHIVO', 'Archivo', 'VARCHAR', false, 45, null);
+        $this->addColumn('ARCHIVO', 'Archivo', 'CLOB', false, null, null);
         $this->addColumn('TITULO', 'Titulo', 'VARCHAR', true, 45, null);
         $this->getColumn('TITULO', false)->setPrimaryString(true);
         $this->addColumn('EDITORIAL', 'Editorial', 'VARCHAR', false, 45, null);
@@ -48,7 +48,6 @@ class MaterialTableMap extends TableMap
         $this->addColumn('FISICO', 'Fisico', 'BOOLEAN', false, 1, null);
         $this->addForeignKey('TEMA_ID_TEMA', 'TemaIdTema', 'INTEGER', 'tema', 'ID_TEMA', true, null, null);
         $this->addForeignKey('BIBLIOTECA_ID_BIBLIOTECA', 'BibliotecaIdBiblioteca', 'INTEGER', 'biblioteca', 'ID_BIBLIOTECA', true, null, null);
-        $this->addForeignKey('CARRERA_ID_CARRERA', 'CarreraIdCarrera', 'INTEGER', 'carrera', 'ID_CARRERA', true, null, null);
         // validators
     } // initialize()
 
@@ -59,9 +58,9 @@ class MaterialTableMap extends TableMap
     {
         $this->addRelation('Tema', 'Tema', RelationMap::MANY_TO_ONE, array('tema_id_tema' => 'id_tema', ), null, null);
         $this->addRelation('Biblioteca', 'Biblioteca', RelationMap::MANY_TO_ONE, array('biblioteca_id_biblioteca' => 'id_biblioteca', ), null, null);
-        $this->addRelation('Carrera', 'Carrera', RelationMap::MANY_TO_ONE, array('carrera_id_carrera' => 'id_carrera', ), null, null);
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), 'CASCADE', 'CASCADE', 'AccesoMaterials');
         $this->addRelation('MaterialAporte', 'MaterialAporte', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'MaterialAportes');
+        $this->addRelation('MaterialCarrera', 'MaterialCarrera', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'MaterialCarreras');
     } // buildRelations()
 
     /**

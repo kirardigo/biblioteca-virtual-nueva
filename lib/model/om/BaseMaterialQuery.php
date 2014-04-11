@@ -15,7 +15,6 @@
  * @method     MaterialQuery orderByFisico($order = Criteria::ASC) Order by the fisico column
  * @method     MaterialQuery orderByTemaIdTema($order = Criteria::ASC) Order by the tema_id_tema column
  * @method     MaterialQuery orderByBibliotecaIdBiblioteca($order = Criteria::ASC) Order by the biblioteca_id_biblioteca column
- * @method     MaterialQuery orderByCarreraIdCarrera($order = Criteria::ASC) Order by the carrera_id_carrera column
  *
  * @method     MaterialQuery groupByIdMaterial() Group by the id_material column
  * @method     MaterialQuery groupByArchivo() Group by the archivo column
@@ -26,7 +25,6 @@
  * @method     MaterialQuery groupByFisico() Group by the fisico column
  * @method     MaterialQuery groupByTemaIdTema() Group by the tema_id_tema column
  * @method     MaterialQuery groupByBibliotecaIdBiblioteca() Group by the biblioteca_id_biblioteca column
- * @method     MaterialQuery groupByCarreraIdCarrera() Group by the carrera_id_carrera column
  *
  * @method     MaterialQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     MaterialQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -40,10 +38,6 @@
  * @method     MaterialQuery rightJoinBiblioteca($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Biblioteca relation
  * @method     MaterialQuery innerJoinBiblioteca($relationAlias = null) Adds a INNER JOIN clause to the query using the Biblioteca relation
  *
- * @method     MaterialQuery leftJoinCarrera($relationAlias = null) Adds a LEFT JOIN clause to the query using the Carrera relation
- * @method     MaterialQuery rightJoinCarrera($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Carrera relation
- * @method     MaterialQuery innerJoinCarrera($relationAlias = null) Adds a INNER JOIN clause to the query using the Carrera relation
- *
  * @method     MaterialQuery leftJoinAccesoMaterial($relationAlias = null) Adds a LEFT JOIN clause to the query using the AccesoMaterial relation
  * @method     MaterialQuery rightJoinAccesoMaterial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AccesoMaterial relation
  * @method     MaterialQuery innerJoinAccesoMaterial($relationAlias = null) Adds a INNER JOIN clause to the query using the AccesoMaterial relation
@@ -51,6 +45,10 @@
  * @method     MaterialQuery leftJoinMaterialAporte($relationAlias = null) Adds a LEFT JOIN clause to the query using the MaterialAporte relation
  * @method     MaterialQuery rightJoinMaterialAporte($relationAlias = null) Adds a RIGHT JOIN clause to the query using the MaterialAporte relation
  * @method     MaterialQuery innerJoinMaterialAporte($relationAlias = null) Adds a INNER JOIN clause to the query using the MaterialAporte relation
+ *
+ * @method     MaterialQuery leftJoinMaterialCarrera($relationAlias = null) Adds a LEFT JOIN clause to the query using the MaterialCarrera relation
+ * @method     MaterialQuery rightJoinMaterialCarrera($relationAlias = null) Adds a RIGHT JOIN clause to the query using the MaterialCarrera relation
+ * @method     MaterialQuery innerJoinMaterialCarrera($relationAlias = null) Adds a INNER JOIN clause to the query using the MaterialCarrera relation
  *
  * @method     Material findOne(PropelPDO $con = null) Return the first Material matching the query
  * @method     Material findOneOrCreate(PropelPDO $con = null) Return the first Material matching the query, or a new Material object populated from the query conditions when no match is found
@@ -64,7 +62,6 @@
  * @method     Material findOneByFisico(boolean $fisico) Return the first Material filtered by the fisico column
  * @method     Material findOneByTemaIdTema(int $tema_id_tema) Return the first Material filtered by the tema_id_tema column
  * @method     Material findOneByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return the first Material filtered by the biblioteca_id_biblioteca column
- * @method     Material findOneByCarreraIdCarrera(int $carrera_id_carrera) Return the first Material filtered by the carrera_id_carrera column
  *
  * @method     array findByIdMaterial(int $id_material) Return Material objects filtered by the id_material column
  * @method     array findByArchivo(string $archivo) Return Material objects filtered by the archivo column
@@ -75,7 +72,6 @@
  * @method     array findByFisico(boolean $fisico) Return Material objects filtered by the fisico column
  * @method     array findByTemaIdTema(int $tema_id_tema) Return Material objects filtered by the tema_id_tema column
  * @method     array findByBibliotecaIdBiblioteca(int $biblioteca_id_biblioteca) Return Material objects filtered by the biblioteca_id_biblioteca column
- * @method     array findByCarreraIdCarrera(int $carrera_id_carrera) Return Material objects filtered by the carrera_id_carrera column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -166,7 +162,7 @@ abstract class BaseMaterialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `FISICO`, `TEMA_ID_TEMA`, `BIBLIOTECA_ID_BIBLIOTECA`, `CARRERA_ID_CARRERA` FROM `material` WHERE `ID_MATERIAL` = :p0';
+        $sql = 'SELECT `ID_MATERIAL`, `ARCHIVO`, `TITULO`, `EDITORIAL`, `AUTOR`, `DESCRIPCION`, `FISICO`, `TEMA_ID_TEMA`, `BIBLIOTECA_ID_BIBLIOTECA` FROM `material` WHERE `ID_MATERIAL` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -541,49 +537,6 @@ abstract class BaseMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the carrera_id_carrera column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByCarreraIdCarrera(1234); // WHERE carrera_id_carrera = 1234
-     * $query->filterByCarreraIdCarrera(array(12, 34)); // WHERE carrera_id_carrera IN (12, 34)
-     * $query->filterByCarreraIdCarrera(array('min' => 12)); // WHERE carrera_id_carrera > 12
-     * </code>
-     *
-     * @see       filterByCarrera()
-     *
-     * @param     mixed $carreraIdCarrera The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return MaterialQuery The current query, for fluid interface
-     */
-    public function filterByCarreraIdCarrera($carreraIdCarrera = null, $comparison = null)
-    {
-        if (is_array($carreraIdCarrera)) {
-            $useMinMax = false;
-            if (isset($carreraIdCarrera['min'])) {
-                $this->addUsingAlias(MaterialPeer::CARRERA_ID_CARRERA, $carreraIdCarrera['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($carreraIdCarrera['max'])) {
-                $this->addUsingAlias(MaterialPeer::CARRERA_ID_CARRERA, $carreraIdCarrera['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(MaterialPeer::CARRERA_ID_CARRERA, $carreraIdCarrera, $comparison);
-    }
-
-    /**
      * Filter the query by a related Tema object
      *
      * @param   Tema|PropelObjectCollection $tema The related object(s) to use as filter
@@ -736,82 +689,6 @@ abstract class BaseMaterialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Carrera object
-     *
-     * @param   Carrera|PropelObjectCollection $carrera The related object(s) to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return   MaterialQuery The current query, for fluid interface
-     * @throws   PropelException - if the provided filter is invalid.
-     */
-    public function filterByCarrera($carrera, $comparison = null)
-    {
-        if ($carrera instanceof Carrera) {
-            return $this
-                ->addUsingAlias(MaterialPeer::CARRERA_ID_CARRERA, $carrera->getIdCarrera(), $comparison);
-        } elseif ($carrera instanceof PropelObjectCollection) {
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-
-            return $this
-                ->addUsingAlias(MaterialPeer::CARRERA_ID_CARRERA, $carrera->toKeyValue('PrimaryKey', 'IdCarrera'), $comparison);
-        } else {
-            throw new PropelException('filterByCarrera() only accepts arguments of type Carrera or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the Carrera relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return MaterialQuery The current query, for fluid interface
-     */
-    public function joinCarrera($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Carrera');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'Carrera');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the Carrera relation Carrera object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   CarreraQuery A secondary query class using the current class as primary query
-     */
-    public function useCarreraQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinCarrera($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Carrera', 'CarreraQuery');
-    }
-
-    /**
      * Filter the query by a related AccesoMaterial object
      *
      * @param   AccesoMaterial|PropelObjectCollection $accesoMaterial  the related object to use as filter
@@ -957,6 +834,80 @@ abstract class BaseMaterialQuery extends ModelCriteria
         return $this
             ->joinMaterialAporte($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'MaterialAporte', 'MaterialAporteQuery');
+    }
+
+    /**
+     * Filter the query by a related MaterialCarrera object
+     *
+     * @param   MaterialCarrera|PropelObjectCollection $materialCarrera  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   MaterialQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByMaterialCarrera($materialCarrera, $comparison = null)
+    {
+        if ($materialCarrera instanceof MaterialCarrera) {
+            return $this
+                ->addUsingAlias(MaterialPeer::ID_MATERIAL, $materialCarrera->getMaterialIdMaterial(), $comparison);
+        } elseif ($materialCarrera instanceof PropelObjectCollection) {
+            return $this
+                ->useMaterialCarreraQuery()
+                ->filterByPrimaryKeys($materialCarrera->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByMaterialCarrera() only accepts arguments of type MaterialCarrera or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the MaterialCarrera relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return MaterialQuery The current query, for fluid interface
+     */
+    public function joinMaterialCarrera($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('MaterialCarrera');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'MaterialCarrera');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the MaterialCarrera relation MaterialCarrera object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   MaterialCarreraQuery A secondary query class using the current class as primary query
+     */
+    public function useMaterialCarreraQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinMaterialCarrera($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'MaterialCarrera', 'MaterialCarreraQuery');
     }
 
     /**

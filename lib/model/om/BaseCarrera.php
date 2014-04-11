@@ -48,9 +48,9 @@ abstract class BaseCarrera extends BaseObject
     protected $collCarreraFisicas;
 
     /**
-     * @var        PropelObjectCollection|Material[] Collection to store aggregation of Material objects.
+     * @var        PropelObjectCollection|MaterialCarrera[] Collection to store aggregation of MaterialCarrera objects.
      */
-    protected $collMaterials;
+    protected $collMaterialCarreras;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -76,7 +76,7 @@ abstract class BaseCarrera extends BaseObject
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $materialsScheduledForDeletion = null;
+    protected $materialCarrerasScheduledForDeletion = null;
 
     /**
      * Get the [id_carrera] column value.
@@ -248,7 +248,7 @@ abstract class BaseCarrera extends BaseObject
 
             $this->collCarreraFisicas = null;
 
-            $this->collMaterials = null;
+            $this->collMaterialCarreras = null;
 
         } // if (deep)
     }
@@ -423,17 +423,17 @@ abstract class BaseCarrera extends BaseObject
                 }
             }
 
-            if ($this->materialsScheduledForDeletion !== null) {
-                if (!$this->materialsScheduledForDeletion->isEmpty()) {
-                    MaterialQuery::create()
-                        ->filterByPrimaryKeys($this->materialsScheduledForDeletion->getPrimaryKeys(false))
+            if ($this->materialCarrerasScheduledForDeletion !== null) {
+                if (!$this->materialCarrerasScheduledForDeletion->isEmpty()) {
+                    MaterialCarreraQuery::create()
+                        ->filterByPrimaryKeys($this->materialCarrerasScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
-                    $this->materialsScheduledForDeletion = null;
+                    $this->materialCarrerasScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collMaterials !== null) {
-                foreach ($this->collMaterials as $referrerFK) {
+            if ($this->collMaterialCarreras !== null) {
+                foreach ($this->collMaterialCarreras as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -596,8 +596,8 @@ abstract class BaseCarrera extends BaseObject
                     }
                 }
 
-                if ($this->collMaterials !== null) {
-                    foreach ($this->collMaterials as $referrerFK) {
+                if ($this->collMaterialCarreras !== null) {
+                    foreach ($this->collMaterialCarreras as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -681,8 +681,8 @@ abstract class BaseCarrera extends BaseObject
             if (null !== $this->collCarreraFisicas) {
                 $result['CarreraFisicas'] = $this->collCarreraFisicas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collMaterials) {
-                $result['Materials'] = $this->collMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->collMaterialCarreras) {
+                $result['MaterialCarreras'] = $this->collMaterialCarreras->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -841,9 +841,9 @@ abstract class BaseCarrera extends BaseObject
                 }
             }
 
-            foreach ($this->getMaterials() as $relObj) {
+            foreach ($this->getMaterialCarreras() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addMaterial($relObj->copy($deepCopy));
+                    $copyObj->addMaterialCarrera($relObj->copy($deepCopy));
                 }
             }
 
@@ -911,8 +911,8 @@ abstract class BaseCarrera extends BaseObject
         if ('CarreraFisica' == $relationName) {
             $this->initCarreraFisicas();
         }
-        if ('Material' == $relationName) {
-            $this->initMaterials();
+        if ('MaterialCarrera' == $relationName) {
+            $this->initMaterialCarreras();
         }
     }
 
@@ -1109,23 +1109,23 @@ abstract class BaseCarrera extends BaseObject
     }
 
     /**
-     * Clears out the collMaterials collection
+     * Clears out the collMaterialCarreras collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addMaterials()
+     * @see        addMaterialCarreras()
      */
-    public function clearMaterials()
+    public function clearMaterialCarreras()
     {
-        $this->collMaterials = null; // important to set this to NULL since that means it is uninitialized
+        $this->collMaterialCarreras = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Initializes the collMaterials collection.
+     * Initializes the collMaterialCarreras collection.
      *
-     * By default this just sets the collMaterials collection to an empty array (like clearcollMaterials());
+     * By default this just sets the collMaterialCarreras collection to an empty array (like clearcollMaterialCarreras());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1134,17 +1134,17 @@ abstract class BaseCarrera extends BaseObject
      *
      * @return void
      */
-    public function initMaterials($overrideExisting = true)
+    public function initMaterialCarreras($overrideExisting = true)
     {
-        if (null !== $this->collMaterials && !$overrideExisting) {
+        if (null !== $this->collMaterialCarreras && !$overrideExisting) {
             return;
         }
-        $this->collMaterials = new PropelObjectCollection();
-        $this->collMaterials->setModel('Material');
+        $this->collMaterialCarreras = new PropelObjectCollection();
+        $this->collMaterialCarreras->setModel('MaterialCarrera');
     }
 
     /**
-     * Gets an array of Material objects which contain a foreign key that references this object.
+     * Gets an array of MaterialCarrera objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -1154,70 +1154,70 @@ abstract class BaseCarrera extends BaseObject
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Material[] List of Material objects
+     * @return PropelObjectCollection|MaterialCarrera[] List of MaterialCarrera objects
      * @throws PropelException
      */
-    public function getMaterials($criteria = null, PropelPDO $con = null)
+    public function getMaterialCarreras($criteria = null, PropelPDO $con = null)
     {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
+        if (null === $this->collMaterialCarreras || null !== $criteria) {
+            if ($this->isNew() && null === $this->collMaterialCarreras) {
                 // return empty collection
-                $this->initMaterials();
+                $this->initMaterialCarreras();
             } else {
-                $collMaterials = MaterialQuery::create(null, $criteria)
+                $collMaterialCarreras = MaterialCarreraQuery::create(null, $criteria)
                     ->filterByCarrera($this)
                     ->find($con);
                 if (null !== $criteria) {
-                    return $collMaterials;
+                    return $collMaterialCarreras;
                 }
-                $this->collMaterials = $collMaterials;
+                $this->collMaterialCarreras = $collMaterialCarreras;
             }
         }
 
-        return $this->collMaterials;
+        return $this->collMaterialCarreras;
     }
 
     /**
-     * Sets a collection of Material objects related by a one-to-many relationship
+     * Sets a collection of MaterialCarrera objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      PropelCollection $materials A Propel collection.
+     * @param      PropelCollection $materialCarreras A Propel collection.
      * @param      PropelPDO $con Optional connection object
      */
-    public function setMaterials(PropelCollection $materials, PropelPDO $con = null)
+    public function setMaterialCarreras(PropelCollection $materialCarreras, PropelPDO $con = null)
     {
-        $this->materialsScheduledForDeletion = $this->getMaterials(new Criteria(), $con)->diff($materials);
+        $this->materialCarrerasScheduledForDeletion = $this->getMaterialCarreras(new Criteria(), $con)->diff($materialCarreras);
 
-        foreach ($this->materialsScheduledForDeletion as $materialRemoved) {
-            $materialRemoved->setCarrera(null);
+        foreach ($this->materialCarrerasScheduledForDeletion as $materialCarreraRemoved) {
+            $materialCarreraRemoved->setCarrera(null);
         }
 
-        $this->collMaterials = null;
-        foreach ($materials as $material) {
-            $this->addMaterial($material);
+        $this->collMaterialCarreras = null;
+        foreach ($materialCarreras as $materialCarrera) {
+            $this->addMaterialCarrera($materialCarrera);
         }
 
-        $this->collMaterials = $materials;
+        $this->collMaterialCarreras = $materialCarreras;
     }
 
     /**
-     * Returns the number of related Material objects.
+     * Returns the number of related MaterialCarrera objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      PropelPDO $con
-     * @return int             Count of related Material objects.
+     * @return int             Count of related MaterialCarrera objects.
      * @throws PropelException
      */
-    public function countMaterials(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    public function countMaterialCarreras(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
     {
-        if (null === $this->collMaterials || null !== $criteria) {
-            if ($this->isNew() && null === $this->collMaterials) {
+        if (null === $this->collMaterialCarreras || null !== $criteria) {
+            if ($this->isNew() && null === $this->collMaterialCarreras) {
                 return 0;
             } else {
-                $query = MaterialQuery::create(null, $criteria);
+                $query = MaterialCarreraQuery::create(null, $criteria);
                 if ($distinct) {
                     $query->distinct();
                 }
@@ -1227,51 +1227,51 @@ abstract class BaseCarrera extends BaseObject
                     ->count($con);
             }
         } else {
-            return count($this->collMaterials);
+            return count($this->collMaterialCarreras);
         }
     }
 
     /**
-     * Method called to associate a Material object to this object
-     * through the Material foreign key attribute.
+     * Method called to associate a MaterialCarrera object to this object
+     * through the MaterialCarrera foreign key attribute.
      *
-     * @param    Material $l Material
+     * @param    MaterialCarrera $l MaterialCarrera
      * @return   Carrera The current object (for fluent API support)
      */
-    public function addMaterial(Material $l)
+    public function addMaterialCarrera(MaterialCarrera $l)
     {
-        if ($this->collMaterials === null) {
-            $this->initMaterials();
+        if ($this->collMaterialCarreras === null) {
+            $this->initMaterialCarreras();
         }
-        if (!$this->collMaterials->contains($l)) { // only add it if the **same** object is not already associated
-            $this->doAddMaterial($l);
+        if (!$this->collMaterialCarreras->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddMaterialCarrera($l);
         }
 
         return $this;
     }
 
     /**
-     * @param	Material $material The material object to add.
+     * @param	MaterialCarrera $materialCarrera The materialCarrera object to add.
      */
-    protected function doAddMaterial($material)
+    protected function doAddMaterialCarrera($materialCarrera)
     {
-        $this->collMaterials[]= $material;
-        $material->setCarrera($this);
+        $this->collMaterialCarreras[]= $materialCarrera;
+        $materialCarrera->setCarrera($this);
     }
 
     /**
-     * @param	Material $material The material object to remove.
+     * @param	MaterialCarrera $materialCarrera The materialCarrera object to remove.
      */
-    public function removeMaterial($material)
+    public function removeMaterialCarrera($materialCarrera)
     {
-        if ($this->getMaterials()->contains($material)) {
-            $this->collMaterials->remove($this->collMaterials->search($material));
-            if (null === $this->materialsScheduledForDeletion) {
-                $this->materialsScheduledForDeletion = clone $this->collMaterials;
-                $this->materialsScheduledForDeletion->clear();
+        if ($this->getMaterialCarreras()->contains($materialCarrera)) {
+            $this->collMaterialCarreras->remove($this->collMaterialCarreras->search($materialCarrera));
+            if (null === $this->materialCarrerasScheduledForDeletion) {
+                $this->materialCarrerasScheduledForDeletion = clone $this->collMaterialCarreras;
+                $this->materialCarrerasScheduledForDeletion->clear();
             }
-            $this->materialsScheduledForDeletion[]= $material;
-            $material->setCarrera(null);
+            $this->materialCarrerasScheduledForDeletion[]= $materialCarrera;
+            $materialCarrera->setCarrera(null);
         }
     }
 
@@ -1281,7 +1281,7 @@ abstract class BaseCarrera extends BaseObject
      * an identical criteria, it returns the collection.
      * Otherwise if this Carrera is new, it will return
      * an empty collection; or if this Carrera has previously
-     * been saved, it will retrieve related Materials from storage.
+     * been saved, it will retrieve related MaterialCarreras from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -1290,39 +1290,14 @@ abstract class BaseCarrera extends BaseObject
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      PropelPDO $con optional connection object
      * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Material[] List of Material objects
+     * @return PropelObjectCollection|MaterialCarrera[] List of MaterialCarrera objects
      */
-    public function getMaterialsJoinTema($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getMaterialCarrerasJoinMaterial($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
-        $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Tema', $join_behavior);
+        $query = MaterialCarreraQuery::create(null, $criteria);
+        $query->joinWith('Material', $join_behavior);
 
-        return $this->getMaterials($query, $con);
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Carrera is new, it will return
-     * an empty collection; or if this Carrera has previously
-     * been saved, it will retrieve related Materials from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Carrera.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      PropelPDO $con optional connection object
-     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Material[] List of Material objects
-     */
-    public function getMaterialsJoinBiblioteca($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = MaterialQuery::create(null, $criteria);
-        $query->joinWith('Biblioteca', $join_behavior);
-
-        return $this->getMaterials($query, $con);
+        return $this->getMaterialCarreras($query, $con);
     }
 
     /**
@@ -1357,8 +1332,8 @@ abstract class BaseCarrera extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collMaterials) {
-                foreach ($this->collMaterials as $o) {
+            if ($this->collMaterialCarreras) {
+                foreach ($this->collMaterialCarreras as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
@@ -1368,10 +1343,10 @@ abstract class BaseCarrera extends BaseObject
             $this->collCarreraFisicas->clearIterator();
         }
         $this->collCarreraFisicas = null;
-        if ($this->collMaterials instanceof PropelCollection) {
-            $this->collMaterials->clearIterator();
+        if ($this->collMaterialCarreras instanceof PropelCollection) {
+            $this->collMaterialCarreras->clearIterator();
         }
-        $this->collMaterials = null;
+        $this->collMaterialCarreras = null;
     }
 
     /**

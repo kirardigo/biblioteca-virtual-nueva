@@ -10,8 +10,12 @@ INSERT INTO `biblioteca_2`.`localidad` (`nombre`, `cod_postal`, `provincia_id_pr
 INSERT INTO `biblioteca_2`.`tipo_doc` (`nombre`) VALUES ('DNI');
 
 INSERT INTO `biblioteca_2`.`pfisica` (`nombre`, `apellido`, `varon`, `fecha_nac`, `tipo_doc_id_tipo_doc`, `documento`) VALUES ('GABRIEL', 'FIGUEROA', '1', '1989-03-21', '1', '789456');
-
 INSERT INTO `biblioteca_2`.`usuario` (`id_usuario`, `valido`, `usuario`, `password`, `admin`, `email`) VALUES ('1', '1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', 'admin@admin.com');
+
+
+
+
+
 
 INSERT INTO `biblioteca_2`.`contenido` (`numero_contenido`, `nombre`) VALUES ('R', 'REFERENCIAS');
 INSERT INTO `biblioteca_2`.`contenido` (`numero_contenido`, `nombre`) VALUES ('0', 'GENERALIDADES');
@@ -115,6 +119,6 @@ INSERT INTO `biblioteca_2`.`biblioteca` (`nombre`, `pjuridica_id_pjuridica`) VAL
 
 
 INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('DESARROLLO DE SOFTWARE');
-INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('REDES y TELECOMUNICACIONES');
+INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('REDES Y TELECOMUNICACIONES');
 INSERT INTO `biblioteca_2`.`carrera` (`nombre`) VALUES ('ENFERMERIA');
 

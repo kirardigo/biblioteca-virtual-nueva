@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width"></meta>
 
     <!-- include base css files from plugin -->
+    
     <?php include_partial('default/mpProjectPlugin_css_assets', array('load' => array('twitter_bootstrap'))); ?>
 
     <?php include_stylesheets() ?>
@@ -139,6 +140,7 @@
       </div>
     <!-- include base js files from plugin -->
     <?php include_partial('default/mpProjectPlugin_js_assets', array('load' => array('jquery', 'twitter_bootstrap'))); ?>
+    
     <?php include_javascripts() ?>
   </body>
   

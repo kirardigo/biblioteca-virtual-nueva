@@ -23,7 +23,6 @@ abstract class BaseMaterialForm extends BaseFormPropel
       'fisico'                   => new sfWidgetFormInputCheckbox(),
       'tema_id_tema'             => new sfWidgetFormPropelChoice(array('model' => 'Tema', 'add_empty' => false)),
       'biblioteca_id_biblioteca' => new sfWidgetFormPropelChoice(array('model' => 'Biblioteca', 'add_empty' => false)),
-      'carrera_id_carrera'       => new sfWidgetFormPropelChoice(array('model' => 'Carrera', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -36,7 +35,6 @@ abstract class BaseMaterialForm extends BaseFormPropel
       'fisico'                   => new sfValidatorBoolean(array('required' => false)),
       'tema_id_tema'             => new sfValidatorPropelChoice(array('model' => 'Tema', 'column' => 'id_tema')),
       'biblioteca_id_biblioteca' => new sfValidatorPropelChoice(array('model' => 'Biblioteca', 'column' => 'id_biblioteca')),
-      'carrera_id_carrera'       => new sfValidatorPropelChoice(array('model' => 'Carrera', 'column' => 'id_carrera')),
     ));
 
     $this->widgetSchema->setNameFormat('material[%s]');

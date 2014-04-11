@@ -78,7 +78,7 @@ propel:
   material:
     _attributes: { phpName: Material, idMethod: native }
     id_material: { phpName: IdMaterial, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: false }
+    archivo: { phpName: Archivo, type: CLOB, required: false }
     titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: true }
     editorial: { phpName: Editorial, type: VARCHAR, size: '45', required: false }
     autor: { phpName: Autor, type: VARCHAR, size: '45', required: false }
@@ -86,14 +86,19 @@ propel:
     fisico: { phpName: Fisico, type: BOOLEAN, size: '1', required: false }
     tema_id_tema: { phpName: TemaIdTema, type: INTEGER, required: true, foreignTable: tema, foreignReference: id_tema }
     biblioteca_id_biblioteca: { phpName: BibliotecaIdBiblioteca, type: INTEGER, required: true, foreignTable: biblioteca, foreignReference: id_biblioteca }
-    carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }
-    _indexes: { fk_material_biblioteca1: [biblioteca_id_biblioteca], fk_material_carrera1: [carrera_id_carrera], fk_material_tema1: [tema_id_tema] }
+    _indexes: { fk_material_biblioteca1: [biblioteca_id_biblioteca], fk_material_tema1: [tema_id_tema] }
   material_aporte:
     _attributes: { phpName: MaterialAporte, idMethod: native }
     id_material_aporte: { phpName: IdMaterialAporte, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
     aporte_id_aporte: { phpName: AporteIdAporte, type: INTEGER, required: true, foreignTable: aporte, foreignReference: id_aporte }
     _indexes: { fk_material_aporte_material1: [material_id_material], fk_material_aporte_aporte1: [aporte_id_aporte] }
+  material_carrera:
+    _attributes: { phpName: MaterialCarrera, idMethod: native }
+    id_material_carrera: { phpName: IdMaterialCarrera, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
+    carrera_id_carrera: { phpName: CarreraIdCarrera, type: INTEGER, required: true, foreignTable: carrera, foreignReference: id_carrera }
+    _indexes: { fk_material_carrera_material1: [material_id_material], fk_material_carrera_carrera1: [carrera_id_carrera] }
   pfisica:
     _attributes: { phpName: Pfisica, idMethod: native }
     id_pfisica: { phpName: IdPfisica, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }

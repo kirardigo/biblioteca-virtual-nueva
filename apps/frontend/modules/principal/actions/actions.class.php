@@ -90,8 +90,8 @@ class principalActions extends sfActions
                     
                   
              
-                     
-         ->orderBy('IdMaterial', Criteria::DESC)       
+         ->orderBy('Autor', Criteria::ASC)
+         ->orderBy('Titulo', Criteria::ASC)     
             ;
             $this->elegido = $consulta2->filterByBibliotecaIdBiblioteca(2)->find();                
     }

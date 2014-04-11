@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'carrera' table.
+ * This class defines the structure of the 'material_carrera' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class CarreraTableMap extends TableMap
+class MaterialCarreraTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.CarreraTableMap';
+    const CLASS_NAME = 'lib.model.map.MaterialCarreraTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,15 +32,15 @@ class CarreraTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('carrera');
-        $this->setPhpName('Carrera');
-        $this->setClassname('Carrera');
+        $this->setName('material_carrera');
+        $this->setPhpName('MaterialCarrera');
+        $this->setClassname('MaterialCarrera');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('ID_CARRERA', 'IdCarrera', 'INTEGER', true, null, null);
-        $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 45, null);
-        $this->getColumn('NOMBRE', false)->setPrimaryString(true);
+        $this->addPrimaryKey('ID_MATERIAL_CARRERA', 'IdMaterialCarrera', 'INTEGER', true, null, null);
+        $this->addForeignKey('MATERIAL_ID_MATERIAL', 'MaterialIdMaterial', 'INTEGER', 'material', 'ID_MATERIAL', true, null, null);
+        $this->addForeignKey('CARRERA_ID_CARRERA', 'CarreraIdCarrera', 'INTEGER', 'carrera', 'ID_CARRERA', true, null, null);
         // validators
     } // initialize()
 
@@ -49,8 +49,8 @@ class CarreraTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('CarreraFisica', 'CarreraFisica', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), 'CASCADE', 'CASCADE', 'CarreraFisicas');
-        $this->addRelation('MaterialCarrera', 'MaterialCarrera', RelationMap::ONE_TO_MANY, array('id_carrera' => 'carrera_id_carrera', ), null, null, 'MaterialCarreras');
+        $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), null, null);
+        $this->addRelation('Carrera', 'Carrera', RelationMap::MANY_TO_ONE, array('carrera_id_carrera' => 'id_carrera', ), null, null);
     } // buildRelations()
 
     /**
@@ -67,4 +67,4 @@ class CarreraTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // CarreraTableMap
+} // MaterialCarreraTableMap

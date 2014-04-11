@@ -20,7 +20,7 @@ class AporteForm extends BaseAporteForm
 
     $this->widgetSchema['archivo'] = new sfWidgetFormInputFileEditable(array(
       'label'     => 'Cargar archivo',
-      'file_src'  => '/uploads/files/'.$this->getObject()->getArchivo(),
+      'file_src'  => '/uploads/aporte/'.$this->getObject()->getArchivo(),
       'is_image'  => false,
       'edit_mode' => !$this->isNew(),
       'delete_label'=>'¿Eliminar el archivo?',
@@ -32,7 +32,7 @@ class AporteForm extends BaseAporteForm
  
   $this->setValidator('archivo', new sfValidatorFile(array(
     //'mime_types' => array('application/pdf'),
-    'path' => sfConfig::get('sf_upload_dir').'/files',
+    'path' => sfConfig::get('sf_upload_dir').'/aporte',
     'required' => false,
       'validated_file_class' => 'SwimsuitValidatedFile',
   )));

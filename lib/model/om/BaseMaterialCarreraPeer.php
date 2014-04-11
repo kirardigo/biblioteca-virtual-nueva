@@ -2,70 +2,52 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'material' table.
+ * Base static class for performing query and update operations on the 'material_carrera' table.
  *
  * 
  *
  * @package    propel.generator.lib.model.om
  */
-abstract class BaseMaterialPeer {
+abstract class BaseMaterialCarreraPeer {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'propel';
 
     /** the table name for this class */
-    const TABLE_NAME = 'material';
+    const TABLE_NAME = 'material_carrera';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'Material';
+    const OM_CLASS = 'MaterialCarrera';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'MaterialTableMap';
+    const TM_CLASS = 'MaterialCarreraTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 9;
+    const NUM_COLUMNS = 3;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 9;
+    const NUM_HYDRATE_COLUMNS = 3;
 
-    /** the column name for the ID_MATERIAL field */
-    const ID_MATERIAL = 'material.ID_MATERIAL';
+    /** the column name for the ID_MATERIAL_CARRERA field */
+    const ID_MATERIAL_CARRERA = 'material_carrera.ID_MATERIAL_CARRERA';
 
-    /** the column name for the ARCHIVO field */
-    const ARCHIVO = 'material.ARCHIVO';
+    /** the column name for the MATERIAL_ID_MATERIAL field */
+    const MATERIAL_ID_MATERIAL = 'material_carrera.MATERIAL_ID_MATERIAL';
 
-    /** the column name for the TITULO field */
-    const TITULO = 'material.TITULO';
-
-    /** the column name for the EDITORIAL field */
-    const EDITORIAL = 'material.EDITORIAL';
-
-    /** the column name for the AUTOR field */
-    const AUTOR = 'material.AUTOR';
-
-    /** the column name for the DESCRIPCION field */
-    const DESCRIPCION = 'material.DESCRIPCION';
-
-    /** the column name for the FISICO field */
-    const FISICO = 'material.FISICO';
-
-    /** the column name for the TEMA_ID_TEMA field */
-    const TEMA_ID_TEMA = 'material.TEMA_ID_TEMA';
-
-    /** the column name for the BIBLIOTECA_ID_BIBLIOTECA field */
-    const BIBLIOTECA_ID_BIBLIOTECA = 'material.BIBLIOTECA_ID_BIBLIOTECA';
+    /** the column name for the CARRERA_ID_CARRERA field */
+    const CARRERA_ID_CARRERA = 'material_carrera.CARRERA_ID_CARRERA';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identiy map to hold any loaded instances of Material objects.
+     * An identiy map to hold any loaded instances of MaterialCarrera objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array Material[]
+     * @var        array MaterialCarrera[]
      */
     public static $instances = array();
 
@@ -77,12 +59,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial', 'Archivo', 'Titulo', 'Editorial', 'Autor', 'Descripcion', 'Fisico', 'TemaIdTema', 'BibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'fisico', 'temaIdTema', 'bibliotecaIdBiblioteca', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL, self::ARCHIVO, self::TITULO, self::EDITORIAL, self::AUTOR, self::DESCRIPCION, self::FISICO, self::TEMA_ID_TEMA, self::BIBLIOTECA_ID_BIBLIOTECA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL', 'ARCHIVO', 'TITULO', 'EDITORIAL', 'AUTOR', 'DESCRIPCION', 'FISICO', 'TEMA_ID_TEMA', 'BIBLIOTECA_ID_BIBLIOTECA', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material', 'archivo', 'titulo', 'editorial', 'autor', 'descripcion', 'fisico', 'tema_id_tema', 'biblioteca_id_biblioteca', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterialCarrera', 'MaterialIdMaterial', 'CarreraIdCarrera', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterialCarrera', 'materialIdMaterial', 'carreraIdCarrera', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL_CARRERA, self::MATERIAL_ID_MATERIAL, self::CARRERA_ID_CARRERA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL_CARRERA', 'MATERIAL_ID_MATERIAL', 'CARRERA_ID_CARRERA', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material_carrera', 'material_id_material', 'carrera_id_carrera', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
     /**
@@ -92,12 +74,12 @@ abstract class BaseMaterialPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdMaterial' => 0, 'Archivo' => 1, 'Titulo' => 2, 'Editorial' => 3, 'Autor' => 4, 'Descripcion' => 5, 'Fisico' => 6, 'TemaIdTema' => 7, 'BibliotecaIdBiblioteca' => 8, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterial' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'fisico' => 6, 'temaIdTema' => 7, 'bibliotecaIdBiblioteca' => 8, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL => 0, self::ARCHIVO => 1, self::TITULO => 2, self::EDITORIAL => 3, self::AUTOR => 4, self::DESCRIPCION => 5, self::FISICO => 6, self::TEMA_ID_TEMA => 7, self::BIBLIOTECA_ID_BIBLIOTECA => 8, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL' => 0, 'ARCHIVO' => 1, 'TITULO' => 2, 'EDITORIAL' => 3, 'AUTOR' => 4, 'DESCRIPCION' => 5, 'FISICO' => 6, 'TEMA_ID_TEMA' => 7, 'BIBLIOTECA_ID_BIBLIOTECA' => 8, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_material' => 0, 'archivo' => 1, 'titulo' => 2, 'editorial' => 3, 'autor' => 4, 'descripcion' => 5, 'fisico' => 6, 'tema_id_tema' => 7, 'biblioteca_id_biblioteca' => 8, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('IdMaterialCarrera' => 0, 'MaterialIdMaterial' => 1, 'CarreraIdCarrera' => 2, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idMaterialCarrera' => 0, 'materialIdMaterial' => 1, 'carreraIdCarrera' => 2, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_MATERIAL_CARRERA => 0, self::MATERIAL_ID_MATERIAL => 1, self::CARRERA_ID_CARRERA => 2, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_MATERIAL_CARRERA' => 0, 'MATERIAL_ID_MATERIAL' => 1, 'CARRERA_ID_CARRERA' => 2, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_material_carrera' => 0, 'material_id_material' => 1, 'carrera_id_carrera' => 2, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
     /**
@@ -148,12 +130,12 @@ abstract class BaseMaterialPeer {
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. MaterialPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. MaterialCarreraPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(MaterialPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(MaterialCarreraPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -171,25 +153,13 @@ abstract class BaseMaterialPeer {
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(MaterialPeer::ID_MATERIAL);
-            $criteria->addSelectColumn(MaterialPeer::ARCHIVO);
-            $criteria->addSelectColumn(MaterialPeer::TITULO);
-            $criteria->addSelectColumn(MaterialPeer::EDITORIAL);
-            $criteria->addSelectColumn(MaterialPeer::AUTOR);
-            $criteria->addSelectColumn(MaterialPeer::DESCRIPCION);
-            $criteria->addSelectColumn(MaterialPeer::FISICO);
-            $criteria->addSelectColumn(MaterialPeer::TEMA_ID_TEMA);
-            $criteria->addSelectColumn(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA);
+            $criteria->addSelectColumn(MaterialCarreraPeer::ID_MATERIAL_CARRERA);
+            $criteria->addSelectColumn(MaterialCarreraPeer::MATERIAL_ID_MATERIAL);
+            $criteria->addSelectColumn(MaterialCarreraPeer::CARRERA_ID_CARRERA);
         } else {
-            $criteria->addSelectColumn($alias . '.ID_MATERIAL');
-            $criteria->addSelectColumn($alias . '.ARCHIVO');
-            $criteria->addSelectColumn($alias . '.TITULO');
-            $criteria->addSelectColumn($alias . '.EDITORIAL');
-            $criteria->addSelectColumn($alias . '.AUTOR');
-            $criteria->addSelectColumn($alias . '.DESCRIPCION');
-            $criteria->addSelectColumn($alias . '.FISICO');
-            $criteria->addSelectColumn($alias . '.TEMA_ID_TEMA');
-            $criteria->addSelectColumn($alias . '.BIBLIOTECA_ID_BIBLIOTECA');
+            $criteria->addSelectColumn($alias . '.ID_MATERIAL_CARRERA');
+            $criteria->addSelectColumn($alias . '.MATERIAL_ID_MATERIAL');
+            $criteria->addSelectColumn($alias . '.CARRERA_ID_CARRERA');
         }
     }
 
@@ -209,26 +179,26 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
         $criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         // BasePeer returns a PDOStatement
@@ -248,7 +218,7 @@ abstract class BaseMaterialPeer {
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return                 Material
+     * @return                 MaterialCarrera
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -256,7 +226,7 @@ abstract class BaseMaterialPeer {
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = MaterialPeer::doSelect($critcopy, $con);
+        $objects = MaterialCarreraPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -274,7 +244,7 @@ abstract class BaseMaterialPeer {
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return MaterialPeer::populateObjects(MaterialPeer::doSelectStmt($criteria, $con));
+        return MaterialCarreraPeer::populateObjects(MaterialCarreraPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -292,12 +262,12 @@ abstract class BaseMaterialPeer {
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
@@ -305,7 +275,7 @@ abstract class BaseMaterialPeer {
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
 
@@ -321,14 +291,14 @@ abstract class BaseMaterialPeer {
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param      Material $obj A Material object.
+     * @param      MaterialCarrera $obj A MaterialCarrera object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdMaterial();
+                $key = (string) $obj->getIdMaterialCarrera();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -342,7 +312,7 @@ abstract class BaseMaterialPeer {
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A Material object or a primary key value.
+     * @param      mixed $value A MaterialCarrera object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -350,13 +320,13 @@ abstract class BaseMaterialPeer {
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof Material) {
-                $key = (string) $value->getIdMaterial();
+            if (is_object($value) && $value instanceof MaterialCarrera) {
+                $key = (string) $value->getIdMaterialCarrera();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Material object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or MaterialCarrera object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
@@ -371,7 +341,7 @@ abstract class BaseMaterialPeer {
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return   Material Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return   MaterialCarrera Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
@@ -396,14 +366,11 @@ abstract class BaseMaterialPeer {
     }
     
     /**
-     * Method to invalidate the instance pool of all tables related to material
+     * Method to invalidate the instance pool of all tables related to material_carrera
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
     {
-        // Invalidate objects in AccesoMaterialPeer instance pool,
-        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        AccesoMaterialPeer::clearInstancePool();
     }
 
     /**
@@ -453,11 +420,11 @@ abstract class BaseMaterialPeer {
         $results = array();
     
         // set the class once to avoid overhead in the loop
-        $cls = MaterialPeer::getOMClass();
+        $cls = MaterialCarreraPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = MaterialPeer::getInstanceFromPool($key))) {
+            $key = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = MaterialCarreraPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -466,7 +433,7 @@ abstract class BaseMaterialPeer {
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                MaterialPeer::addInstanceToPool($obj, $key);
+                MaterialCarreraPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -480,21 +447,21 @@ abstract class BaseMaterialPeer {
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (Material object, last column rank)
+     * @return array (MaterialCarrera object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = MaterialPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = MaterialPeer::getInstanceFromPool($key))) {
+        $key = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = MaterialCarreraPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + MaterialPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = MaterialPeer::OM_CLASS;
+            $cls = MaterialCarreraPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            MaterialPeer::addInstanceToPool($obj, $key);
+            MaterialCarreraPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -502,7 +469,7 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Tema table
+     * Returns the number of rows matching criteria, joining the related Material table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -510,7 +477,7 @@ abstract class BaseMaterialPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinTema(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinMaterial(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -518,14 +485,14 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -534,15 +501,15 @@ abstract class BaseMaterialPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -559,7 +526,7 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Biblioteca table
+     * Returns the number of rows matching criteria, joining the related Carrera table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -567,7 +534,7 @@ abstract class BaseMaterialPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinBiblioteca(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinCarrera(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -575,14 +542,14 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -591,15 +558,15 @@ abstract class BaseMaterialPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -616,15 +583,15 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Selects a collection of Material objects pre-filled with their Tema objects.
+     * Selects a collection of MaterialCarrera objects pre-filled with their Material objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Material objects.
+     * @return array           Array of MaterialCarrera objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinTema(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinMaterial(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -633,50 +600,50 @@ abstract class BaseMaterialPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
+        MaterialCarreraPeer::addSelectColumns($criteria);
+        $startcol = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
         MaterialPeer::addSelectColumns($criteria);
-        $startcol = MaterialPeer::NUM_HYDRATE_COLUMNS;
-        TemaPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+            $key1 = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialCarreraPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
 
-                $cls = MaterialPeer::getOMClass();
+                $cls = MaterialCarreraPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                MaterialPeer::addInstanceToPool($obj1, $key1);
+                MaterialCarreraPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = TemaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = MaterialPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = TemaPeer::getInstanceFromPool($key2);
+                $obj2 = MaterialPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = TemaPeer::getOMClass();
+                    $cls = MaterialPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    TemaPeer::addInstanceToPool($obj2, $key2);
+                    MaterialPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (Material) to $obj2 (Tema)
-                $obj2->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to $obj2 (Material)
+                $obj2->addMaterialCarrera($obj1);
 
             } // if joined row was not null
 
@@ -689,15 +656,15 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Selects a collection of Material objects pre-filled with their Biblioteca objects.
+     * Selects a collection of MaterialCarrera objects pre-filled with their Carrera objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Material objects.
+     * @return array           Array of MaterialCarrera objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinBiblioteca(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinCarrera(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -706,50 +673,50 @@ abstract class BaseMaterialPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
-        MaterialPeer::addSelectColumns($criteria);
-        $startcol = MaterialPeer::NUM_HYDRATE_COLUMNS;
-        BibliotecaPeer::addSelectColumns($criteria);
+        MaterialCarreraPeer::addSelectColumns($criteria);
+        $startcol = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
+        CarreraPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+            $key1 = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialCarreraPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
 
-                $cls = MaterialPeer::getOMClass();
+                $cls = MaterialCarreraPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                MaterialPeer::addInstanceToPool($obj1, $key1);
+                MaterialCarreraPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = BibliotecaPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = BibliotecaPeer::getInstanceFromPool($key2);
+                $obj2 = CarreraPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = BibliotecaPeer::getOMClass();
+                    $cls = CarreraPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    BibliotecaPeer::addInstanceToPool($obj2, $key2);
+                    CarreraPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (Material) to $obj2 (Biblioteca)
-                $obj2->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to $obj2 (Carrera)
+                $obj2->addMaterialCarrera($obj1);
 
             } // if joined row was not null
 
@@ -778,14 +745,14 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -794,17 +761,17 @@ abstract class BaseMaterialPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -820,12 +787,12 @@ abstract class BaseMaterialPeer {
     }
 
     /**
-     * Selects a collection of Material objects pre-filled with all related objects.
+     * Selects a collection of MaterialCarrera objects pre-filled with all related objects.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Material objects.
+     * @return array           Array of MaterialCarrera objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -838,76 +805,76 @@ abstract class BaseMaterialPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
+        MaterialCarreraPeer::addSelectColumns($criteria);
+        $startcol2 = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
+
         MaterialPeer::addSelectColumns($criteria);
-        $startcol2 = MaterialPeer::NUM_HYDRATE_COLUMNS;
+        $startcol3 = $startcol2 + MaterialPeer::NUM_HYDRATE_COLUMNS;
 
-        TemaPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + TemaPeer::NUM_HYDRATE_COLUMNS;
+        CarreraPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + CarreraPeer::NUM_HYDRATE_COLUMNS;
 
-        BibliotecaPeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + BibliotecaPeer::NUM_HYDRATE_COLUMNS;
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
-
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+            $key1 = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialCarreraPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
-                $cls = MaterialPeer::getOMClass();
+                $cls = MaterialCarreraPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                MaterialPeer::addInstanceToPool($obj1, $key1);
+                MaterialCarreraPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined Tema rows
+            // Add objects for joined Material rows
 
-            $key2 = TemaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            $key2 = MaterialPeer::getPrimaryKeyHashFromRow($row, $startcol2);
             if ($key2 !== null) {
-                $obj2 = TemaPeer::getInstanceFromPool($key2);
+                $obj2 = MaterialPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = TemaPeer::getOMClass();
+                    $cls = MaterialPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    TemaPeer::addInstanceToPool($obj2, $key2);
+                    MaterialPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 loaded
 
-                // Add the $obj1 (Material) to the collection in $obj2 (Tema)
-                $obj2->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to the collection in $obj2 (Material)
+                $obj2->addMaterialCarrera($obj1);
             } // if joined row not null
 
-            // Add objects for joined Biblioteca rows
+            // Add objects for joined Carrera rows
 
-            $key3 = BibliotecaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            $key3 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol3);
             if ($key3 !== null) {
-                $obj3 = BibliotecaPeer::getInstanceFromPool($key3);
+                $obj3 = CarreraPeer::getInstanceFromPool($key3);
                 if (!$obj3) {
 
-                    $cls = BibliotecaPeer::getOMClass();
+                    $cls = CarreraPeer::getOMClass();
 
                     $obj3 = new $cls();
                     $obj3->hydrate($row, $startcol3);
-                    BibliotecaPeer::addInstanceToPool($obj3, $key3);
+                    CarreraPeer::addInstanceToPool($obj3, $key3);
                 } // if obj3 loaded
 
-                // Add the $obj1 (Material) to the collection in $obj3 (Biblioteca)
-                $obj3->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to the collection in $obj3 (Carrera)
+                $obj3->addMaterialCarrera($obj1);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -919,7 +886,7 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Tema table
+     * Returns the number of rows matching criteria, joining the related Material table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -927,7 +894,7 @@ abstract class BaseMaterialPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExceptTema(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptMaterial(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -935,14 +902,14 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY should not affect count
@@ -951,15 +918,15 @@ abstract class BaseMaterialPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
     
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -976,7 +943,7 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Biblioteca table
+     * Returns the number of rows matching criteria, joining the related Carrera table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -984,7 +951,7 @@ abstract class BaseMaterialPeer {
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExceptBiblioteca(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptCarrera(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -992,14 +959,14 @@ abstract class BaseMaterialPeer {
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            MaterialPeer::addSelectColumns($criteria);
+            MaterialCarreraPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY should not affect count
@@ -1008,15 +975,15 @@ abstract class BaseMaterialPeer {
         $criteria->setDbName(self::DATABASE_NAME);
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
     
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -1033,16 +1000,16 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Selects a collection of Material objects pre-filled with all related objects except Tema.
+     * Selects a collection of MaterialCarrera objects pre-filled with all related objects except Material.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Material objects.
+     * @return array           Array of MaterialCarrera objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptTema(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptMaterial(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1053,18 +1020,18 @@ abstract class BaseMaterialPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
-        MaterialPeer::addSelectColumns($criteria);
-        $startcol2 = MaterialPeer::NUM_HYDRATE_COLUMNS;
+        MaterialCarreraPeer::addSelectColumns($criteria);
+        $startcol2 = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
 
-        BibliotecaPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + BibliotecaPeer::NUM_HYDRATE_COLUMNS;
+        CarreraPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + CarreraPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(MaterialPeer::BIBLIOTECA_ID_BIBLIOTECA, BibliotecaPeer::ID_BIBLIOTECA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::CARRERA_ID_CARRERA, CarreraPeer::ID_CARRERA, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
 
@@ -1072,35 +1039,35 @@ abstract class BaseMaterialPeer {
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+            $key1 = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialCarreraPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
-                $cls = MaterialPeer::getOMClass();
+                $cls = MaterialCarreraPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                MaterialPeer::addInstanceToPool($obj1, $key1);
+                MaterialCarreraPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-                // Add objects for joined Biblioteca rows
+                // Add objects for joined Carrera rows
 
-                $key2 = BibliotecaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                $key2 = CarreraPeer::getPrimaryKeyHashFromRow($row, $startcol2);
                 if ($key2 !== null) {
-                    $obj2 = BibliotecaPeer::getInstanceFromPool($key2);
+                    $obj2 = CarreraPeer::getInstanceFromPool($key2);
                     if (!$obj2) {
     
-                        $cls = BibliotecaPeer::getOMClass();
+                        $cls = CarreraPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    BibliotecaPeer::addInstanceToPool($obj2, $key2);
+                    CarreraPeer::addInstanceToPool($obj2, $key2);
                 } // if $obj2 already loaded
 
-                // Add the $obj1 (Material) to the collection in $obj2 (Biblioteca)
-                $obj2->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to the collection in $obj2 (Carrera)
+                $obj2->addMaterialCarrera($obj1);
 
             } // if joined row is not null
 
@@ -1113,16 +1080,16 @@ abstract class BaseMaterialPeer {
 
 
     /**
-     * Selects a collection of Material objects pre-filled with all related objects except Biblioteca.
+     * Selects a collection of MaterialCarrera objects pre-filled with all related objects except Carrera.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Material objects.
+     * @return array           Array of MaterialCarrera objects.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptBiblioteca(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptCarrera(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1133,18 +1100,18 @@ abstract class BaseMaterialPeer {
             $criteria->setDbName(self::DATABASE_NAME);
         }
 
+        MaterialCarreraPeer::addSelectColumns($criteria);
+        $startcol2 = MaterialCarreraPeer::NUM_HYDRATE_COLUMNS;
+
         MaterialPeer::addSelectColumns($criteria);
-        $startcol2 = MaterialPeer::NUM_HYDRATE_COLUMNS;
+        $startcol3 = $startcol2 + MaterialPeer::NUM_HYDRATE_COLUMNS;
 
-        TemaPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + TemaPeer::NUM_HYDRATE_COLUMNS;
-
-        $criteria->addJoin(MaterialPeer::TEMA_ID_TEMA, TemaPeer::ID_TEMA, $join_behavior);
+        $criteria->addJoin(MaterialCarreraPeer::MATERIAL_ID_MATERIAL, MaterialPeer::ID_MATERIAL, $join_behavior);
 
 		// symfony_behaviors behavior
 		foreach (sfMixer::getCallables(self::getMixerPreSelectHook(__FUNCTION__)) as $sf_hook)
 		{
-		  call_user_func($sf_hook, 'BaseMaterialPeer', $criteria, $con);
+		  call_user_func($sf_hook, 'BaseMaterialCarreraPeer', $criteria, $con);
 		}
 
 
@@ -1152,35 +1119,35 @@ abstract class BaseMaterialPeer {
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = MaterialPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = MaterialPeer::getInstanceFromPool($key1))) {
+            $key1 = MaterialCarreraPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = MaterialCarreraPeer::getInstanceFromPool($key1))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj1->hydrate($row, 0, true); // rehydrate
             } else {
-                $cls = MaterialPeer::getOMClass();
+                $cls = MaterialCarreraPeer::getOMClass();
 
                 $obj1 = new $cls();
                 $obj1->hydrate($row);
-                MaterialPeer::addInstanceToPool($obj1, $key1);
+                MaterialCarreraPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-                // Add objects for joined Tema rows
+                // Add objects for joined Material rows
 
-                $key2 = TemaPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                $key2 = MaterialPeer::getPrimaryKeyHashFromRow($row, $startcol2);
                 if ($key2 !== null) {
-                    $obj2 = TemaPeer::getInstanceFromPool($key2);
+                    $obj2 = MaterialPeer::getInstanceFromPool($key2);
                     if (!$obj2) {
     
-                        $cls = TemaPeer::getOMClass();
+                        $cls = MaterialPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    TemaPeer::addInstanceToPool($obj2, $key2);
+                    MaterialPeer::addInstanceToPool($obj2, $key2);
                 } // if $obj2 already loaded
 
-                // Add the $obj1 (Material) to the collection in $obj2 (Tema)
-                $obj2->addMaterial($obj1);
+                // Add the $obj1 (MaterialCarrera) to the collection in $obj2 (Material)
+                $obj2->addMaterialCarrera($obj1);
 
             } // if joined row is not null
 
@@ -1208,9 +1175,9 @@ abstract class BaseMaterialPeer {
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseMaterialPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseMaterialPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new MaterialTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseMaterialCarreraPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseMaterialCarreraPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new MaterialCarreraTableMap());
       }
     }
 
@@ -1222,13 +1189,13 @@ abstract class BaseMaterialPeer {
      */
     public static function getOMClass()
     {
-        return MaterialPeer::OM_CLASS;
+        return MaterialCarreraPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a Material or Criteria object.
+     * Performs an INSERT on the database, given a MaterialCarrera or Criteria object.
      *
-     * @param      mixed $values Criteria or Material object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or MaterialCarrera object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -1237,17 +1204,17 @@ abstract class BaseMaterialPeer {
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from Material object
+            $criteria = $values->buildCriteria(); // build Criteria from MaterialCarrera object
         }
 
-        if ($criteria->containsKey(MaterialPeer::ID_MATERIAL) && $criteria->keyContainsValue(MaterialPeer::ID_MATERIAL) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.MaterialPeer::ID_MATERIAL.')');
+        if ($criteria->containsKey(MaterialCarreraPeer::ID_MATERIAL_CARRERA) && $criteria->keyContainsValue(MaterialCarreraPeer::ID_MATERIAL_CARRERA) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.MaterialCarreraPeer::ID_MATERIAL_CARRERA.')');
         }
 
 
@@ -1269,9 +1236,9 @@ abstract class BaseMaterialPeer {
     }
 
     /**
-     * Performs an UPDATE on the database, given a Material or Criteria object.
+     * Performs an UPDATE on the database, given a MaterialCarrera or Criteria object.
      *
-     * @param      mixed $values Criteria or Material object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or MaterialCarrera object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -1280,7 +1247,7 @@ abstract class BaseMaterialPeer {
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -1288,15 +1255,15 @@ abstract class BaseMaterialPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(MaterialPeer::ID_MATERIAL);
-            $value = $criteria->remove(MaterialPeer::ID_MATERIAL);
+            $comparison = $criteria->getComparison(MaterialCarreraPeer::ID_MATERIAL_CARRERA);
+            $value = $criteria->remove(MaterialCarreraPeer::ID_MATERIAL_CARRERA);
             if ($value) {
-                $selectCriteria->add(MaterialPeer::ID_MATERIAL, $value, $comparison);
+                $selectCriteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(MaterialPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(MaterialCarreraPeer::TABLE_NAME);
             }
 
-        } else { // $values is Material object
+        } else { // $values is MaterialCarrera object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
@@ -1308,7 +1275,7 @@ abstract class BaseMaterialPeer {
     }
 
     /**
-     * Deletes all rows from the material table.
+     * Deletes all rows from the material_carrera table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -1317,20 +1284,19 @@ abstract class BaseMaterialPeer {
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += MaterialPeer::doOnDeleteCascade(new Criteria(MaterialPeer::DATABASE_NAME), $con);
-            $affectedRows += BasePeer::doDeleteAll(MaterialPeer::TABLE_NAME, $con, MaterialPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(MaterialCarreraPeer::TABLE_NAME, $con, MaterialCarreraPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            MaterialPeer::clearInstancePool();
-            MaterialPeer::clearRelatedInstancePool();
+            MaterialCarreraPeer::clearInstancePool();
+            MaterialCarreraPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -1341,9 +1307,9 @@ abstract class BaseMaterialPeer {
     }
 
     /**
-     * Performs a DELETE on the database, given a Material or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a MaterialCarrera or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or Material object or primary key or array of primary keys
+     * @param      mixed $values Criteria or MaterialCarrera object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -1354,18 +1320,28 @@ abstract class BaseMaterialPeer {
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
+            // invalidate the cache for all objects of this type, since we have no
+            // way of knowing (without running a query) what objects should be invalidated
+            // from the cache based on this Criteria.
+            MaterialCarreraPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof Material) { // it's a model object
+        } elseif ($values instanceof MaterialCarrera) { // it's a model object
+            // invalidate the cache for this single object
+            MaterialCarreraPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(MaterialPeer::ID_MATERIAL, (array) $values, Criteria::IN);
+            $criteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, (array) $values, Criteria::IN);
+            // invalidate the cache for this object(s)
+            foreach ((array) $values as $singleval) {
+                MaterialCarreraPeer::removeInstanceFromPool($singleval);
+            }
         }
 
         // Set the correct dbName
@@ -1378,25 +1354,8 @@ abstract class BaseMaterialPeer {
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
             
-            // cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
-            $c = clone $criteria;
-            $affectedRows += MaterialPeer::doOnDeleteCascade($c, $con);
-            
-            // Because this db requires some delete cascade/set null emulation, we have to
-            // clear the cached instance *after* the emulation has happened (since
-            // instances get re-added by the select statement contained therein).
-            if ($values instanceof Criteria) {
-                MaterialPeer::clearInstancePool();
-            } elseif ($values instanceof Material) { // it's a model object
-                MaterialPeer::removeInstanceFromPool($values);
-            } else { // it's a primary key, or an array of pks
-                foreach ((array) $values as $singleval) {
-                    MaterialPeer::removeInstanceFromPool($singleval);
-                }
-            }
-            
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            MaterialPeer::clearRelatedInstancePool();
+            MaterialCarreraPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -1407,46 +1366,13 @@ abstract class BaseMaterialPeer {
     }
 
     /**
-     * This is a method for emulating ON DELETE CASCADE for DBs that don't support this
-     * feature (like MySQL or SQLite).
-     *
-     * This method is not very speedy because it must perform a query first to get
-     * the implicated records and then perform the deletes by calling those Peer classes.
-     *
-     * This method should be used within a transaction if possible.
-     *
-     * @param      Criteria $criteria
-     * @param      PropelPDO $con
-     * @return int The number of affected rows (if supported by underlying database driver).
-     */
-    protected static function doOnDeleteCascade(Criteria $criteria, PropelPDO $con)
-    {
-        // initialize var to track total num of affected rows
-        $affectedRows = 0;
-
-        // first find the objects that are implicated by the $criteria
-        $objects = MaterialPeer::doSelect($criteria, $con);
-        foreach ($objects as $obj) {
-
-
-            // delete related AccesoMaterial objects
-            $criteria = new Criteria(AccesoMaterialPeer::DATABASE_NAME);
-            
-            $criteria->add(AccesoMaterialPeer::MATERIAL_ID_MATERIAL, $obj->getIdMaterial());
-            $affectedRows += AccesoMaterialPeer::doDelete($criteria, $con);
-        }
-
-        return $affectedRows;
-    }
-
-    /**
-     * Validates all modified columns of given Material object.
+     * Validates all modified columns of given MaterialCarrera object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param      Material $obj The object to validate.
+     * @param      MaterialCarrera $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -1456,8 +1382,8 @@ abstract class BaseMaterialPeer {
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(MaterialPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(MaterialPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(MaterialCarreraPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(MaterialCarreraPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -1473,7 +1399,7 @@ abstract class BaseMaterialPeer {
 
         }
 
-        return BasePeer::doValidate(MaterialPeer::DATABASE_NAME, MaterialPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(MaterialCarreraPeer::DATABASE_NAME, MaterialCarreraPeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -1481,23 +1407,23 @@ abstract class BaseMaterialPeer {
      *
      * @param      int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return Material
+     * @return MaterialCarrera
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = MaterialPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = MaterialCarreraPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
-        $criteria->add(MaterialPeer::ID_MATERIAL, $pk);
+        $criteria = new Criteria(MaterialCarreraPeer::DATABASE_NAME);
+        $criteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, $pk);
 
-        $v = MaterialPeer::doSelect($criteria, $con);
+        $v = MaterialCarreraPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -1507,23 +1433,23 @@ abstract class BaseMaterialPeer {
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return Material[]
+     * @return MaterialCarrera[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(MaterialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(MaterialCarreraPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(MaterialPeer::DATABASE_NAME);
-            $criteria->add(MaterialPeer::ID_MATERIAL, $pks, Criteria::IN);
-            $objs = MaterialPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(MaterialCarreraPeer::DATABASE_NAME);
+            $criteria->add(MaterialCarreraPeer::ID_MATERIAL_CARRERA, $pks, Criteria::IN);
+            $objs = MaterialCarreraPeer::doSelect($criteria, $con);
         }
 
         return $objs;
@@ -1556,15 +1482,15 @@ abstract class BaseMaterialPeer {
 	{
 	  if (preg_match('/^do(Select|Count)(Join(All(Except)?)?|Stmt)?/', $method, $match))
 	  {
-	    return sprintf('BaseMaterialPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
+	    return sprintf('BaseMaterialCarreraPeer:%s:%1$s', 'Count' == $match[1] ? 'doCount' : $match[0]);
 	  }
 	
 	  throw new LogicException(sprintf('Unrecognized function "%s"', $method));
 	}
 
-} // BaseMaterialPeer
+} // BaseMaterialCarreraPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseMaterialPeer::buildTableMap();
+BaseMaterialCarreraPeer::buildTableMap();
 
