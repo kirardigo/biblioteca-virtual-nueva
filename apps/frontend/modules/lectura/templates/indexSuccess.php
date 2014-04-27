@@ -1,4 +1,4 @@
-   <div class="example">
+ <!--  <div class="example">
 
         <div class="player">
             
@@ -24,15 +24,24 @@
 
     </div>
 </div>
-</br> </br>
-<?php //echo url_fo('@my_rule',true) ?>
+
+</br> </br>-->
+
 
 
 <?php if ($apo ==1):?>
-<embed style="margin-left: 100px;" src="<?php echo image_path('../uploads/aporte/'.$arch)?>" width="850" height="1075"></embed>
-<?php else:?>
 
-<embed style="margin-left: 100px;" src="<?php echo image_path('../uploads/material/'.$arch)?>" width="850" height="1075"></embed>
+<object data="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/'.$arch)?>" width="950" height="1075"><embed src="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/'.$arch)?>" width="950" height="1075"></embed> ERROR, No pudo mostrarse la pagina. </object>
+
+
+<?php else:?>
+<?php echo link_to('<i class="icon-list icon-white"></i>Agregar material a mi lista', 'lectura/agregar?idarch='.$idarch.'&cosa='.$idarch,array( 'class'=>"btn btn-inverse btn-mini") ) ?>
+
+</br> </br>
+
+<object data="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/material/'.$arch)?>" width="950" height="1075"><embed src="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/material/'.$arch)?>" width="950" height="1075"></embed> ERROR, No pudo mostrarse la pagina. </object>
+
+
 <?php endif;?>
-<!--<iframe id="viewer" src="{{ asset('/plugins/sfViewerPlugin/index.html') }}#{{ asset('/uploads/files/ANONIMO_REDES.PDF') }}" width='900' height='600' allowfullscreen webkitallowfullscreen></iframe>-->
+
 

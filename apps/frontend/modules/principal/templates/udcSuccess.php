@@ -4,7 +4,7 @@
 <h2 style="color: white;" class="alert-heading offset1">Busqueda de Material</h2>
 
 <fieldset>    
-    <form style="background: sienna;" class="well form-search span3 offset1" action="<?php echo url_for('material/index') ?>" method="POST">
+    <form style="background: sienna;" class="well form-search span3 offset1" action="<?php echo url_for('principal/udc') ?>" method="POST">
        <label class="busqueda">Autor</label>
        <input type="text" data-provide="typeahead" data-items="5" placeholder="Autor" name="autor"
        data-source='[<?php foreach($Materials as $mat){echo "\"".$mat->getAutor()."\"";if($Materials->getPosition()< sizeof($Materials)-1){echo(",");}}?>]'>
@@ -43,7 +43,7 @@
     $cant = sizeof($elegido);
     if($cant >= 1):?>
 
-<h1 class="h1info" >Materiales UDC y Vacchina</h1>
+<h1 class="h1info" >Materiales UDC</h1>
 
 
 

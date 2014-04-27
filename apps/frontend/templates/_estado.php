@@ -11,10 +11,13 @@
         </form>
       </fieldset>     
 <?php else:?>                   
-      <div style="width: 160px; height: 100px;" class="well" style="font-size: small"><?php echo "<i> Hola <b>".$sf_user->getAttribute('userNom')."</b>, Bienvenido!</i>"?>        
+      <div style="width: 160px; height: 120px;" class="well" style="font-size: small"><?php echo "<i> Hola <b>".$sf_user->getAttribute('userNom')."</b>, Bienvenido!</i>"?>        
 <!--        <br/><a href="<?php //echo url_for('usuario/edit?id_usuario='.$sf_user->getAttribute('id')) ?>"><i class="icon-user"></i> Perfil</a>-->
         
-          <br/><br/><a class="btn btn-inverse" href="<?php echo url_for('usuario/edit?id_usuario='.$sf_user->getAttribute('id')) ?>"><i class="icon-user icon-white"></i> Perfil</a>
+          <br/><br/>
+          <a class="btn btn-inverse" href="<?php echo url_for('lectura/lista') ?>"><i class="icon-list icon-white"></i> Lista de Lectura</a> 
+          <br/><br/>
+          <a class="btn btn-inverse" href="<?php echo url_for('usuario/edit?id_usuario='.$sf_user->getAttribute('id')) ?>"><i class="icon-user icon-white"></i> Perfil</a>
           
          
           <a class="btn btn-inverse" href="<?php echo url_for('login/logout') ?>"><i class="icon-off icon-white"></i> Salir</a>        

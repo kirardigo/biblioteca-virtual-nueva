@@ -100,6 +100,11 @@ abstract class BaseMaterial extends BaseObject
     protected $collAccesoMaterials;
 
     /**
+     * @var        PropelObjectCollection|Lista[] Collection to store aggregation of Lista objects.
+     */
+    protected $collListas;
+
+    /**
      * @var        PropelObjectCollection|MaterialAporte[] Collection to store aggregation of MaterialAporte objects.
      */
     protected $collMaterialAportes;
@@ -128,6 +133,12 @@ abstract class BaseMaterial extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $accesoMaterialsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $listasScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -566,6 +577,8 @@ abstract class BaseMaterial extends BaseObject
             $this->aBiblioteca = null;
             $this->collAccesoMaterials = null;
 
+            $this->collListas = null;
+
             $this->collMaterialAportes = null;
 
             $this->collMaterialCarreras = null;
@@ -756,6 +769,23 @@ abstract class BaseMaterial extends BaseObject
 
             if ($this->collAccesoMaterials !== null) {
                 foreach ($this->collAccesoMaterials as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->listasScheduledForDeletion !== null) {
+                if (!$this->listasScheduledForDeletion->isEmpty()) {
+                    ListaQuery::create()
+                        ->filterByPrimaryKeys($this->listasScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->listasScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collListas !== null) {
+                foreach ($this->collListas as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1012,6 +1042,14 @@ abstract class BaseMaterial extends BaseObject
                     }
                 }
 
+                if ($this->collListas !== null) {
+                    foreach ($this->collListas as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collMaterialAportes !== null) {
                     foreach ($this->collMaterialAportes as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
@@ -1138,6 +1176,9 @@ abstract class BaseMaterial extends BaseObject
             }
             if (null !== $this->collAccesoMaterials) {
                 $result['AccesoMaterials'] = $this->collAccesoMaterials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collListas) {
+                $result['Listas'] = $this->collListas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collMaterialAportes) {
                 $result['MaterialAportes'] = $this->collMaterialAportes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1344,6 +1385,12 @@ abstract class BaseMaterial extends BaseObject
                 }
             }
 
+            foreach ($this->getListas() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addLista($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getMaterialAportes() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addMaterialAporte($relObj->copy($deepCopy));
@@ -1521,6 +1568,9 @@ abstract class BaseMaterial extends BaseObject
     {
         if ('AccesoMaterial' == $relationName) {
             $this->initAccesoMaterials();
+        }
+        if ('Lista' == $relationName) {
+            $this->initListas();
         }
         if ('MaterialAporte' == $relationName) {
             $this->initMaterialAportes();
@@ -1720,6 +1770,198 @@ abstract class BaseMaterial extends BaseObject
         $query->joinWith('Usuario', $join_behavior);
 
         return $this->getAccesoMaterials($query, $con);
+    }
+
+    /**
+     * Clears out the collListas collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addListas()
+     */
+    public function clearListas()
+    {
+        $this->collListas = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collListas collection.
+     *
+     * By default this just sets the collListas collection to an empty array (like clearcollListas());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initListas($overrideExisting = true)
+    {
+        if (null !== $this->collListas && !$overrideExisting) {
+            return;
+        }
+        $this->collListas = new PropelObjectCollection();
+        $this->collListas->setModel('Lista');
+    }
+
+    /**
+     * Gets an array of Lista objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Material is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Lista[] List of Lista objects
+     * @throws PropelException
+     */
+    public function getListas($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collListas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collListas) {
+                // return empty collection
+                $this->initListas();
+            } else {
+                $collListas = ListaQuery::create(null, $criteria)
+                    ->filterByMaterial($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collListas;
+                }
+                $this->collListas = $collListas;
+            }
+        }
+
+        return $this->collListas;
+    }
+
+    /**
+     * Sets a collection of Lista objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $listas A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setListas(PropelCollection $listas, PropelPDO $con = null)
+    {
+        $this->listasScheduledForDeletion = $this->getListas(new Criteria(), $con)->diff($listas);
+
+        foreach ($this->listasScheduledForDeletion as $listaRemoved) {
+            $listaRemoved->setMaterial(null);
+        }
+
+        $this->collListas = null;
+        foreach ($listas as $lista) {
+            $this->addLista($lista);
+        }
+
+        $this->collListas = $listas;
+    }
+
+    /**
+     * Returns the number of related Lista objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Lista objects.
+     * @throws PropelException
+     */
+    public function countListas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collListas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collListas) {
+                return 0;
+            } else {
+                $query = ListaQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByMaterial($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collListas);
+        }
+    }
+
+    /**
+     * Method called to associate a Lista object to this object
+     * through the Lista foreign key attribute.
+     *
+     * @param    Lista $l Lista
+     * @return   Material The current object (for fluent API support)
+     */
+    public function addLista(Lista $l)
+    {
+        if ($this->collListas === null) {
+            $this->initListas();
+        }
+        if (!$this->collListas->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddLista($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Lista $lista The lista object to add.
+     */
+    protected function doAddLista($lista)
+    {
+        $this->collListas[]= $lista;
+        $lista->setMaterial($this);
+    }
+
+    /**
+     * @param	Lista $lista The lista object to remove.
+     */
+    public function removeLista($lista)
+    {
+        if ($this->getListas()->contains($lista)) {
+            $this->collListas->remove($this->collListas->search($lista));
+            if (null === $this->listasScheduledForDeletion) {
+                $this->listasScheduledForDeletion = clone $this->collListas;
+                $this->listasScheduledForDeletion->clear();
+            }
+            $this->listasScheduledForDeletion[]= $lista;
+            $lista->setMaterial(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Material is new, it will return
+     * an empty collection; or if this Material has previously
+     * been saved, it will retrieve related Listas from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Material.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Lista[] List of Lista objects
+     */
+    public function getListasJoinUsuario($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ListaQuery::create(null, $criteria);
+        $query->joinWith('Usuario', $join_behavior);
+
+        return $this->getListas($query, $con);
     }
 
     /**
@@ -2145,6 +2387,11 @@ abstract class BaseMaterial extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collListas) {
+                foreach ($this->collListas as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collMaterialAportes) {
                 foreach ($this->collMaterialAportes as $o) {
                     $o->clearAllReferences($deep);
@@ -2161,6 +2408,10 @@ abstract class BaseMaterial extends BaseObject
             $this->collAccesoMaterials->clearIterator();
         }
         $this->collAccesoMaterials = null;
+        if ($this->collListas instanceof PropelCollection) {
+            $this->collListas->clearIterator();
+        }
+        $this->collListas = null;
         if ($this->collMaterialAportes instanceof PropelCollection) {
             $this->collMaterialAportes->clearIterator();
         }

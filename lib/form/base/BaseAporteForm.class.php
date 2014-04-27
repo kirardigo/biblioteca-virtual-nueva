@@ -15,7 +15,7 @@ abstract class BaseAporteForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id_aporte'          => new sfWidgetFormInputHidden(),
-      'archivo'            => new sfWidgetFormInputText(),
+      'archivo'            => new sfWidgetFormTextarea(),
       'titulo'             => new sfWidgetFormInputText(),
       'descripcion'        => new sfWidgetFormTextarea(),
       'usuario_id_usuario' => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => false)),
@@ -23,7 +23,7 @@ abstract class BaseAporteForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_aporte'          => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdAporte()), 'empty_value' => $this->getObject()->getIdAporte(), 'required' => false)),
-      'archivo'            => new sfValidatorString(array('max_length' => 45)),
+      'archivo'            => new sfValidatorString(),
       'titulo'             => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'descripcion'        => new sfValidatorString(array('required' => false)),
       'usuario_id_usuario' => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id_usuario')),

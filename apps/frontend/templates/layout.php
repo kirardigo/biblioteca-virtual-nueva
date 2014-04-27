@@ -93,7 +93,7 @@
                 
               
               <li class="dropdown">
-                <a href="<?php echo url_for('material/index');?>">Material UDC</a>
+                <a href="<?php echo url_for('principal/udc');?>">Material UDC</a>
 
               </li>
               
@@ -115,7 +115,7 @@
               </li>
               <?php endif; ?>
               <li class="dropdown">
-                <a href="http:\\www.udc.edu.ar">Universidad del Chubut</a>
+                <a target="_blank" href="http:\\www.udc.edu.ar">Universidad del Chubut</a>
 
               </li>
 

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'aporte' table.
+ * This class defines the structure of the 'lista' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class AporteTableMap extends TableMap
+class ListaTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.AporteTableMap';
+    const CLASS_NAME = 'lib.model.map.ListaTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,16 +32,15 @@ class AporteTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('aporte');
-        $this->setPhpName('Aporte');
-        $this->setClassname('Aporte');
+        $this->setName('lista');
+        $this->setPhpName('Lista');
+        $this->setClassname('Lista');
         $this->setPackage('lib.model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('ID_APORTE', 'IdAporte', 'INTEGER', true, null, null);
-        $this->addColumn('ARCHIVO', 'Archivo', 'CLOB', true, null, null);
-        $this->addColumn('TITULO', 'Titulo', 'VARCHAR', false, 45, null);
-        $this->addColumn('DESCRIPCION', 'Descripcion', 'LONGVARCHAR', false, null, null);
+        $this->addPrimaryKey('ID_LISTA', 'IdLista', 'INTEGER', true, null, null);
+        $this->addColumn('INFORMACION', 'Informacion', 'LONGVARCHAR', false, null, null);
+        $this->addForeignKey('MATERIAL_ID_MATERIAL', 'MaterialIdMaterial', 'INTEGER', 'material', 'ID_MATERIAL', true, null, null);
         $this->addForeignKey('USUARIO_ID_USUARIO', 'UsuarioIdUsuario', 'INTEGER', 'usuario', 'ID_USUARIO', true, null, null);
         // validators
     } // initialize()
@@ -51,8 +50,8 @@ class AporteTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Material', 'Material', RelationMap::MANY_TO_ONE, array('material_id_material' => 'id_material', ), null, null);
         $this->addRelation('Usuario', 'Usuario', RelationMap::MANY_TO_ONE, array('usuario_id_usuario' => 'id_usuario', ), null, null);
-        $this->addRelation('MaterialAporte', 'MaterialAporte', RelationMap::ONE_TO_MANY, array('id_aporte' => 'aporte_id_aporte', ), null, null, 'MaterialAportes');
     } // buildRelations()
 
     /**
@@ -69,4 +68,4 @@ class AporteTableMap extends TableMap
         );
     } // getBehaviors()
 
-} // AporteTableMap
+} // ListaTableMap

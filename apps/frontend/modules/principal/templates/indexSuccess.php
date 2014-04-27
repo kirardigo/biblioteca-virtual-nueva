@@ -69,4 +69,5 @@
   <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 <?php endif; ?>
 
-<a target="_blank" href="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/CONSTNCIA_AUTOR_admin.PDF')?>">pdf.js</a>
+
+

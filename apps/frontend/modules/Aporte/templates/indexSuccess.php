@@ -26,12 +26,12 @@
       
       <td>  
           <?php $ext=substr(strrchr($Aporte->getArchivo(), '.'), 1);
-                if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>   
+                if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'){
                     
-                    
-				<a class="btn btn-info btn-mini" target="_blank" href="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/'.$Aporte->getArchivo())?>">Visualizar</a>
+                  echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Aporte->getArchivo().'&apo=1',array( 'class'=>"btn btn-info btn-mini") );  }
+				
 
-           <?php endif;?>         
+           ?>         
                     
      
             

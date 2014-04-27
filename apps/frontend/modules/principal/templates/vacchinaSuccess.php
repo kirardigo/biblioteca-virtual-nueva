@@ -90,10 +90,11 @@
           <?php 
       $ext=substr(strrchr($Material->getArchivo(), '.'), 1);
       
-      if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'):?>     
-      			<a class="btn btn-info btn-mini" target="_blank" href="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/material/'.$Material->getArchivo())?>">Visualizar</a>
+      if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'){    
+                      echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Material->getArchivo(),array( 'class'=>"btn btn-info btn-mini") );  }
+				
 
-          <?php endif;?>       
+           ?>       
       
       <?php if ($Material->getArchivo()!=null):?>
       <?php echo link_to('<i class="icon-download icon-white"></i>Descargar', 'material/download?archivito='.$Material->getArchivo().'&id='.$Material->getIdMaterial(),array( 'class'=>"btn btn-success btn-mini") ) ?>

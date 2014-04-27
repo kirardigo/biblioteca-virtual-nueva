@@ -45,6 +45,7 @@ class UsuarioTableMap extends TableMap
         $this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 45, null);
         $this->addColumn('ADMIN', 'Admin', 'BOOLEAN', false, 1, null);
         $this->addColumn('EMAIL', 'Email', 'VARCHAR', false, 45, null);
+        $this->addColumn('SUBIDOR', 'Subidor', 'BOOLEAN', false, 1, null);
         // validators
     } // initialize()
 
@@ -57,6 +58,7 @@ class UsuarioTableMap extends TableMap
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'AccesoMaterials');
         $this->addRelation('Anuncio', 'Anuncio', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'Anuncios');
         $this->addRelation('Aporte', 'Aporte', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'Aportes');
+        $this->addRelation('Lista', 'Lista', RelationMap::ONE_TO_MANY, array('id_usuario' => 'usuario_id_usuario', ), null, null, 'Listas');
     } // buildRelations()
 
     /**

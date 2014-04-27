@@ -20,6 +20,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'password'   => new sfWidgetFormInputText(),
       'admin'      => new sfWidgetFormInputCheckbox(),
       'email'      => new sfWidgetFormInputText(),
+      'subidor'    => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'password'   => new sfValidatorString(array('max_length' => 45)),
       'admin'      => new sfValidatorBoolean(array('required' => false)),
       'email'      => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'subidor'    => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(

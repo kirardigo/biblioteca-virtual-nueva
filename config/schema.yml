@@ -20,7 +20,7 @@ propel:
   aporte:
     _attributes: { phpName: Aporte, idMethod: native }
     id_aporte: { phpName: IdAporte, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
-    archivo: { phpName: Archivo, type: VARCHAR, size: '45', required: true }
+    archivo: { phpName: Archivo, type: CLOB, required: true }
     titulo: { phpName: Titulo, type: VARCHAR, size: '45', required: false }
     descripcion: { phpName: Descripcion, type: LONGVARCHAR, required: false }
     usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
@@ -68,6 +68,13 @@ propel:
     localidad_id_localidad: { phpName: LocalidadIdLocalidad, type: INTEGER, required: true, foreignTable: localidad, foreignReference: id_localidad }
     pjuridica_id_pjuridica: { phpName: PjuridicaIdPjuridica, type: INTEGER, required: true, foreignTable: pjuridica, foreignReference: id_pjuridica }
     _indexes: { fk_domicilio_localidad1: [localidad_id_localidad], fk_domicilio_j_pjuridica1: [pjuridica_id_pjuridica] }
+  lista:
+    _attributes: { phpName: Lista, idMethod: native }
+    id_lista: { phpName: IdLista, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    informacion: { phpName: Informacion, type: LONGVARCHAR, required: false }
+    material_id_material: { phpName: MaterialIdMaterial, type: INTEGER, required: true, foreignTable: material, foreignReference: id_material }
+    usuario_id_usuario: { phpName: UsuarioIdUsuario, type: INTEGER, required: true, foreignTable: usuario, foreignReference: id_usuario }
+    _indexes: { fk_lista_usuario1: [usuario_id_usuario], fk_lista_material1: [material_id_material] }
   localidad:
     _attributes: { phpName: Localidad, idMethod: native }
     id_localidad: { phpName: IdLocalidad, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -145,3 +152,4 @@ propel:
     password: { phpName: Password, type: VARCHAR, size: '45', required: true }
     admin: { phpName: Admin, type: BOOLEAN, size: '1', required: false }
     email: { phpName: Email, type: VARCHAR, size: '45', required: false }
+    subidor: { phpName: Subidor, type: BOOLEAN, size: '1', required: false }

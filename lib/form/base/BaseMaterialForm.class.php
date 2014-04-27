@@ -15,7 +15,7 @@ abstract class BaseMaterialForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id_material'              => new sfWidgetFormInputHidden(),
-      'archivo'                  => new sfWidgetFormInputText(),
+      'archivo'                  => new sfWidgetFormTextarea(),
       'titulo'                   => new sfWidgetFormInputText(),
       'editorial'                => new sfWidgetFormInputText(),
       'autor'                    => new sfWidgetFormInputText(),
@@ -27,7 +27,7 @@ abstract class BaseMaterialForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id_material'              => new sfValidatorChoice(array('choices' => array($this->getObject()->getIdMaterial()), 'empty_value' => $this->getObject()->getIdMaterial(), 'required' => false)),
-      'archivo'                  => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'archivo'                  => new sfValidatorString(array('required' => false)),
       'titulo'                   => new sfValidatorString(array('max_length' => 45)),
       'editorial'                => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'autor'                    => new sfValidatorString(array('max_length' => 45, 'required' => false)),

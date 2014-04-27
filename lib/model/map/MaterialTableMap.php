@@ -59,6 +59,7 @@ class MaterialTableMap extends TableMap
         $this->addRelation('Tema', 'Tema', RelationMap::MANY_TO_ONE, array('tema_id_tema' => 'id_tema', ), null, null);
         $this->addRelation('Biblioteca', 'Biblioteca', RelationMap::MANY_TO_ONE, array('biblioteca_id_biblioteca' => 'id_biblioteca', ), null, null);
         $this->addRelation('AccesoMaterial', 'AccesoMaterial', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), 'CASCADE', 'CASCADE', 'AccesoMaterials');
+        $this->addRelation('Lista', 'Lista', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'Listas');
         $this->addRelation('MaterialAporte', 'MaterialAporte', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'MaterialAportes');
         $this->addRelation('MaterialCarrera', 'MaterialCarrera', RelationMap::ONE_TO_MANY, array('id_material' => 'material_id_material', ), null, null, 'MaterialCarreras');
     } // buildRelations()

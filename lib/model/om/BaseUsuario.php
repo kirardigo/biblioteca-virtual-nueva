@@ -67,6 +67,12 @@ abstract class BaseUsuario extends BaseObject
     protected $email;
 
     /**
+     * The value for the subidor field.
+     * @var        boolean
+     */
+    protected $subidor;
+
+    /**
      * @var        Pfisica
      */
     protected $aPfisica;
@@ -85,6 +91,11 @@ abstract class BaseUsuario extends BaseObject
      * @var        PropelObjectCollection|Aporte[] Collection to store aggregation of Aporte objects.
      */
     protected $collAportes;
+
+    /**
+     * @var        PropelObjectCollection|Lista[] Collection to store aggregation of Lista objects.
+     */
+    protected $collListas;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -117,6 +128,12 @@ abstract class BaseUsuario extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $aportesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $listasScheduledForDeletion = null;
 
     /**
      * Get the [id_usuario] column value.
@@ -182,6 +199,17 @@ abstract class BaseUsuario extends BaseObject
     {
 
         return $this->email;
+    }
+
+    /**
+     * Get the [subidor] column value.
+     * 
+     * @return   boolean
+     */
+    public function getSubidor()
+    {
+
+        return $this->subidor;
     }
 
     /**
@@ -331,6 +359,35 @@ abstract class BaseUsuario extends BaseObject
     } // setEmail()
 
     /**
+     * Sets the value of the [subidor] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * 
+     * @param      boolean|integer|string $v The new value
+     * @return   Usuario The current object (for fluent API support)
+     */
+    public function setSubidor($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->subidor !== $v) {
+            $this->subidor = $v;
+            $this->modifiedColumns[] = UsuarioPeer::SUBIDOR;
+        }
+
+
+        return $this;
+    } // setSubidor()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -368,6 +425,7 @@ abstract class BaseUsuario extends BaseObject
             $this->password = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->admin = ($row[$startcol + 4] !== null) ? (boolean) $row[$startcol + 4] : null;
             $this->email = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->subidor = ($row[$startcol + 6] !== null) ? (boolean) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -376,7 +434,7 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Usuario object", $e);
@@ -447,6 +505,8 @@ abstract class BaseUsuario extends BaseObject
             $this->collAnuncios = null;
 
             $this->collAportes = null;
+
+            $this->collListas = null;
 
         } // if (deep)
     }
@@ -667,6 +727,23 @@ abstract class BaseUsuario extends BaseObject
                 }
             }
 
+            if ($this->listasScheduledForDeletion !== null) {
+                if (!$this->listasScheduledForDeletion->isEmpty()) {
+                    ListaQuery::create()
+                        ->filterByPrimaryKeys($this->listasScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->listasScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collListas !== null) {
+                foreach ($this->collListas as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -707,6 +784,9 @@ abstract class BaseUsuario extends BaseObject
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) {
             $modifiedColumns[':p' . $index++]  = '`EMAIL`';
         }
+        if ($this->isColumnModified(UsuarioPeer::SUBIDOR)) {
+            $modifiedColumns[':p' . $index++]  = '`SUBIDOR`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `usuario` (%s) VALUES (%s)',
@@ -735,6 +815,9 @@ abstract class BaseUsuario extends BaseObject
                         break;
                     case '`EMAIL`':						
 						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
+                        break;
+                    case '`SUBIDOR`':
+						$stmt->bindValue($identifier, (int) $this->subidor, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -864,6 +947,14 @@ abstract class BaseUsuario extends BaseObject
                     }
                 }
 
+                if ($this->collListas !== null) {
+                    foreach ($this->collListas as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -917,6 +1008,9 @@ abstract class BaseUsuario extends BaseObject
             case 5:
                 return $this->getEmail();
                 break;
+            case 6:
+                return $this->getSubidor();
+                break;
             default:
                 return null;
                 break;
@@ -952,6 +1046,7 @@ abstract class BaseUsuario extends BaseObject
             $keys[3] => $this->getPassword(),
             $keys[4] => $this->getAdmin(),
             $keys[5] => $this->getEmail(),
+            $keys[6] => $this->getSubidor(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aPfisica) {
@@ -965,6 +1060,9 @@ abstract class BaseUsuario extends BaseObject
             }
             if (null !== $this->collAportes) {
                 $result['Aportes'] = $this->collAportes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collListas) {
+                $result['Listas'] = $this->collListas->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1018,6 +1116,9 @@ abstract class BaseUsuario extends BaseObject
             case 5:
                 $this->setEmail($value);
                 break;
+            case 6:
+                $this->setSubidor($value);
+                break;
         } // switch()
     }
 
@@ -1048,6 +1149,7 @@ abstract class BaseUsuario extends BaseObject
         if (array_key_exists($keys[3], $arr)) $this->setPassword($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setAdmin($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setEmail($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setSubidor($arr[$keys[6]]);
     }
 
     /**
@@ -1065,6 +1167,7 @@ abstract class BaseUsuario extends BaseObject
         if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
         if ($this->isColumnModified(UsuarioPeer::ADMIN)) $criteria->add(UsuarioPeer::ADMIN, $this->admin);
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) $criteria->add(UsuarioPeer::EMAIL, $this->email);
+        if ($this->isColumnModified(UsuarioPeer::SUBIDOR)) $criteria->add(UsuarioPeer::SUBIDOR, $this->subidor);
 
         return $criteria;
     }
@@ -1133,6 +1236,7 @@ abstract class BaseUsuario extends BaseObject
         $copyObj->setPassword($this->getPassword());
         $copyObj->setAdmin($this->getAdmin());
         $copyObj->setEmail($this->getEmail());
+        $copyObj->setSubidor($this->getSubidor());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1156,6 +1260,12 @@ abstract class BaseUsuario extends BaseObject
             foreach ($this->getAportes() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addAporte($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getListas() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addLista($relObj->copy($deepCopy));
                 }
             }
 
@@ -1278,6 +1388,9 @@ abstract class BaseUsuario extends BaseObject
         }
         if ('Aporte' == $relationName) {
             $this->initAportes();
+        }
+        if ('Lista' == $relationName) {
+            $this->initListas();
         }
     }
 
@@ -1808,6 +1921,198 @@ abstract class BaseUsuario extends BaseObject
     }
 
     /**
+     * Clears out the collListas collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addListas()
+     */
+    public function clearListas()
+    {
+        $this->collListas = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collListas collection.
+     *
+     * By default this just sets the collListas collection to an empty array (like clearcollListas());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initListas($overrideExisting = true)
+    {
+        if (null !== $this->collListas && !$overrideExisting) {
+            return;
+        }
+        $this->collListas = new PropelObjectCollection();
+        $this->collListas->setModel('Lista');
+    }
+
+    /**
+     * Gets an array of Lista objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Usuario is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Lista[] List of Lista objects
+     * @throws PropelException
+     */
+    public function getListas($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collListas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collListas) {
+                // return empty collection
+                $this->initListas();
+            } else {
+                $collListas = ListaQuery::create(null, $criteria)
+                    ->filterByUsuario($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collListas;
+                }
+                $this->collListas = $collListas;
+            }
+        }
+
+        return $this->collListas;
+    }
+
+    /**
+     * Sets a collection of Lista objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $listas A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setListas(PropelCollection $listas, PropelPDO $con = null)
+    {
+        $this->listasScheduledForDeletion = $this->getListas(new Criteria(), $con)->diff($listas);
+
+        foreach ($this->listasScheduledForDeletion as $listaRemoved) {
+            $listaRemoved->setUsuario(null);
+        }
+
+        $this->collListas = null;
+        foreach ($listas as $lista) {
+            $this->addLista($lista);
+        }
+
+        $this->collListas = $listas;
+    }
+
+    /**
+     * Returns the number of related Lista objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Lista objects.
+     * @throws PropelException
+     */
+    public function countListas(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collListas || null !== $criteria) {
+            if ($this->isNew() && null === $this->collListas) {
+                return 0;
+            } else {
+                $query = ListaQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByUsuario($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collListas);
+        }
+    }
+
+    /**
+     * Method called to associate a Lista object to this object
+     * through the Lista foreign key attribute.
+     *
+     * @param    Lista $l Lista
+     * @return   Usuario The current object (for fluent API support)
+     */
+    public function addLista(Lista $l)
+    {
+        if ($this->collListas === null) {
+            $this->initListas();
+        }
+        if (!$this->collListas->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddLista($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Lista $lista The lista object to add.
+     */
+    protected function doAddLista($lista)
+    {
+        $this->collListas[]= $lista;
+        $lista->setUsuario($this);
+    }
+
+    /**
+     * @param	Lista $lista The lista object to remove.
+     */
+    public function removeLista($lista)
+    {
+        if ($this->getListas()->contains($lista)) {
+            $this->collListas->remove($this->collListas->search($lista));
+            if (null === $this->listasScheduledForDeletion) {
+                $this->listasScheduledForDeletion = clone $this->collListas;
+                $this->listasScheduledForDeletion->clear();
+            }
+            $this->listasScheduledForDeletion[]= $lista;
+            $lista->setUsuario(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Usuario is new, it will return
+     * an empty collection; or if this Usuario has previously
+     * been saved, it will retrieve related Listas from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Usuario.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Lista[] List of Lista objects
+     */
+    public function getListasJoinMaterial($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ListaQuery::create(null, $criteria);
+        $query->joinWith('Material', $join_behavior);
+
+        return $this->getListas($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1818,6 +2123,7 @@ abstract class BaseUsuario extends BaseObject
         $this->password = null;
         $this->admin = null;
         $this->email = null;
+        $this->subidor = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();
@@ -1853,6 +2159,11 @@ abstract class BaseUsuario extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collListas) {
+                foreach ($this->collListas as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collAccesoMaterials instanceof PropelCollection) {
@@ -1867,6 +2178,10 @@ abstract class BaseUsuario extends BaseObject
             $this->collAportes->clearIterator();
         }
         $this->collAportes = null;
+        if ($this->collListas instanceof PropelCollection) {
+            $this->collListas->clearIterator();
+        }
+        $this->collListas = null;
         $this->aPfisica = null;
     }
 
