@@ -31,6 +31,7 @@
 <?php if ($apo ==1):?>
 <embed style="margin-left: 100px;" src="<?php echo image_path('../uploads/aporte/'.$arch)?>" width="850" height="1075"></embed>
 <?php else:?>
+
 <embed style="margin-left: 100px;" src="<?php echo image_path('../uploads/material/'.$arch)?>" width="850" height="1075"></embed>
 <?php endif;?>
 <!--<iframe id="viewer" src="{{ asset('/plugins/sfViewerPlugin/index.html') }}#{{ asset('/uploads/files/ANONIMO_REDES.PDF') }}" width='900' height='600' allowfullscreen webkitallowfullscreen></iframe>-->
