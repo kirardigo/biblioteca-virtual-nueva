@@ -59,7 +59,9 @@ jQuery(document).ready(function(){
                                         nav_label_next:'>',
                                         nav_label_last:'>>'
                             });
-                
+                tinymce.init({
+    selector: "textarea"
+ });
                // $('#tablita').dataTable();
 		});
                 

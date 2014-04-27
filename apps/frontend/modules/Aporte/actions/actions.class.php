@@ -104,7 +104,7 @@ class aporteActions extends sfActions
 
                    
                   // Buscamos el archivo en la carpeta de upload (nuestro caso) 
-                  $file = sfConfig::get('sf_upload_dir').'/files/'.$archivo; 
+                  $file = sfConfig::get('sf_upload_dir').'/aporte/'.$archivo; 
                     $file_name="test.jpg";
                 // Cabeceras necesarias para ejecutar la descarga 
                   $response = $this->getResponse(); 

@@ -21,13 +21,13 @@
 
       <td><?php echo $Aporte->getArchivo() ?></td>
       <td><?php echo $Aporte->getTitulo() ?></td>
-      <td><?php echo $Aporte->getDescripcion() ?></td>
+      <td><?php echo sfOutputEscaper::unescape($Aporte->getDescripcion()) ?></td>
       <td><?php echo $Aporte->getUsuario()->getUsuario(); ?></td>
       
       <td>  
           <?php $ext=substr(strrchr($Aporte->getArchivo(), '.'), 1);
                 if ($ext=='JPG'||$ext=='PNG'||$ext=='BMP'||$ext=='GIF'||$ext=='PDF'||$ext=='GIF'){    
-                    echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Aporte->getArchivo(),array( 'class'=>"btn btn-info btn-mini") );}
+                    echo link_to('<i class="icon-eye-open icon-white"></i>Visualizar', 'lectura/index?archivo='.$Aporte->getArchivo().'&apo=1',array( 'class'=>"btn btn-info btn-mini") );}
      
             ?>
           <?php if ($Aporte->getArchivo()!=null):?>

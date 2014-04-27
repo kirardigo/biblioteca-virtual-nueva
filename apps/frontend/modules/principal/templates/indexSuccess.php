@@ -57,7 +57,7 @@
     <tr>
     
       
-      <td colspan="2" style="background: peru; color: black;"><?php echo $Anuncio->getInformacion() ?></td>
+        <td colspan="2" style="background: peru; color: black;"><?php echo sfOutputEscaper::unescape($Anuncio->getInformacion()) ?></td>
 
     </tr></thead>
     <?php endforeach; ?>
@@ -68,3 +68,4 @@
 <?php if($sf_user->hasCredential('admin')):?>
   <a class="btn btn-inverse" href="<?php echo url_for('anuncio/new') ?>"><i class="icon-plus-sign icon-white"></i>Agregar</a>
 <?php endif; ?>
+

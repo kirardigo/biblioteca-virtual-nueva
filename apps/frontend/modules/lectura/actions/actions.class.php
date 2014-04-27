@@ -19,5 +19,8 @@ class lecturaActions extends sfActions
   {
     $cosa=$request->getParameter('archivo');
       $this->arch=$cosa;
+      
+    $cosa2=$request->getParameter('apo');
+      $this->apo=$cosa2;
   }
 }

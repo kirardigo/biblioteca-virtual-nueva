@@ -26,7 +26,7 @@ unset($this['usuario_id_usuario']);
   //    $nombre= $user->getAttribute('id');
         
 
-//$this->widgetSchema['usuario_id_usuario'] = new sfWidgetFormInputText();
+$this->widgetSchema['informacion'] = new sfWidgetFormTextarea();
 //$this->widgetSchema['usuario_id_usuario']->setLabel('Usuario'); 
 //$this->setDefault('usuario_id_usuario', 90);
         // 

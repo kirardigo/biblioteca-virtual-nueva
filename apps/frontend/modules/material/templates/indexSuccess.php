@@ -85,7 +85,7 @@
       <td><?php echo $Material->getTitulo() ?></td>
       <td><?php echo $Material->getEditorial() ?></td>
       
-      <td><?php echo $Material->getDescripcion() ?></td>
+      <td><?php echo sfOutputEscaper::unescape($Material->getDescripcion()) ?></td>
  
   
     <?php if($sf_user->isAuthenticated()):?>
