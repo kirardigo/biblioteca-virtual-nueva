@@ -152,4 +152,3 @@ propel:
     password: { phpName: Password, type: VARCHAR, size: '45', required: true }
     admin: { phpName: Admin, type: BOOLEAN, size: '1', required: false }
     email: { phpName: Email, type: VARCHAR, size: '45', required: false }
-    subidor: { phpName: Subidor, type: BOOLEAN, size: '1', required: false }

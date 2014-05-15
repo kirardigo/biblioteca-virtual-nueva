@@ -23,13 +23,13 @@ abstract class BaseUsuarioPeer {
     const TM_CLASS = 'UsuarioTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 6;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 6;
 
     /** the column name for the ID_USUARIO field */
     const ID_USUARIO = 'usuario.ID_USUARIO';
@@ -48,9 +48,6 @@ abstract class BaseUsuarioPeer {
 
     /** the column name for the EMAIL field */
     const EMAIL = 'usuario.EMAIL';
-
-    /** the column name for the SUBIDOR field */
-    const SUBIDOR = 'usuario.SUBIDOR';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -71,12 +68,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUsuario', 'Valido', 'Usuario', 'Password', 'Admin', 'Email', 'Subidor', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario', 'valido', 'usuario', 'password', 'admin', 'email', 'subidor', ),
-        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO, self::VALIDO, self::USUARIO, self::PASSWORD, self::ADMIN, self::EMAIL, self::SUBIDOR, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO', 'VALIDO', 'USUARIO', 'PASSWORD', 'ADMIN', 'EMAIL', 'SUBIDOR', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_usuario', 'valido', 'usuario', 'password', 'admin', 'email', 'subidor', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('IdUsuario', 'Valido', 'Usuario', 'Password', 'Admin', 'Email', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario', 'valido', 'usuario', 'password', 'admin', 'email', ),
+        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO, self::VALIDO, self::USUARIO, self::PASSWORD, self::ADMIN, self::EMAIL, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO', 'VALIDO', 'USUARIO', 'PASSWORD', 'ADMIN', 'EMAIL', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_usuario', 'valido', 'usuario', 'password', 'admin', 'email', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -86,12 +83,12 @@ abstract class BaseUsuarioPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUsuario' => 0, 'Valido' => 1, 'Usuario' => 2, 'Password' => 3, 'Admin' => 4, 'Email' => 5, 'Subidor' => 6, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario' => 0, 'valido' => 1, 'usuario' => 2, 'password' => 3, 'admin' => 4, 'email' => 5, 'subidor' => 6, ),
-        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO => 0, self::VALIDO => 1, self::USUARIO => 2, self::PASSWORD => 3, self::ADMIN => 4, self::EMAIL => 5, self::SUBIDOR => 6, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO' => 0, 'VALIDO' => 1, 'USUARIO' => 2, 'PASSWORD' => 3, 'ADMIN' => 4, 'EMAIL' => 5, 'SUBIDOR' => 6, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_usuario' => 0, 'valido' => 1, 'usuario' => 2, 'password' => 3, 'admin' => 4, 'email' => 5, 'subidor' => 6, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('IdUsuario' => 0, 'Valido' => 1, 'Usuario' => 2, 'Password' => 3, 'Admin' => 4, 'Email' => 5, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUsuario' => 0, 'valido' => 1, 'usuario' => 2, 'password' => 3, 'admin' => 4, 'email' => 5, ),
+        BasePeer::TYPE_COLNAME => array (self::ID_USUARIO => 0, self::VALIDO => 1, self::USUARIO => 2, self::PASSWORD => 3, self::ADMIN => 4, self::EMAIL => 5, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USUARIO' => 0, 'VALIDO' => 1, 'USUARIO' => 2, 'PASSWORD' => 3, 'ADMIN' => 4, 'EMAIL' => 5, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_usuario' => 0, 'valido' => 1, 'usuario' => 2, 'password' => 3, 'admin' => 4, 'email' => 5, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -171,7 +168,6 @@ abstract class BaseUsuarioPeer {
             $criteria->addSelectColumn(UsuarioPeer::PASSWORD);
             $criteria->addSelectColumn(UsuarioPeer::ADMIN);
             $criteria->addSelectColumn(UsuarioPeer::EMAIL);
-            $criteria->addSelectColumn(UsuarioPeer::SUBIDOR);
         } else {
             $criteria->addSelectColumn($alias . '.ID_USUARIO');
             $criteria->addSelectColumn($alias . '.VALIDO');
@@ -179,7 +175,6 @@ abstract class BaseUsuarioPeer {
             $criteria->addSelectColumn($alias . '.PASSWORD');
             $criteria->addSelectColumn($alias . '.ADMIN');
             $criteria->addSelectColumn($alias . '.EMAIL');
-            $criteria->addSelectColumn($alias . '.SUBIDOR');
         }
     }
 

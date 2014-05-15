@@ -67,12 +67,6 @@ abstract class BaseUsuario extends BaseObject
     protected $email;
 
     /**
-     * The value for the subidor field.
-     * @var        boolean
-     */
-    protected $subidor;
-
-    /**
      * @var        Pfisica
      */
     protected $aPfisica;
@@ -199,17 +193,6 @@ abstract class BaseUsuario extends BaseObject
     {
 
         return $this->email;
-    }
-
-    /**
-     * Get the [subidor] column value.
-     * 
-     * @return   boolean
-     */
-    public function getSubidor()
-    {
-
-        return $this->subidor;
     }
 
     /**
@@ -359,35 +342,6 @@ abstract class BaseUsuario extends BaseObject
     } // setEmail()
 
     /**
-     * Sets the value of the [subidor] column.
-     * Non-boolean arguments are converted using the following rules:
-     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
-     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
-     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
-     * 
-     * @param      boolean|integer|string $v The new value
-     * @return   Usuario The current object (for fluent API support)
-     */
-    public function setSubidor($v)
-    {
-        if ($v !== null) {
-            if (is_string($v)) {
-                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
-            } else {
-                $v = (boolean) $v;
-            }
-        }
-
-        if ($this->subidor !== $v) {
-            $this->subidor = $v;
-            $this->modifiedColumns[] = UsuarioPeer::SUBIDOR;
-        }
-
-
-        return $this;
-    } // setSubidor()
-
-    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -425,7 +379,6 @@ abstract class BaseUsuario extends BaseObject
             $this->password = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->admin = ($row[$startcol + 4] !== null) ? (boolean) $row[$startcol + 4] : null;
             $this->email = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->subidor = ($row[$startcol + 6] !== null) ? (boolean) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -434,7 +387,7 @@ abstract class BaseUsuario extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = UsuarioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Usuario object", $e);
@@ -784,9 +737,6 @@ abstract class BaseUsuario extends BaseObject
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) {
             $modifiedColumns[':p' . $index++]  = '`EMAIL`';
         }
-        if ($this->isColumnModified(UsuarioPeer::SUBIDOR)) {
-            $modifiedColumns[':p' . $index++]  = '`SUBIDOR`';
-        }
 
         $sql = sprintf(
             'INSERT INTO `usuario` (%s) VALUES (%s)',
@@ -815,9 +765,6 @@ abstract class BaseUsuario extends BaseObject
                         break;
                     case '`EMAIL`':						
 						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
-                        break;
-                    case '`SUBIDOR`':
-						$stmt->bindValue($identifier, (int) $this->subidor, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -1008,9 +955,6 @@ abstract class BaseUsuario extends BaseObject
             case 5:
                 return $this->getEmail();
                 break;
-            case 6:
-                return $this->getSubidor();
-                break;
             default:
                 return null;
                 break;
@@ -1046,7 +990,6 @@ abstract class BaseUsuario extends BaseObject
             $keys[3] => $this->getPassword(),
             $keys[4] => $this->getAdmin(),
             $keys[5] => $this->getEmail(),
-            $keys[6] => $this->getSubidor(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aPfisica) {
@@ -1116,9 +1059,6 @@ abstract class BaseUsuario extends BaseObject
             case 5:
                 $this->setEmail($value);
                 break;
-            case 6:
-                $this->setSubidor($value);
-                break;
         } // switch()
     }
 
@@ -1149,7 +1089,6 @@ abstract class BaseUsuario extends BaseObject
         if (array_key_exists($keys[3], $arr)) $this->setPassword($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setAdmin($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setEmail($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setSubidor($arr[$keys[6]]);
     }
 
     /**
@@ -1167,7 +1106,6 @@ abstract class BaseUsuario extends BaseObject
         if ($this->isColumnModified(UsuarioPeer::PASSWORD)) $criteria->add(UsuarioPeer::PASSWORD, $this->password);
         if ($this->isColumnModified(UsuarioPeer::ADMIN)) $criteria->add(UsuarioPeer::ADMIN, $this->admin);
         if ($this->isColumnModified(UsuarioPeer::EMAIL)) $criteria->add(UsuarioPeer::EMAIL, $this->email);
-        if ($this->isColumnModified(UsuarioPeer::SUBIDOR)) $criteria->add(UsuarioPeer::SUBIDOR, $this->subidor);
 
         return $criteria;
     }
@@ -1236,7 +1174,6 @@ abstract class BaseUsuario extends BaseObject
         $copyObj->setPassword($this->getPassword());
         $copyObj->setAdmin($this->getAdmin());
         $copyObj->setEmail($this->getEmail());
-        $copyObj->setSubidor($this->getSubidor());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -2123,7 +2060,6 @@ abstract class BaseUsuario extends BaseObject
         $this->password = null;
         $this->admin = null;
         $this->email = null;
-        $this->subidor = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();

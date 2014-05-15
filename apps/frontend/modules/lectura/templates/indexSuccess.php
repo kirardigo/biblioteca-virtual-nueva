@@ -26,20 +26,32 @@
 </div>
 
 </br> </br>-->
-
+<?php if ($sf_user->hasFlash('agregado')): ?>
+  <div class="flash_notice"><?php echo $sf_user->getFlash('agregado') ?></div>
+<?php endif ?>
 
 
 <?php if ($apo ==1):?>
 
-<object data="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/'.$arch)?>" width="950" height="1075"><embed src="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/aporte/'.$arch)?>" width="950" height="1075"></embed> ERROR, No pudo mostrarse la pagina. </object>
+<object data="<?php echo image_path($aporte)?>" width="950" height="1075"></object>
+
 
 
 <?php else:?>
-<?php echo link_to('<i class="icon-list icon-white"></i>Agregar material a mi lista', 'lectura/agregar?idarch='.$idarch.'&cosa='.$idarch,array( 'class'=>"btn btn-inverse btn-mini") ) ?>
+
+
+<?php 
+if(!$Listita->getFirst()){
+echo link_to('<i class="icon-list icon-white"></i>Agregar material a mi lista', 'lectura/agregar?idarch='.$idarch.'&arch='.$arch,array( 'class'=>"btn btn-inverse btn-mini") ) ;
+}else{
+    echo '<div class="label label-info">Material en lista de lectura</div>';
+}      // echo link_to('<i class="icon-list icon-white"></i>lista', 'lectura/lista',array( 'class'=>"btn btn-inverse btn-mini") ); 
+        
+        ?>
 
 </br> </br>
-
-<object data="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/material/'.$arch)?>" width="950" height="1075"><embed src="<?php echo image_path('../js/pdfjs/web/viewer.html?file=../../../uploads/material/'.$arch)?>" width="950" height="1075"></embed> ERROR, No pudo mostrarse la pagina. </object>
+<?php //include $material) ?>
+<object data="<?php echo image_path($material)?>" width="950" height="1075"></object>
 
 
 <?php endif;?>

@@ -12,7 +12,6 @@
  * @method     UsuarioQuery orderByPassword($order = Criteria::ASC) Order by the password column
  * @method     UsuarioQuery orderByAdmin($order = Criteria::ASC) Order by the admin column
  * @method     UsuarioQuery orderByEmail($order = Criteria::ASC) Order by the email column
- * @method     UsuarioQuery orderBySubidor($order = Criteria::ASC) Order by the subidor column
  *
  * @method     UsuarioQuery groupByIdUsuario() Group by the id_usuario column
  * @method     UsuarioQuery groupByValido() Group by the valido column
@@ -20,7 +19,6 @@
  * @method     UsuarioQuery groupByPassword() Group by the password column
  * @method     UsuarioQuery groupByAdmin() Group by the admin column
  * @method     UsuarioQuery groupByEmail() Group by the email column
- * @method     UsuarioQuery groupBySubidor() Group by the subidor column
  *
  * @method     UsuarioQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     UsuarioQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -55,7 +53,6 @@
  * @method     Usuario findOneByPassword(string $password) Return the first Usuario filtered by the password column
  * @method     Usuario findOneByAdmin(boolean $admin) Return the first Usuario filtered by the admin column
  * @method     Usuario findOneByEmail(string $email) Return the first Usuario filtered by the email column
- * @method     Usuario findOneBySubidor(boolean $subidor) Return the first Usuario filtered by the subidor column
  *
  * @method     array findByIdUsuario(int $id_usuario) Return Usuario objects filtered by the id_usuario column
  * @method     array findByValido(boolean $valido) Return Usuario objects filtered by the valido column
@@ -63,7 +60,6 @@
  * @method     array findByPassword(string $password) Return Usuario objects filtered by the password column
  * @method     array findByAdmin(boolean $admin) Return Usuario objects filtered by the admin column
  * @method     array findByEmail(string $email) Return Usuario objects filtered by the email column
- * @method     array findBySubidor(boolean $subidor) Return Usuario objects filtered by the subidor column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -154,7 +150,7 @@ abstract class BaseUsuarioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID_USUARIO`, `VALIDO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL`, `SUBIDOR` FROM `usuario` WHERE `ID_USUARIO` = :p0';
+        $sql = 'SELECT `ID_USUARIO`, `VALIDO`, `USUARIO`, `PASSWORD`, `ADMIN`, `EMAIL` FROM `usuario` WHERE `ID_USUARIO` = :p0';
         try {
             $stmt = $con->prepare($sql);			
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -411,33 +407,6 @@ abstract class BaseUsuarioQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(UsuarioPeer::EMAIL, $email, $comparison);
-    }
-
-    /**
-     * Filter the query on the subidor column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterBySubidor(true); // WHERE subidor = true
-     * $query->filterBySubidor('yes'); // WHERE subidor = true
-     * </code>
-     *
-     * @param     boolean|string $subidor The value to use as filter.
-     *              Non-boolean arguments are converted using the following rules:
-     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
-     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
-     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return UsuarioQuery The current query, for fluid interface
-     */
-    public function filterBySubidor($subidor = null, $comparison = null)
-    {
-        if (is_string($subidor)) {
-            $subidor = in_array(strtolower($subidor), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
-        }
-
-        return $this->addUsingAlias(UsuarioPeer::SUBIDOR, $subidor, $comparison);
     }
 
     /**

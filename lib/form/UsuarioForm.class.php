@@ -17,6 +17,7 @@ class UsuarioForm extends BaseUsuarioForm
      if ($user->hasCredential('user') ){
        unset($this['valido']);
        unset($this['admin']);
+   //    unset($this['subidor']);
        //quito la opcion de modificar el "usuario"
        unset($this['usuario']);
        
@@ -27,7 +28,16 @@ class UsuarioForm extends BaseUsuarioForm
      if (($user->getAttribute('id'))!= ($var) ){
         // return;
 
-     }  
+     }
+     
+     if ($user->hasCredential('admin') ){
+           $this->widgetSchema['valido']->setLabel('¿Es un usuario valido?');
+           $this->widgetSchema['admin']->setLabel('¿Es administrador?');
+     //      $this->widgetSchema['subidor']->setLabel('¿Es subidor?');   
+         
+     }
+         
+       
     // $user= $this->getValue('id_usuario');
      //keria sacar el usuario,, pero esto sirve cuando se guarda nomas
      //$this->setDefault('password', 'hola');
@@ -36,8 +46,7 @@ class UsuarioForm extends BaseUsuarioForm
      
      $this->widgetSchema['password']->setAttribute('type','password');
      $this->validatorSchema['password']->setOption('min_length', 6);
-     $this->widgetSchema['valido']->setLabel('¿Es un usuario valido?');
-           $this->widgetSchema['admin']->setLabel('¿Es administrador?');
+
  //$this->widgetSchema['password']->set
      
 
@@ -52,10 +61,11 @@ class UsuarioForm extends BaseUsuarioForm
      
      
      if (!$user->isAuthenticated() ){
-		               unset($this['valido']);
+       unset($this['valido']);
        unset($this['admin']);
-		 
-		 }
+       //unset($this['subidor']);
+       
+       }
      
      
      }
